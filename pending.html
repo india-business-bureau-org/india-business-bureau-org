@@ -4,10 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Verification Pending — Indian Business Bureau</title>
+  <title>Payment Verification — Indian Business Bureau</title>
+
   <meta
     name="description"
-    content="Your Indian Business Bureau membership payment is pending manual verification."
+    content="Indian Business Bureau membership payment verification status."
   >
 
   <style>
@@ -18,6 +19,8 @@
       --gold-soft: #fff7e6;
       --green: #15803d;
       --green-soft: #ecfdf3;
+      --red: #b42318;
+      --red-soft: #fef3f2;
       --text: #111827;
       --muted: #667085;
       --border: #e5e7eb;
@@ -33,6 +36,7 @@
 
     body {
       min-height: 100vh;
+
       font-family:
         "Inter",
         "Avenir Next",
@@ -69,16 +73,18 @@
 
     .card {
       background: var(--surface);
+
       border: 1px solid rgba(15, 23, 42, .06);
+
       border-radius: 28px;
+
       padding: 42px 34px;
+
       text-align: center;
 
       box-shadow:
         0 25px 70px rgba(15, 23, 42, .12);
     }
-
-    /* BRAND */
 
     .brand {
       display: inline-flex;
@@ -87,14 +93,13 @@
 
       font-size: 12px;
       font-weight: 900;
+
       letter-spacing: 1.4px;
 
       color: #6b7280;
 
       margin-bottom: 26px;
     }
-
-    /* STATUS ICON */
 
     .status-icon {
       width: 82px;
@@ -105,6 +110,7 @@
       border-radius: 50%;
 
       background: var(--gold-soft);
+
       border: 1px solid #f2dfb3;
 
       display: flex;
@@ -115,11 +121,14 @@
 
       box-shadow:
         0 10px 25px rgba(200, 155, 60, .12);
+
+      transition: .3s ease;
     }
 
     .status-label {
       display: inline-flex;
       align-items: center;
+
       gap: 7px;
 
       padding: 7px 12px;
@@ -127,13 +136,17 @@
       border-radius: 999px;
 
       background: var(--gold-soft);
+
       border: 1px solid #f0dfb9;
 
       color: #8a651d;
 
       font-size: 11px;
+
       font-weight: 900;
+
       letter-spacing: .5px;
+
       text-transform: uppercase;
 
       margin-bottom: 15px;
@@ -142,15 +155,17 @@
     .status-dot {
       width: 7px;
       height: 7px;
+
       border-radius: 50%;
+
       background: var(--gold);
     }
 
-    /* HEADLINE */
-
     h1 {
       font-size: 31px;
+
       line-height: 1.2;
+
       letter-spacing: -.5px;
 
       color: var(--navy);
@@ -160,22 +175,25 @@
 
     .intro {
       max-width: 470px;
+
       margin: 0 auto 28px;
 
       color: var(--muted);
 
       font-size: 15px;
+
       line-height: 1.7;
     }
 
-    /* AMOUNT */
-
     .amount-box {
       display: flex;
+
       align-items: center;
+
       justify-content: space-between;
 
       background: var(--surface-soft);
+
       border: 1px solid var(--border);
 
       border-radius: 16px;
@@ -189,7 +207,9 @@
 
     .amount-label {
       color: var(--muted);
+
       font-size: 12px;
+
       font-weight: 700;
     }
 
@@ -197,15 +217,15 @@
       color: var(--navy);
 
       font-size: 25px;
+
       font-weight: 900;
     }
-
-    /* MEMBER DETAILS */
 
     .details {
       text-align: left;
 
       border: 1px solid var(--border);
+
       border-radius: 17px;
 
       overflow: hidden;
@@ -217,20 +237,25 @@
       padding: 14px 17px;
 
       background: var(--surface-soft);
+
       border-bottom: 1px solid var(--border);
 
       font-size: 12px;
+
       font-weight: 900;
 
       color: var(--navy);
 
       text-transform: uppercase;
+
       letter-spacing: .6px;
     }
 
     .detail-row {
       display: flex;
+
       justify-content: space-between;
+
       gap: 18px;
 
       padding: 14px 17px;
@@ -244,24 +269,29 @@
 
     .detail-label {
       color: #98a2b3;
+
       font-size: 12px;
+
       font-weight: 700;
     }
 
     .detail-value {
       color: var(--text);
+
       font-size: 13px;
+
       font-weight: 800;
+
       text-align: right;
+
       word-break: break-word;
     }
-
-    /* VERIFICATION BOX */
 
     .verification {
       text-align: left;
 
       background: var(--green-soft);
+
       border: 1px solid #ccebd7;
 
       border-radius: 17px;
@@ -273,7 +303,9 @@
 
     .verification-head {
       display: flex;
+
       align-items: center;
+
       gap: 10px;
 
       margin-bottom: 9px;
@@ -286,13 +318,17 @@
       border-radius: 50%;
 
       background: #dcfce7;
+
       color: var(--green);
 
       display: flex;
+
       align-items: center;
+
       justify-content: center;
 
       font-size: 14px;
+
       font-weight: 900;
 
       flex-shrink: 0;
@@ -300,6 +336,7 @@
 
     .verification strong {
       color: #166534;
+
       font-size: 14px;
     }
 
@@ -307,17 +344,17 @@
       color: #3f6b4d;
 
       font-size: 12px;
+
       line-height: 1.6;
 
       padding-left: 37px;
     }
 
-    /* STEPS */
-
     .steps {
       text-align: left;
 
       background: var(--surface-soft);
+
       border: 1px solid var(--border);
 
       border-radius: 17px;
@@ -329,6 +366,7 @@
 
     .steps-title {
       font-size: 13px;
+
       font-weight: 900;
 
       color: var(--navy);
@@ -338,6 +376,7 @@
 
     .step {
       display: flex;
+
       gap: 12px;
 
       margin-bottom: 15px;
@@ -356,13 +395,17 @@
       border-radius: 50%;
 
       background: var(--navy);
+
       color: white;
 
       display: flex;
+
       align-items: center;
+
       justify-content: center;
 
       font-size: 11px;
+
       font-weight: 900;
     }
 
@@ -382,13 +425,13 @@
       color: var(--muted);
 
       font-size: 12px;
+
       line-height: 1.5;
     }
 
-    /* IMPORTANT NOTICE */
-
     .notice {
       display: flex;
+
       gap: 10px;
 
       text-align: left;
@@ -396,6 +439,7 @@
       padding: 15px;
 
       border: 1px solid #e5e7eb;
+
       border-radius: 14px;
 
       margin-bottom: 22px;
@@ -403,6 +447,7 @@
 
     .notice-icon {
       font-size: 17px;
+
       line-height: 1;
     }
 
@@ -410,6 +455,7 @@
       color: var(--muted);
 
       font-size: 11.5px;
+
       line-height: 1.6;
     }
 
@@ -417,9 +463,8 @@
       color: var(--text);
     }
 
-    /* BUTTON */
-
-    .home-btn {
+    .home-btn,
+    .training-btn {
       display: block;
 
       width: 100%;
@@ -428,12 +473,12 @@
 
       border-radius: 13px;
 
-      background: var(--navy);
       color: white;
 
       text-decoration: none;
 
       font-size: 13px;
+
       font-weight: 900;
 
       transition:
@@ -441,12 +486,127 @@
         background .2s ease;
     }
 
+    .home-btn {
+      background: var(--navy);
+    }
+
     .home-btn:hover {
       background: #172033;
+
       transform: translateY(-1px);
     }
 
-    /* SUPPORT */
+    .training-btn {
+      background: var(--green);
+
+      margin-bottom: 12px;
+    }
+
+    .training-btn:hover {
+      background: #166534;
+
+      transform: translateY(-1px);
+    }
+
+    .member-box {
+      background: var(--green-soft);
+
+      border: 1px solid #b7e4c7;
+
+      border-radius: 17px;
+
+      padding: 20px;
+
+      margin-bottom: 20px;
+    }
+
+    .member-box .approved-icon {
+      font-size: 42px;
+
+      margin-bottom: 8px;
+    }
+
+    .member-box h2 {
+      color: #166534;
+
+      font-size: 24px;
+
+      margin-bottom: 7px;
+    }
+
+    .member-box p {
+      color: #3f6b4d;
+
+      font-size: 13px;
+
+      line-height: 1.6;
+
+      margin-bottom: 14px;
+    }
+
+    .member-id {
+      display: inline-block;
+
+      background: white;
+
+      border: 1px solid #ccebd7;
+
+      border-radius: 10px;
+
+      padding: 10px 15px;
+
+      color: var(--navy);
+
+      font-size: 16px;
+
+      font-weight: 900;
+
+      letter-spacing: 1px;
+    }
+
+    .rejected-box {
+      background: var(--red-soft);
+
+      border: 1px solid #fecdca;
+
+      border-radius: 17px;
+
+      padding: 20px;
+
+      margin-bottom: 20px;
+
+      text-align: center;
+    }
+
+    .rejected-box .rejected-icon {
+      font-size: 40px;
+
+      margin-bottom: 8px;
+    }
+
+    .rejected-box h2 {
+      color: var(--red);
+
+      font-size: 22px;
+
+      margin-bottom: 8px;
+    }
+
+    .rejected-box p {
+      color: #7a271a;
+
+      font-size: 13px;
+
+      line-height: 1.6;
+    }
+
+    .checking {
+      margin-top: 12px;
+
+      color: #98a2b3;
+
+      font-size: 10.5px;
+    }
 
     .footer-note {
       margin-top: 17px;
@@ -454,18 +614,23 @@
       color: #98a2b3;
 
       font-size: 10.5px;
+
       line-height: 1.5;
     }
 
-    /* MOBILE */
+    .hidden {
+      display: none !important;
+    }
 
     @media (max-width: 520px) {
+
       body {
         padding: 14px;
       }
 
       .card {
         padding: 32px 19px;
+
         border-radius: 23px;
       }
 
@@ -476,6 +641,7 @@
       .status-icon {
         width: 74px;
         height: 74px;
+
         font-size: 34px;
       }
 
@@ -508,39 +674,106 @@
 
     <section class="card">
 
-      <!-- BRAND -->
-
       <div class="brand">
         INDIAN BUSINESS BUREAU
       </div>
 
 
-      <!-- STATUS -->
+      <!-- =========================
+           PENDING STATE
+      ========================== -->
 
-      <div class="status-icon">
-        ⏳
+      <div id="pendingState">
+
+        <div class="status-icon">
+          ⏳
+        </div>
+
+        <div class="status-label">
+          <span class="status-dot"></span>
+          Verification Pending
+        </div>
+
+        <h1>
+          Your Submission Is Received
+        </h1>
+
+        <p class="intro">
+          Your payment details have been submitted for verification.
+          Membership access will be activated after the transaction
+          is manually reviewed and verified.
+        </p>
+
       </div>
 
-      <div class="status-label">
-        <span class="status-dot"></span>
-        Verification Pending
+
+      <!-- =========================
+           APPROVED STATE
+      ========================== -->
+
+      <div id="approvedState" class="hidden">
+
+        <div class="member-box">
+
+          <div class="approved-icon">
+            🎉
+          </div>
+
+          <h2>
+            Membership Approved
+          </h2>
+
+          <p>
+            Your payment has been verified successfully.
+            Your Indian Business Bureau membership is now active.
+          </p>
+
+          <div class="member-id" id="memberId">
+            IBB-XXXXXX
+          </div>
+
+        </div>
+
+        <a
+          href="training.html"
+          class="training-btn"
+        >
+          🎓 Start Your Training
+        </a>
+
       </div>
 
 
-      <!-- HEADING -->
+      <!-- =========================
+           REJECTED STATE
+      ========================== -->
 
-      <h1>
-        Your Submission Is Received
-      </h1>
+      <div id="rejectedState" class="hidden">
 
-      <p class="intro">
-        Your payment details have been submitted for verification.
-        Membership access will be activated after the transaction
-        is manually reviewed and verified.
-      </p>
+        <div class="rejected-box">
+
+          <div class="rejected-icon">
+            ❌
+          </div>
+
+          <h2>
+            Verification Rejected
+          </h2>
+
+          <p>
+            Your payment could not be verified.
+            Please contact support if you believe this was
+            a mistake.
+          </p>
+
+        </div>
+
+      </div>
 
 
-      <!-- AMOUNT -->
+      <!-- =========================
+           COMMON DETAILS
+      ========================== -->
 
       <div class="amount-box">
 
@@ -557,8 +790,6 @@
       </div>
 
 
-      <!-- MEMBER DETAILS -->
-
       <div class="details">
 
         <div class="details-title">
@@ -566,6 +797,7 @@
         </div>
 
         <div class="detail-row">
+
           <span class="detail-label">
             Full Name
           </span>
@@ -576,9 +808,11 @@
           >
             —
           </span>
+
         </div>
 
         <div class="detail-row">
+
           <span class="detail-label">
             Mobile Number
           </span>
@@ -589,9 +823,11 @@
           >
             —
           </span>
+
         </div>
 
         <div class="detail-row">
+
           <span class="detail-label">
             UTR / Transaction ID
           </span>
@@ -602,14 +838,20 @@
           >
             —
           </span>
+
         </div>
 
       </div>
 
 
-      <!-- VERIFICATION STATUS -->
+      <!-- =========================
+           PENDING INFORMATION
+      ========================== -->
 
-      <div class="verification">
+      <div
+        class="verification"
+        id="pendingInfo"
+      >
 
         <div class="verification-head">
 
@@ -624,22 +866,30 @@
         </div>
 
         <p>
-          Your submitted transaction reference will be checked
+          Your submitted transaction reference is being checked
           against the payment record. Please do not make another
           payment while your verification is pending.
         </p>
 
+        <div class="checking">
+          Automatically checking verification status...
+        </div>
+
       </div>
 
 
-      <!-- NEXT STEPS -->
+      <!-- =========================
+           NEXT STEPS
+      ========================== -->
 
-      <div class="steps">
+      <div
+        class="steps"
+        id="stepsBox"
+      >
 
         <div class="steps-title">
           What happens next?
         </div>
-
 
         <div class="step">
 
@@ -662,7 +912,6 @@
 
         </div>
 
-
         <div class="step">
 
           <div class="step-number">
@@ -672,18 +921,17 @@
           <div class="step-content">
 
             <strong>
-              Verification
+              Membership Approval
             </strong>
 
             <span>
-              Once the payment is confirmed, your registration
-              can be approved.
+              Once your payment is confirmed, your membership
+              will be activated.
             </span>
 
           </div>
 
         </div>
-
 
         <div class="step">
 
@@ -694,12 +942,12 @@
           <div class="step-content">
 
             <strong>
-              Community Access
+              Start Training
             </strong>
 
             <span>
-              After approval, you can receive the applicable
-              IBB membership and community access information.
+              After approval, you can start your structured
+              IBB business training program.
             </span>
 
           </div>
@@ -709,9 +957,14 @@
       </div>
 
 
-      <!-- IMPORTANT NOTICE -->
+      <!-- =========================
+           SECURITY NOTICE
+      ========================== -->
 
-      <div class="notice">
+      <div
+        class="notice"
+        id="noticeBox"
+      >
 
         <div class="notice-icon">
           ⚠️
@@ -727,7 +980,9 @@
       </div>
 
 
-      <!-- HOME BUTTON -->
+      <!-- =========================
+           HOME
+      ========================== -->
 
       <a
         href="index.html"
@@ -739,7 +994,7 @@
 
       <div class="footer-note">
         Indian Business Bureau · Payment verification status
-        remains pending until the transaction is confirmed.
+        updates automatically.
       </div>
 
     </section>
@@ -748,10 +1003,18 @@
 
 
   <script>
-    /*
-      Read the details saved by join.html / payment.html.
-      If a value is not available, display "—".
-    */
+
+    // ==========================================
+    // APPS SCRIPT WEB APP URL
+    // ==========================================
+
+    const APPS_SCRIPT_URL =
+      "https://script.google.com/macros/s/AKfycbxMRgZRXfwLgJr4z9fXtqRU7ixM7sXToXDYTr4pu1M93TpiSw7F3Q8TlHZdn37gWJ4/exec";
+
+
+    // ==========================================
+    // GET MEMBER DETAILS
+    // ==========================================
 
     const name =
       sessionStorage.getItem("ibb_name") || "—";
@@ -760,18 +1023,318 @@
       sessionStorage.getItem("ibb_mobile") || "—";
 
     const utr =
-      sessionStorage.getItem("ibb_utr") || "—";
+      sessionStorage.getItem("ibb_utr") || "";
 
 
-    /*
-      Display member information.
-    */
+    document.getElementById("displayName").textContent =
+      name;
 
-    document.getElementById("displayName").textContent = name;
+    document.getElementById("displayMobile").textContent =
+      mobile;
 
-    document.getElementById("displayMobile").textContent = mobile;
+    document.getElementById("displayUtr").textContent =
+      utr || "—";
 
-    document.getElementById("displayUtr").textContent = utr;
+
+    // ==========================================
+    // STATE ELEMENTS
+    // ==========================================
+
+    const pendingState =
+      document.getElementById("pendingState");
+
+    const approvedState =
+      document.getElementById("approvedState");
+
+    const rejectedState =
+      document.getElementById("rejectedState");
+
+    const pendingInfo =
+      document.getElementById("pendingInfo");
+
+    const stepsBox =
+      document.getElementById("stepsBox");
+
+    const noticeBox =
+      document.getElementById("noticeBox");
+
+    const memberId =
+      document.getElementById("memberId");
+
+
+    // ==========================================
+    // SHOW APPROVED
+    // ==========================================
+
+    function showApproved(memberID) {
+
+      pendingState.classList.add("hidden");
+
+      rejectedState.classList.add("hidden");
+
+      approvedState.classList.remove("hidden");
+
+      pendingInfo.classList.add("hidden");
+
+      stepsBox.classList.add("hidden");
+
+      noticeBox.classList.add("hidden");
+
+      memberId.textContent =
+        memberID || "IBB-MEMBER";
+
+
+      // Save approval locally
+      sessionStorage.setItem(
+        "ibb_payment_status",
+        "APPROVED"
+      );
+
+      if (memberID) {
+
+        sessionStorage.setItem(
+          "ibb_member_id",
+          memberID
+        );
+
+      }
+
+    }
+
+
+    // ==========================================
+    // SHOW REJECTED
+    // ==========================================
+
+    function showRejected() {
+
+      pendingState.classList.add("hidden");
+
+      approvedState.classList.add("hidden");
+
+      rejectedState.classList.remove("hidden");
+
+      pendingInfo.classList.add("hidden");
+
+      stepsBox.classList.add("hidden");
+
+      noticeBox.classList.add("hidden");
+
+      sessionStorage.setItem(
+        "ibb_payment_status",
+        "REJECTED"
+      );
+
+    }
+
+
+    // ==========================================
+    // JSONP STATUS CHECK
+    // ==========================================
+
+    function checkPaymentStatus() {
+
+      if (!utr) {
+
+        console.log(
+          "No UTR found in sessionStorage."
+        );
+
+        return;
+
+      }
+
+
+      const callbackName =
+        "ibbStatusCallback_" +
+        Date.now();
+
+
+      const script =
+        document.createElement("script");
+
+
+      const url =
+        APPS_SCRIPT_URL +
+        "?utr=" +
+        encodeURIComponent(utr) +
+        "&callback=" +
+        callbackName;
+
+
+      window[callbackName] =
+        function(data) {
+
+          try {
+
+            console.log(
+              "IBB payment status:",
+              data
+            );
+
+
+            if (
+              !data ||
+              !data.success
+            ) {
+
+              return;
+
+            }
+
+
+            const status =
+              String(
+                data.status || "PENDING"
+              ).toUpperCase();
+
+
+            if (status === "APPROVED") {
+
+              showApproved(
+                data.memberId || ""
+              );
+
+              stopPolling();
+
+            }
+
+
+            else if (status === "REJECTED") {
+
+              showRejected();
+
+              stopPolling();
+
+            }
+
+
+            else {
+
+              sessionStorage.setItem(
+                "ibb_payment_status",
+                "PENDING"
+              );
+
+            }
+
+          }
+
+          catch(error) {
+
+            console.error(
+              "Status processing error:",
+              error
+            );
+
+          }
+
+
+          // Cleanup JSONP callback
+          try {
+
+            delete window[callbackName];
+
+          }
+
+          catch(error) {
+
+            window[callbackName] =
+              undefined;
+
+          }
+
+
+          if (script.parentNode) {
+
+            script.parentNode.removeChild(
+              script
+            );
+
+          }
+
+        };
+
+
+      script.src = url;
+
+      script.onerror = function() {
+
+        console.log(
+          "Unable to check payment status."
+        );
+
+        try {
+
+          delete window[callbackName];
+
+        }
+
+        catch(error) {
+
+          window[callbackName] =
+            undefined;
+
+        }
+
+        if (script.parentNode) {
+
+          script.parentNode.removeChild(
+            script
+          );
+
+        }
+
+      };
+
+
+      document.body.appendChild(script);
+
+    }
+
+
+    // ==========================================
+    // AUTO POLLING
+    // ==========================================
+
+    let pollingTimer = null;
+
+
+    function startPolling() {
+
+      checkPaymentStatus();
+
+
+      pollingTimer =
+        setInterval(
+          checkPaymentStatus,
+          5000
+        );
+
+    }
+
+
+    function stopPolling() {
+
+      if (pollingTimer) {
+
+        clearInterval(
+          pollingTimer
+        );
+
+        pollingTimer = null;
+
+      }
+
+    }
+
+
+    // ==========================================
+    // START
+    // ==========================================
+
+    startPolling();
+
   </script>
 
 </body>
