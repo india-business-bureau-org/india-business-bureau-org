@@ -460,6 +460,7 @@
     /* MOBILE */
 
     @media (max-width: 520px) {
+
       body {
         padding: 13px;
       }
@@ -485,6 +486,7 @@
   </style>
 </head>
 
+
 <body>
 
   <main class="page">
@@ -495,9 +497,11 @@
         INDIAN BUSINESS BUREAU
       </div>
 
+
       <h1>
         Complete Your Registration
       </h1>
+
 
       <p class="subtitle">
         Pay the one-time ₹101 registration fee and submit
@@ -528,6 +532,7 @@
           Pay using UPI
         </div>
 
+
         <div class="upi-row">
 
           <div
@@ -536,6 +541,7 @@
           >
             7528826377@slc
           </div>
+
 
           <button
             type="button"
@@ -547,6 +553,7 @@
 
         </div>
 
+
         <button
           type="button"
           class="pay-btn"
@@ -554,6 +561,7 @@
         >
           PAY ₹101 WITH UPI
         </button>
+
 
         <div class="upi-help">
           Google Pay · PhonePe · Other UPI Apps
@@ -570,6 +578,7 @@
           How to complete payment
         </div>
 
+
         <div class="step">
 
           <div class="number">
@@ -577,6 +586,7 @@
           </div>
 
           <div>
+
             <strong>
               Pay ₹101
             </strong>
@@ -585,6 +595,7 @@
               Use the UPI ID above or tap the payment button
               to open your UPI app.
             </span>
+
           </div>
 
         </div>
@@ -597,6 +608,7 @@
           </div>
 
           <div>
+
             <strong>
               Complete the payment
             </strong>
@@ -605,6 +617,7 @@
               After completing payment, keep your UTR /
               transaction reference available.
             </span>
+
           </div>
 
         </div>
@@ -617,6 +630,7 @@
           </div>
 
           <div>
+
             <strong>
               Submit your UTR
             </strong>
@@ -625,6 +639,7 @@
               Enter the transaction reference below and
               submit it for verification.
             </span>
+
           </div>
 
         </div>
@@ -640,14 +655,17 @@
           Payment Verification
         </div>
 
+
         <p class="utr-description">
           Enter the UTR / Transaction ID shown in your
           UPI payment details.
         </p>
 
+
         <label for="utr">
           UTR / Transaction ID
         </label>
+
 
         <input
           type="text"
@@ -656,6 +674,7 @@
           autocomplete="off"
           maxlength="100"
         >
+
 
         <button
           type="button"
@@ -677,18 +696,26 @@
           🔒
         </div>
 
+
         <p>
-          <strong>Security:</strong>
+
+          <strong>
+            Security:
+          </strong>
+
           Never enter or share your UPI PIN, OTP, password
           or banking credentials on this page.
+
         </p>
 
       </div>
 
 
       <div class="footer">
+
         Membership activation is subject to successful
         payment verification.
+
       </div>
 
     </section>
@@ -699,14 +726,13 @@
   <!--
     Hidden iframe.
 
-    Google Form response is submitted here so the user
-    does NOT see Google's "Your response has been recorded"
-    page.
+    Apps Script response is submitted here so the user
+    stays on our website.
   -->
 
   <iframe
-    name="googleFormFrame"
-    id="googleFormFrame"
+    name="appsScriptFrame"
+    id="appsScriptFrame"
     style="display:none;"
   ></iframe>
 
@@ -717,19 +743,12 @@
        CONFIGURATION
     ========================================= */
 
-    const UPI_ID = "7528826377@slc";
+    const UPI_ID =
+      "7528826377@slc";
 
-    const GOOGLE_FORM_URL =
-      "https://docs.google.com/forms/d/e/1FAIpQLSfkKFDLcQU34fKuIPWV042OPGfOgBqvyFhB_TLW1LSWB9ISPQ/formResponse";
 
-    const NAME_ENTRY =
-      "entry.1710482705";
-
-    const MOBILE_ENTRY =
-      "entry.1711873210";
-
-    const UTR_ENTRY =
-      "entry.2000855266";
+    const APPS_SCRIPT_URL =
+      "https://script.google.com/macros/s/AKfycbxMRgZRXfwLgJr4z9fXtqRU7ixM7sXToXDYTr4pu1M93TpiSw7F3Q8TlHZdn37gWJ4/exec";
 
 
     /* =========================================
@@ -745,7 +764,10 @@
         "&am=101.00" +
         "&cu=INR";
 
-      window.location.href = upiUrl;
+
+      window.location.href =
+        upiUrl;
+
     }
 
 
@@ -755,22 +777,32 @@
 
     function copyUPI() {
 
-      navigator.clipboard.writeText(UPI_ID)
+      navigator.clipboard
+        .writeText(UPI_ID)
+
         .then(function () {
 
           const button =
             document.querySelector(".copy-btn");
 
+
           const oldText =
             button.textContent;
 
-          button.textContent = "Copied!";
+
+          button.textContent =
+            "Copied!";
+
 
           setTimeout(function () {
-            button.textContent = oldText;
+
+            button.textContent =
+              oldText;
+
           }, 1500);
 
         })
+
         .catch(function () {
 
           alert(
@@ -778,6 +810,7 @@
           );
 
         });
+
     }
 
 
@@ -790,11 +823,14 @@
       const name =
         sessionStorage.getItem("ibb_name") || "";
 
+
       const mobile =
         sessionStorage.getItem("ibb_mobile") || "";
 
+
       const utrInput =
         document.getElementById("utr");
+
 
       const utr =
         utrInput
@@ -813,6 +849,7 @@
         );
 
         return;
+
       }
 
 
@@ -823,6 +860,7 @@
         );
 
         return;
+
       }
 
 
@@ -832,14 +870,19 @@
           "Please enter your UTR / Transaction ID."
         );
 
-        utrInput.focus();
+
+        if (utrInput) {
+          utrInput.focus();
+        }
+
 
         return;
+
       }
 
 
       /* -----------------------------------------
-         SAVE UTR LOCALLY
+         SAVE DATA LOCALLY
       ----------------------------------------- */
 
       sessionStorage.setItem(
@@ -847,9 +890,10 @@
         utr
       );
 
+
       sessionStorage.setItem(
         "ibb_payment_status",
-        "pending"
+        "PENDING"
       );
 
 
@@ -860,26 +904,34 @@
       const submitBtn =
         document.getElementById("submitBtn");
 
-      submitBtn.disabled = true;
+
+      submitBtn.disabled =
+        true;
+
 
       submitBtn.textContent =
         "SUBMITTING...";
 
 
       /* -----------------------------------------
-         CREATE HIDDEN GOOGLE FORM
+         CREATE HIDDEN FORM
       ----------------------------------------- */
 
       const form =
         document.createElement("form");
 
-      form.method = "POST";
+
+      form.method =
+        "POST";
+
 
       form.action =
-        GOOGLE_FORM_URL;
+        APPS_SCRIPT_URL;
+
 
       form.target =
-        "googleFormFrame";
+        "appsScriptFrame";
+
 
       form.style.display =
         "none";
@@ -892,14 +944,18 @@
       const nameField =
         document.createElement("input");
 
+
       nameField.type =
         "hidden";
 
+
       nameField.name =
-        NAME_ENTRY;
+        "name";
+
 
       nameField.value =
         name;
+
 
       form.appendChild(
         nameField
@@ -913,14 +969,18 @@
       const mobileField =
         document.createElement("input");
 
+
       mobileField.type =
         "hidden";
 
+
       mobileField.name =
-        MOBILE_ENTRY;
+        "mobile";
+
 
       mobileField.value =
         mobile;
+
 
       form.appendChild(
         mobileField
@@ -934,14 +994,18 @@
       const utrField =
         document.createElement("input");
 
+
       utrField.type =
         "hidden";
 
+
       utrField.name =
-        UTR_ENTRY;
+        "utr";
+
 
       utrField.value =
         utr;
+
 
       form.appendChild(
         utrField
@@ -958,14 +1022,14 @@
 
 
       /* -----------------------------------------
-         SUBMIT TO GOOGLE FORM
+         SUBMIT TO GOOGLE APPS SCRIPT
       ----------------------------------------- */
 
       form.submit();
 
 
       /* -----------------------------------------
-         GO TO OUR OWN PENDING PAGE
+         GO TO PENDING PAGE
       ----------------------------------------- */
 
       setTimeout(function () {
@@ -973,7 +1037,7 @@
         window.location.href =
           "pending.html";
 
-      }, 1500);
+      }, 1200);
 
     }
 
