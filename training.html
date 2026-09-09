@@ -1,1567 +1,1643 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>IBB Promoter Training</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f4f7fb;
-      color: #172033;
-      line-height: 1.6;
-    }
-
-    button {
-      font-family: inherit;
-    }
-
-    .header {
-      background: linear-gradient(135deg, #111827, #1e3a8a);
-      color: white;
-      padding: 25px 18px;
-    }
-
-    .header-inner {
-      max-width: 1100px;
-      margin: auto;
-    }
-
-    .brand {
-      font-size: 14px;
-      font-weight: bold;
-      letter-spacing: 1px;
-      opacity: .85;
-      margin-bottom: 8px;
-    }
-
-    .header h1 {
-      font-size: 30px;
-      margin-bottom: 6px;
-    }
-
-    .header p {
-      opacity: .85;
-      font-size: 15px;
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: 25px auto;
-      padding: 0 15px;
-    }
-
-    .member-card {
-      background: white;
-      border-radius: 16px;
-      padding: 20px;
-      box-shadow: 0 5px 20px rgba(0,0,0,.06);
-      margin-bottom: 20px;
-    }
-
-    .member-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
-
-    .member-name {
-      font-size: 20px;
-      font-weight: 700;
-    }
-
-    .member-id {
-      font-size: 13px;
-      color: #64748b;
-      margin-top: 3px;
-    }
-
-    .progress-section {
-      margin-top: 18px;
-    }
-
-    .progress-top {
-      display: flex;
-      justify-content: space-between;
-      font-size: 13px;
-      margin-bottom: 7px;
-      color: #475569;
-    }
-
-    .progress-bar {
-      height: 10px;
-      background: #e2e8f0;
-      border-radius: 20px;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, #2563eb, #16a34a);
-      border-radius: 20px;
-      transition: width .4s ease;
-    }
-
-    .layout {
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: 20px;
-      align-items: start;
-    }
-
-    .days-card {
-      background: white;
-      border-radius: 16px;
-      padding: 15px;
-      box-shadow: 0 5px 20px rgba(0,0,0,.06);
-      position: sticky;
-      top: 15px;
-    }
-
-    .days-card h3 {
-      font-size: 17px;
-      margin-bottom: 12px;
-    }
-
-    .day-list {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      max-height: 65vh;
-      overflow-y: auto;
-      padding-right: 3px;
-    }
-
-    .day-btn {
-      border: none;
-      background: #f8fafc;
-      padding: 11px 12px;
-      border-radius: 10px;
-      text-align: left;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: #334155;
-      font-size: 13px;
-      transition: .2s;
-    }
-
-    .day-btn:hover {
-      background: #eef2ff;
-    }
-
-    .day-btn.active {
-      background: #dbeafe;
-      color: #1d4ed8;
-      font-weight: bold;
-    }
-
-    .day-btn.completed {
-      background: #ecfdf5;
-      color: #047857;
-    }
-
-    .day-btn.locked {
-      opacity: .55;
-      cursor: not-allowed;
-    }
-
-    .day-number {
-      font-weight: 700;
-    }
-
-    .status-icon {
-      font-size: 14px;
-    }
-
-    .training-card {
-      background: white;
-      border-radius: 18px;
-      padding: 28px;
-      box-shadow: 0 5px 20px rgba(0,0,0,.06);
-    }
-
-    .day-label {
-      display: inline-block;
-      background: #dbeafe;
-      color: #1d4ed8;
-      padding: 5px 11px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .training-card h2 {
-      font-size: 27px;
-      margin-bottom: 8px;
-    }
-
-    .description {
-      color: #64748b;
-      margin-bottom: 25px;
-    }
-
-    .section {
-      border: 1px solid #e2e8f0;
-      border-radius: 14px;
-      padding: 18px;
-      margin-bottom: 16px;
-    }
-
-    .section h3 {
-      font-size: 17px;
-      margin-bottom: 8px;
-    }
-
-    .learn-box {
-      background: #eff6ff;
-      border-color: #bfdbfe;
-    }
-
-    .task-box {
-      background: #f8fafc;
-    }
-
-    .proof-box {
-      background: #fffbeb;
-      border-color: #fde68a;
-    }
-
-    .earning-box {
-      background: #ecfdf5;
-      border-color: #bbf7d0;
-    }
-
-    .qa-box {
-      background: #faf5ff;
-      border-color: #e9d5ff;
-    }
-
-    ul {
-      padding-left: 20px;
-    }
-
-    li {
-      margin-bottom: 6px;
-    }
-
-    .check-list {
-      list-style: none;
-      padding: 0;
-    }
-
-    .check-list li {
-      margin-bottom: 9px;
-    }
-
-    .check-list label {
-      display: flex;
-      gap: 9px;
-      align-items: flex-start;
-      cursor: pointer;
-    }
-
-    .check-list input {
-      margin-top: 5px;
-    }
-
-    .task-note {
-      margin-top: 12px;
-      padding: 12px;
-      border-radius: 9px;
-      background: white;
-      border: 1px dashed #cbd5e1;
-      font-size: 13px;
-      color: #475569;
-    }
-
-    .navigation {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      margin-top: 25px;
-    }
-
-    .btn {
-      border: none;
-      border-radius: 10px;
-      padding: 13px 20px;
-      font-size: 14px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: .2s;
-    }
-
-    .btn-primary {
-      background: #2563eb;
-      color: white;
-    }
-
-    .btn-primary:hover {
-      background: #1d4ed8;
-    }
-
-    .btn-secondary {
-      background: #e2e8f0;
-      color: #334155;
-    }
-
-    .btn-success {
-      background: #16a34a;
-      color: white;
-    }
-
-    .btn:disabled {
-      opacity: .45;
-      cursor: not-allowed;
-    }
-
-    .completion-box {
-      display: none;
-      background: linear-gradient(135deg, #ecfdf5, #eff6ff);
-      border: 1px solid #bbf7d0;
-      border-radius: 16px;
-      padding: 25px;
-      margin-top: 20px;
-      text-align: center;
-    }
-
-    .completion-box.show {
-      display: block;
-    }
-
-    .completion-icon {
-      font-size: 50px;
-      margin-bottom: 10px;
-    }
-
-    .completion-box h2 {
-      margin-bottom: 8px;
-    }
-
-    .completion-box p {
-      color: #475569;
-      margin-bottom: 18px;
-    }
-
-    .whatsapp-btn {
-      display: inline-block;
-      text-decoration: none;
-      background: #16a34a;
-      color: white;
-      padding: 13px 20px;
-      border-radius: 10px;
-      font-weight: bold;
-    }
-
-    .warning {
-      background: #fff7ed;
-      border: 1px solid #fed7aa;
-      color: #9a3412;
-      padding: 14px;
-      border-radius: 10px;
-      font-size: 13px;
-      margin-top: 15px;
-    }
-
-    .footer {
-      text-align: center;
-      padding: 30px 15px;
-      color: #64748b;
-      font-size: 12px;
-    }
-
-    @media (max-width: 800px) {
-      .layout {
-        grid-template-columns: 1fr;
-      }
-
-      .days-card {
-        position: static;
-      }
-
-      .day-list {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        max-height: none;
-      }
-
-      .training-card {
-        padding: 20px;
-      }
-
-      .header h1 {
-        font-size: 24px;
-      }
-    }
-
-    @media (max-width: 500px) {
-      .day-list {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .training-card h2 {
-        font-size: 22px;
-      }
-
-      .navigation {
-        flex-direction: column;
-      }
-
-      .navigation .btn {
-        width: 100%;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>IBB Promoter Academy</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+:root{
+  --blue:#2563eb;
+  --blue-dark:#1d4ed8;
+  --green:#16a34a;
+  --green-light:#ecfdf5;
+  --text:#172033;
+  --muted:#64748b;
+  --border:#e2e8f0;
+  --bg:#f5f7fb;
+  --white:#fff;
+}
+
+body{
+  font-family:Inter,Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button{
+  font-family:inherit;
+}
+
+/* ================= HEADER ================= */
+
+.header{
+  background:
+    radial-gradient(circle at 80% 20%,rgba(59,130,246,.35),transparent 30%),
+    linear-gradient(135deg,#0f172a,#1e3a8a);
+  color:white;
+  padding:30px 18px 34px;
+}
+
+.header-inner{
+  max-width:1050px;
+  margin:auto;
+}
+
+.brand{
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:1.5px;
+  opacity:.75;
+  margin-bottom:8px;
+}
+
+.header h1{
+  font-size:32px;
+  line-height:1.2;
+  margin-bottom:8px;
+}
+
+.header p{
+  font-size:14px;
+  opacity:.82;
+}
+
+/* ================= CONTAINER ================= */
+
+.container{
+  max-width:1050px;
+  margin:-18px auto 40px;
+  padding:0 16px;
+}
+
+/* ================= MEMBER CARD ================= */
+
+.member-card{
+  background:white;
+  border:1px solid rgba(226,232,240,.8);
+  border-radius:18px;
+  padding:20px;
+  box-shadow:0 12px 35px rgba(15,23,42,.08);
+  margin-bottom:18px;
+}
+
+.member-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.member-name{
+  font-size:19px;
+  font-weight:800;
+}
+
+.member-id{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:2px;
+}
+
+.progress-number{
+  font-weight:800;
+  color:var(--blue);
+  text-align:right;
+}
+
+.progress-label{
+  font-size:11px;
+  color:var(--muted);
+}
+
+.progress-section{
+  margin-top:18px;
+}
+
+.progress-info{
+  display:flex;
+  justify-content:space-between;
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:7px;
+}
+
+.progress-bar{
+  height:9px;
+  background:#e8edf5;
+  border-radius:99px;
+  overflow:hidden;
+}
+
+.progress-fill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#2563eb,#22c55e);
+  border-radius:99px;
+  transition:.4s ease;
+}
+
+/* ================= DAY NAV ================= */
+
+.day-navigation{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:12px;
+  margin-bottom:18px;
+  box-shadow:0 6px 20px rgba(15,23,42,.04);
+}
+
+.day-scroll{
+  display:flex;
+  gap:7px;
+  overflow-x:auto;
+  padding-bottom:2px;
+}
+
+.day-scroll::-webkit-scrollbar{
+  height:4px;
+}
+
+.day-scroll::-webkit-scrollbar-thumb{
+  background:#cbd5e1;
+  border-radius:20px;
+}
+
+.day-btn{
+  flex:0 0 auto;
+  min-width:70px;
+  border:none;
+  background:#f8fafc;
+  color:#475569;
+  border-radius:10px;
+  padding:9px 10px;
+  cursor:pointer;
+  font-size:11px;
+  font-weight:700;
+  transition:.2s;
+}
+
+.day-btn:hover{
+  background:#eff6ff;
+}
+
+.day-btn.active{
+  background:#dbeafe;
+  color:#1d4ed8;
+}
+
+.day-btn.completed{
+  background:#dcfce7;
+  color:#15803d;
+}
+
+.day-btn.locked{
+  opacity:.55;
+  cursor:not-allowed;
+}
+
+/* ================= LOCK BOX ================= */
+
+.lock-box{
+  background:linear-gradient(135deg,#eff6ff,#f8fafc);
+  border:1px solid #bfdbfe;
+  border-radius:18px;
+  padding:30px 20px;
+  text-align:center;
+  margin-bottom:18px;
+}
+
+.lock-icon{
+  width:58px;
+  height:58px;
+  margin:0 auto 12px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#dbeafe;
+  font-size:27px;
+}
+
+.lock-box h2{
+  font-size:21px;
+  margin-bottom:6px;
+}
+
+.lock-box p{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.countdown{
+  font-size:28px;
+  font-weight:900;
+  color:#1d4ed8;
+  margin:12px 0 4px;
+  letter-spacing:1px;
+}
+
+.unlock-time{
+  font-size:11px;
+  color:var(--muted);
+}
+
+/* ================= TRAINING CARD ================= */
+
+.training-card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:28px;
+  box-shadow:0 10px 30px rgba(15,23,42,.06);
+}
+
+.day-label{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  background:#dbeafe;
+  color:#1d4ed8;
+  border-radius:99px;
+  padding:5px 11px;
+  font-size:11px;
+  font-weight:800;
+  margin-bottom:12px;
+}
+
+.training-card h2{
+  font-size:27px;
+  line-height:1.25;
+  margin-bottom:7px;
+}
+
+.description{
+  color:var(--muted);
+  font-size:14px;
+  margin-bottom:23px;
+}
+
+/* ================= SECTIONS ================= */
+
+.section{
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:18px;
+  margin-bottom:14px;
+}
+
+.section h3{
+  font-size:15px;
+  margin-bottom:9px;
+}
+
+.learn-box{
+  background:#f8fbff;
+  border-color:#dbeafe;
+}
+
+.task-box{
+  background:#fffdf5;
+  border-color:#fde68a;
+}
+
+.proof-box{
+  background:#f8fafc;
+}
+
+.tip-box{
+  background:#f0fdf4;
+  border-color:#bbf7d0;
+}
+
+ul{
+  padding-left:19px;
+}
+
+li{
+  margin-bottom:6px;
+  font-size:13px;
+}
+
+/* ================= CHECKLIST ================= */
+
+.check-list{
+  list-style:none;
+  padding:0;
+}
+
+.check-list li{
+  margin-bottom:8px;
+}
+
+.check-label{
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  padding:10px;
+  border-radius:10px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.check-label:hover{
+  background:#f1f5f9;
+}
+
+.check-label input{
+  margin-top:5px;
+  accent-color:var(--green);
+}
+
+.check-label span{
+  font-size:13px;
+}
+
+/* ================= BUTTONS ================= */
+
+.navigation{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-top:23px;
+}
+
+.btn{
+  border:none;
+  border-radius:11px;
+  padding:13px 20px;
+  font-size:13px;
+  font-weight:800;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.btn-primary{
+  background:var(--blue);
+  color:white;
+}
+
+.btn-primary:hover{
+  background:var(--blue-dark);
+}
+
+.btn-secondary{
+  background:#e2e8f0;
+  color:#334155;
+}
+
+.btn-success{
+  background:var(--green);
+  color:white;
+}
+
+.btn:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
+
+/* ================= FINAL TEST ================= */
+
+.test-card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:28px;
+  box-shadow:0 10px 30px rgba(15,23,42,.06);
+}
+
+.test-header{
+  text-align:center;
+  padding-bottom:22px;
+  border-bottom:1px solid var(--border);
+  margin-bottom:22px;
+}
+
+.test-icon{
+  font-size:45px;
+  margin-bottom:7px;
+}
+
+.test-header h2{
+  font-size:27px;
+  margin-bottom:5px;
+}
+
+.test-header p{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.question{
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:17px;
+  margin-bottom:13px;
+}
+
+.question-number{
+  font-size:11px;
+  color:var(--blue);
+  font-weight:800;
+  margin-bottom:5px;
+}
+
+.question-title{
+  font-size:14px;
+  font-weight:700;
+  margin-bottom:11px;
+}
+
+.option{
+  display:flex;
+  align-items:flex-start;
+  gap:9px;
+  padding:9px;
+  border-radius:9px;
+  cursor:pointer;
+  font-size:13px;
+}
+
+.option:hover{
+  background:#f8fafc;
+}
+
+.option input{
+  margin-top:4px;
+  accent-color:var(--blue);
+}
+
+.test-submit{
+  width:100%;
+  margin-top:8px;
+}
+
+/* ================= RESULT ================= */
+
+.result{
+  display:none;
+  text-align:center;
+  border-radius:18px;
+  padding:28px 20px;
+  margin-top:20px;
+}
+
+.result.show{
+  display:block;
+}
+
+.result.pass{
+  background:#ecfdf5;
+  border:1px solid #bbf7d0;
+}
+
+.result.fail{
+  background:#fff7ed;
+  border:1px solid #fed7aa;
+}
+
+.result-icon{
+  font-size:50px;
+}
+
+.result h2{
+  margin:7px 0;
+}
+
+.score{
+  font-size:31px;
+  font-weight:900;
+  margin:8px 0;
+}
+
+/* ================= COMPLETE ================= */
+
+.complete-box{
+  display:none;
+  background:linear-gradient(135deg,#ecfdf5,#eff6ff);
+  border:1px solid #bbf7d0;
+  border-radius:20px;
+  padding:35px 20px;
+  text-align:center;
+  margin-top:18px;
+}
+
+.complete-box.show{
+  display:block;
+}
+
+.complete-icon{
+  font-size:58px;
+}
+
+.complete-box h2{
+  font-size:25px;
+  margin:8px 0;
+}
+
+.complete-box p{
+  color:var(--muted);
+  font-size:13px;
+  max-width:550px;
+  margin:0 auto 18px;
+}
+
+.badge{
+  display:inline-block;
+  background:#16a34a;
+  color:white;
+  padding:8px 15px;
+  border-radius:99px;
+  font-size:12px;
+  font-weight:800;
+}
+
+/* ================= FOOTER ================= */
+
+.footer{
+  text-align:center;
+  padding:25px 15px;
+  color:#94a3b8;
+  font-size:11px;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:650px){
+
+  .header{
+    padding:24px 15px 30px;
+  }
+
+  .header h1{
+    font-size:25px;
+  }
+
+  .container{
+    margin-top:-14px;
+  }
+
+  .training-card,
+  .test-card{
+    padding:19px;
+  }
+
+  .training-card h2{
+    font-size:22px;
+  }
+
+  .navigation{
+    flex-direction:column;
+  }
+
+  .navigation .btn{
+    width:100%;
+  }
+
+  .member-card{
+    padding:17px;
+  }
+
+  .countdown{
+    font-size:24px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <header class="header">
-    <div class="header-inner">
-      <div class="brand">INDIAN BUSINESS BUREAU</div>
-      <h1>IBB Promoter Training</h1>
-      <p>30-Day Training + Practical Task System</p>
-    </div>
-  </header>
+<header class="header">
+  <div class="header-inner">
+    <div class="brand">INDIAN BUSINESS BUREAU</div>
+    <h1>IBB Promoter Academy</h1>
+    <p>Learn • Practice • Complete • Get Certified</p>
+  </div>
+</header>
 
-  <main class="container">
+<main class="container">
 
-    <div class="member-card">
-      <div class="member-row">
-        <div>
-          <div class="member-name" id="memberName">
-            IBB Promoter
-          </div>
+  <!-- MEMBER -->
+  <div class="member-card">
 
-          <div class="member-id" id="memberId">
-            Member ID: —
-          </div>
+    <div class="member-top">
+
+      <div>
+        <div class="member-name" id="memberName">
+          IBB Promoter
         </div>
 
-        <div>
-          <strong id="completedCount">0 / 30</strong>
-          <div style="font-size:12px;color:#64748b;">
-            Days Completed
-          </div>
+        <div class="member-id" id="memberId">
+          Member ID: —
         </div>
       </div>
 
-      <div class="progress-section">
-        <div class="progress-top">
-          <span>Training Progress</span>
-          <span id="progressPercent">0%</span>
+      <div>
+        <div class="progress-number" id="completedCount">
+          0 / 10
         </div>
 
-        <div class="progress-bar">
-          <div class="progress-fill" id="progressFill"></div>
+        <div class="progress-label">
+          Training Completed
         </div>
       </div>
-    </div>
-
-
-    <div class="layout">
-
-      <aside class="days-card">
-        <h3>30-Day Training</h3>
-        <div class="day-list" id="dayList"></div>
-      </aside>
-
-
-      <section>
-
-        <div class="training-card" id="trainingCard">
-          <!-- Training content generated by JavaScript -->
-        </div>
-
-        <div class="completion-box" id="completionBox">
-
-          <div class="completion-icon">🎉</div>
-
-          <h2>Training Completed!</h2>
-
-          <p>
-            Congratulations! You have successfully completed
-            the 30-Day IBB Promoter Training.
-          </p>
-
-          <p>
-            You are now ready to understand and participate
-            in eligible IBB promotional campaigns.
-          </p>
-
-          <a
-            href="YOUR_WHATSAPP_COMMUNITY_LINK"
-            class="whatsapp-btn"
-            id="whatsappButton"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            💬 Join IBB WhatsApp Community
-          </a>
-
-          <div class="warning">
-            Replace the WhatsApp link in this file with your
-            official IBB WhatsApp Community link before publishing.
-          </div>
-
-        </div>
-
-      </section>
 
     </div>
 
-  </main>
+    <div class="progress-section">
+
+      <div class="progress-info">
+        <span>Your Progress</span>
+        <span id="progressPercent">0%</span>
+      </div>
+
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+    </div>
+
+  </div>
 
 
-  <footer class="footer">
-    © Indian Business Bureau — IBB Promoter Training
-  </footer>
+  <!-- DAY NAVIGATION -->
+  <div class="day-navigation">
+
+    <div class="day-scroll" id="dayList"></div>
+
+  </div>
+
+
+  <!-- MAIN CONTENT -->
+  <div id="mainContent"></div>
+
+
+  <!-- FINAL TEST -->
+  <div id="finalTest"></div>
+
+
+  <!-- COMPLETE -->
+  <div class="complete-box" id="completeBox">
+
+    <div class="complete-icon">🏆</div>
+
+    <span class="badge">
+      IBB PROMOTER CERTIFIED
+    </span>
+
+    <h2>Congratulations!</h2>
+
+    <p>
+      You have successfully completed the IBB Promoter
+      Training and passed the final assessment.
+    </p>
+
+    <p>
+      You are now ready to participate in eligible IBB
+      promotional campaigns.
+    </p>
+
+  </div>
+
+</main>
+
+<footer class="footer">
+  © Indian Business Bureau — IBB Promoter Academy
+</footer>
 
 
 <script>
 
-  /*
-   * ==========================================================
-   * IBB PROMOTER TRAINING
-   * 30 DAYS
-   * ==========================================================
-   */
-
-  const trainingData = [
-
-    {
-      day: 1,
-      title: "Understand the IBB Promoter Model",
-      description: "IBB ka complete promotional ecosystem samjho.",
-
-      learn: [
-        "Businesses promotional campaigns ke liye IBB se connect karte hain.",
-        "IBB campaign requirements ko organise karke eligible promoters tak pahunchata hai.",
-        "Promoters assigned promotional tasks complete karte hain.",
-        "Promoter task ka required proof submit karta hai.",
-        "IBB task ko manually verify karta hai.",
-        "Approved task ke according promoter payout receive karta hai."
-      ],
+/* ==========================================================
+   MEMBER
+========================================================== */
 
-      task: "Ek notebook/document mein complete IBB workflow likho: Business → IBB → Promoter → Task → Proof → Verification → Payout.",
+const memberName =
+  sessionStorage.getItem("ibb_name") || "IBB Promoter";
 
-      proof: [
-        "Complete workflow written hai.",
-        "Har step ka purpose samjha hai."
-      ],
+const memberId =
+  sessionStorage.getItem("ibb_member_id") || "Not assigned";
 
-      earning: "Training task ka purpose system samajhna hai. Actual campaign payout campaign ke terms par depend karega.",
 
-      qa: "Agar kisi step ka process clear nahi hai, training notes mein apna question likho."
-    },
-
+document.getElementById("memberName").textContent =
+  memberName;
 
-    {
-      day: 2,
-      title: "How Promotional Campaigns Work",
-      description: "Business campaign ko samajhna promoter ki first responsibility hai.",
+document.getElementById("memberId").textContent =
+  "Member ID: " + memberId;
 
-      learn: [
-        "Har campaign ka specific objective hota hai.",
-        "Campaign mein deliverables, deadline, eligibility aur reward ho sakta hai.",
-        "Task accept karne se pehle instructions completely read karni chahiye.",
-        "Jo task requirements aap meet nahi karte, use accept nahi karna chahiye."
-      ],
 
-      task: "Ek imaginary campaign brief banao aur usmein objective, deliverable, deadline aur reward identify karo.",
+/* ==========================================================
+   MEMBER-SPECIFIC STORAGE
+========================================================== */
 
-      proof: [
-        "Campaign objective identified.",
-        "Deliverable identified.",
-        "Deadline identified.",
-        "Reward identified."
-      ],
+const STORAGE_KEY =
+  "ibb_10day_completed_" + memberId;
 
-      earning: "Campaign ka reward IBB ke campaign brief mein clearly communicate kiya jayega.",
+const CURRENT_DAY_KEY =
+  "ibb_10day_current_" + memberId;
 
-      qa: "Campaign accept karne se pehle kaunsi information check karni chahiye?"
-    },
-
-
-    {
-      day: 3,
-      title: "Task Eligibility",
-      description: "Har promoter har campaign ke liye eligible nahi hota.",
+const LAST_COMPLETION_KEY =
+  "ibb_10day_last_completion_" + memberId;
 
-      learn: [
-        "Campaign-specific eligibility requirements padho.",
-        "Location, device, skill, content format ya other requirements ho sakti hain.",
-        "Agar requirement meet nahi hoti to task accept mat karo.",
-        "Wrong task acceptance se rejection ka risk badhta hai."
-      ],
+const CHECKS_KEY =
+  "ibb_10day_checks_" + memberId;
 
-      task: "3 sample campaigns imagine karo aur har ek ke liye decide karo ki aap eligible ho ya nahi.",
+const TEST_KEY =
+  "ibb_final_test_" + memberId;
 
-      proof: [
-        "3 campaigns reviewed.",
-        "Eligibility reason written hai."
-      ],
-
-      earning: "Eligible campaign successfully complete karne par applicable campaign reward mil sakta hai.",
 
-      qa: "Eligibility unclear ho to task accept karne se pehle clarification lena better hai."
-    },
+/* ==========================================================
+   TRAINING DATA
+========================================================== */
 
+const trainingData = [
 
-    {
-      day: 4,
-      title: "UGC Content Basics",
-      description: "User Generated Content IBB campaigns ka important promotional format ho sakta hai.",
+{
+ day:1,
 
-      learn: [
-        "UGC ka purpose natural aur useful promotional content create karna hai.",
-        "Content genuine, clear aur campaign brief ke according hona chahiye.",
-        "Video mein good lighting aur understandable audio important hai.",
-        "False claims ya misleading statements avoid karo."
-      ],
+ title:"Welcome to IBB",
 
-      task: "Ek imaginary local business ke liye 20–30 second UGC video ka concept banao.",
+ description:
+ "Aaj aap samjhoge ki IBB Promoter ka actual role kya hai aur complete system kaise work karta hai.",
 
-      proof: [
-        "Video concept written hai.",
-        "Opening hook included hai.",
-        "Main message included hai.",
-        "Call-to-action included hai."
-      ],
+ learn:[
+  "IBB businesses aur promoters ke beech promotional campaigns organise karta hai.",
+  "Promoter campaign instructions ko read karke eligible tasks complete karta hai.",
+  "Har task ke specific deliverables aur proof requirements ho sakte hain.",
+  "Completed work verification ke liye submit kiya ja sakta hai.",
+  "Approved work ka payout campaign terms ke according process hota hai."
+ ],
 
-      earning: "UGC campaign reward deliverable aur campaign terms par depend karega.",
+ task:
+ "Apne words mein IBB ka complete workflow likho: Business → IBB → Promoter → Task → Proof → Verification → Payout.",
 
-      qa: "UGC ka goal sirf advertisement banana nahi, useful aur authentic promotional content banana hai."
-    },
+ proof:[
+  "Maine complete IBB workflow samajh liya.",
+  "Mujhe promoter ki responsibility samajh aa gayi.",
+  "Maine training instructions read kar li hain."
+ ],
 
+ tip:
+ "Aaj ka goal earning nahi — system ko properly samajhna hai."
+},
 
-    {
-      day: 5,
-      title: "UGC Script Writing",
-      description: "Short promotional script ko clear aur natural banana seekho.",
+{
+ day:2,
 
-      learn: [
-        "Strong opening attention capture kar sakti hai.",
-        "Script ko short aur understandable rakho.",
-        "Product/service ke real benefits highlight karo.",
-        "Unsupported claims mat karo."
-      ],
+ title:"How Campaigns Work",
 
-      task: "30-second UGC script likho: Hook → Problem → Product/Service → Benefit → CTA.",
+ description:
+ "Aaj tum ek campaign ko accept karne se pehle important information identify karna seekhoge.",
 
-      proof: [
-        "Complete script ready hai.",
-        "Script approximately 30 seconds ki hai.",
-        "CTA included hai."
-      ],
+ learn:[
+  "Campaign objective kya hai.",
+  "Promoter ko kya deliver karna hai.",
+  "Deadline kya hai.",
+  "Eligibility requirements kya hain.",
+  "Reward/payout terms kya hain.",
+  "Proof kis format mein submit karna hai."
+ ],
 
-      earning: "Approved script/content campaign-specific payout ke liye eligible ho sakta hai.",
+ task:
+ "Ek imaginary campaign brief banao aur objective, deliverable, deadline, eligibility aur reward identify karo.",
 
-      qa: "Script ko natural conversational language mein rakhna better hai."
-    },
+ proof:[
+  "Maine campaign objective identify kiya.",
+  "Maine deliverable identify kiya.",
+  "Maine deadline identify ki.",
+  "Maine eligibility identify ki.",
+  "Maine reward identify kiya."
+ ],
 
-
-    {
-      day: 6,
-      title: "Record Your UGC",
-      description: "Script ko practical video mein convert karo.",
-
-      learn: [
-        "Phone ko stable rakho.",
-        "Face properly visible ho agar campaign requirement ho.",
-        "Background clean rakho.",
-        "Audio clear rakho.",
-        "Video campaign brief ke required format mein rakho."
-      ],
-
-      task: "Apni Day 5 script ke basis par sample 20–30 second video record karo.",
-
-      proof: [
-        "Video recorded.",
-        "Audio understandable hai.",
-        "Lighting acceptable hai.",
-        "Video brief ke according hai."
-      ],
-
-      earning: "Actual campaign mein payout approved deliverable ke basis par hoga.",
-
-      qa: "Recording se pehle campaign ke technical requirements check karo."
-    },
-
-
-    {
-      day: 7,
-      title: "Content Quality",
-      description: "Professional-looking content banane ke basic principles.",
-
-      learn: [
-        "Lighting subject ke front ya suitable direction mein honi chahiye.",
-        "Audio mein background noise minimum rakho.",
-        "Frame mein unnecessary distractions avoid karo.",
-        "Video unnecessarily long mat karo.",
-        "Authenticity aur clarity priority honi chahiye."
-      ],
-
-      task: "Day 6 ke video ko review karke kam se kam 3 improvements identify karo.",
-
-      proof: [
-        "3 improvements identified.",
-        "Improved version prepared."
-      ],
-
-      earning: "Quality directly campaign acceptance chances ko affect kar sakti hai.",
-
-      qa: "Upload se pehle content ko ek baar complete watch karna mandatory habit banao."
-    },
-
-
-    {
-      day: 8,
-      title: "Social Promotion",
-      description: "Legitimate social promotional campaigns ko samjho.",
-
-      learn: [
-        "Campaign ke exact posting instructions follow karo.",
-        "Required caption, media aur CTA use karo.",
-        "Promotional relationship ko required disclosure ke according clearly identify karo.",
-        "Spam ya misleading promotion avoid karo."
-      ],
-
-      task: "Ek sample promotional social post create karo.",
-
-      proof: [
-        "Caption ready.",
-        "Creative ready.",
-        "CTA included.",
-        "Required disclosure considered."
-      ],
-
-      earning: "Social campaign payout campaign-specific terms par depend karega.",
-
-      qa: "Promotional content mein transparency important hai."
-    },
-
-
-    {
-      day: 9,
-      title: "Disclosure & Transparency",
-      description: "Promotional content ko responsible tareeke se publish karna seekho.",
-
-      learn: [
-        "Paid ya incentivized promotion ko applicable rules ke according disclose karo.",
-        "Personal experience ko fake mat banao.",
-        "False reviews ya fabricated testimonials mat create karo.",
-        "Audience ko mislead karna IBB promoter standards ke against hai."
-      ],
-
-      task: "Ek sample sponsored/promotional post banao jisme suitable disclosure included ho.",
-
-      proof: [
-        "Disclosure included.",
-        "Promotional message clear hai.",
-        "False claim nahi hai."
-      ],
-
-      earning: "Compliant campaigns hi promoter participation ke liye suitable hain.",
-
-      qa: "Genuine promotion ka foundation trust aur transparency hai."
-    },
-
-
-    {
-      day: 10,
-      title: "Read a Campaign Brief",
-      description: "Campaign brief se important information quickly extract karo.",
-
-      learn: [
-        "Objective",
-        "Eligibility",
-        "Deliverables",
-        "Deadline",
-        "Reward",
-        "Proof requirements",
-        "Special instructions"
-      ],
-
-      task: "Ek sample campaign brief ko read karke upar ke 7 points identify karo.",
-
-      proof: [
-        "All 7 campaign details identified."
-      ],
-
-      earning: "Clear brief understanding se avoidable rejection kam hoti hai.",
-
-      qa: "Brief unclear ho to assumption ke basis par task complete mat karo."
-    },
-
-
-    {
-      day: 11,
-      title: "Accept Tasks Responsibly",
-      description: "Task accept karna commitment hota hai.",
-
-      learn: [
-        "Task accept karne se pehle deadline check karo.",
-        "Deliverable samjho.",
-        "Required resources available hain ya nahi check karo.",
-        "Payout terms samjho.",
-        "Sirf wahi tasks accept karo jo realistically complete kar sakte ho."
-      ],
-
-      task: "Task acceptance checklist create karo.",
-
-      proof: [
-        "Deadline check.",
-        "Deliverable check.",
-        "Eligibility check.",
-        "Proof requirement check.",
-        "Reward check."
-      ],
-
-      earning: "Successful completion hi applicable payout ke liye qualify karega.",
-
-      qa: "Over-accepting tasks se quality aur deadlines dono affect ho sakte hain."
-    },
-
-
-    {
-      day: 12,
-      title: "Proof Submission",
-      description: "Correct proof ke bina completed task verify nahi ho sakta.",
-
-      learn: [
-        "Proof campaign ke requested format mein submit karo.",
-        "Screenshots clear hone chahiye.",
-        "Links working hone chahiye.",
-        "Videos/photos complete hone chahiye.",
-        "Proof ko deadline se pehle submit karo."
-      ],
-
-      task: "Ek mock task ke liye proof submission package prepare karo.",
-
-      proof: [
-        "Required screenshot/link/video ready.",
-        "Proof clearly labelled hai.",
-        "Submission complete hai."
-      ],
-
-      earning: "Incomplete proof ke wajah se otherwise completed work bhi review mein fail ho sakta hai.",
-
-      qa: "Submit button press karne se pehle proof checklist verify karo."
-    },
-
-
-    {
-      day: 13,
-      title: "Common Rejection Reasons",
-      description: "Rejected tasks ke common reasons samjho.",
-
-      learn: [
-        "Incomplete deliverable",
-        "Wrong format",
-        "Poor quality",
-        "Missing proof",
-        "Late submission",
-        "Instructions not followed",
-        "Ineligible participation",
-        "Misleading or non-compliant content"
-      ],
-
-      task: "7 common rejection reasons ki checklist banao aur har ek ka prevention likho.",
-
-      proof: [
-        "7 rejection reasons listed.",
-        "Prevention strategy written."
-      ],
-
-      earning: "Quality aur compliance improve karna earning consistency ke liye important hai.",
-
-      qa: "Rejection ko learning feedback ki tarah use karo."
-    },
-
-
-    {
-      day: 14,
-      title: "IBB Verification System",
-      description: "Manual verification ka purpose quality aur compliance maintain karna hai.",
-
-      learn: [
-        "IBB submitted proof review karega.",
-        "Task requirements ke against submission check ho sakti hai.",
-        "Complete aur compliant task approve ho sakta hai.",
-        "Requirement fail hone par task reject ho sakta hai.",
-        "Verification decision campaign terms ke according hoga."
-      ],
-
-      task: "Ek mock submission ko campaign brief ke against verify karo.",
-
-      proof: [
-        "All requirements checked.",
-        "Approve/reject decision with reason."
-      ],
-
-      earning: "Payout verification ke result aur campaign terms ke according process hoga.",
-
-      qa: "Promoter ko submission se pehle self-verification karni chahiye."
-    },
-
-
-    {
-      day: 15,
-      title: "Payout System",
-      description: "Approved task se payout tak ka process samjho.",
-
-      learn: [
-        "Promoter task complete karta hai.",
-        "Proof submit hota hai.",
-        "IBB verification karta hai.",
-        "Approved task payout processing ke liye eligible hota hai.",
-        "Payout campaign ke stated terms ke according hota hai."
-      ],
-
-      task: "Example workflow banao: Task reward ₹X → Completed → Submitted → Approved → Payout.",
-
-      proof: [
-        "Payout workflow understood.",
-        "Approved vs rejected clearly understood."
-      ],
-
-      earning: "Actual amount campaign-specific hota hai; training page fixed earnings guarantee nahi karta.",
-
-      qa: "Task reward accept karne se pehle campaign terms read karo."
-    },
-
-
-    {
-      day: 16,
-      title: "Professional Communication",
-      description: "Promoter communication bhi task quality ka part hai.",
-
-      learn: [
-        "Instructions ko respectfully follow karo.",
-        "Unclear requirement par clear question pucho.",
-        "Spam messages avoid karo.",
-        "Deadline issue ho to appropriate channel se timely communicate karo."
-      ],
-
-      task: "Ek professional clarification message draft karo for a hypothetical campaign.",
-
-      proof: [
-        "Clear question.",
-        "Relevant campaign context.",
-        "Professional language."
-      ],
-
-      earning: "Good communication campaign execution ko smoother banati hai.",
-
-      qa: "Short, clear aur relevant communication best practice hai."
-    },
-
-
-    {
-      day: 17,
-      title: "Content Creativity",
-      description: "Same campaign ke liye creative approaches develop karo.",
-
-      learn: [
-        "Different hooks test kiye ja sakte hain.",
-        "Audience ke perspective se content socho.",
-        "Creative freedom campaign brief ki limits ke andar rakho.",
-        "Facts aur claims accurate rakho."
-      ],
-
-      task: "Ek product ke liye 3 different UGC hooks create karo.",
-
-      proof: [
-        "3 unique hooks.",
-        "All hooks campaign-appropriate."
-      ],
-
-      earning: "Creative quality campaign-specific selection mein useful ho sakti hai.",
-
-      qa: "Creativity ka matlab misleading claim karna nahi hai."
-    },
-
-
-    {
-      day: 18,
-      title: "Product Demo UGC",
-      description: "Product ya service demonstration create karna seekho.",
-
-      learn: [
-        "Product ko naturally demonstrate karo.",
-        "Key features clearly show karo.",
-        "Actual usage ko accurately represent karo.",
-        "Unsupported performance claims avoid karo."
-      ],
-
-      task: "Ek imaginary product ka 30-second demo plan banao.",
-
-      proof: [
-        "Opening shot.",
-        "Product demonstration.",
-        "Benefit explanation.",
-        "CTA."
-      ],
-
-      earning: "Approved product demo campaigns applicable reward provide kar sakte hain.",
-
-      qa: "Demo ko simple aur understandable rakho."
-    },
-
-
-    {
-      day: 19,
-      title: "Genuine Testimonial Content",
-      description: "Authentic customer experience ko responsibly present karo.",
-
-      learn: [
-        "Fake experience create mat karo.",
-        "Jo experience nahi hua uska claim mat karo.",
-        "Promotional relationship ko applicable disclosure ke according identify karo.",
-        "Personal opinion ko factual claim se separate rakho."
-      ],
-
-      task: "Ek hypothetical genuine experience testimonial ka structure banao.",
-
-      proof: [
-        "Experience section.",
-        "Specific observation.",
-        "Honest opinion.",
-        "Disclosure considered."
-      ],
-
-      earning: "Genuine testimonial campaigns ke terms ke according reward ho sakta hai.",
-
-      qa: "Trust long-term promoter reputation ka important part hai."
-    },
-
-
-    {
-      day: 20,
-      title: "Event Promotion",
-      description: "Events ko legitimate promotional campaigns ke through promote karna.",
-
-      learn: [
-        "Event date/time/location accurately communicate karo.",
-        "Registration information clear rakho.",
-        "Approved creative use karo.",
-        "Audience ko misleading information mat do."
-      ],
-
-      task: "Ek imaginary local event ke liye promotional post create karo.",
-
-      proof: [
-        "Event details.",
-        "Creative/caption.",
-        "CTA.",
-        "Accurate information."
-      ],
-
-      earning: "Event campaign payout campaign-specific deliverables par depend karega.",
-
-      qa: "Event information publish karne se pehle details verify karo."
-    },
-
-
-    {
-      day: 21,
-      title: "Legitimate Lead Generation",
-      description: "Businesses ke liye genuine leads generate karna.",
-
-      learn: [
-        "Real interested prospects ko target karo.",
-        "Spam submissions avoid karo.",
-        "Fake names/numbers/emails use mat karo.",
-        "Lead criteria campaign brief ke according follow karo.",
-        "Privacy aur consent requirements ka respect karo."
-      ],
-
-      task: "Ek hypothetical campaign ke liye legitimate lead-generation process design karo.",
-
-      proof: [
-        "Target audience defined.",
-        "Lead qualification criteria defined.",
-        "Submission process defined."
-      ],
-
-      earning: "Lead-generation campaign ka payout accepted/qualified leads ke terms par depend kar sakta hai.",
-
-      qa: "Quantity se pehle lead quality aur legitimacy important hai."
-    },
-
-
-    {
-      day: 22,
-      title: "Campaign Discipline",
-      description: "Professional promoter ki sabse important habits.",
-
-      learn: [
-        "Deadline tracking",
-        "Task priority",
-        "Proof organisation",
-        "Communication",
-        "Quality control"
-      ],
-
-      task: "Apna weekly campaign management checklist banao.",
-
-      proof: [
-        "Task tracker created.",
-        "Deadline system created.",
-        "Proof storage system created."
-      ],
-
-      earning: "Better organisation se missed deadlines aur incomplete submissions reduce ho sakti hain.",
-
-      qa: "Ek simple spreadsheet ya notes app task tracking ke liye enough ho sakta hai."
-    },
-
-
-    {
-      day: 23,
-      title: "Quality Over Quantity",
-      description: "Zyada tasks accept karna hamesha better nahi hota.",
-
-      learn: [
-        "Apni actual capacity samjho.",
-        "Quality compromise mat karo.",
-        "Deadline realistically assess karo.",
-        "Completed approved tasks par focus karo."
-      ],
-
-      task: "10 hypothetical tasks mein se sirf 3 select karo jo aap realistically complete kar sakte ho.",
-
-      proof: [
-        "3 selected tasks.",
-        "Selection reasons written."
-      ],
-
-      earning: "Consistent approved work long-term participation ke liye better approach hai.",
-
-      qa: "Task acceptance se pehle time aur requirements dono evaluate karo."
-    },
-
-
-    {
-      day: 24,
-      title: "Smart Campaign Selection",
-      description: "Suitable campaigns ko identify karna.",
-
-      learn: [
-        "Skill match",
-        "Time required",
-        "Deadline",
-        "Deliverable difficulty",
-        "Reward",
-        "Eligibility"
-      ],
-
-      task: "5 sample campaigns compare karo aur top 2 select karo.",
-
-      proof: [
-        "5 campaigns compared.",
-        "Top 2 selected with reasons."
-      ],
-
-      earning: "Campaign selection promoter ke available time aur skills par depend karegi.",
-
-      qa: "Highest reward automatically best campaign nahi hota."
-    },
-
-
-    {
-      day: 25,
-      title: "Build Your Promoter Profile",
-      description: "Apni skills aur campaign strengths organise karo.",
-
-      learn: [
-        "Content creation skills",
-        "UGC skills",
-        "Communication",
-        "Social promotion",
-        "Lead generation",
-        "Other relevant abilities"
-      ],
-
-      task: "Apna promoter skill profile prepare karo.",
-
-      proof: [
-        "Skills listed.",
-        "Content categories listed.",
-        "Experience/sample work listed where applicable."
-      ],
-
-      earning: "Relevant skills identify karne se suitable campaign opportunities evaluate karna easier hota hai.",
-
-      qa: "Profile mein wahi skills mention karo jo genuinely perform kar sakte ho."
-    },
-
-
-    {
-      day: 26,
-      title: "Build Your Portfolio",
-      description: "Best work ko organised form mein present karo.",
-
-      learn: [
-        "Best UGC samples save karo.",
-        "Creative examples organise karo.",
-        "Relevant campaign categories separate karo.",
-        "Outdated ya poor-quality samples remove karo."
-      ],
-
-      task: "Apne top 3 promotional content samples ka mini portfolio banao.",
-
-      proof: [
-        "3 samples selected.",
-        "Each sample has category/title.",
-        "Portfolio organised."
-      ],
-
-      earning: "Portfolio quality future campaign suitability demonstrate karne mein helpful ho sakti hai.",
-
-      qa: "Portfolio mein fake work ya kisi aur ka work apna bata kar mat use karo."
-    },
-
-
-    {
-      day: 27,
-      title: "Advanced Campaign Workflow",
-      description: "Detailed campaign ko professionally execute karna.",
-
-      learn: [
-        "Brief analysis",
-        "Planning",
-        "Execution",
-        "Quality check",
-        "Proof collection",
-        "Submission"
-      ],
-
-      task: "Ek complete mock campaign ko planning se submission tak execute karo.",
-
-      proof: [
-        "Campaign plan.",
-        "Deliverable.",
-        "Quality check.",
-        "Proof package."
-      ],
-
-      earning: "Advanced campaigns ke rewards campaign-specific terms ke according honge.",
-
-      qa: "Complex task ko small steps mein divide karna useful hai."
-    },
-
-
-    {
-      day: 28,
-      title: "Professional Promoter Workflow",
-      description: "Apna complete repeatable system banao.",
-
-      learn: [
-        "Campaign discovery",
-        "Eligibility",
-        "Acceptance",
-        "Planning",
-        "Execution",
-        "Proof",
-        "Submission",
-        "Verification",
-        "Payout tracking"
-      ],
-
-      task: "Apna personal IBB promoter workflow checklist create karo.",
-
-      proof: [
-        "Complete workflow checklist ready.",
-        "No major step missing."
-      ],
-
-      earning: "Organised workflow se campaign management improve ho sakta hai.",
-
-      qa: "Har campaign mein brief ko final authority samjho."
-    },
-
-
-    {
-      day: 29,
-      title: "Final Mock Campaign",
-      description: "Ab tak seekhi hui skills ko ek complete practical challenge mein use karo.",
-
-      learn: [
-        "Campaign ko beginning se end tak manage karo.",
-        "Instructions carefully follow karo.",
-        "Deliverable prepare karo.",
-        "Proof package complete karo.",
-        "Self-verification karo."
-      ],
-
-      task: "Ek complete mock promotional campaign execute karo: Brief → Plan → Content → Proof → Submission.",
-
-      proof: [
-        "Campaign brief understood.",
-        "Deliverable completed.",
-        "Proof prepared.",
-        "Self-check completed."
-      ],
-
-      earning: "Ye training challenge hai. Actual campaign payout nahi maana jayega unless IBB specifically assigns it as a paid campaign.",
-
-      qa: "Day 30 se pehle apne weak areas ko identify karo."
-    },
-
-
-    {
-      day: 30,
-      title: "Final Promoter Readiness",
-      description: "30-day IBB Promoter Training ka final assessment.",
-
-      learn: [
-        "IBB business-to-promoter model samajhna.",
-        "Campaign requirements read karna.",
-        "Suitable tasks select karna.",
-        "UGC aur promotional content create karna.",
-        "Legitimate lead generation samajhna.",
-        "Proof submit karna.",
-        "Verification aur payout workflow samajhna.",
-        "Professional promoter discipline maintain karna."
-      ],
-
-      task: "Final assessment complete karo aur apna promoter workflow explain karo.",
-
-      proof: [
-        "30-day training completed.",
-        "Final workflow understood.",
-        "Campaign execution process understood.",
-        "Proof submission process understood.",
-        "Verification and payout process understood."
-      ],
-
-      earning: "Training completion future IBB campaign participation ke liye readiness indicate karta hai. Actual earnings campaign availability, eligibility, completion and approval par depend karti hain.",
-
-      qa: "Aapka goal sirf tasks complete karna nahi, balki consistently genuine, compliant aur high-quality promotional work deliver karna hai."
-    }
-
-  ];
-
-
-  /*
-   * ==========================================================
-   * MEMBER DATA
-   * ==========================================================
-   */
-
-  const memberName =
-    sessionStorage.getItem("ibb_name") || "IBB Promoter";
-
-  const memberId =
-    sessionStorage.getItem("ibb_member_id") || "Not assigned";
-
-
-  /*
-   * ==========================================================
-   * STORAGE
-   * ==========================================================
-   */
-
-  const STORAGE_KEY = "ibb_training_completed_v1";
-  const DAY_KEY = "ibb_training_current_day_v1";
-
-  let completedDays =
-    JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-
-  let currentDay =
-    parseInt(localStorage.getItem(DAY_KEY) || "1", 10);
-
-  if (
-    isNaN(currentDay) ||
-    currentDay < 1 ||
-    currentDay > 30
-  ) {
-    currentDay = 1;
-  }
-
-
-  /*
-   * ==========================================================
-   * MEMBER DISPLAY
-   * ==========================================================
-   */
-
-  document.getElementById("memberName").textContent =
-    memberName;
-
-  document.getElementById("memberId").textContent =
-    "Member ID: " + memberId;
-
-
-  /*
-   * ==========================================================
-   * HELPERS
-   * ==========================================================
-   */
-
-  function isCompleted(day) {
-    return completedDays.includes(day);
-  }
-
-  function isUnlocked(day) {
-
-    if (day === 1) return true;
-
-    return isCompleted(day - 1);
-  }
-
-
-  /*
-   * ==========================================================
-   * PROGRESS
-   * ==========================================================
-   */
-
-  function updateProgress() {
-
-    const count = completedDays.length;
-
-    const percent =
-      Math.round((count / 30) * 100);
-
-    document.getElementById("completedCount")
-      .textContent = count + " / 30";
-
-    document.getElementById("progressPercent")
-      .textContent = percent + "%";
-
-    document.getElementById("progressFill")
-      .style.width = percent + "%";
-
-    if (count === 30) {
-      document.getElementById("completionBox")
-        .classList.add("show");
-    } else {
-      document.getElementById("completionBox")
-        .classList.remove("show");
-    }
-  }
-
-
-  /*
-   * ==========================================================
-   * DAY LIST
-   * ==========================================================
-   */
-
-  function renderDayList() {
-
-    const list =
-      document.getElementById("dayList");
-
-    list.innerHTML = "";
-
-    trainingData.forEach(function(item) {
-
-      const button =
-        document.createElement("button");
-
-      button.className = "day-btn";
-
-      if (item.day === currentDay) {
-        button.classList.add("active");
-      }
-
-      if (isCompleted(item.day)) {
-        button.classList.add("completed");
-      }
-
-      if (!isUnlocked(item.day)) {
-        button.classList.add("locked");
-        button.disabled = true;
-      }
-
-      const icon =
-        isCompleted(item.day)
-          ? "✓"
-          : (!isUnlocked(item.day) ? "🔒" : "");
-
-      button.innerHTML = `
-        <span>
-          <span class="day-number">
-            Day ${item.day}
-          </span>
-          <br>
-          <span>
-            ${item.title}
-          </span>
-        </span>
-
-        <span class="status-icon">
-          ${icon}
-        </span>
-      `;
-
-      button.addEventListener("click", function() {
-
-        if (!isUnlocked(item.day)) {
-          return;
-        }
-
-        currentDay = item.day;
-
-        localStorage.setItem(
-          DAY_KEY,
-          currentDay
-        );
-
-        renderDayList();
-        renderTraining();
-      });
-
-      list.appendChild(button);
-
-    });
-
-  }
-
-
-  /*
-   * ==========================================================
-   * TRAINING CONTENT
-   * ==========================================================
-   */
-
-  function renderTraining() {
-
-    const item =
-      trainingData.find(
-        x => x.day === currentDay
-      );
-
-    if (!item) return;
-
-    const card =
-      document.getElementById("trainingCard");
+ tip:
+ "Golden rule: Brief padhe bina task accept mat karo."
+},
+
+{
+ day:3,
+
+ title:"Create Better Photos 📸",
+
+ description:
+ "Aaj tum seekhoge ki business ke liye useful aur professional-looking photos kaise capture karni hain.",
+
+ learn:[
+  "Good lighting ka importance.",
+  "Clean framing.",
+  "Wide shots aur close-up shots.",
+  "Unnecessary background distractions avoid karna.",
+  "Photo ko natural aur useful rakhna."
+ ],
+
+ task:
+ "Kisi suitable place/object ka 3-photo practice set banao: 1 wide shot + 1 close-up + 1 detail shot.",
+
+ proof:[
+  "Wide photo complete.",
+  "Close-up photo complete.",
+  "Detail photo complete.",
+  "Photos clear aur usable hain."
+ ],
+
+ tip:
+ "Expensive camera ki zarurat nahi. Clean composition aur good lighting zyada important hain."
+},
+
+{
+ day:4,
+
+ title:"Make Engaging Reels 🎥",
+
+ description:
+ "Aaj tum simple short-form video ko engaging promotional content mein convert karna seekhoge.",
+
+ learn:[
+  "First few seconds ka importance.",
+  "Hook kaise create karna hai.",
+  "B-roll ka use.",
+  "Short aur clear messaging.",
+  "Natural business showcase.",
+  "Accurate claims."
+ ],
+
+ task:
+ "20–30 second ki sample reel plan karo: Hook → Visuals → Main Benefit → CTA.",
+
+ proof:[
+  "Hook ready.",
+  "Shot list ready.",
+  "Main message ready.",
+  "CTA ready."
+ ],
+
+ tip:
+ "Reel ko advertisement jaisa forced mat banao — viewer ko useful reason do dekhne ka."
+},
+
+{
+ day:5,
+
+ title:"UGC That Feels Real",
+
+ description:
+ "Aaj focus hai natural, clear aur trustworthy UGC content par.",
+
+ learn:[
+  "Conversational language use karo.",
+  "Real experience ko accurately represent karo.",
+  "Fake claims avoid karo.",
+  "Promotional relationship ko applicable disclosure rules ke according identify karo.",
+  "Audience ko mislead mat karo."
+ ],
+
+ task:
+ "Ek 30-second UGC script likho: Hook → Experience/Problem → Solution → Benefit → CTA.",
+
+ proof:[
+  "Script complete hai.",
+  "Hook included hai.",
+  "Main benefit included hai.",
+  "CTA included hai.",
+  "No misleading claim."
+ ],
+
+ tip:
+ "Trust > hype. Long-term promoter ke liye credibility important hai."
+},
+
+{
+ day:6,
+
+ title:"Edit Like a Pro ✂️",
+
+ description:
+ "Raw content ko clean social-media-ready content mein convert karna seekho.",
+
+ learn:[
+  "Unnecessary clips remove karna.",
+  "Basic text/captions.",
+  "Readable subtitles.",
+  "Appropriate music/audio.",
+  "Good pacing.",
+  "Clean cover image."
+ ],
+
+ task:
+ "Day 4 ya Day 5 ke concept par ek short edited video prepare karo.",
+
+ proof:[
+  "Video trimmed.",
+  "Text/captions added where useful.",
+  "Audio understandable.",
+  "Cover selected."
+ ],
+
+ tip:
+ "Editing ka goal video ko complicated banana nahi — message ko easier banana hai."
+},
+
+{
+ day:7,
+
+ title:"Publish & Promote",
+
+ description:
+ "Aaj tum campaign content ko properly prepare aur publish karne ke principles seekhoge.",
+
+ learn:[
+  "Campaign posting instructions follow karna.",
+  "Caption requirements.",
+  "CTA requirements.",
+  "Applicable promotional disclosure.",
+  "Spam avoid karna.",
+  "Misleading information avoid karna."
+ ],
+
+ task:
+ "Ek sample promotional post banao with media, caption, CTA and suitable disclosure.",
+
+ proof:[
+  "Media ready.",
+  "Caption ready.",
+  "CTA included.",
+  "Disclosure considered.",
+  "Campaign instructions checked."
+ ],
+
+ tip:
+ "Promotion ka purpose audience ko inform aur engage karna hai — spam create karna nahi."
+},
+
+{
+ day:8,
+
+ title:"Proof & Verification",
+
+ description:
+ "Great work tabhi count hota hai jab proof clear aur complete ho.",
+
+ learn:[
+  "Proof requirements carefully read karo.",
+  "Screenshots clear rakho.",
+  "Links working hone chahiye.",
+  "Required media complete honi chahiye.",
+  "Deadline se pehle submission karo."
+ ],
+
+ task:
+ "Ek mock campaign ke liye complete proof package prepare karo.",
+
+ proof:[
+  "Required proof collected.",
+  "Screenshots clear.",
+  "Links checked.",
+  "Submission package complete."
+ ],
+
+ tip:
+ "Submit karne se pehle khud reviewer ban kar apna work check karo."
+},
+
+{
+ day:9,
+
+ title:"Become a Reliable Promoter",
+
+ description:
+ "Aaj focus hai professionalism, deadlines aur smart campaign selection par.",
+
+ learn:[
+  "Sirf realistic tasks accept karo.",
+  "Deadline track karo.",
+  "Instructions follow karo.",
+  "Unclear requirements par clarification lo.",
+  "Quality ko quantity se upar rakho."
+ ],
+
+ task:
+ "Apna personal promoter checklist banao: Accept → Plan → Create → Check → Proof → Submit.",
+
+ proof:[
+  "Personal workflow ready.",
+  "Deadline system ready.",
+  "Quality-check step included.",
+  "Proof step included."
+ ],
+
+ tip:
+ "Reliable promoter woh hai jo commitment lene ke baad consistently quality work deliver kare."
+},
+
+{
+ day:10,
+
+ title:"Final Campaign Challenge 🚀",
+
+ description:
+ "Last training day. Ab tum complete campaign workflow ko practically apply karoge.",
+
+ learn:[
+  "Campaign brief read karna.",
+  "Eligibility check karna.",
+  "Deliverables plan karna.",
+  "Content create karna.",
+  "Quality check karna.",
+  "Proof prepare karna.",
+  "Submission process samajhna."
+ ],
+
+ task:
+ "Mock campaign complete karo: Brief → Eligibility → Plan → Content → Quality Check → Proof → Submission.",
+
+ proof:[
+  "Campaign brief understood.",
+  "Eligibility checked.",
+  "Deliverable planned.",
+  "Content prepared.",
+  "Quality check completed.",
+  "Proof package prepared."
+ ],
+
+ tip:
+ "Day 10 ke baad aapka next step Final Assessment hai. Ready ho jao."
+}
+
+];
+
+
+/* ==========================================================
+   FINAL TEST QUESTIONS
+========================================================== */
+
+const questions = [
+
+{
+ q:"Campaign accept karne se pehle sabse important kya hai?",
+ options:[
+  "Sirf reward dekhna",
+  "Campaign brief aur requirements read karna",
+  "Friend se poochna",
+  "Immediately accept karna"
+ ],
+ answer:1
+},
+
+{
+ q:"Agar aap campaign ki eligibility meet nahi karte?",
+ options:[
+  "Phir bhi task accept karo",
+  "Fake information submit karo",
+  "Task accept nahi karna chahiye",
+  "Kisi aur ka proof use karo"
+ ],
+ answer:2
+},
+
+{
+ q:"Good promotional photo mein kya important hai?",
+ options:[
+  "Random framing",
+  "Poor lighting",
+  "Clear composition",
+  "Maximum filters"
+ ],
+ answer:2
+},
+
+{
+ q:"Short reel ka opening kisliye important hai?",
+ options:[
+  "Viewer ka attention capture karne ke liye",
+  "Video ko longer banane ke liye",
+  "Hashtags add karne ke liye",
+  "File size increase karne ke liye"
+ ],
+ answer:0
+},
+
+{
+ q:"UGC content mein kya avoid karna chahiye?",
+ options:[
+  "Natural language",
+  "Clear message",
+  "Misleading claims",
+  "Useful information"
+ ],
+ answer:2
+},
+
+{
+ q:"Proof submit karne se pehle kya karna chahiye?",
+ options:[
+  "Requirements check",
+  "Proof delete",
+  "Deadline ignore",
+  "Random screenshot"
+ ],
+ answer:0
+},
+
+{
+ q:"Task accept karna kya represent karta hai?",
+ options:[
+  "No responsibility",
+  "A commitment to complete the requirements",
+  "Guaranteed payment",
+  "Automatic approval"
+ ],
+ answer:1
+},
+
+{
+ q:"Promotional content mein transparency kyun important hai?",
+ options:[
+  "Trust maintain karne ke liye",
+  "Video hide karne ke liye",
+  "Content longer karne ke liye",
+  "Reward double karne ke liye"
+ ],
+ answer:0
+},
+
+{
+ q:"Quality aur quantity mein promoter ko kya prioritize karna chahiye?",
+ options:[
+  "Quantity at any cost",
+  "Quality and realistic workload",
+  "Random tasks",
+  "Only highest reward"
+ ],
+ answer:1
+},
+
+{
+ q:"Deadline miss hone ka risk kam karne ka best method?",
+ options:[
+  "Last minute start karna",
+  "Deadline track karna",
+  "Instructions ignore karna",
+  "Proof baad mein sochna"
+ ],
+ answer:1
+},
+
+{
+ q:"Payout generally kis process ke baad relevant hota hai?",
+ options:[
+  "Task dekhne ke baad",
+  "Task approval/verification according to campaign terms",
+  "Account banate hi",
+  "Training open karte hi"
+ ],
+ answer:1
+},
+
+{
+ q:"Agar campaign instruction unclear ho?",
+ options:[
+  "Guess karna",
+  "Ignore karna",
+  "Clarification lena",
+  "Fake proof banana"
+ ],
+ answer:2
+},
+
+{
+ q:"Professional promoter ka best trait kya hai?",
+ options:[
+  "Unreliable hona",
+  "Instructions follow karna",
+  "Spam karna",
+  "Deadlines ignore karna"
+ ],
+ answer:1
+},
+
+{
+ q:"Editing ka main purpose kya hai?",
+ options:[
+  "Video complicated banana",
+  "Message ko clear aur engaging banana",
+  "Video ko unnecessarily long banana",
+  "Maximum effects use karna"
+ ],
+ answer:1
+},
+
+{
+ q:"Campaign proof kaisa hona chahiye?",
+ options:[
+  "Incomplete",
+  "Unclear",
+  "Relevant and complete",
+  "Random"
+ ],
+ answer:2
+},
+
+{
+ q:"Fake testimonial ka problem kya hai?",
+ options:[
+  "Trust aur compliance risk",
+  "Video quality improve hoti hai",
+  "Reward guaranteed hota hai",
+  "Campaign automatically approve hota hai"
+ ],
+ answer:0
+},
+
+{
+ q:"Best campaign selection kis basis par honi chahiye?",
+ options:[
+  "Sirf highest payout",
+  "Eligibility, time, requirements aur suitability",
+  "Random selection",
+  "Friend ki choice"
+ ],
+ answer:1
+},
+
+{
+ q:"Campaign complete karne ka correct flow kya hai?",
+ options:[
+  "Submit → Plan → Read",
+  "Read Brief → Plan → Execute → Check → Submit",
+  "Accept → Ignore → Submit",
+  "Create → Guess → Submit"
+ ],
+ answer:1
+},
+
+{
+ q:"IBB Promoter ka primary responsibility kya hai?",
+ options:[
+  "Campaign requirements ke according legitimate promotional work complete karna",
+  "Har business ko guarantee dena",
+  "Fake reviews create karna",
+  "Rules ignore karna"
+ ],
+ answer:0
+},
+
+{
+ q:"Final assessment pass karne ke liye minimum recommended score kya hai?",
+ options:[
+  "40%",
+  "50%",
+  "60%",
+  "80%"
+ ],
+ answer:3
+}
+
+];
+
+
+/* ==========================================================
+   STATE
+========================================================== */
+
+let completedDays =
+  JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+
+let currentDay =
+  parseInt(localStorage.getItem(CURRENT_DAY_KEY) || "1",10);
+
+let lastCompletion =
+  parseInt(localStorage.getItem(LAST_COMPLETION_KEY) || "0",10);
+
+let testPassed =
+  localStorage.getItem(TEST_KEY) === "passed";
+
+let checkState =
+  JSON.parse(localStorage.getItem(CHECKS_KEY) || "{}");
+
+
+/* ==========================================================
+   HELPERS
+========================================================== */
+
+function isCompleted(day){
+  return completedDays.includes(day);
+}
+
+function saveState(){
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(completedDays)
+  );
+
+  localStorage.setItem(
+    CURRENT_DAY_KEY,
+    currentDay
+  );
+
+  localStorage.setItem(
+    LAST_COMPLETION_KEY,
+    lastCompletion
+  );
+
+  localStorage.setItem(
+    CHECKS_KEY,
+    JSON.stringify(checkState)
+  );
+}
+
+function hoursSinceLastCompletion(){
+
+  if(!lastCompletion) return 999;
+
+  return (Date.now() - lastCompletion) / 3600000;
+}
+
+function nextDayUnlocked(){
+
+  if(!lastCompletion) return true;
+
+  return hoursSinceLastCompletion() >= 24;
+}
+
+function isUnlocked(day){
+
+  if(day === 1) return true;
+
+  if(!isCompleted(day - 1)) return false;
+
+  if(day === currentDay) return nextDayUnlocked();
+
+  return isCompleted(day);
+}
+
+
+/* ==========================================================
+   PROGRESS
+========================================================== */
+
+function updateProgress(){
+
+  const count =
+    completedDays.length;
+
+  const percent =
+    Math.round((count / 10) * 100);
+
+  document.getElementById("completedCount")
+    .textContent = count + " / 10";
+
+  document.getElementById("progressPercent")
+    .textContent = percent + "%";
+
+  document.getElementById("progressFill")
+    .style.width = percent + "%";
+}
+
+
+/* ==========================================================
+   DAY NAV
+========================================================== */
+
+function renderDayList(){
+
+  const list =
+    document.getElementById("dayList");
+
+  list.innerHTML = "";
+
+  trainingData.forEach(item=>{
+
+    const button =
+      document.createElement("button");
+
+    button.className = "day-btn";
 
     const completed =
       isCompleted(item.day);
 
-    card.innerHTML = `
+    const locked =
+      item.day > 1 &&
+      !completed &&
+      (
+        !isCompleted(item.day - 1) ||
+        !nextDayUnlocked()
+      );
+
+    if(item.day === currentDay && !locked){
+      button.classList.add("active");
+    }
+
+    if(completed){
+      button.classList.add("completed");
+    }
+
+    if(locked){
+      button.classList.add("locked");
+      button.disabled = true;
+    }
+
+    button.innerHTML =
+      completed
+      ? `✓ Day ${item.day}`
+      : locked
+      ? `🔒 Day ${item.day}`
+      : `Day ${item.day}`;
+
+    button.onclick = ()=>{
+
+      currentDay = item.day;
+
+      saveState();
+
+      renderDayList();
+      renderTraining();
+
+      window.scrollTo({
+        top:0,
+        behavior:"smooth"
+      });
+
+    };
+
+    list.appendChild(button);
+
+  });
+
+}
+
+
+/* ==========================================================
+   LOCK SCREEN
+========================================================== */
+
+function renderLock(){
+
+  const main =
+    document.getElementById("mainContent");
+
+  const unlockAt =
+    lastCompletion + 86400000;
+
+  main.innerHTML = `
+
+    <div class="lock-box">
+
+      <div class="lock-icon">🔒</div>
+
+      <h2>
+        Next Training Locked
+      </h2>
+
+      <p>
+        You completed the previous day successfully.
+        Your next training opens after 24 hours.
+      </p>
+
+      <div class="countdown" id="countdown">
+        24:00:00
+      </div>
+
+      <div class="unlock-time">
+        Unlocks: ${new Date(unlockAt).toLocaleString()}
+      </div>
+
+    </div>
+
+  `;
+
+  startCountdown(unlockAt);
+}
+
+
+/* ==========================================================
+   COUNTDOWN
+========================================================== */
+
+let countdownInterval;
+
+function startCountdown(unlockAt){
+
+  clearInterval(countdownInterval);
+
+  function update(){
+
+    const remaining =
+      Math.max(0,unlockAt-Date.now());
+
+    if(remaining <= 0){
+
+      clearInterval(countdownInterval);
+
+      renderDayList();
+      renderTraining();
+
+      return;
+    }
+
+    const totalSeconds =
+      Math.floor(remaining/1000);
+
+    const hours =
+      Math.floor(totalSeconds/3600);
+
+    const minutes =
+      Math.floor((totalSeconds%3600)/60);
+
+    const seconds =
+      totalSeconds%60;
+
+    const el =
+      document.getElementById("countdown");
+
+    if(el){
+
+      el.textContent =
+        String(hours).padStart(2,"0") +
+        ":" +
+        String(minutes).padStart(2,"0") +
+        ":" +
+        String(seconds).padStart(2,"0");
+
+    }
+
+  }
+
+  update();
+
+  countdownInterval =
+    setInterval(update,1000);
+}
+
+
+/* ==========================================================
+   TRAINING
+========================================================== */
+
+function renderTraining(){
+
+  if(completedDays.length === 10){
+
+    document.getElementById("mainContent").innerHTML = "";
+
+    renderFinalTest();
+
+    return;
+  }
+
+  const item =
+    trainingData.find(
+      x=>x.day === currentDay
+    );
+
+  if(!item) return;
+
+  if(
+    item.day > 1 &&
+    !isCompleted(item.day - 1)
+  ){
+
+    currentDay =
+      completedDays.length + 1;
+
+    saveState();
+
+  }
+
+  if(
+    item.day > 1 &&
+    !isCompleted(item.day) &&
+    !nextDayUnlocked()
+  ){
+
+    renderLock();
+
+    return;
+  }
+
+  const completed =
+    isCompleted(item.day);
+
+  const savedChecks =
+    checkState[item.day] || [];
+
+  const main =
+    document.getElementById("mainContent");
+
+  main.innerHTML = `
+
+    <div class="training-card">
 
       <div class="day-label">
-        DAY ${item.day} OF 30
+        DAY ${item.day} OF 10
       </div>
 
       <h2>
@@ -1575,12 +1651,12 @@
 
       <div class="section learn-box">
 
-        <h3>📚 Learn</h3>
+        <h3>📚 What You'll Learn</h3>
 
         <ul>
-          ${item.learn.map(
-            point => `<li>${point}</li>`
-          ).join("")}
+          ${item.learn.map(point=>`
+            <li>${point}</li>
+          `).join("")}
         </ul>
 
       </div>
@@ -1588,64 +1664,55 @@
 
       <div class="section task-box">
 
-        <h3>🎯 Today's Practical Task</h3>
+        <h3>🎯 Today's Challenge</h3>
 
-        <p>
+        <p style="font-size:13px">
           ${item.task}
         </p>
-
-        <div class="task-note">
-          <strong>Tip:</strong>
-          Task ko complete karte waqt campaign
-          instructions aur applicable rules ko priority do.
-        </div>
 
       </div>
 
 
       <div class="section proof-box">
 
-        <h3>📋 Proof / Completion Checklist</h3>
+        <h3>✅ Complete Your Checklist</h3>
 
         <ul class="check-list">
 
-          ${item.proof.map(
-            (point, index) => `
-              <li>
-                <label>
-                  <input
-                    type="checkbox"
-                    class="proof-check"
-                    data-index="${index}"
-                  >
-                  <span>${point}</span>
-                </label>
-              </li>
-            `
-          ).join("")}
+          ${item.proof.map((point,index)=>`
+
+            <li>
+
+              <label class="check-label">
+
+                <input
+                  type="checkbox"
+                  class="proof-check"
+                  data-index="${index}"
+                  ${savedChecks.includes(index) ? "checked":""}
+                >
+
+                <span>
+                  ${point}
+                </span>
+
+              </label>
+
+            </li>
+
+          `).join("")}
 
         </ul>
 
       </div>
 
 
-      <div class="section earning-box">
+      <div class="section tip-box">
 
-        <h3>💰 Earnings / Payout</h3>
+        <h3>💡 Pro Tip</h3>
 
-        <p>
-          ${item.earning}
-        </p>
-
-      </div>
-
-
-      <div class="section qa-box">
-
-        <h3>❓ Q&A</h3>
-
-        <p>
-          ${item.qa}
+        <p style="font-size:13px">
+          ${item.tip}
         </p>
 
       </div>
@@ -1655,8 +1722,8 @@
 
         <button
           class="btn btn-secondary"
-          id="previousBtn"
-          ${item.day === 1 ? "disabled" : ""}
+          id="prevBtn"
+          ${item.day===1 ? "disabled":""}
         >
           ← Previous
         </button>
@@ -1666,265 +1733,548 @@
           completed
           ?
           `
-            <button
-              class="btn btn-success"
-              id="nextBtn"
-            >
-              ${
-                item.day === 30
-                ? "Training Completed ✓"
-                : "Next Day →"
-              }
-            </button>
+          <button
+            class="btn btn-success"
+            id="nextBtn"
+          >
+            ${
+              item.day===10
+              ? "Go to Final Test →"
+              : "Next Training →"
+            }
+          </button>
           `
           :
           `
-            <button
-              class="btn btn-primary"
-              id="completeBtn"
-            >
-              ✓ Complete Day ${item.day}
-            </button>
+          <button
+            class="btn btn-primary"
+            id="completeBtn"
+          >
+            ✓ Complete Day ${item.day}
+          </button>
           `
         }
 
       </div>
 
-    `;
+    </div>
+
+  `;
 
 
-    /*
-     * Previous button
-     */
+  /* CHECKBOX SAVE */
 
-    const previousBtn =
-      document.getElementById("previousBtn");
+  document
+    .querySelectorAll(".proof-check")
+    .forEach(check=>{
 
-    if (previousBtn) {
+      check.addEventListener("change",()=>{
 
-      previousBtn.addEventListener(
-        "click",
-        function() {
+        const checked = [];
 
-          if (currentDay > 1) {
+        document
+          .querySelectorAll(".proof-check")
+          .forEach(c=>{
 
-            currentDay--;
-
-            localStorage.setItem(
-              DAY_KEY,
-              currentDay
-            );
-
-            renderDayList();
-            renderTraining();
-
-            window.scrollTo({
-              top: 0,
-              behavior: "smooth"
-            });
-
-          }
-
-        }
-      );
-
-    }
-
-
-    /*
-     * Complete button
-     */
-
-    const completeBtn =
-      document.getElementById("completeBtn");
-
-    if (completeBtn) {
-
-      completeBtn.addEventListener(
-        "click",
-        function() {
-
-          const checks =
-            document.querySelectorAll(
-              ".proof-check"
-            );
-
-          let allChecked = true;
-
-          checks.forEach(function(check) {
-
-            if (!check.checked) {
-              allChecked = false;
+            if(c.checked){
+              checked.push(
+                Number(c.dataset.index)
+              );
             }
 
           });
 
+        checkState[item.day] = checked;
 
-          if (!allChecked) {
+        saveState();
 
-            alert(
-              "Please complete all checklist items before marking this day complete."
-            );
+      });
 
-            return;
-          }
+    });
 
 
-          if (!completedDays.includes(item.day)) {
+  /* PREVIOUS */
 
-            completedDays.push(item.day);
+  const prev =
+    document.getElementById("prevBtn");
 
-            completedDays =
-              completedDays
-                .map(Number)
-                .sort((a, b) => a - b);
+  if(prev){
 
-            localStorage.setItem(
-              STORAGE_KEY,
-              JSON.stringify(completedDays)
-            );
+    prev.onclick = ()=>{
 
-          }
+      if(currentDay > 1){
 
+        currentDay--;
 
-          updateProgress();
+        saveState();
 
+        renderDayList();
+        renderTraining();
 
-          /*
-           * Move to next day
-           */
+        window.scrollTo({
+          top:0,
+          behavior:"smooth"
+        });
 
-          if (item.day < 30) {
-
-            currentDay = item.day + 1;
-
-            localStorage.setItem(
-              DAY_KEY,
-              currentDay
-            );
-
-            renderDayList();
-            renderTraining();
-
-            window.scrollTo({
-              top: 0,
-              behavior: "smooth"
-            });
-
-          } else {
-
-            renderDayList();
-            renderTraining();
-
-            document.getElementById(
-              "completionBox"
-            ).scrollIntoView({
-              behavior: "smooth"
-            });
-
-          }
-
-        }
-      );
-
-    }
-
-
-    /*
-     * Next button for completed day
-     */
-
-    const nextBtn =
-      document.getElementById("nextBtn");
-
-    if (nextBtn) {
-
-      nextBtn.addEventListener(
-        "click",
-        function() {
-
-          if (item.day === 30) {
-
-            document.getElementById(
-              "completionBox"
-            ).scrollIntoView({
-              behavior: "smooth"
-            });
-
-            return;
-          }
-
-
-          currentDay =
-            Math.min(item.day + 1, 30);
-
-          localStorage.setItem(
-            DAY_KEY,
-            currentDay
-          );
-
-          renderDayList();
-          renderTraining();
-
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-          });
-
-        }
-      );
-
-    }
-
-  }
-
-
-  /*
-   * ==========================================================
-   * INITIAL LOAD
-   * ==========================================================
-   */
-
-  /*
-   * If previous training is complete,
-   * automatically show Day 30.
-   */
-
-  if (completedDays.length === 30) {
-    currentDay = 30;
-  }
-
-  /*
-   * If current day is locked because the
-   * previous day isn't completed, find the
-   * first available day.
-   */
-
-  if (!isUnlocked(currentDay)) {
-
-    let firstAvailable = 1;
-
-    for (let i = 1; i <= 30; i++) {
-
-      if (isUnlocked(i)) {
-        firstAvailable = i;
       }
 
-    }
-
-    currentDay = firstAvailable;
-
-    localStorage.setItem(
-      DAY_KEY,
-      currentDay
-    );
+    };
 
   }
 
 
-  updateProgress();
-  renderDayList();
-  renderTraining();
+  /* COMPLETE */
+
+  const complete =
+    document.getElementById("completeBtn");
+
+  if(complete){
+
+    complete.onclick = ()=>{
+
+      const checks =
+        document.querySelectorAll(".proof-check");
+
+      const allChecked =
+        [...checks].every(c=>c.checked);
+
+      if(!allChecked){
+
+        alert(
+          "Please complete every checklist item first."
+        );
+
+        return;
+      }
+
+      if(!completedDays.includes(item.day)){
+
+        completedDays.push(item.day);
+
+        completedDays.sort(
+          (a,b)=>a-b
+        );
+
+        /*
+         * IMPORTANT:
+         * 24-hour timer starts NOW.
+         */
+
+        lastCompletion =
+          Date.now();
+
+        checkState[item.day] = [];
+
+        saveState();
+
+      }
+
+      updateProgress();
+
+      if(item.day < 10){
+
+        currentDay =
+          item.day + 1;
+
+        saveState();
+
+        renderDayList();
+        renderTraining();
+
+        window.scrollTo({
+          top:0,
+          behavior:"smooth"
+        });
+
+      }else{
+
+        renderDayList();
+        renderTraining();
+
+        window.scrollTo({
+          top:0,
+          behavior:"smooth"
+        });
+
+      }
+
+    };
+
+  }
+
+
+  /* NEXT */
+
+  const next =
+    document.getElementById("nextBtn");
+
+  if(next){
+
+    next.onclick = ()=>{
+
+      if(item.day === 10){
+
+        renderFinalTest();
+
+        window.scrollTo({
+          top:0,
+          behavior:"smooth"
+        });
+
+        return;
+
+      }
+
+      currentDay =
+        item.day + 1;
+
+      saveState();
+
+      renderDayList();
+      renderTraining();
+
+      window.scrollTo({
+        top:0,
+        behavior:"smooth"
+      });
+
+    };
+
+  }
+
+}
+
+
+/* ==========================================================
+   FINAL TEST
+========================================================== */
+
+function shuffle(array){
+
+  return [...array]
+    .sort(()=>Math.random()-.5);
+}
+
+
+function renderFinalTest(){
+
+  document.getElementById("mainContent").innerHTML = "";
+
+  const final =
+    document.getElementById("finalTest");
+
+  if(testPassed){
+
+    final.innerHTML = `
+
+      <div class="test-card">
+
+        <div class="test-header">
+
+          <div class="test-icon">🏆</div>
+
+          <h2>Final Assessment Passed</h2>
+
+          <p>
+            You have already completed the IBB Promoter Academy.
+          </p>
+
+        </div>
+
+      </div>
+
+    `;
+
+    document
+      .getElementById("completeBox")
+      .classList.add("show");
+
+    return;
+  }
+
+
+  const selected =
+    shuffle(questions).slice(0,20);
+
+  final.innerHTML = `
+
+    <div class="test-card">
+
+      <div class="test-header">
+
+        <div class="test-icon">🎯</div>
+
+        <h2>IBB Final Assessment</h2>
+
+        <p>
+          20 questions • 80% required to pass
+        </p>
+
+      </div>
+
+
+      <div id="questionsContainer"></div>
+
+      <button
+        class="btn btn-primary test-submit"
+        id="submitTest"
+      >
+        Submit Final Test
+      </button>
+
+
+      <div
+        class="result"
+        id="testResult"
+      ></div>
+
+    </div>
+
+  `;
+
+
+  const container =
+    document.getElementById(
+      "questionsContainer"
+    );
+
+
+  selected.forEach((item,index)=>{
+
+    const div =
+      document.createElement("div");
+
+    div.className = "question";
+
+    div.innerHTML = `
+
+      <div class="question-number">
+        QUESTION ${index+1} OF 20
+      </div>
+
+      <div class="question-title">
+        ${item.q}
+      </div>
+
+      ${item.options.map((option,i)=>`
+
+        <label class="option">
+
+          <input
+            type="radio"
+            name="question_${index}"
+            value="${i}"
+          >
+
+          <span>
+            ${option}
+          </span>
+
+        </label>
+
+      `).join("")}
+
+    `;
+
+    container.appendChild(div);
+
+  });
+
+
+  document
+    .getElementById("submitTest")
+    .onclick = ()=>{
+
+      let score = 0;
+
+      let unanswered = 0;
+
+      selected.forEach((item,index)=>{
+
+        const selectedOption =
+          document.querySelector(
+            `input[name="question_${index}"]:checked`
+          );
+
+        if(!selectedOption){
+
+          unanswered++;
+
+          return;
+
+        }
+
+        if(
+          Number(selectedOption.value) ===
+          item.answer
+        ){
+
+          score++;
+
+        }
+
+      });
+
+
+      if(unanswered > 0){
+
+        alert(
+          `Please answer all questions. ${unanswered} question(s) remaining.`
+        );
+
+        return;
+
+      }
+
+
+      const percentage =
+        Math.round(
+          (score / selected.length) * 100
+        );
+
+
+      const result =
+        document.getElementById("testResult");
+
+
+      if(percentage >= 80){
+
+        testPassed = true;
+
+        localStorage.setItem(
+          TEST_KEY,
+          "passed"
+        );
+
+        result.className =
+          "result show pass";
+
+        result.innerHTML = `
+
+          <div class="result-icon">🎉</div>
+
+          <h2>Congratulations!</h2>
+
+          <div class="score">
+            ${percentage}%
+          </div>
+
+          <p>
+            You passed the IBB Final Assessment.
+          </p>
+
+          <button
+            class="btn btn-success"
+            onclick="finishCertification()"
+            style="margin-top:15px"
+          >
+            🏆 Complete Certification
+          </button>
+
+        `;
+
+      }else{
+
+        result.className =
+          "result show fail";
+
+        result.innerHTML = `
+
+          <div class="result-icon">📚</div>
+
+          <h2>Not Passed Yet</h2>
+
+          <div class="score">
+            ${percentage}%
+          </div>
+
+          <p>
+            You need at least 80% to pass.
+            Review the training and try again.
+          </p>
+
+          <button
+            class="btn btn-primary"
+            onclick="renderFinalTest()"
+            style="margin-top:15px"
+          >
+            🔄 Retake Test
+          </button>
+
+        `;
+
+      }
+
+    };
+
+}
+
+
+/* ==========================================================
+   CERTIFICATION
+========================================================== */
+
+function finishCertification(){
+
+  document
+    .getElementById("completeBox")
+    .classList.add("show");
+
+  document
+    .getElementById("finalTest")
+    .innerHTML = `
+
+      <div class="test-card">
+
+        <div class="test-header">
+
+          <div class="test-icon">🟢</div>
+
+          <h2>You Are Work Ready</h2>
+
+          <p>
+            Your IBB Promoter training and final assessment
+            have been successfully completed.
+          </p>
+
+        </div>
+
+      </div>
+
+    `;
+
+  window.scrollTo({
+    top:document.body.scrollHeight,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* ==========================================================
+   INITIAL LOAD
+========================================================== */
+
+if(completedDays.length === 10){
+
+  currentDay = 10;
+
+}
+
+if(
+  currentDay > 1 &&
+  !isCompleted(currentDay - 1) &&
+  !isCompleted(currentDay)
+){
+
+  currentDay =
+    completedDays.length + 1;
+
+}
+
+updateProgress();
+renderDayList();
+renderTraining();
 
 </script>
 
