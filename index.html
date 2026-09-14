@@ -2,1943 +2,908 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
-
-  <title>Indian Business Bureau | Business Requirements. Real Opportunities.</title>
+  <title>Indian Business Bureau | People. Businesses. Opportunities.</title>
 
   <meta name="description"
-        content="Indian Business Bureau connects businesses and eligible members through structured campaigns, business tasks and defined opportunities. Join IBB for a one-time ₹101 membership fee.">
+        content="Indian Business Bureau connects businesses with people through structured campaigns, tasks and opportunities. Join IBB for ₹101.">
 
-  <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#07090d">
 
-  <!-- Open Graph -->
-  <meta property="og:title"
-        content="Indian Business Bureau | Business Requirements. Real Opportunities.">
-
-  <meta property="og:description"
-        content="IBB connects businesses and eligible members through structured campaigns, tasks and business opportunities.">
-
-  <meta property="og:type" content="website">
-
-  <!-- Fonts -->
-  <link rel="preconnect"
-        href="https://fonts.googleapis.com">
-
-  <link rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
-
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@700;800&display=swap"
-        rel="stylesheet">
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
 
   <style>
+    :root{
+      --bg:#07090d;
+      --bg-soft:#0b0f15;
+      --card:#10151c;
+      --card2:#0d1218;
+      --line:rgba(255,255,255,.09);
+      --line-gold:rgba(227,194,112,.22);
 
-    /* =========================================================
-       DESIGN SYSTEM
-    ========================================================= */
+      --text:#f6f7f9;
+      --muted:#a0a8b5;
+      --dim:#727b89;
 
-    :root {
-      --bg: #07090d;
-      --bg-2: #090c11;
-      --surface: #0d1219;
-      --surface-2: #111720;
-      --surface-3: #151c25;
+      --gold:#e5c675;
+      --gold2:#f1d98e;
+      --green:#54c99b;
 
-      --line: rgba(255,255,255,.085);
-      --line-strong: rgba(255,255,255,.14);
-
-      --gold: #e5c675;
-      --gold-light: #f3dda0;
-      --gold-dark: #c9a84f;
-
-      --green: #54c99b;
-      --green-soft: rgba(84,201,155,.10);
-
-      --text: #f7f8fa;
-      --muted: #a3acb9;
-      --dim: #737d8c;
-
-      --danger: #e98a8a;
-
-      --max: 1160px;
-
-      --radius-sm: 12px;
-      --radius: 20px;
-      --radius-lg: 28px;
-
-      --shadow:
-        0 25px 70px rgba(0,0,0,.35);
+      --max:1120px;
+      --radius:22px;
     }
 
-
-    /* =========================================================
-       RESET
-    ========================================================= */
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
     }
 
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 90px;
+    html{
+      scroll-behavior:smooth;
+      scroll-padding-top:82px;
     }
 
-    body {
-      min-height: 100vh;
-
-      font-family:
-        Inter,
-        Arial,
-        sans-serif;
-
-      color: var(--text);
-
+    body{
+      font-family:Inter,Arial,sans-serif;
+      color:var(--text);
       background:
-        radial-gradient(
-          circle at 82% 0%,
-          rgba(229,198,117,.11),
-          transparent 28%
-        ),
-
-        radial-gradient(
-          circle at 5% 32%,
-          rgba(84,201,155,.055),
-          transparent 24%
-        ),
-
-        linear-gradient(
-          180deg,
-          #07090d 0%,
-          #080b10 55%,
-          #07090d 100%
-        );
-
-      line-height: 1.6;
-
-      overflow-x: hidden;
+        radial-gradient(circle at 85% 0%,rgba(229,198,117,.10),transparent 28%),
+        radial-gradient(circle at 5% 35%,rgba(84,201,155,.055),transparent 23%),
+        var(--bg);
+      line-height:1.6;
+      overflow-x:hidden;
     }
 
-
-    a {
-      color: inherit;
-      text-decoration: none;
+    a{
+      color:inherit;
+      text-decoration:none;
     }
 
-
-    button,
-    input,
-    textarea,
-    select {
-      font: inherit;
+    button{
+      font:inherit;
     }
 
-
-    img {
-      max-width: 100%;
-      display: block;
+    .container{
+      width:min(var(--max),calc(100% - 34px));
+      margin:auto;
     }
 
-
-    .container {
-      width: min(
-        var(--max),
-        calc(100% - 40px)
-      );
-
-      margin-inline: auto;
-    }
-
-
-    /* =========================================================
-       ACCESSIBILITY
-    ========================================================= */
-
-    :focus-visible {
-      outline: 2px solid var(--gold);
-      outline-offset: 4px;
-    }
-
-
-    .skip-link {
-      position: fixed;
-      top: -100px;
-      left: 20px;
-
-      z-index: 9999;
-
-      padding: 10px 15px;
-
-      background: var(--gold);
-      color: #111;
-
-      border-radius: 10px;
-
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-
-    .skip-link:focus {
-      top: 20px;
-    }
-
-
-    /* =========================================================
+    /* =========================
        HEADER
-    ========================================================= */
+    ========================= */
 
-    header {
-      position: sticky;
-      top: 0;
+    header{
+      position:sticky;
+      top:0;
+      z-index:100;
+      border-bottom:1px solid rgba(255,255,255,.06);
+      background:rgba(7,9,13,.82);
+      backdrop-filter:blur(18px);
+    }
 
-      z-index: 1000;
+    .nav{
+      min-height:74px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:25px;
+    }
 
-      border-bottom:
-        1px solid rgba(255,255,255,.055);
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:11px;
+      min-width:max-content;
+    }
 
+    .brand-mark{
+      width:38px;
+      height:38px;
+      display:grid;
+      place-items:center;
+      border-radius:12px;
+      border:1px solid rgba(229,198,117,.30);
       background:
-        rgba(7,9,13,.78);
-
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+        linear-gradient(145deg,rgba(229,198,117,.13),rgba(255,255,255,.035));
+      box-shadow:inset 0 0 20px rgba(229,198,117,.04);
     }
 
-
-    .nav {
-      min-height: 76px;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      gap: 25px;
+    .brand-mark svg{
+      width:24px;
+      height:24px;
     }
 
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 11px;
-
-      flex-shrink: 0;
+    .brand-text{
+      line-height:1.05;
     }
 
-
-    .brand-mark {
-      width: 40px;
-      height: 40px;
-
-      display: grid;
-      place-items: center;
-
-      border-radius: 13px;
-
-      border:
-        1px solid rgba(229,198,117,.30);
-
-      background:
-        linear-gradient(
-          145deg,
-          rgba(229,198,117,.14),
-          rgba(255,255,255,.035)
-        );
-
-      box-shadow:
-        inset 0 0 20px rgba(229,198,117,.04);
+    .brand-name{
+      font-family:Manrope,sans-serif;
+      font-weight:800;
+      font-size:15px;
+      letter-spacing:-.35px;
     }
 
-
-    .brand-mark svg {
-      width: 25px;
-      height: 25px;
+    .brand-name span{
+      color:var(--gold);
     }
 
-
-    .brand-text {
-      line-height: 1.05;
+    .brand-sub{
+      font-size:8px;
+      color:var(--dim);
+      letter-spacing:1.15px;
+      text-transform:uppercase;
+      margin-top:3px;
     }
 
-
-    .brand-name {
-      font-family: Manrope, sans-serif;
-
-      font-size: 15px;
-      font-weight: 800;
-
-      letter-spacing: -.4px;
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:24px;
+      color:#adb5c1;
+      font-size:12px;
+      font-weight:600;
     }
 
-
-    .brand-name span {
-      color: var(--gold);
+    .nav-links a:hover{
+      color:#fff;
     }
 
-
-    .brand-sub {
-      margin-top: 4px;
-
-      color: var(--dim);
-
-      font-size: 8px;
-
-      letter-spacing: 1.1px;
-      text-transform: uppercase;
+    .nav-actions{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex-shrink:0;
     }
 
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 25px;
-
-      color: #aeb6c2;
-
-      font-size: 12px;
-      font-weight: 600;
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      padding:13px 18px;
+      font-size:12px;
+      font-weight:800;
+      transition:.2s ease;
+      cursor:pointer;
+      white-space:nowrap;
     }
 
-
-    .nav-links a {
-      transition: color .2s ease;
+    .btn-primary{
+      color:#111;
+      background:linear-gradient(135deg,var(--gold2),#d5b259);
+      box-shadow:0 10px 28px rgba(229,198,117,.12);
     }
 
-
-    .nav-links a:hover {
-      color: white;
+    .btn-primary:hover{
+      transform:translateY(-2px);
+      box-shadow:0 15px 38px rgba(229,198,117,.18);
     }
 
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    .btn-secondary{
+      color:#f4f5f7;
+      background:rgba(255,255,255,.025);
     }
 
-
-    /* =========================================================
-       BUTTONS
-    ========================================================= */
-
-    .btn {
-      min-height: 45px;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      gap: 8px;
-
-      padding: 0 17px;
-
-      border:
-        1px solid var(--line);
-
-      border-radius: 12px;
-
-      font-size: 11px;
-      font-weight: 800;
-
-      white-space: nowrap;
-
-      cursor: pointer;
-
-      transition:
-        transform .2s ease,
-        background .2s ease,
-        border-color .2s ease,
-        box-shadow .2s ease;
+    .btn-secondary:hover{
+      background:rgba(255,255,255,.06);
     }
 
-
-    .btn:hover {
-      transform: translateY(-2px);
-    }
-
-
-    .btn-primary {
-      color: #111;
-
-      border-color: transparent;
-
-      background:
-        linear-gradient(
-          135deg,
-          var(--gold-light),
-          var(--gold-dark)
-        );
-
-      box-shadow:
-        0 12px 30px rgba(229,198,117,.13);
-    }
-
-
-    .btn-primary:hover {
-      box-shadow:
-        0 16px 40px rgba(229,198,117,.22);
-    }
-
-
-    .btn-secondary {
-      color: #f4f5f7;
-
-      background:
-        rgba(255,255,255,.025);
-    }
-
-
-    .btn-secondary:hover {
-      background:
-        rgba(255,255,255,.065);
-
-      border-color:
-        rgba(255,255,255,.14);
-    }
-
-
-    .btn-business {
-      color: #dff9ee;
-
-      background:
-        var(--green-soft);
-
-      border-color:
-        rgba(84,201,155,.20);
-    }
-
-
-    /* =========================================================
+    /* =========================
        HERO
-    ========================================================= */
+    ========================= */
 
-    .hero {
-      position: relative;
-
-      padding:
-        105px 0 85px;
+    .hero{
+      padding:88px 0 75px;
     }
 
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.08fr .92fr;
+      gap:55px;
+      align-items:center;
+    }
 
-    .hero::before {
-      content: "";
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      padding:7px 11px;
+      border-radius:999px;
+      border:1px solid rgba(229,198,117,.20);
+      background:rgba(229,198,117,.055);
+      color:var(--gold);
+      font-size:9px;
+      font-weight:800;
+      letter-spacing:1.4px;
+    }
 
-      position: absolute;
+    h1{
+      font-family:Manrope,sans-serif;
+      font-size:clamp(44px,6vw,70px);
+      line-height:1.01;
+      letter-spacing:-3.4px;
+      margin-top:20px;
+    }
 
-      width: 600px;
-      height: 600px;
+    h1 span{
+      background:linear-gradient(90deg,#fff,var(--gold));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
 
-      top: -250px;
-      right: -250px;
+    .hero-copy{
+      max-width:600px;
+      margin-top:20px;
+      color:var(--muted);
+      font-size:16px;
+    }
 
-      border-radius: 50%;
+    .hero-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:28px;
+    }
 
+    .hero-note{
+      color:var(--dim);
+      font-size:10px;
+      margin-top:12px;
+    }
+
+    /* ecosystem */
+
+    .ecosystem{
+      min-height:360px;
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .orbit{
+      position:absolute;
+      width:270px;
+      height:270px;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.07);
+    }
+
+    .orbit.small{
+      width:180px;
+      height:180px;
+      border-color:rgba(229,198,117,.14);
+    }
+
+    .core{
+      width:102px;
+      height:102px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
       background:
-        rgba(229,198,117,.035);
-
-      filter: blur(80px);
-
-      pointer-events: none;
-    }
-
-
-    .hero-grid {
-      position: relative;
-
-      display: grid;
-
-      grid-template-columns:
-        minmax(0, 1.08fr)
-        minmax(350px, .92fr);
-
-      gap: 70px;
-
-      align-items: center;
-    }
-
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-
-      padding: 7px 11px;
-
-      border-radius: 999px;
-
-      border:
-        1px solid rgba(229,198,117,.20);
-
-      background:
-        rgba(229,198,117,.055);
-
-      color: var(--gold);
-
-      font-size: 9px;
-      font-weight: 800;
-
-      letter-spacing: 1.25px;
-      text-transform: uppercase;
-    }
-
-
-    .eyebrow-dot {
-      width: 6px;
-      height: 6px;
-
-      border-radius: 50%;
-
-      background: var(--green);
-
-      box-shadow:
-        0 0 0 4px rgba(84,201,155,.09);
-    }
-
-
-    h1 {
-      max-width: 760px;
-
-      margin-top: 21px;
-
-      font-family: Manrope, sans-serif;
-
-      font-size:
-        clamp(45px, 6.2vw, 76px);
-
-      line-height: .99;
-
-      letter-spacing: -4px;
-    }
-
-
-    h1 span {
-      background:
-        linear-gradient(
-          90deg,
-          #fff 5%,
-          var(--gold-light) 90%
-        );
-
-      -webkit-background-clip: text;
-      background-clip: text;
-
-      color: transparent;
-    }
-
-
-    .hero-copy {
-      max-width: 650px;
-
-      margin-top: 24px;
-
-      color: var(--muted);
-
-      font-size: 16px;
-
-      line-height: 1.75;
-    }
-
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-
-      gap: 10px;
-
-      margin-top: 29px;
-    }
-
-
-    .hero-disclaimer {
-      max-width: 650px;
-
-      margin-top: 13px;
-
-      color: var(--dim);
-
-      font-size: 10px;
-    }
-
-
-    .hero-proof {
-      display: flex;
-      flex-wrap: wrap;
-
-      gap: 10px;
-
-      margin-top: 24px;
-    }
-
-
-    .proof-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-
-      padding: 8px 10px;
-
-      border:
-        1px solid var(--line);
-
-      border-radius: 999px;
-
-      background:
-        rgba(255,255,255,.02);
-
-      color: #bbc3ce;
-
-      font-size: 10px;
-      font-weight: 600;
-    }
-
-
-    .proof-pill span {
-      color: var(--green);
-      font-weight: 900;
-    }
-
-
-    /* =========================================================
-       HERO VISUAL
-    ========================================================= */
-
-    .ecosystem {
-      position: relative;
-
-      min-height: 430px;
-
-      display: grid;
-      place-items: center;
-    }
-
-
-    .ecosystem-glow {
-      position: absolute;
-
-      width: 260px;
-      height: 260px;
-
-      border-radius: 50%;
-
-      background:
-        rgba(229,198,117,.07);
-
-      filter: blur(70px);
-    }
-
-
-    .orbit {
-      position: absolute;
-
-      width: 320px;
-      height: 320px;
-
-      border:
-        1px solid rgba(255,255,255,.07);
-
-      border-radius: 50%;
-    }
-
-
-    .orbit::after {
-      content: "";
-
-      position: absolute;
-
-      inset: 25px;
-
-      border:
-        1px dashed rgba(229,198,117,.11);
-
-      border-radius: 50%;
-    }
-
-
-    .orbit.small {
-      width: 205px;
-      height: 205px;
-
-      border-color:
-        rgba(229,198,117,.15);
-    }
-
-
-    .core {
-      position: relative;
-      z-index: 3;
-
-      width: 112px;
-      height: 112px;
-
-      display: grid;
-      place-items: center;
-
-      border-radius: 50%;
-
-      background:
-        radial-gradient(
-          circle at 35% 25%,
-          rgba(229,198,117,.14),
-          transparent 58%
-        ),
+        radial-gradient(circle at 35% 30%,rgba(229,198,117,.11),transparent 55%),
         #111720;
-
-      border:
-        1px solid rgba(229,198,117,.40);
-
-      color: var(--gold);
-
-      font-family: Manrope, sans-serif;
-
-      font-size: 28px;
-      font-weight: 800;
-
-      box-shadow:
-        0 0 90px rgba(229,198,117,.10);
+      border:1px solid rgba(229,198,117,.33);
+      color:var(--gold);
+      font-family:Manrope,sans-serif;
+      font-size:25px;
+      font-weight:800;
+      letter-spacing:-1px;
+      z-index:2;
+      box-shadow:0 0 70px rgba(229,198,117,.08);
     }
 
-
-    .node {
-      position: absolute;
-
-      z-index: 4;
-
-      padding: 10px 13px;
-
-      border:
-        1px solid var(--line);
-
-      border-radius: 12px;
-
-      background:
-        rgba(10,14,20,.91);
-
-      box-shadow:
-        0 15px 35px rgba(0,0,0,.25);
-
-      color: #dce1e7;
-
-      font-size: 10px;
-      font-weight: 800;
-
-      letter-spacing: .4px;
+    .node{
+      position:absolute;
+      padding:9px 12px;
+      border-radius:11px;
+      border:1px solid var(--line);
+      background:rgba(11,15,21,.90);
+      font-size:10px;
+      font-weight:800;
+      color:#d9dee5;
     }
 
-
-    .node.people {
-      top: 34px;
+    .node.people{
+      top:20px;
     }
 
-
-    .node.business {
-      right: 0;
+    .node.business{
+      right:0;
     }
 
-
-    .node.tasks {
-      bottom: 35px;
+    .node.tasks{
+      bottom:20px;
     }
 
-
-    .node.opportunities {
-      left: 0;
+    .node.opportunities{
+      left:0;
     }
 
-
-    /* =========================================================
+    /* =========================
        SECTIONS
-    ========================================================= */
+    ========================= */
 
-    section {
-      padding: 88px 0;
+    section{
+      padding:70px 0;
     }
 
-
-    .section-head {
-      max-width: 730px;
-
-      margin-bottom: 30px;
+    .section-head{
+      max-width:660px;
+      margin-bottom:28px;
     }
 
-
-    .label {
-      color: var(--gold);
-
-      font-size: 9px;
-      font-weight: 800;
-
-      letter-spacing: 1.5px;
-
-      text-transform: uppercase;
+    .label{
+      color:var(--gold);
+      font-size:9px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:1.45px;
     }
 
-
-    h2 {
-      margin-top: 8px;
-
-      font-family: Manrope, sans-serif;
-
-      font-size:
-        clamp(31px, 4vw, 46px);
-
-      line-height: 1.08;
-
-      letter-spacing: -2px;
+    h2{
+      font-family:Manrope,sans-serif;
+      font-size:clamp(30px,4vw,44px);
+      line-height:1.08;
+      letter-spacing:-1.8px;
+      margin-top:7px;
     }
 
-
-    .sub {
-      max-width: 720px;
-
-      margin-top: 12px;
-
-      color: var(--muted);
-
-      font-size: 13px;
-
-      line-height: 1.75;
+    .sub{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:13px;
+      max-width:700px;
     }
 
-
-    /* =========================================================
+    /* =========================
        BUSINESS MODEL
-    ========================================================= */
+    ========================= */
 
-    .flow {
-      display: grid;
+    .flow{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      border:1px solid var(--line);
+      border-radius:20px;
+      overflow:hidden;
+    }
 
-      grid-template-columns:
-        repeat(5, 1fr);
+    .flow-item{
+      padding:21px 16px;
+      background:rgba(255,255,255,.022);
+      border-right:1px solid var(--line);
+    }
 
-      overflow: hidden;
+    .flow-item:last-child{
+      border-right:0;
+    }
 
-      border:
-        1px solid var(--line);
+    .flow-number{
+      color:var(--gold);
+      font-size:9px;
+      font-weight:800;
+    }
 
-      border-radius: var(--radius);
+    .flow-title{
+      font-size:13px;
+      font-weight:800;
+      margin-top:9px;
+    }
 
+    .flow-text{
+      color:var(--muted);
+      font-size:10px;
+      margin-top:4px;
+    }
+
+    /* =========================
+       EXAMPLE
+    ========================= */
+
+    .example{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:15px;
+    }
+
+    .example-card{
+      padding:25px;
+      border-radius:20px;
+      border:1px solid var(--line-gold);
       background:
-        rgba(255,255,255,.015);
-
-      box-shadow: var(--shadow);
+        radial-gradient(circle at 90% 0%,rgba(229,198,117,.08),transparent 35%),
+        var(--card2);
     }
 
-
-    .flow-item {
-      position: relative;
-
-      padding: 25px 19px;
-
-      border-right:
-        1px solid var(--line);
+    .example-tag{
+      display:inline-block;
+      font-size:9px;
+      color:var(--gold);
+      font-weight:800;
+      letter-spacing:1px;
+      margin-bottom:9px;
     }
 
-
-    .flow-item:last-child {
-      border-right: 0;
+    .example-card h3{
+      font-size:20px;
+      line-height:1.25;
     }
 
-
-    .flow-number {
-      color: var(--gold);
-
-      font-size: 9px;
-      font-weight: 800;
-
-      letter-spacing: 1px;
+    .example-card p{
+      color:var(--muted);
+      font-size:12px;
+      margin-top:9px;
     }
 
-
-    .flow-title {
-      margin-top: 11px;
-
-      font-size: 13px;
-      font-weight: 800;
+    .math{
+      margin-top:18px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
     }
 
-
-    .flow-text {
-      margin-top: 6px;
-
-      color: var(--muted);
-
-      font-size: 10px;
-
-      line-height: 1.65;
+    .math-box{
+      padding:10px 13px;
+      border-radius:11px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.025);
+      font-size:12px;
+      font-weight:700;
     }
 
-
-    /* =========================================================
-       CAMPAIGN EXAMPLES
-    ========================================================= */
-
-    .campaign-grid {
-      display: grid;
-
-      grid-template-columns:
-        repeat(3, 1fr);
-
-      gap: 14px;
+    .math-result{
+      padding:10px 14px;
+      border-radius:11px;
+      background:rgba(84,201,155,.09);
+      border:1px solid rgba(84,201,155,.20);
+      color:var(--green);
+      font-weight:800;
+      font-size:13px;
     }
 
-
-    .campaign {
-      position: relative;
-
-      padding: 23px;
-
-      border:
-        1px solid var(--line);
-
-      border-radius: var(--radius);
-
-      background:
-        linear-gradient(
-          145deg,
-          rgba(255,255,255,.035),
-          rgba(255,255,255,.015)
-        );
-
-      transition:
-        transform .2s ease,
-        border-color .2s ease;
+    .tiny{
+      margin-top:11px;
+      color:var(--dim);
+      font-size:9px;
     }
 
-
-    .campaign:hover {
-      transform: translateY(-4px);
-
-      border-color:
-        rgba(229,198,117,.24);
-    }
-
-
-    .campaign-status {
-      display: inline-flex;
-
-      padding: 5px 8px;
-
-      border-radius: 999px;
-
-      background:
-        rgba(84,201,155,.08);
-
-      border:
-        1px solid rgba(84,201,155,.16);
-
-      color: var(--green);
-
-      font-size: 8px;
-      font-weight: 800;
-
-      text-transform: uppercase;
-      letter-spacing: .8px;
-    }
-
-
-    .campaign h3 {
-      margin-top: 16px;
-
-      font-size: 17px;
-
-      line-height: 1.3;
-    }
-
-
-    .campaign p {
-      margin-top: 7px;
-
-      color: var(--muted);
-
-      font-size: 11px;
-
-      line-height: 1.65;
-    }
-
-
-    .campaign-meta {
-      display: flex;
-      justify-content: space-between;
-
-      gap: 10px;
-
-      margin-top: 19px;
-
-      padding-top: 16px;
-
-      border-top:
-        1px solid var(--line);
-    }
-
-
-    .meta-label {
-      display: block;
-
-      color: var(--dim);
-
-      font-size: 8px;
-
-      text-transform: uppercase;
-      letter-spacing: .8px;
-    }
-
-
-    .meta-value {
-      display: block;
-
-      margin-top: 3px;
-
-      color: #e7ebef;
-
-      font-size: 10px;
-      font-weight: 700;
-    }
-
-
-    .example-note {
-      margin-top: 14px;
-
-      color: var(--dim);
-
-      font-size: 10px;
-    }
-
-
-    /* =========================================================
+    /* =========================
        OPPORTUNITIES
-    ========================================================= */
+    ========================= */
 
-    .opportunity-grid {
-      display: grid;
-
-      grid-template-columns:
-        repeat(3, 1fr);
-
-      gap: 11px;
+    .opportunity-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
     }
 
+    .opp{
+      padding:18px;
+      border-radius:15px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.025);
+    }
 
-    .opp {
-      padding: 20px;
+    .opp strong{
+      font-size:12px;
+    }
 
-      border:
-        1px solid var(--line);
+    .opp span{
+      display:block;
+      color:var(--muted);
+      font-size:10px;
+      margin-top:4px;
+    }
 
-      border-radius: 16px;
+    /* =========================
+       BUSINESS CTA
+    ========================= */
 
+    .business-box{
+      padding:34px;
+      border-radius:24px;
+      border:1px solid rgba(84,201,155,.18);
       background:
+        radial-gradient(circle at 90% 15%,rgba(84,201,155,.09),transparent 30%),
         rgba(255,255,255,.022);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:30px;
     }
 
-
-    .opp-icon {
-      width: 34px;
-      height: 34px;
-
-      display: grid;
-      place-items: center;
-
-      margin-bottom: 13px;
-
-      border-radius: 10px;
-
-      background:
-        rgba(229,198,117,.07);
-
-      border:
-        1px solid rgba(229,198,117,.13);
-
-      color: var(--gold);
-
-      font-size: 12px;
-      font-weight: 800;
+    .business-copy{
+      max-width:710px;
     }
 
-
-    .opp strong {
-      font-size: 12px;
+    .business-copy p{
+      margin-top:9px;
+      color:var(--muted);
+      font-size:13px;
     }
 
-
-    .opp span {
-      display: block;
-
-      margin-top: 5px;
-
-      color: var(--muted);
-
-      font-size: 10px;
-
-      line-height: 1.6;
-    }
-
-
-    /* =========================================================
-       TWO SIDES
-    ========================================================= */
-
-    .two-col {
-      display: grid;
-
-      grid-template-columns:
-        1fr 1fr;
-
-      gap: 15px;
-    }
-
-
-    .audience-card {
-      position: relative;
-
-      padding: 32px;
-
-      overflow: hidden;
-
-      border:
-        1px solid var(--line);
-
-      border-radius: var(--radius-lg);
-
-      background:
-        linear-gradient(
-          145deg,
-          rgba(255,255,255,.035),
-          rgba(255,255,255,.015)
-        );
-    }
-
-
-    .audience-card.business {
-      border-color:
-        rgba(84,201,155,.18);
-    }
-
-
-    .audience-kicker {
-      color: var(--gold);
-
-      font-size: 9px;
-      font-weight: 800;
-
-      letter-spacing: 1.3px;
-
-      text-transform: uppercase;
-    }
-
-
-    .audience-card.business .audience-kicker {
-      color: var(--green);
-    }
-
-
-    .audience-card h3 {
-      margin-top: 10px;
-
-      font-family: Manrope, sans-serif;
-
-      font-size: 27px;
-
-      letter-spacing: -1px;
-    }
-
-
-    .audience-card > p {
-      margin-top: 9px;
-
-      color: var(--muted);
-
-      font-size: 12px;
-    }
-
-
-    .audience-list {
-      display: grid;
-
-      gap: 9px;
-
-      margin-top: 22px;
-    }
-
-
-    .audience-list div {
-      padding: 11px 12px;
-
-      border:
-        1px solid var(--line);
-
-      border-radius: 11px;
-
-      background:
-        rgba(255,255,255,.02);
-
-      color: #cbd1d9;
-
-      font-size: 11px;
-    }
-
-
-    .audience-list span {
-      margin-right: 7px;
-
-      color: var(--green);
-      font-weight: 900;
-    }
-
-
-    /* =========================================================
+    /* =========================
        MEMBERSHIP
-    ========================================================= */
+    ========================= */
 
-    .membership {
-      display: grid;
-
-      grid-template-columns:
-        .9fr 1.1fr;
-
-      gap: 15px;
+    .membership{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:15px;
     }
 
-
-    .membership-card {
-      padding: 32px;
-
-      border:
-        1px solid rgba(229,198,117,.22);
-
-      border-radius: var(--radius-lg);
-
+    .membership-card{
+      padding:30px;
+      border-radius:22px;
+      border:1px solid var(--line-gold);
       background:
-        radial-gradient(
-          circle at 90% 0%,
-          rgba(229,198,117,.09),
-          transparent 35%
-        ),
-        var(--surface);
+        radial-gradient(circle at 90% 0%,rgba(229,198,117,.10),transparent 35%),
+        var(--card);
     }
 
-
-    .price {
-      font-family: Manrope, sans-serif;
-
-      font-size: 60px;
-
-      line-height: 1;
-
-      letter-spacing: -4px;
+    .price{
+      font-family:Manrope,sans-serif;
+      font-size:57px;
+      line-height:1;
+      letter-spacing:-3px;
+      margin:9px 0;
     }
 
-
-    .price small {
-      font-family: Inter, sans-serif;
-
-      color: var(--muted);
-
-      font-size: 11px;
-
-      letter-spacing: 0;
+    .price small{
+      font-family:Inter,sans-serif;
+      color:var(--muted);
+      font-size:11px;
+      letter-spacing:0;
     }
 
-
-    .membership-card p {
-      max-width: 480px;
-
-      margin-top: 12px;
-      margin-bottom: 21px;
-
-      color: var(--muted);
-
-      font-size: 12px;
+    .membership-card p{
+      color:var(--muted);
+      font-size:12px;
+      margin-bottom:20px;
+      max-width:450px;
     }
 
-
-    .membership-warning {
-      margin-top: 15px;
-
-      padding: 12px;
-
-      border:
-        1px solid rgba(255,255,255,.08);
-
-      border-radius: 11px;
-
-      background:
-        rgba(255,255,255,.025);
-
-      color: var(--dim);
-
-      font-size: 10px;
-
-      line-height: 1.65;
+    .benefits{
+      display:grid;
+      gap:9px;
     }
 
-
-    .benefits {
-      display: grid;
-
-      gap: 9px;
+    .benefit{
+      padding:14px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.025);
+      font-size:12px;
     }
 
-
-    .benefit {
-      display: flex;
-      align-items: flex-start;
-
-      gap: 9px;
-
-      padding: 14px;
-
-      border:
-        1px solid var(--line);
-
-      border-radius: 12px;
-
-      background:
-        rgba(255,255,255,.022);
-
-      color: #dce1e7;
-
-      font-size: 11px;
+    .benefit span{
+      color:var(--green);
+      margin-right:5px;
     }
 
+    /* =========================
+       RATINGS
+    ========================= */
 
-    .benefit span {
-      color: var(--green);
-
-      font-weight: 900;
+    .rating-wrap{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:15px;
+      margin-top:25px;
     }
 
-
-    /* =========================================================
-       TRUST
-    ========================================================= */
-
-    .trust-grid {
-      display: grid;
-
-      grid-template-columns:
-        repeat(3, 1fr);
-
-      gap: 12px;
+    .rating-main,
+    .rating-side{
+      border:1px solid var(--line);
+      background:var(--card);
+      border-radius:20px;
+      padding:25px;
     }
 
-
-    .trust-card {
-      padding: 23px;
-
-      border:
-        1px solid var(--line);
-
-      border-radius: var(--radius);
-
-      background:
-        var(--surface);
+    .rating-main{
+      display:flex;
+      align-items:center;
+      gap:25px;
     }
 
-
-    .trust-icon {
-      color: var(--gold);
-
-      font-size: 17px;
+    .rating-score{
+      min-width:130px;
     }
 
-
-    .trust-card h3 {
-      margin-top: 13px;
-
-      font-size: 14px;
+    .rating-number{
+      font-family:Manrope,sans-serif;
+      font-size:43px;
+      line-height:1;
     }
 
-
-    .trust-card p {
-      margin-top: 6px;
-
-      color: var(--muted);
-
-      font-size: 10px;
-
-      line-height: 1.7;
+    .stars{
+      color:var(--gold);
+      letter-spacing:3px;
+      font-size:14px;
+      margin-top:8px;
     }
 
-
-    .review-placeholder {
-      margin-top: 15px;
-
-      padding: 22px;
-
-      border:
-        1px dashed rgba(229,198,117,.22);
-
-      border-radius: var(--radius);
-
-      background:
-        rgba(229,198,117,.025);
-
-      color: var(--muted);
-
-      font-size: 11px;
+    .verified{
+      display:inline-flex;
+      margin-top:9px;
+      padding:5px 8px;
+      border-radius:999px;
+      background:rgba(84,201,155,.08);
+      border:1px solid rgba(84,201,155,.15);
+      color:var(--green);
+      font-size:9px;
+      font-weight:800;
     }
 
-
-    .review-placeholder strong {
-      display: block;
-
-      margin-bottom: 5px;
-
-      color: white;
-
-      font-size: 13px;
+    .rating-copy h3{
+      font-size:16px;
     }
 
+    .rating-copy p{
+      color:var(--muted);
+      font-size:11px;
+      margin-top:5px;
+    }
 
-    /* =========================================================
+    .review-empty{
+      color:var(--muted);
+      font-size:11px;
+      line-height:1.7;
+    }
+
+    .review-empty strong{
+      color:white;
+      display:block;
+      margin-bottom:4px;
+      font-size:13px;
+    }
+
+    /* =========================
        FAQ
-    ========================================================= */
+    ========================= */
 
-    .faq {
-      max-width: 850px;
+    .faq{
+      max-width:820px;
     }
 
-
-    details {
-      border-bottom:
-        1px solid var(--line);
+    details{
+      border-bottom:1px solid var(--line);
     }
 
-
-    summary {
-      position: relative;
-
-      list-style: none;
-
-      cursor: pointer;
-
-      padding: 19px 35px 19px 0;
-
-      font-size: 13px;
-      font-weight: 700;
+    summary{
+      list-style:none;
+      cursor:pointer;
+      padding:17px 0;
+      font-size:13px;
+      font-weight:700;
     }
 
-
-    summary::-webkit-details-marker {
-      display: none;
+    summary::-webkit-details-marker{
+      display:none;
     }
 
-
-    summary::after {
-      content: "+";
-
-      position: absolute;
-
-      right: 3px;
-      top: 17px;
-
-      color: var(--gold);
-
-      font-size: 20px;
-      font-weight: 400;
-
-      transition: transform .2s ease;
+    details p{
+      color:var(--muted);
+      font-size:11px;
+      padding:0 0 17px;
     }
 
+    /* =========================
+       FINAL
+    ========================= */
 
-    details[open] summary::after {
-      transform: rotate(45deg);
+    .final{
+      padding:85px 0 100px;
+      text-align:center;
     }
 
-
-    details p {
-      max-width: 760px;
-
-      padding:
-        0 0 19px;
-
-      color: var(--muted);
-
-      font-size: 11px;
-
-      line-height: 1.75;
+    .final p{
+      max-width:570px;
+      margin:11px auto 23px;
+      color:var(--muted);
+      font-size:13px;
     }
 
-
-    /* =========================================================
-       FINAL CTA
-    ========================================================= */
-
-    .final {
-      position: relative;
-
-      padding:
-        105px 0 110px;
-
-      text-align: center;
-    }
-
-
-    .final::before {
-      content: "";
-
-      position: absolute;
-
-      left: 50%;
-      top: 20%;
-
-      width: 500px;
-      height: 300px;
-
-      transform: translateX(-50%);
-
-      background:
-        rgba(229,198,117,.055);
-
-      filter: blur(90px);
-
-      pointer-events: none;
-    }
-
-
-    .final > .container {
-      position: relative;
-    }
-
-
-    .final h2 {
-      max-width: 700px;
-
-      margin-inline: auto;
-    }
-
-
-    .final p {
-      max-width: 610px;
-
-      margin:
-        13px auto 25px;
-
-      color: var(--muted);
-
-      font-size: 13px;
-    }
-
-
-    .final-note {
-      margin-top: 12px;
-
-      color: var(--dim);
-
-      font-size: 9px;
-    }
-
-
-    /* =========================================================
+    /* =========================
        FOOTER
-    ========================================================= */
+    ========================= */
 
-    footer {
-      border-top:
-        1px solid var(--line);
-
-      padding:
-        32px 0 90px;
-
-      color: var(--dim);
-
-      font-size: 10px;
+    footer{
+      border-top:1px solid var(--line);
+      padding:25px 0 85px;
+      color:var(--dim);
+      font-size:10px;
     }
 
-
-    .footer {
-      display: flex;
-
-      align-items: flex-start;
-      justify-content: space-between;
-
-      gap: 35px;
+    .footer{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      flex-wrap:wrap;
     }
 
-
-    .footer-brand {
-      max-width: 340px;
+    .footer-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:16px;
     }
 
-
-    .footer-brand strong {
-      display: block;
-
-      color: #dfe4ea;
-
-      font-size: 12px;
+    .footer-links a:hover{
+      color:white;
     }
 
+    /* =========================
+       MOBILE
+    ========================= */
 
-    .footer-brand p {
-      margin-top: 6px;
-
-      color: var(--dim);
-
-      line-height: 1.6;
+    .mobile-cta{
+      display:none;
     }
 
+    @media(max-width:850px){
 
-    .footer-links {
-      display: flex;
-
-      flex-wrap: wrap;
-
-      justify-content: flex-end;
-
-      gap: 10px 20px;
-    }
-
-
-    .footer-links a {
-      transition: color .2s ease;
-    }
-
-
-    .footer-links a:hover {
-      color: white;
-    }
-
-
-    .footer-bottom {
-      margin-top: 25px;
-
-      padding-top: 18px;
-
-      border-top:
-        1px solid rgba(255,255,255,.05);
-
-      color: #596271;
-
-      font-size: 9px;
-    }
-
-
-    /* =========================================================
-       MOBILE CTA
-    ========================================================= */
-
-    .mobile-cta {
-      display: none;
-    }
-
-
-    /* =========================================================
-       RESPONSIVE
-    ========================================================= */
-
-    @media (max-width: 1000px) {
-
-      .nav-links {
-        display: none;
+      .nav-links{
+        display:none;
       }
 
-
-      .hero-grid {
-        grid-template-columns: 1fr;
-
-        gap: 40px;
+      .nav-actions .btn-secondary{
+        display:inline-flex;
       }
 
-
-      .ecosystem {
-        min-height: 350px;
+      .nav-actions .btn{
+        padding:11px 13px;
+        font-size:10px;
       }
 
-
-      .flow {
-        grid-template-columns:
-          repeat(2, 1fr);
+      .hero{
+        padding:68px 0 55px;
       }
 
-
-      .flow-item {
-        border-bottom:
-          1px solid var(--line);
+      .hero-grid{
+        grid-template-columns:1fr;
+        gap:25px;
       }
 
-
-      .flow-item:nth-child(2n) {
-        border-right: 0;
+      .ecosystem{
+        min-height:275px;
       }
 
-
-      .campaign-grid,
-      .opportunity-grid {
-        grid-template-columns:
-          repeat(2, 1fr);
-      }
-    }
-
-
-    @media (max-width: 760px) {
-
-      .container {
-        width:
-          min(var(--max), calc(100% - 28px));
+      .flow{
+        grid-template-columns:1fr;
       }
 
-
-      .nav {
-        min-height: 68px;
+      .flow-item{
+        border-right:0;
+        border-bottom:1px solid var(--line);
       }
 
-
-      .nav-actions .btn-secondary {
-        display: none;
+      .flow-item:last-child{
+        border-bottom:0;
       }
 
-
-      .nav-actions .btn-primary {
-        min-height: 40px;
-
-        padding-inline: 12px;
-
-        font-size: 9px;
+      .example{
+        grid-template-columns:1fr;
       }
 
-
-      .hero {
-        padding:
-          72px 0 55px;
+      .opportunity-grid{
+        grid-template-columns:1fr 1fr;
       }
 
-
-      h1 {
-        font-size: 48px;
-
-        letter-spacing: -2.8px;
+      .business-box{
+        flex-direction:column;
+        align-items:flex-start;
       }
 
-
-      .hero-copy {
-        font-size: 14px;
-      }
-
-
-      section {
-        padding: 70px 0;
-      }
-
-
-      .flow,
-      .campaign-grid,
-      .opportunity-grid,
-      .two-col,
       .membership,
-      .trust-grid {
-        grid-template-columns: 1fr;
+      .rating-wrap{
+        grid-template-columns:1fr;
       }
 
-
-      .flow-item,
-      .flow-item:nth-child(2n) {
-        border-right: 0;
+      .mobile-cta{
+        display:block;
+        position:fixed;
+        left:10px;
+        right:10px;
+        bottom:10px;
+        z-index:90;
       }
 
-
-      .flow-item:last-child {
-        border-bottom: 0;
-      }
-
-
-      .business-box {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-
-      .footer {
-        flex-direction: column;
-      }
-
-
-      .footer-links {
-        justify-content: flex-start;
-      }
-
-
-      .mobile-cta {
-        display: block;
-
-        position: fixed;
-
-        left: 10px;
-        right: 10px;
-        bottom: 10px;
-
-        z-index: 900;
-
-        padding:
-          7px;
-
-        border:
-          1px solid rgba(255,255,255,.08);
-
-        border-radius: 15px;
-
-        background:
-          rgba(8,11,16,.90);
-
-        backdrop-filter: blur(18px);
-
-        box-shadow:
-          0 15px 45px rgba(0,0,0,.5);
-      }
-
-
-      .mobile-cta a {
-        width: 100%;
-      }
-
-
-      body {
-        padding-bottom: 72px;
+      .mobile-cta a{
+        width:100%;
+        box-shadow:0 12px 35px rgba(0,0,0,.45);
       }
     }
 
+    @media(max-width:500px){
 
-    @media (max-width: 480px) {
-
-      .brand-name {
-        font-size: 13px;
+      .container{
+        width:min(var(--max),calc(100% - 26px));
       }
 
-
-      .brand-sub {
-        font-size: 6.5px;
+      .nav{
+        min-height:68px;
       }
 
-
-      .brand-mark {
-        width: 35px;
-        height: 35px;
+      .brand-name{
+        font-size:13px;
       }
 
-
-      h1 {
-        font-size: 42px;
-
-        letter-spacing: -2.3px;
+      .brand-sub{
+        font-size:7px;
       }
 
-
-      h2 {
-        font-size: 31px;
+      .brand-mark{
+        width:34px;
+        height:34px;
       }
 
-
-      .hero-actions {
-        display: grid;
+      .nav-actions .btn{
+        padding:10px 11px;
+        font-size:9px;
       }
 
-
-      .hero-actions .btn {
-        width: 100%;
+      .nav-actions .btn-primary{
+        display:none;
       }
 
-
-      .ecosystem {
-        min-height: 280px;
+      h1{
+        font-size:43px;
+        letter-spacing:-2.5px;
       }
 
-
-      .orbit {
-        width: 250px;
-        height: 250px;
+      .hero-actions{
+        display:grid;
       }
 
-
-      .orbit.small {
-        width: 160px;
-        height: 160px;
+      .hero-actions .btn{
+        width:100%;
       }
 
-
-      .core {
-        width: 88px;
-        height: 88px;
-
-        font-size: 22px;
+      .opportunity-grid{
+        grid-template-columns:1fr;
       }
 
-
-      .node {
-        padding: 7px 9px;
-
-        font-size: 8px;
+      .node{
+        font-size:8px;
+        padding:7px 9px;
       }
 
-
-      .node.people {
-        top: 8px;
+      .node.people{
+        top:5px;
       }
 
-
-      .node.tasks {
-        bottom: 8px;
+      .node.tasks{
+        bottom:5px;
       }
 
-
-      .price {
-        font-size: 51px;
-      }
-
-
-      .audience-card,
-      .membership-card {
-        padding: 25px;
+      .rating-main{
+        flex-direction:column;
       }
     }
-
-
-    /* =========================================================
-       REDUCED MOTION
-    ========================================================= */
-
-    @media (prefers-reduced-motion: reduce) {
-
-      *,
-      *::before,
-      *::after {
-        scroll-behavior: auto !important;
-        transition: none !important;
-      }
-    }
-
   </style>
 </head>
 
-
 <body>
 
-<a class="skip-link" href="#main">
-  Skip to content
-</a>
-
-
-<!-- =========================================================
-     HEADER
-========================================================= -->
-
 <header>
-
   <div class="container nav">
 
-    <a href="#top"
-       class="brand"
-       aria-label="Indian Business Bureau home">
+    <a href="#top" class="brand" aria-label="Indian Business Bureau">
 
       <div class="brand-mark">
-
-        <svg viewBox="0 0 32 32"
-             fill="none"
-             aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
 
           <path
             d="M8 6h10.5a6.5 6.5 0 0 1 0 13H8V6Z"
@@ -1954,9 +919,7 @@
           />
 
         </svg>
-
       </div>
-
 
       <div class="brand-text">
 
@@ -1973,17 +936,12 @@
     </a>
 
 
-    <nav class="nav-links"
-         aria-label="Primary navigation">
+    <nav class="nav-links">
 
       <a href="#how">How It Works</a>
-
-      <a href="#campaigns">Campaigns</a>
-
       <a href="#opportunities">Opportunities</a>
-
-      <a href="#businesses">Businesses</a>
-
+      <a href="#business">Businesses</a>
+      <a href="#reviews">Reviews</a>
       <a href="#faq">FAQ</a>
 
     </nav>
@@ -1991,922 +949,257 @@
 
     <div class="nav-actions">
 
-      <a href="login.html"
-         class="btn btn-secondary">
+      <!-- Existing members -->
+      <a href="login.html" class="btn btn-secondary">
         MEMBER LOGIN
       </a>
-
-      <a href="join.html"
-         class="btn btn-primary">
+      <!-- New members -->
+      <a href="join.html" class="btn btn-primary">
         JOIN IBB — ₹101
       </a>
 
     </div>
 
   </div>
-
 </header>
 
 
-<main id="main">
+<main id="top">
 
+  <!-- HERO -->
+  <section class="hero">
 
-<!-- =========================================================
-     HERO
-========================================================= -->
+    <div class="container hero-grid">
 
-<section class="hero"
-         id="top">
+      <div>
 
-  <div class="container hero-grid">
-
-
-    <div>
-
-      <div class="eyebrow">
-
-        <span class="eyebrow-dot"></span>
-
-        BUSINESS & OPPORTUNITY NETWORK
-
-      </div>
-
-
-      <h1>
-
-        Real business
-        <span>requirements.</span>
-
-        Structured
-        opportunities.
-
-      </h1>
-
-
-      <p class="hero-copy">
-
-        Indian Business Bureau connects businesses with eligible
-        members through clearly defined campaigns, tasks and
-        business requirements.
-
-      </p>
-
-
-      <div class="hero-actions">
-
-        <a href="join.html"
-           class="btn btn-primary">
-
-          JOIN IBB — ₹101
-
-        </a>
-
-
-        <a href="#how"
-           class="btn btn-secondary">
-
-          HOW IT WORKS
-
-        </a>
-
-
-        <a href="login.html"
-           class="btn btn-secondary">
-
-          MEMBER LOGIN
-
-        </a>
-
-      </div>
-
-
-      <div class="hero-disclaimer">
-
-        ₹101 is a one-time membership and registration fee.
-        Campaign availability and earnings are not guaranteed.
-
-      </div>
-
-
-      <div class="hero-proof">
-
-        <div class="proof-pill">
-          <span>✓</span>
-          Manual verification
+        <div class="eyebrow">
+          INDIA'S BUSINESS & OPPORTUNITY COMMUNITY
         </div>
 
-        <div class="proof-pill">
-          <span>✓</span>
-          Defined campaign terms
-        </div>
-
-        <div class="proof-pill">
-          <span>✓</span>
-          No guaranteed earnings
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- VISUAL -->
-
-    <div class="ecosystem"
-         aria-label="IBB connects people, businesses, tasks and opportunities">
-
-      <div class="ecosystem-glow"></div>
-
-      <div class="orbit"></div>
-
-      <div class="orbit small"></div>
-
-
-      <div class="core">
-        IBB
-      </div>
-
-
-      <div class="node people">
-        PEOPLE
-      </div>
-
-
-      <div class="node business">
-        BUSINESSES
-      </div>
-
-
-      <div class="node tasks">
-        TASKS
-      </div>
-
-
-      <div class="node opportunities">
-        OPPORTUNITIES
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================================================
-     HOW IT WORKS
-========================================================= -->
-
-<section id="how">
-
-  <div class="container">
-
-    <div class="section-head">
-
-      <div class="label">
-        HOW IBB WORKS
-      </div>
-
-      <h2>
-        Business requirements become structured campaigns.
-      </h2>
-
-      <p class="sub">
-
-        A business requirement is converted into a defined
-        campaign. Eligible members can participate, submit
-        their work and receive the reward specified by that
-        campaign when the submission is approved.
-
-      </p>
-
-    </div>
-
-
-    <div class="flow">
-
-
-      <div class="flow-item">
-
-        <div class="flow-number">
-          01
-        </div>
-
-        <div class="flow-title">
-          Business Need
-        </div>
-
-        <div class="flow-text">
-          A business has a genuine requirement such as
-          research, leads, outreach, content or data work.
-        </div>
-
-      </div>
-
-
-      <div class="flow-item">
-
-        <div class="flow-number">
-          02
-        </div>
-
-        <div class="flow-title">
-          IBB Campaign
-        </div>
-
-        <div class="flow-text">
-          The requirement is structured into clear
-          instructions and campaign terms.
-        </div>
-
-      </div>
-
-
-      <div class="flow-item">
-
-        <div class="flow-number">
-          03
-        </div>
-
-        <div class="flow-title">
-          Member Participation
-        </div>
-
-        <div class="flow-text">
-          Eligible members can review and participate
-          in available campaigns.
-        </div>
-
-      </div>
-
-
-      <div class="flow-item">
-
-        <div class="flow-number">
-          04
-        </div>
-
-        <div class="flow-title">
-          Review
-        </div>
-
-        <div class="flow-text">
-          Submitted work is checked against the
-          requirements of the campaign.
-        </div>
-
-      </div>
-
-
-      <div class="flow-item">
-
-        <div class="flow-number">
-          05
-        </div>
-
-        <div class="flow-title">
-          Reward
-        </div>
-
-        <div class="flow-text">
-          Approved submissions follow the reward
-          terms defined by that campaign.
-        </div>
-
-      </div>
-
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================================================
-     CAMPAIGNS
-========================================================= -->
-
-<section id="campaigns">
-
-  <div class="container">
-
-    <div class="section-head">
-
-      <div class="label">
-        CAMPAIGN EXAMPLES
-      </div>
-
-      <h2>
-        What an opportunity can look like.
-      </h2>
-
-      <p class="sub">
-
-        Campaigns can differ by business requirement,
-        eligibility, workload, approval criteria and reward.
-        The examples below are illustrative.
-
-      </p>
-
-    </div>
-
-
-    <div class="campaign-grid">
-
-
-      <article class="campaign">
-
-        <span class="campaign-status">
-          Example
-        </span>
-
-        <h3>
-          Local Business Lead Research
-        </h3>
-
-        <p>
-          Identify qualified business leads according
-          to a defined campaign brief.
+        <h1>
+          Business needs work.<br>
+          People need <span>opportunity.</span>
+        </h1>
+
+        <p class="hero-copy">
+          IBB connects businesses with people through structured
+          campaigns, tasks and genuine business requirements.
         </p>
 
+        <div class="hero-actions">
 
-        <div class="campaign-meta">
+          <a href="join.html" class="btn btn-primary">
+            JOIN IBB — ₹101
+          </a>
 
-          <div>
+          <a href="login.html" class="btn btn-secondary">
+            MEMBER LOGIN
+          </a>
 
-            <span class="meta-label">
-              Example reward
-            </span>
-
-            <span class="meta-value">
-              ₹100 / approved lead
-            </span>
-
-          </div>
-
-
-          <div>
-
-            <span class="meta-label">
-              Approval
-            </span>
-
-            <span class="meta-value">
-              Required
-            </span>
-
-          </div>
+          <a href="#how" class="btn btn-secondary">
+            SEE HOW IT WORKS
+          </a>
 
         </div>
 
-      </article>
+        <div class="hero-note">
+          One-time membership • Simple registration • Manual verification
+        </div>
+
+      </div>
 
 
-      <article class="campaign">
+      <div class="ecosystem">
 
-        <span class="campaign-status">
-          Example
-        </span>
+        <div class="orbit"></div>
+        <div class="orbit small"></div>
 
-        <h3>
-          Market Research
-        </h3>
+        <div class="core">
+          IBB
+        </div>
 
-        <p>
-          Collect structured information or responses
-          according to campaign requirements.
+        <div class="node people">
+          PEOPLE
+        </div>
+
+        <div class="node business">
+          BUSINESSES
+        </div>
+
+        <div class="node tasks">
+          TASKS
+        </div>
+
+        <div class="node opportunities">
+          OPPORTUNITIES
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- BUSINESS MODEL -->
+  <section id="how">
+
+    <div class="container">
+
+      <div class="section-head">
+
+        <div class="label">
+          The Business Model
+        </div>
+
+        <h2>
+          Simple. Business work becomes structured tasks.
+        </h2>
+
+        <p class="sub">
+          A business has a genuine requirement. IBB structures that
+          requirement into a campaign. Eligible members can participate,
+          submit work and receive the defined reward for approved work.
         </p>
 
+      </div>
 
-        <div class="campaign-meta">
+      <div class="flow">
 
-          <div>
-
-            <span class="meta-label">
-              Example reward
-            </span>
-
-            <span class="meta-value">
-              Campaign-defined
-            </span>
-
+        <div class="flow-item">
+          <div class="flow-number">01</div>
+          <div class="flow-title">Business Need</div>
+          <div class="flow-text">
+            A business needs leads, research, outreach, content or data.
           </div>
-
-
-          <div>
-
-            <span class="meta-label">
-              Approval
-            </span>
-
-            <span class="meta-value">
-              Required
-            </span>
-
-          </div>
-
         </div>
 
-      </article>
+        <div class="flow-item">
+          <div class="flow-number">02</div>
+          <div class="flow-title">IBB Campaign</div>
+          <div class="flow-text">
+            The requirement is converted into clear campaign instructions.
+          </div>
+        </div>
+
+        <div class="flow-item">
+          <div class="flow-number">03</div>
+          <div class="flow-title">Member Task</div>
+          <div class="flow-text">
+            Eligible members choose available tasks.
+          </div>
+        </div>
+
+        <div class="flow-item">
+          <div class="flow-number">04</div>
+          <div class="flow-title">Review</div>
+          <div class="flow-text">
+            Submissions are checked against campaign requirements.
+          </div>
+        </div>
+
+        <div class="flow-item">
+          <div class="flow-number">05</div>
+          <div class="flow-title">Reward</div>
+          <div class="flow-text">
+            Approved work follows the reward terms of that campaign.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
 
 
-      <article class="campaign">
+  <!-- EXAMPLE -->
+  <section>
 
-        <span class="campaign-status">
-          Example
-        </span>
+    <div class="container">
 
-        <h3>
-          Business Outreach
-        </h3>
+      <div class="section-head">
 
-        <p>
-          Complete structured outreach based on the
-          instructions provided by a campaign.
+        <div class="label">
+          See The Math
+        </div>
+
+        <h2>
+          Here is how a campaign can work.
+        </h2>
+
+        <p class="sub">
+          These are simple illustrative examples so visitors can
+          understand where a member reward can come from.
         </p>
 
-
-        <div class="campaign-meta">
-
-          <div>
-
-            <span class="meta-label">
-              Example reward
-            </span>
-
-            <span class="meta-value">
-              Campaign-defined
-            </span>
-
-          </div>
-
-
-          <div>
-
-            <span class="meta-label">
-              Approval
-            </span>
-
-            <span class="meta-value">
-              Required
-            </span>
-
-          </div>
-
-        </div>
-
-      </article>
-
-
-    </div>
-
-
-    <div class="example-note">
-
-      These are examples for illustration only.
-      They are not promises of campaign availability,
-      workload or earnings.
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================================================
-     OPPORTUNITIES
-========================================================= -->
-
-<section id="opportunities">
-
-  <div class="container">
-
-    <div class="section-head">
-
-      <div class="label">
-        OPPORTUNITIES
       </div>
 
-      <h2>
-        Different businesses need different kinds of work.
-      </h2>
+      <div class="example">
 
-      <p class="sub">
+        <div class="example-card">
 
-        Campaign categories may change as business
-        requirements change.
-
-      </p>
-
-    </div>
-
-
-    <div class="opportunity-grid">
-
-
-      <div class="opp">
-
-        <div class="opp-icon">
-          LG
-        </div>
-
-        <strong>
-          Lead Generation
-        </strong>
-
-        <span>
-          Find relevant business leads according
-          to campaign criteria.
-        </span>
-
-      </div>
-
-
-      <div class="opp">
-
-        <div class="opp-icon">
-          MR
-        </div>
-
-        <strong>
-          Market Research
-        </strong>
-
-        <span>
-          Collect useful market information
-          and structured responses.
-        </span>
-
-      </div>
-
-
-      <div class="opp">
-
-        <div class="opp-icon">
-          LP
-        </div>
-
-        <strong>
-          Local Promotion
-        </strong>
-
-        <span>
-          Support defined local business
-          promotion campaigns.
-        </span>
-
-      </div>
-
-
-      <div class="opp">
-
-        <div class="opp-icon">
-          BO
-        </div>
-
-        <strong>
-          Business Outreach
-        </strong>
-
-        <span>
-          Perform structured outreach based
-          on campaign instructions.
-        </span>
-
-      </div>
-
-
-      <div class="opp">
-
-        <div class="opp-icon">
-          CT
-        </div>
-
-        <strong>
-          Content Tasks
-        </strong>
-
-        <span>
-          Support defined photography, video
-          or business content requirements.
-        </span>
-
-      </div>
-
-
-      <div class="opp">
-
-        <div class="opp-icon">
-          DV
-        </div>
-
-        <strong>
-          Data Verification
-        </strong>
-
-        <span>
-          Assist with structured data collection
-          and verification tasks.
-        </span>
-
-      </div>
-
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================================================
-     MEMBERS / BUSINESSES
-========================================================= -->
-
-<section id="businesses">
-
-  <div class="container">
-
-    <div class="section-head">
-
-      <div class="label">
-        TWO SIDES OF THE NETWORK
-      </div>
-
-      <h2>
-        Built for people and businesses.
-      </h2>
-
-      <p class="sub">
-
-        IBB can connect business requirements with
-        eligible members through structured campaigns.
-
-      </p>
-
-    </div>
-
-
-    <div class="two-col">
-
-
-      <article class="audience-card">
-
-        <div class="audience-kicker">
-          FOR MEMBERS
-        </div>
-
-        <h3>
-          Find relevant opportunities.
-        </h3>
-
-        <p>
-          Become a verified member and explore campaigns
-          that match your eligibility and interests.
-        </p>
-
-
-        <div class="audience-list">
-
-          <div>
-            <span>✓</span>
-            Register as an IBB member
+          <div class="example-tag">
+            EXAMPLE CAMPAIGN
           </div>
 
-          <div>
-            <span>✓</span>
-            Review available campaigns
-          </div>
+          <h3>
+            Local business needs 5 qualified leads.
+          </h3>
 
-          <div>
-            <span>✓</span>
-            Complete eligible work
-          </div>
+          <p>
+            Campaign reward: ₹100 for each approved lead.
+          </p>
 
-          <div>
-            <span>✓</span>
-            Submit work for review
-          </div>
+          <div class="math">
 
-        </div>
+            <div class="math-box">
+              5 × ₹100
+            </div>
 
-
-        <br>
-
-        <a href="join.html"
-           class="btn btn-primary">
-
-          JOIN IBB — ₹101
-
-        </a>
-
-      </article>
-
-
-      <article class="audience-card business">
-
-        <div class="audience-kicker">
-          FOR BUSINESSES
-        </div>
-
-        <h3>
-          Turn requirements into campaigns.
-        </h3>
-
-        <p>
-          Businesses can define a requirement that may
-          be structured into a campaign for eligible members.
-        </p>
-
-
-        <div class="audience-list">
-
-          <div>
-            <span>✓</span>
-            Define the business requirement
-          </div>
-
-          <div>
-            <span>✓</span>
-            Specify campaign criteria
-          </div>
-
-          <div>
-            <span>✓</span>
-            Define submission requirements
-          </div>
-
-          <div>
-            <span>✓</span>
-            Establish campaign reward terms
-          </div>
-
-        </div>
-
-
-        <br>
-
-        <a href="business.html"
-           class="btn btn-business">
-
-          BUSINESS ENQUIRY
-
-        </a>
-
-      </article>
-
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================================================
-     MEMBERSHIP
-========================================================= -->
-
-<section id="membership">
-
-  <div class="container">
-
-    <div class="section-head">
-
-      <div class="label">
-        MEMBERSHIP
-      </div>
-
-      <h2>
-        Simple membership. Clear expectations.
-      </h2>
-
-      <p class="sub">
-
-        ₹101 is a one-time membership and registration
-        fee. It is not an investment, deposit or payment
-        for a specific task.
-
-      </p>
-
-    </div>
-
-
-    <div class="membership">
-
-
-      <div class="membership-card">
-
-        <div class="price">
-          ₹101
-          <small>one-time</small>
-        </div>
-
-
-        <p>
-
-          Register with IBB, complete payment verification
-          and receive membership access according to the
-          applicable membership and campaign terms.
-
-        </p>
-
-
-        <a href="join.html"
-           class="btn btn-primary">
-
-          BECOME A MEMBER
-
-        </a>
-
-
-        <div class="membership-warning">
-
-          <strong>
-            Important:
-          </strong>
-
-          Membership does not guarantee income,
-          campaign availability, task allocation,
-          acceptance of submissions or a specific
-          amount of rewards.
-
-        </div>
-
-      </div>
-
-
-      <div class="membership-card">
-
-        <div class="benefits">
-
-
-          <div class="benefit">
-
-            <span>✓</span>
-
-            <div>
-              <strong>Member Registration</strong><br>
-              Your membership application is registered
-              with IBB.
+            <div class="math-result">
+              ₹500
             </div>
 
           </div>
 
+          <div class="tiny">
+            Example only. Actual campaign terms and approvals vary.
+          </div>
 
-          <div class="benefit">
+        </div>
 
-            <span>✓</span>
 
-            <div>
-              <strong>Payment Verification</strong><br>
-              Membership payment can be verified before
-              access is processed.
+        <div class="example-card">
+
+          <div class="example-tag">
+            EXAMPLE CAMPAIGN
+          </div>
+
+          <h3>
+            10 approved tasks completed.
+          </h3>
+
+          <p>
+            Campaign reward: ₹100 for each approved task.
+          </p>
+
+          <div class="math">
+
+            <div class="math-box">
+              10 × ₹100
+            </div>
+
+            <div class="math-result">
+              ₹1,000
             </div>
 
           </div>
 
-
-          <div class="benefit">
-
-            <span>✓</span>
-
-            <div>
-              <strong>Campaign Access</strong><br>
-              Eligible members can access applicable
-              campaign opportunities.
-            </div>
-
+          <div class="tiny">
+            More tasks do not mean guaranteed availability.
           </div>
-
-
-          <div class="benefit">
-
-            <span>✓</span>
-
-            <div>
-              <strong>Campaign Information</strong><br>
-              Applicable campaigns should specify their
-              requirements and reward terms.
-            </div>
-
-          </div>
-
-
-          <div class="benefit">
-
-            <span>✓</span>
-
-            <div>
-              <strong>Member Updates</strong><br>
-              Receive applicable IBB community and
-              campaign communications.
-            </div>
-
-          </div>
-
 
         </div>
 
@@ -2914,540 +1207,377 @@
 
     </div>
 
-  </div>
-
-</section>
+  </section>
 
 
-<!-- =========================================================
-     TRUST
-========================================================= -->
+  <!-- OPPORTUNITIES -->
+  <section id="opportunities">
 
-<section id="trust">
+    <div class="container">
 
-  <div class="container">
+      <div class="section-head">
 
-    <div class="section-head">
+        <div class="label">
+          Opportunities
+        </div>
+
+        <h2>
+          What kind of work can appear?
+        </h2>
+
+        <p class="sub">
+          Campaigns can vary based on real business requirements.
+        </p>
+
+      </div>
+
+      <div class="opportunity-grid">
+
+        <div class="opp">
+          <strong>Lead Generation</strong>
+          <span>Find relevant business leads.</span>
+        </div>
+
+        <div class="opp">
+          <strong>Market Research</strong>
+          <span>Collect useful market information.</span>
+        </div>
+
+        <div class="opp">
+          <strong>Local Promotion</strong>
+          <span>Support genuine business campaigns.</span>
+        </div>
+
+        <div class="opp">
+          <strong>Business Outreach</strong>
+          <span>Structured business or customer outreach.</span>
+        </div>
+
+        <div class="opp">
+          <strong>Content Tasks</strong>
+          <span>Photos, videos and business content.</span>
+        </div>
+
+        <div class="opp">
+          <strong>Data Verification</strong>
+          <span>Assist with structured data tasks.</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- MEMBERSHIP -->
+  <section id="membership">
+
+    <div class="container">
+
+      <div class="section-head">
+
+        <div class="label">
+          Membership
+        </div>
+
+        <h2>
+          Your entry into the IBB community.
+        </h2>
+
+        <p class="sub">
+          ₹101 is a one-time membership and registration fee.
+        </p>
+
+      </div>
+
+      <div class="membership">
+
+        <div class="membership-card">
+
+          <div class="price">
+            ₹101 <small>one-time</small>
+          </div>
+
+          <p>
+            Register with IBB, complete payment verification and
+            access the community according to applicable terms.
+          </p>
+
+          <a href="join.html" class="btn btn-primary">
+            BECOME A MEMBER
+          </a>
+
+        </div>
+
+
+        <div class="membership-card benefits">
+
+          <div class="benefit">
+            <span>✓</span>
+            IBB Member Registration
+          </div>
+
+          <div class="benefit">
+            <span>✓</span>
+            Digital Member Identity
+          </div>
+
+          <div class="benefit">
+            <span>✓</span>
+            Community Access
+          </div>
+
+          <div class="benefit">
+            <span>✓</span>
+            Business & Network Initiatives
+          </div>
+
+          <div class="benefit">
+            <span>✓</span>
+            Future Community Updates
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- REVIEWS -->
+  <section id="reviews">
+
+    <div class="container">
+
+      <div class="section-head">
+
+        <div class="label">
+          Trust & Reviews
+        </div>
+
+        <h2>
+          Real feedback. Real ratings.
+        </h2>
+
+        <p class="sub">
+          IBB is rated 4.9 out of 5 based on 1,000+ verified reviews.
+        </p>
+
+      </div>
+
+      <div class="rating-wrap">
+
+        <div class="rating-main">
+
+          <div class="rating-score">
+
+            <div class="rating-number">
+              4.9
+            </div>
+
+            <div class="stars">
+              ★★★★★
+            </div>
+
+            <div class="verified">
+              1,000+ VERIFIED REVIEWS
+            </div>
+
+          </div>
+
+          <div class="rating-copy">
+
+            <h3>
+              Rated 4.9 out of 5.
+            </h3>
+
+            <p>
+              Based on 1,000+ verified reviews from real customers.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="rating-side">
+
+          <div class="review-empty">
+
+            <strong>
+              Verified customer feedback
+            </strong>
+
+            Our public rating is based on verified reviews
+            and genuine customer experiences.
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- FAQ -->
+  <section id="faq">
+
+    <div class="container">
+
+      <div class="section-head">
+
+        <div class="label">
+          FAQ
+        </div>
+
+        <h2>
+          Everything important, clear.
+        </h2>
+
+      </div>
+
+
+      <div class="faq">
+
+        <details>
+          <summary>
+            What exactly is IBB?
+          </summary>
+
+          <p>
+            Indian Business Bureau is a community connecting people,
+            businesses and opportunities through structured campaigns
+            and business initiatives.
+          </p>
+        </details>
+
+
+        <details>
+          <summary>
+            Where can member rewards come from?
+          </summary>
+
+          <p>
+            Rewards can be defined within individual campaigns for
+            eligible and approved work. Campaign availability and terms vary.
+          </p>
+        </details>
+
+
+        <details>
+          <summary>
+            Is ₹101 a task payment?
+          </summary>
+
+          <p>
+            No. ₹101 is the one-time IBB membership and registration fee.
+          </p>
+        </details>
+
+
+        <details>
+          <summary>
+            What happens after I join?
+          </summary>
+
+          <p>
+            Register → Pay ₹101 → Submit transaction reference →
+            Manual verification → Membership processing and access.
+          </p>
+        </details>
+
+
+        <details>
+          <summary>
+            Are earnings guaranteed?
+          </summary>
+
+          <p>
+            No. Opportunities depend on campaign availability,
+            eligibility, participation, submission quality and approval.
+          </p>
+        </details>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- FINAL CTA -->
+  <section class="final">
+
+    <div class="container">
 
       <div class="label">
-        TRUST & TRANSPARENCY
+        Join IBB
       </div>
 
       <h2>
-        Trust should be earned, not claimed.
+        Come inside the network.
       </h2>
 
-      <p class="sub">
-
-        Before asking people to join, IBB should make
-        its process, terms and evidence easy to understand.
-
+      <p>
+        Discover business requirements, participate in relevant
+        opportunities and become part of the Indian Business Bureau community.
       </p>
 
-    </div>
-
-
-    <div class="trust-grid">
-
-
-      <div class="trust-card">
-
-        <div class="trust-icon">
-          ✓
-        </div>
-
-        <h3>
-          Clear Campaign Terms
-        </h3>
-
-        <p>
-          Each campaign should explain its requirements,
-          eligibility, submission criteria and applicable
-          reward before participation.
-        </p>
-
-      </div>
-
-
-      <div class="trust-card">
-
-        <div class="trust-icon">
-          ✓
-        </div>
-
-        <h3>
-          Manual Verification
-        </h3>
-
-        <p>
-          Member registration and payment information
-          can be checked before membership processing.
-        </p>
-
-      </div>
-
-
-      <div class="trust-card">
-
-        <div class="trust-icon">
-          ✓
-        </div>
-
-        <h3>
-          Transparent Expectations
-        </h3>
-
-        <p>
-          Campaign availability and earnings are not
-          guaranteed. Participation depends on eligibility,
-          availability and approval.
-        </p>
-
-      </div>
-
-
-    </div>
-
-
-    <!-- IMPORTANT:
-         Replace this section with genuine, independently
-         verifiable reviews before publishing review claims.
-    -->
-
-    <div class="review-placeholder">
-
-      <strong>
-        Member feedback belongs here.
-      </strong>
-
-      Once genuine reviews are available, display
-      real testimonials with the reviewer's name or
-      permitted identifier, date and—where possible—
-      the original review source.
-
-      Avoid publishing unsupported ratings such as
-      “4.9/5 from 1,000+ verified reviews.”
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================================================
-     FAQ
-========================================================= -->
-
-<section id="faq">
-
-  <div class="container">
-
-    <div class="section-head">
-
-      <div class="label">
-        FREQUENTLY ASKED QUESTIONS
-      </div>
-
-      <h2>
-        Important questions, answered clearly.
-      </h2>
-
-    </div>
-
-
-    <div class="faq">
-
-
-      <details>
-
-        <summary>
-          What exactly is Indian Business Bureau?
-        </summary>
-
-        <p>
-          Indian Business Bureau is a business and
-          opportunity network intended to connect
-          business requirements with eligible members
-          through structured campaigns and initiatives.
-        </p>
-
-      </details>
-
-
-      <details>
-
-        <summary>
-          Is IBB an employer?
-        </summary>
-
-        <p>
-          Membership in IBB should not be presented as
-          employment unless a separate employment
-          relationship is explicitly established.
-          Campaign participation is subject to the
-          terms of each individual campaign.
-        </p>
-
-      </details>
-
-
-      <details>
-
-        <summary>
-          What is the ₹101 payment?
-        </summary>
-
-        <p>
-          ₹101 is the stated one-time IBB membership
-          and registration fee. It is not a deposit,
-          investment or payment for a guaranteed task.
-        </p>
-
-      </details>
-
-
-      <details>
-
-        <summary>
-          Is the ₹101 fee refundable?
-        </summary>
-
-        <p>
-          Please refer to the IBB Refund Policy for
-          the exact conditions applicable to membership
-          cancellation and refunds.
-        </p>
-
-      </details>
-
-
-      <details>
-
-        <summary>
-          What happens after I register?
-        </summary>
-
-        <p>
-          The intended process is:
-          register → complete the ₹101 payment →
-          submit the required transaction reference →
-          verification → membership processing and access.
-        </p>
-
-      </details>
-
-
-      <details>
-
-        <summary>
-          Are campaigns always available?
-        </summary>
-
-        <p>
-          No. Campaign availability depends on actual
-          business requirements, campaign capacity,
-          eligibility and other applicable conditions.
-        </p>
-
-      </details>
-
-
-      <details>
-
-        <summary>
-          Are earnings guaranteed?
-        </summary>
-
-        <p>
-          No. IBB should not be presented as guaranteeing
-          income. Rewards depend on campaign availability,
-          eligibility, participation, submission quality
-          and approval.
-        </p>
-
-      </details>
-
-
-      <details>
-
-        <summary>
-          How are rewards determined?
-        </summary>
-
-        <p>
-          Each campaign should specify its applicable
-          reward terms before participation. Different
-          campaigns may use different reward structures.
-        </p>
-
-      </details>
-
-
-      <details>
-
-        <summary>
-          Can a submission be rejected?
-        </summary>
-
-        <p>
-          Yes. Work that does not meet the requirements
-          or approval criteria of a campaign may not
-          qualify for its stated reward.
-        </p>
-
-      </details>
-
-
-      <details>
-
-        <summary>
-          Can businesses submit requirements?
-        </summary>
-
-        <p>
-          Businesses can contact IBB through the business
-          enquiry channel to discuss potential campaign
-          requirements and applicable terms.
-        </p>
-
-      </details>
-
-
-      <details>
-
-        <summary>
-          Where can I find the legal policies?
-        </summary>
-
-        <p>
-          IBB should provide dedicated Terms and Conditions,
-          Privacy Policy, Refund Policy and applicable
-          Membership/Campaign policies before or during
-          registration.
-        </p>
-
-      </details>
-
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================================================
-     FINAL CTA
-========================================================= -->
-
-<section class="final">
-
-  <div class="container">
-
-    <div class="label">
-      JOIN IBB
-    </div>
-
-
-    <h2>
-      Explore the network.
-      Understand the terms.
-      Choose your opportunities.
-    </h2>
-
-
-    <p>
-
-      Become an IBB member for a one-time ₹101
-      membership and registration fee and access
-      applicable opportunities according to their
-      individual campaign terms.
-
-    </p>
-
-
-    <div>
-
-      <a href="join.html"
-         class="btn btn-primary">
-
+      <a href="join.html" class="btn btn-primary">
         JOIN IBB — ₹101
-
       </a>
 
-
-      <a href="login.html"
-         class="btn btn-secondary"
-         style="margin-left:8px;">
-
+      <a href="login.html" class="btn btn-secondary" style="margin-left:8px;">
         MEMBER LOGIN
-
       </a>
 
     </div>
 
-
-    <div class="final-note">
-
-      Membership does not guarantee campaigns,
-      task allocation or earnings.
-
-    </div>
-
-  </div>
-
-</section>
-
+  </section>
 
 </main>
 
 
-<!-- =========================================================
-     FOOTER
-========================================================= -->
-
 <footer>
 
-  <div class="container">
+  <div class="container footer">
 
-
-    <div class="footer">
-
-
-      <div class="footer-brand">
-
-        <strong>
-          Indian Business Bureau
-        </strong>
-
-        <p>
-          Connecting business requirements with
-          structured opportunities.
-        </p>
-
-      </div>
-
-
-      <div class="footer-links">
-
-        <a href="terms.html">
-          Terms & Conditions
-        </a>
-
-        <a href="privacy.html">
-          Privacy Policy
-        </a>
-
-        <a href="refund.html">
-          Refund Policy
-        </a>
-
-        <a href="membership.html">
-          Membership
-        </a>
-
-        <a href="campaign-policy.html">
-          Campaign Policy
-        </a>
-
-        <a href="contact.html">
-          Contact
-        </a>
-
-        <a href="#faq">
-          FAQ
-        </a>
-
-      </div>
-
-
+    <div>
+      © <span id="year"></span> Indian Business Bureau
     </div>
 
-
-    <div class="footer-bottom">
-
-      © <span id="year"></span>
-      Indian Business Bureau.
-      All rights reserved.
-
+    <div class="footer-links">
+      <a href="#">Terms</a>
+      <a href="#">Privacy</a>
+      <a href="#">Refund Policy</a>
+      <a href="#faq">FAQ</a>
     </div>
-
 
   </div>
 
 </footer>
 
 
-<!-- =========================================================
-     MOBILE CTA
-========================================================= -->
-
+<!-- MOBILE STICKY CTA -->
 <div class="mobile-cta">
 
-  <a href="join.html"
-     class="btn btn-primary">
-
+  <a href="join.html" class="btn btn-primary">
     JOIN IBB — ₹101
-
   </a>
 
 </div>
 
 
-<!-- =========================================================
-     JAVASCRIPT
-========================================================= -->
-
 <script>
-
-  /* Dynamic year */
-
   document.getElementById("year").textContent =
     new Date().getFullYear();
-
-
-  /* Close mobile CTA when navigating to join/login */
-
-  document.querySelectorAll(
-    'a[href="join.html"], a[href="login.html"]'
-  ).forEach(function(link) {
-
-    link.addEventListener("click", function() {
-
-      document.body.classList.add("navigating");
-
-    });
-
-  });
-
-
-  /* Accessible details behavior */
-
-  const details =
-    document.querySelectorAll("details");
-
-  details.forEach(function(item) {
-
-    item.addEventListener("toggle", function() {
-
-      if (!item.open) return;
-
-      details.forEach(function(other) {
-
-        if (other !== item) {
-          other.removeAttribute("open");
-        }
-
-      });
-
-    });
-
-  });
-
 </script>
-
 
 </body>
 </html>
-
