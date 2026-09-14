@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -214,8 +215,9 @@
     </div>
 
     <div class="note">
-      After creating your account, you will continue to the IBB member
-      payment and verification process.
+      Your membership has already been approved.
+      After creating your account, you will be automatically logged in
+      and taken to your IBB training dashboard.
     </div>
 
   </div>
@@ -245,7 +247,7 @@
         document.getElementById("fullName").value.trim();
 
       const email =
-        document.getElementById("email").value.trim();
+        document.getElementById("email").value.trim().toLowerCase();
 
       const mobile =
         document.getElementById("mobile").value.trim();
@@ -271,7 +273,6 @@
 
       button.disabled = true;
       button.textContent = "Creating account...";
-
       message.textContent = "";
 
       try {
@@ -296,23 +297,39 @@
           throw error;
         }
 
+        /*
+         * IMPORTANT:
+         * If email confirmation is disabled in Supabase,
+         * data.session will be available here.
+         *
+         * That means the user is automatically logged in.
+         */
+
         if (data.session) {
 
           message.textContent =
-            "Account created successfully. Redirecting...";
+            "Account created successfully! Logging you in...";
 
           message.style.color = "#16a34a";
 
+          button.textContent = "Logged In ✓";
+
           setTimeout(function() {
-            window.location.href = "login.html";
-          }, 1200);
+
+            window.location.replace("training.html");
+
+          }, 800);
 
         } else {
 
+          /*
+           * This happens if Supabase requires email confirmation.
+           * User cannot be automatically logged in until confirmation.
+           */
+
           message.innerHTML =
             "Account created successfully.<br><br>" +
-            "Please check your email and confirm your account " +
-            "before logging in.";
+            "Please confirm your email before logging in.";
 
           message.style.color = "#16a34a";
 
@@ -337,3 +354,4 @@
 
 </body>
 </html>
+```
