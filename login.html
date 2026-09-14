@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,78 +9,266 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f7fb;
+      min-height: 100vh;
+      font-family: Inter, Arial, sans-serif;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(99,102,241,0.18), transparent 30%),
+        radial-gradient(circle at 85% 80%, rgba(14,165,233,0.15), transparent 30%),
+        #070b17;
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
+      padding: 24px;
+      color: #fff;
+    }
+
+    .login-wrapper {
+      width: 100%;
+      max-width: 430px;
+    }
+
+    .brand {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+
+    .brand-badge {
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 14px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #6366f1, #06b6d4);
+      box-shadow: 0 12px 35px rgba(79,70,229,0.35);
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 27px;
+      letter-spacing: -0.6px;
+    }
+
+    .brand p {
+      margin: 8px 0 0;
+      color: #94a3b8;
+      font-size: 14px;
     }
 
     .login-box {
-      width: 90%;
-      max-width: 400px;
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+      background: rgba(15, 23, 42, 0.88);
+      border: 1px solid rgba(148,163,184,0.16);
+      padding: 32px;
+      border-radius: 24px;
+      box-shadow:
+        0 25px 70px rgba(0,0,0,0.45),
+        inset 0 1px 0 rgba(255,255,255,0.04);
+      backdrop-filter: blur(18px);
     }
 
-    h1 {
-      text-align: center;
+    .login-title {
+      margin: 0 0 6px;
+      font-size: 22px;
+    }
+
+    .login-subtitle {
+      margin: 0 0 26px;
+      color: #94a3b8;
+      font-size: 14px;
+    }
+
+    .field {
+      margin-bottom: 18px;
     }
 
     label {
       display: block;
-      margin-top: 15px;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
+      color: #cbd5e1;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #64748b;
+      font-size: 16px;
+      pointer-events: none;
     }
 
     input {
       width: 100%;
-      box-sizing: border-box;
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
+      padding: 14px 14px 14px 43px;
+      border: 1px solid #263247;
+      border-radius: 12px;
+      background: #0b1220;
+      color: #fff;
+      outline: none;
+      font-size: 15px;
+      transition: 0.2s ease;
     }
 
-    button {
+    input::placeholder {
+      color: #64748b;
+    }
+
+    input:focus {
+      border-color: #6366f1;
+      box-shadow: 0 0 0 3px rgba(99,102,241,0.14);
+    }
+
+    .login-btn {
       width: 100%;
-      margin-top: 22px;
-      padding: 12px;
+      margin-top: 8px;
+      padding: 14px;
       border: 0;
-      border-radius: 6px;
+      border-radius: 12px;
       cursor: pointer;
+      color: #fff;
       font-size: 16px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      box-shadow: 0 10px 25px rgba(79,70,229,0.28);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(79,70,229,0.38);
+    }
+
+    .login-btn:active {
+      transform: translateY(0);
+    }
+
+    .login-btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
     }
 
     #message {
       text-align: center;
-      margin-top: 15px;
+      margin-top: 16px;
+      min-height: 20px;
+      font-size: 14px;
+      color: #fca5a5;
+    }
+
+    .secure-note {
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(148,163,184,0.12);
+      text-align: center;
+      color: #64748b;
+      font-size: 12px;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 18px;
+      color: #64748b;
+      font-size: 12px;
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 18px;
+      }
+
+      .login-box {
+        padding: 25px 20px;
+        border-radius: 20px;
+      }
+
+      .brand h1 {
+        font-size: 24px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="login-box">
-    <h1>IBB Member Login</h1>
+  <div class="login-wrapper">
 
-    <form id="loginForm">
+    <div class="brand">
+      <div class="brand-badge">IBB</div>
+      <h1>IBB Member Area</h1>
+      <p>Welcome back. Continue your training.</p>
+    </div>
 
-      <label for="email">Email</label>
-      <input type="email" id="email" required>
+    <div class="login-box">
 
-      <label for="password">Password</label>
-      <input type="password" id="password" required>
+      <h2 class="login-title">Welcome back 👋</h2>
+      <p class="login-subtitle">Login to access your member training.</p>
 
-      <button type="submit">Login</button>
+      <form id="loginForm">
 
-      <div id="message"></div>
+        <div class="field">
+          <label for="email">Email address</label>
 
-    </form>
+          <div class="input-wrap">
+            <span class="input-icon">✉</span>
+            <input
+              type="email"
+              id="email"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required
+            >
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+
+          <div class="input-wrap">
+            <span class="input-icon">🔒</span>
+            <input
+              type="password"
+              id="password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              required
+            >
+          </div>
+        </div>
+
+        <button class="login-btn" id="loginBtn" type="submit">
+          Login to Training
+        </button>
+
+        <div id="message"></div>
+
+      </form>
+
+      <div class="secure-note">
+        🔐 Secure member login
+      </div>
+
+    </div>
+
+    <div class="footer">
+      IBB Member Training Platform
+    </div>
+
   </div>
 
   <script>
@@ -98,8 +287,11 @@
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value;
       const message = document.getElementById("message");
+      const loginBtn = document.getElementById("loginBtn");
 
-      message.textContent = "Logging in...";
+      message.textContent = "";
+      loginBtn.disabled = true;
+      loginBtn.textContent = "Logging in...";
 
       const { data, error } = await supabaseClient.auth.signInWithPassword({
         email: email,
@@ -108,9 +300,12 @@
 
       if (error) {
         message.textContent = error.message;
+        loginBtn.disabled = false;
+        loginBtn.textContent = "Login to Training";
         return;
       }
 
+      message.style.color = "#86efac";
       message.textContent = "Login successful!";
 
       window.location.href = "training.html";
@@ -119,3 +314,4 @@
 
 </body>
 </html>
+```
