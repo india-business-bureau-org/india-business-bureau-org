@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Join Indian Business Bureau</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, #243b75 0%, transparent 35%),
+        radial-gradient(circle at bottom right, #0b6b63 0%, transparent 35%),
+        #07111f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      color: #111827;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 460px;
+      background: rgba(255,255,255,0.97);
+      border-radius: 24px;
+      padding: 34px;
+      box-shadow: 0 25px 70px rgba(0,0,0,0.30);
+    }
+
+    .brand {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .logo {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 14px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #111827, #2563eb);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      color: #111827;
+    }
+
+    .subtitle {
+      margin-top: 8px;
+      color: #64748b;
+      font-size: 14px;
+    }
+
+    label {
+      display: block;
+      margin: 17px 0 7px;
+      font-weight: 700;
+      font-size: 14px;
+      color: #334155;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px 15px;
+      border: 1px solid #d7dee8;
+      border-radius: 12px;
+      outline: none;
+      font-size: 15px;
+      background: #f8fafc;
+    }
+
+    input:focus {
+      border-color: #2563eb;
+      background: white;
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.10);
+    }
+
+    button {
+      width: 100%;
+      margin-top: 24px;
+      padding: 15px;
+      border: 0;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #111827, #2563eb);
+      color: white;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    #message {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 22px;
+      font-size: 14px;
+      color: #64748b;
+    }
+
+    .login-link a {
+      color: #2563eb;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .note {
+      margin-top: 20px;
+      padding: 13px;
+      border-radius: 12px;
+      background: #f1f5f9;
+      color: #475569;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+
+    <div class="brand">
+      <div class="logo">IBB</div>
+
+      <h1>Create Your Account</h1>
+
+      <div class="subtitle">
+        Join the Indian Business Bureau Promoter Academy
+      </div>
+    </div>
+
+    <form id="signupForm">
+
+      <label for="fullName">Full Name</label>
+      <input
+        type="text"
+        id="fullName"
+        placeholder="Enter your full name"
+        required
+      >
+
+      <label for="email">Email Address</label>
+      <input
+        type="email"
+        id="email"
+        placeholder="you@example.com"
+        required
+      >
+
+      <label for="mobile">Mobile Number</label>
+      <input
+        type="tel"
+        id="mobile"
+        placeholder="Enter your mobile number"
+        required
+      >
+
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        placeholder="Minimum 6 characters"
+        minlength="6"
+        required
+      >
+
+      <label for="confirmPassword">Confirm Password</label>
+      <input
+        type="password"
+        id="confirmPassword"
+        placeholder="Enter password again"
+        minlength="6"
+        required
+      >
+
+      <button type="submit" id="signupButton">
+        Create Account
+      </button>
+
+      <div id="message"></div>
+
+    </form>
+
+    <div class="login-link">
+      Already have an account?
+      <a href="login.html">Login here</a>
+    </div>
+
+    <div class="note">
+      After creating your account, you will continue to the IBB member
+      payment and verification process.
+    </div>
+
+  </div>
+
+  <script>
+
+    const SUPABASE_URL =
+      "https://tvantyrkjxoljjpnadac.supabase.co";
+
+    const SUPABASE_PUBLISHABLE_KEY =
+      "sb_publishable_t0Z_jIqNeUde0fZ4YS8h3Q_fQHLO_GV";
+
+    const supabaseClient = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
+
+    const form = document.getElementById("signupForm");
+    const message = document.getElementById("message");
+    const button = document.getElementById("signupButton");
+
+    form.addEventListener("submit", async function(e) {
+
+      e.preventDefault();
+
+      const fullName =
+        document.getElementById("fullName").value.trim();
+
+      const email =
+        document.getElementById("email").value.trim();
+
+      const mobile =
+        document.getElementById("mobile").value.trim();
+
+      const password =
+        document.getElementById("password").value;
+
+      const confirmPassword =
+        document.getElementById("confirmPassword").value;
+
+      if (password !== confirmPassword) {
+        message.textContent = "Passwords do not match.";
+        message.style.color = "#dc2626";
+        return;
+      }
+
+      if (password.length < 6) {
+        message.textContent =
+          "Password must be at least 6 characters.";
+        message.style.color = "#dc2626";
+        return;
+      }
+
+      button.disabled = true;
+      button.textContent = "Creating account...";
+
+      message.textContent = "";
+
+      try {
+
+        const { data, error } =
+          await supabaseClient.auth.signUp({
+
+            email: email,
+
+            password: password,
+
+            options: {
+              data: {
+                full_name: fullName,
+                mobile: mobile
+              }
+            }
+
+          });
+
+        if (error) {
+          throw error;
+        }
+
+        if (data.session) {
+
+          message.textContent =
+            "Account created successfully. Redirecting...";
+
+          message.style.color = "#16a34a";
+
+          setTimeout(function() {
+            window.location.href = "payment.html";
+          }, 1200);
+
+        } else {
+
+          message.innerHTML =
+            "Account created successfully.<br><br>" +
+            "Please check your email and confirm your account " +
+            "before logging in.";
+
+          message.style.color = "#16a34a";
+
+          button.disabled = false;
+          button.textContent = "Create Account";
+        }
+
+      } catch (error) {
+
+        message.textContent =
+          error.message || "Unable to create account.";
+
+        message.style.color = "#dc2626";
+
+        button.disabled = false;
+        button.textContent = "Create Account";
+      }
+
+    });
+
+  </script>
+
+</body>
+</html>
