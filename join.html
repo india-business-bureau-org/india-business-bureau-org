@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Join IBB — Indian Business Bureau</title>
 
   <style>
@@ -156,6 +156,7 @@
       font-size: 14px;
       color: #111827;
       outline: none;
+      transition: .2s ease;
     }
 
     .field input:focus,
@@ -163,6 +164,30 @@
       background: white;
       border-color: #6366f1;
       box-shadow: 0 0 0 4px rgba(99,102,241,.10);
+    }
+
+    .field input.invalid,
+    .field select.invalid {
+      border-color: #dc2626;
+      background: #fff7f7;
+    }
+
+    .field input.valid,
+    .field select.valid {
+      border-color: #16a34a;
+      background: #f7fff9;
+    }
+
+    .error {
+      display: none;
+      margin-top: 6px;
+      color: #dc2626;
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
+    .error.show {
+      display: block;
     }
 
     .submit-btn {
@@ -177,10 +202,17 @@
       cursor: pointer;
       margin-top: 8px;
       box-shadow: 0 12px 25px rgba(17,24,39,.20);
+      transition: .2s ease;
     }
 
-    .submit-btn:active {
-      transform: scale(.99);
+    .submit-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .submit-btn:disabled {
+      opacity: .55;
+      cursor: not-allowed;
+      transform: none;
     }
 
     .secure {
@@ -242,182 +274,793 @@
       }
     }
   </style>
-
 </head>
 
 <body>
 
-  <div class="page">
+<div class="page">
 
-<div class="brand">
-  <div class="brand-icon">IBB</div>
-  <h1>INDIAN BUSINESS BUREAU</h1>
-  <p>Professional Membership Registration</p>
+  <div class="brand">
+    <div class="brand-icon">IBB</div>
+
+    <h1>INDIAN BUSINESS BUREAU</h1>
+
+    <p>Professional Membership Registration</p>
+  </div>
+
+
+  <div class="card">
+
+    <div class="card-header">
+      <h2>Join IBB Membership</h2>
+
+      <p>
+        Enter your details below to continue with your membership registration.
+      </p>
+    </div>
+
+
+    <div class="fee-card">
+
+      <div>
+        <small>Registration Fee</small>
+        <strong>₹101</strong>
+      </div>
+
+      <div class="fee-badge">
+        ONE TIME
+      </div>
+
+    </div>
+
+
+    <form id="registrationForm" novalidate>
+
+
+      <!-- FULL NAME -->
+
+      <div class="field">
+
+        <label for="name">
+          Full Name *
+        </label>
+
+        <div class="input-wrap">
+
+          <span class="input-icon">👤</span>
+
+          <input
+            type="text"
+            id="name"
+            placeholder="Enter your full name"
+            autocomplete="name"
+            maxlength="60"
+            required
+          >
+
+        </div>
+
+        <div class="error" id="nameError">
+          Please enter a valid name using letters and spaces only.
+        </div>
+
+      </div>
+
+
+      <!-- MOBILE -->
+
+      <div class="field">
+
+        <label for="mobile">
+          Mobile Number *
+        </label>
+
+        <div class="input-wrap">
+
+          <span class="input-icon">📱</span>
+
+          <input
+            type="tel"
+            id="mobile"
+            placeholder="10-digit mobile number"
+            maxlength="10"
+            inputmode="numeric"
+            autocomplete="tel"
+            required
+          >
+
+        </div>
+
+        <div class="error" id="mobileError">
+          Please enter a valid Indian 10-digit mobile number.
+        </div>
+
+      </div>
+
+
+      <!-- EMAIL -->
+
+      <div class="field">
+
+        <label for="email">
+          Email Address *
+        </label>
+
+        <div class="input-wrap">
+
+          <span class="input-icon">✉️</span>
+
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter your email address"
+            autocomplete="email"
+            maxlength="120"
+            required
+          >
+
+        </div>
+
+        <div class="error" id="emailError">
+          Please enter a valid email address.
+        </div>
+
+      </div>
+
+
+      <!-- CITY -->
+
+      <div class="field">
+
+        <label for="city">
+          City *
+        </label>
+
+        <div class="input-wrap">
+
+          <span class="input-icon">📍</span>
+
+          <input
+            type="text"
+            id="city"
+            placeholder="Enter your city"
+            autocomplete="address-level2"
+            maxlength="50"
+            required
+          >
+
+        </div>
+
+        <div class="error" id="cityError">
+          Please enter a valid city name.
+        </div>
+
+      </div>
+
+
+      <!-- STATE -->
+
+      <div class="field">
+
+        <label for="state">
+          State *
+        </label>
+
+        <div class="input-wrap">
+
+          <span class="input-icon">🇮🇳</span>
+
+          <select id="state" required>
+
+            <option value="">
+              Select your state
+            </option>
+
+            <option>Punjab</option>
+            <option>Haryana</option>
+            <option>Delhi</option>
+            <option>Himachal Pradesh</option>
+            <option>Rajasthan</option>
+            <option>Uttar Pradesh</option>
+            <option>Maharashtra</option>
+            <option>Gujarat</option>
+            <option>Madhya Pradesh</option>
+            <option>West Bengal</option>
+            <option>Bihar</option>
+            <option>Jharkhand</option>
+            <option>Odisha</option>
+            <option>Chhattisgarh</option>
+            <option>Uttarakhand</option>
+            <option>Jammu & Kashmir</option>
+            <option>Goa</option>
+            <option>Karnataka</option>
+            <option>Kerala</option>
+            <option>Tamil Nadu</option>
+            <option>Telangana</option>
+            <option>Andhra Pradesh</option>
+            <option>Assam</option>
+            <option>Arunachal Pradesh</option>
+            <option>Manipur</option>
+            <option>Meghalaya</option>
+            <option>Mizoram</option>
+            <option>Nagaland</option>
+            <option>Sikkim</option>
+            <option>Tripura</option>
+            <option>Other</option>
+
+          </select>
+
+        </div>
+
+        <div class="error" id="stateError">
+          Please select your state.
+        </div>
+
+      </div>
+
+
+      <button
+        type="submit"
+        class="submit-btn"
+        id="submitBtn"
+      >
+        CONTINUE TO ₹101 PAYMENT →
+      </button>
+
+    </form>
+
+
+    <div class="secure">
+      <span>✓</span>
+      Your information is submitted securely
+    </div>
+
+
+    <a href="index.html" class="back">
+      ← Back to Home
+    </a>
+
+  </div>
+
+
+  <div class="footer-note">
+
+    By continuing, you agree to proceed with the IBB membership
+    registration and ₹101 registration fee.
+
+  </div>
+
 </div>
 
-<div class="card">
 
-  <div class="card-header">
-    <h2>Join IBB Membership</h2>
-    <p>
-      Enter your details below to continue with your membership registration.
-    </p>
-  </div>
+<script>
 
-  <div class="fee-card">
-    <div>
-      <small>Registration Fee</small>
-      <strong>₹101</strong>
-    </div>
+  const form =
+    document.getElementById("registrationForm");
 
-    <div class="fee-badge">ONE TIME</div>
-  </div>
+  const submitBtn =
+    document.getElementById("submitBtn");
 
-  <form id="registrationForm">
 
-    <div class="field">
-      <label for="name">Full Name *</label>
+  const nameInput =
+    document.getElementById("name");
 
-      <div class="input-wrap">
-        <span class="input-icon">👤</span>
-        <input
-          type="text"
-          id="name"
-          placeholder="Enter your full name"
-          autocomplete="name"
-          required
-        >
-      </div>
-    </div>
+  const mobileInput =
+    document.getElementById("mobile");
 
-    <div class="field">
-      <label for="mobile">Mobile Number *</label>
+  const emailInput =
+    document.getElementById("email");
 
-      <div class="input-wrap">
-        <span class="input-icon">📱</span>
-        <input
-          type="tel"
-          id="mobile"
-          placeholder="10-digit mobile number"
-          maxlength="10"
-          inputmode="numeric"
-          autocomplete="tel"
-          required
-        >
-      </div>
-    </div>
+  const cityInput =
+    document.getElementById("city");
 
-    <div class="field">
-      <label for="email">Email Address *</label>
+  const stateInput =
+    document.getElementById("state");
 
-      <div class="input-wrap">
-        <span class="input-icon">✉️</span>
-        <input
-          type="email"
-          id="email"
-          placeholder="Enter your email address"
-          autocomplete="email"
-          required
-        >
-      </div>
-    </div>
 
-    <div class="field">
-      <label for="city">City *</label>
+  // ==========================================
+  // VALIDATION HELPERS
+  // ==========================================
 
-      <div class="input-wrap">
-        <span class="input-icon">📍</span>
-        <input
-          type="text"
-          id="city"
-          placeholder="Enter your city"
-          autocomplete="address-level2"
-          required
-        >
-      </div>
-    </div>
+  function setError(input, errorId, message) {
 
-    <div class="field">
-      <label for="state">State *</label>
+    input.classList.remove("valid");
+    input.classList.add("invalid");
 
-      <div class="input-wrap">
-        <span class="input-icon">🇮🇳</span>
+    const error =
+      document.getElementById(errorId);
 
-        <select id="state" required>
-          <option value="">Select your state</option>
-          <option>Punjab</option>
-          <option>Haryana</option>
-          <option>Delhi</option>
-          <option>Himachal Pradesh</option>
-          <option>Rajasthan</option>
-          <option>Uttar Pradesh</option>
-          <option>Maharashtra</option>
-          <option>Gujarat</option>
-          <option>Madhya Pradesh</option>
-          <option>West Bengal</option>
-          <option>Bihar</option>
-          <option>Jharkhand</option>
-          <option>Odisha</option>
-          <option>Chhattisgarh</option>
-          <option>Uttarakhand</option>
-          <option>Jammu & Kashmir</option>
-          <option>Other</option>
-        </select>
-      </div>
-    </div>
+    error.textContent = message;
+    error.classList.add("show");
 
-    <button type="submit" class="submit-btn">
-      CONTINUE TO ₹101 PAYMENT →
-    </button>
+  }
 
-  </form>
 
-  <div class="secure">
-    <span>✓</span>
-    Your information is submitted securely
-  </div>
+  function setValid(input, errorId) {
 
-  <a href="index.html" class="back">
-    ← Back to Home
-  </a>
+    input.classList.remove("invalid");
+    input.classList.add("valid");
 
-</div>
+    document
+      .getElementById(errorId)
+      .classList.remove("show");
 
-<div class="footer-note">
-  By continuing, you agree to proceed with the IBB membership registration
-  and ₹101 registration fee.
-</div>
+  }
 
-  </div>
 
-  <script>
-    document.getElementById("registrationForm").addEventListener("submit", function(event) {
+  function clearState(input, errorId) {
+
+    input.classList.remove("invalid");
+    input.classList.remove("valid");
+
+    document
+      .getElementById(errorId)
+      .classList.remove("show");
+
+  }
+
+
+  // ==========================================
+  // NAME VALIDATION
+  // ==========================================
+
+  function validateName() {
+
+    const value =
+      nameInput.value.trim().replace(/\s+/g, " ");
+
+    nameInput.value = value;
+
+
+    if (!value) {
+
+      setError(
+        nameInput,
+        "nameError",
+        "Full name is required."
+      );
+
+      return false;
+
+    }
+
+
+    if (value.length < 3) {
+
+      setError(
+        nameInput,
+        "nameError",
+        "Name must contain at least 3 characters."
+      );
+
+      return false;
+
+    }
+
+
+    if (value.length > 60) {
+
+      setError(
+        nameInput,
+        "nameError",
+        "Name is too long."
+      );
+
+      return false;
+
+    }
+
+
+    // Allows English letters, spaces and common Indian name characters.
+    const namePattern =
+      /^[A-Za-z\u0900-\u097F]+(?:[ .'’-][A-Za-z\u0900-\u097F]+)*$/;
+
+
+    if (!namePattern.test(value)) {
+
+      setError(
+        nameInput,
+        "nameError",
+        "Please enter a real name using letters and spaces only."
+      );
+
+      return false;
+
+    }
+
+
+    // Prevent obvious fake/repeated names
+    const normalized =
+      value.toLowerCase().replace(/[^a-z]/g, "");
+
+    if (
+      normalized.length >= 4 &&
+      /^([a-z])\1+$/.test(normalized)
+    ) {
+
+      setError(
+        nameInput,
+        "nameError",
+        "Please enter a valid full name."
+      );
+
+      return false;
+
+    }
+
+
+    setValid(nameInput, "nameError");
+
+    return true;
+
+  }
+
+
+  // ==========================================
+  // MOBILE VALIDATION
+  // ==========================================
+
+  function validateMobile() {
+
+    let value =
+      mobileInput.value.replace(/\D/g, "");
+
+    mobileInput.value = value;
+
+
+    if (!value) {
+
+      setError(
+        mobileInput,
+        "mobileError",
+        "Mobile number is required."
+      );
+
+      return false;
+
+    }
+
+
+    if (!/^[6-9][0-9]{9}$/.test(value)) {
+
+      setError(
+        mobileInput,
+        "mobileError",
+        "Enter a valid Indian 10-digit mobile number starting with 6, 7, 8 or 9."
+      );
+
+      return false;
+
+    }
+
+
+    // Reject obvious repeated numbers
+    if (/^(\d)\1{9}$/.test(value)) {
+
+      setError(
+        mobileInput,
+        "mobileError",
+        "Please enter a valid mobile number."
+      );
+
+      return false;
+
+    }
+
+
+    setValid(mobileInput, "mobileError");
+
+    return true;
+
+  }
+
+
+  // ==========================================
+  // EMAIL VALIDATION
+  // ==========================================
+
+  function validateEmail() {
+
+    const value =
+      emailInput.value.trim().toLowerCase();
+
+    emailInput.value = value;
+
+
+    if (!value) {
+
+      setError(
+        emailInput,
+        "emailError",
+        "Email address is required."
+      );
+
+      return false;
+
+    }
+
+
+    if (value.length > 120) {
+
+      setError(
+        emailInput,
+        "emailError",
+        "Email address is too long."
+      );
+
+      return false;
+
+    }
+
+
+    const emailPattern =
+      /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+
+    if (!emailPattern.test(value)) {
+
+      setError(
+        emailInput,
+        "emailError",
+        "Please enter a valid email address."
+      );
+
+      return false;
+
+    }
+
+
+    setValid(emailInput, "emailError");
+
+    return true;
+
+  }
+
+
+  // ==========================================
+  // CITY VALIDATION
+  // ==========================================
+
+  function validateCity() {
+
+    const value =
+      cityInput.value.trim().replace(/\s+/g, " ");
+
+    cityInput.value = value;
+
+
+    if (!value) {
+
+      setError(
+        cityInput,
+        "cityError",
+        "City is required."
+      );
+
+      return false;
+
+    }
+
+
+    if (value.length < 2) {
+
+      setError(
+        cityInput,
+        "cityError",
+        "Please enter a valid city."
+      );
+
+      return false;
+
+    }
+
+
+    if (value.length > 50) {
+
+      setError(
+        cityInput,
+        "cityError",
+        "City name is too long."
+      );
+
+      return false;
+
+    }
+
+
+    const cityPattern =
+      /^[A-Za-z\u0900-\u097F]+(?:[ .'’-][A-Za-z\u0900-\u097F]+)*$/;
+
+
+    if (!cityPattern.test(value)) {
+
+      setError(
+        cityInput,
+        "cityError",
+        "Please enter a valid city name."
+      );
+
+      return false;
+
+    }
+
+
+    setValid(cityInput, "cityError");
+
+    return true;
+
+  }
+
+
+  // ==========================================
+  // STATE VALIDATION
+  // ==========================================
+
+  function validateState() {
+
+    if (!stateInput.value) {
+
+      setError(
+        stateInput,
+        "stateError",
+        "Please select your state."
+      );
+
+      return false;
+
+    }
+
+
+    setValid(stateInput, "stateError");
+
+    return true;
+
+  }
+
+
+  // ==========================================
+  // LIVE INPUT CLEANING
+  // ==========================================
+
+  mobileInput.addEventListener(
+    "input",
+    function() {
+
+      this.value =
+        this.value.replace(/\D/g, "").slice(0, 10);
+
+    }
+  );
+
+
+  nameInput.addEventListener(
+    "blur",
+    validateName
+  );
+
+
+  mobileInput.addEventListener(
+    "blur",
+    validateMobile
+  );
+
+
+  emailInput.addEventListener(
+    "blur",
+    validateEmail
+  );
+
+
+  cityInput.addEventListener(
+    "blur",
+    validateCity
+  );
+
+
+  stateInput.addEventListener(
+    "change",
+    validateState
+  );
+
+
+  // ==========================================
+  // FORM SUBMIT
+  // ==========================================
+
+  form.addEventListener(
+    "submit",
+    function(event) {
+
       event.preventDefault();
 
-      const name = document.getElementById("name").value.trim();
-      const mobile = document.getElementById("mobile").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const city = document.getElementById("city").value.trim();
-      const state = document.getElementById("state").value;
 
-      if (!name || !mobile || !email || !city || !state) {
+      const validName =
+        validateName();
+
+      const validMobile =
+        validateMobile();
+
+      const validEmail =
+        validateEmail();
+
+      const validCity =
+        validateCity();
+
+      const validState =
+        validateState();
+
+
+      if (
+        !validName ||
+        !validMobile ||
+        !validEmail ||
+        !validCity ||
+        !validState
+      ) {
+
+        const firstInvalid =
+          document.querySelector(".invalid");
+
+        if (firstInvalid) {
+
+          firstInvalid.focus();
+
+        }
+
         return;
+
       }
 
-      if (!/^[0-9]{10}$/.test(mobile)) {
-        alert("Please enter a valid 10-digit mobile number.");
-        return;
-      }
 
-      sessionStorage.setItem("ibb_name", name);
-      sessionStorage.setItem("ibb_mobile", mobile);
-      sessionStorage.setItem("ibb_email", email);
-      sessionStorage.setItem("ibb_city", city);
-      sessionStorage.setItem("ibb_state", state);
+      // Disable button while redirecting
+      submitBtn.disabled = true;
 
-      window.location.replace("payment.html");
-    });
-  </script>
+      submitBtn.textContent =
+        "Please wait...";
+
+
+      // ==========================================
+      // SAVE MEMBER DETAILS
+      // ==========================================
+
+      sessionStorage.setItem(
+        "ibb_name",
+        nameInput.value.trim()
+      );
+
+      sessionStorage.setItem(
+        "ibb_mobile",
+        mobileInput.value.trim()
+      );
+
+      sessionStorage.setItem(
+        "ibb_email",
+        emailInput.value.trim().toLowerCase()
+      );
+
+      sessionStorage.setItem(
+        "ibb_city",
+        cityInput.value.trim()
+      );
+
+      sessionStorage.setItem(
+        "ibb_state",
+        stateInput.value
+      );
+
+
+      // ==========================================
+      // PAYMENT PAGE
+      // ==========================================
+
+      window.location.replace(
+        "payment.html"
+      );
+
+    }
+  );
+
+</script>
 
 </body>
 </html>
