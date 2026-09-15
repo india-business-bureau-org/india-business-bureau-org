@@ -1,3080 +1,1536 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>IBB Promoter Academy | Indian Business Bureau</title>
-
-  <meta
-    name="description"
-    content="IBB Promoter Academy — Build practical skills, complete missions and become campaign-ready."
-  />
-
-  <!-- Premium Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
-    rel="stylesheet"
-  />
-
-  <!-- Supabase -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <style>
-    :root {
-      --bg: #f5f7fb;
-      --surface: #ffffff;
-      --surface-soft: #f8fafc;
-      --navy: #07152f;
-      --navy-2: #0d2347;
-      --blue: #2563eb;
-      --blue-dark: #1d4ed8;
-      --cyan: #06b6d4;
-      --gold: #f5b942;
-      --green: #16a34a;
-      --green-soft: #ecfdf3;
-      --red: #dc2626;
-      --text: #10213f;
-      --muted: #64748b;
-      --border: #e5eaf2;
-      --shadow: 0 20px 55px rgba(15, 35, 70, .08);
-      --shadow-lg: 0 30px 80px rgba(8, 28, 60, .16);
-      --radius: 22px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: "Manrope", "Plus Jakarta Sans", Arial, sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(37,99,235,.06), transparent 32%),
-        radial-gradient(circle at 80% 20%, rgba(6,182,212,.05), transparent 28%),
-        var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    button {
-      font-family: inherit;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    /* =========================
-       LOADING
-    ========================= */
-
-    #loadingScreen {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #07152f;
-      color: white;
-    }
-
-    .loader-box {
-      text-align: center;
-    }
-
-    .loader-logo {
-      width: 64px;
-      height: 64px;
-      margin: auto auto 18px;
-      border-radius: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #2563eb, #06b6d4);
-      font-size: 26px;
-      font-weight: 800;
-      box-shadow: 0 20px 50px rgba(37,99,235,.35);
-    }
-
-    .loader-box h2 {
-      font-size: 20px;
-      margin-bottom: 6px;
-    }
-
-    .loader-box p {
-      color: rgba(255,255,255,.65);
-      font-size: 13px;
-    }
-
-    .spinner {
-      width: 25px;
-      height: 25px;
-      border: 3px solid rgba(255,255,255,.18);
-      border-top-color: white;
-      border-radius: 50%;
-      margin: 20px auto 0;
-      animation: spin .8s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    /* =========================
-       HEADER
-    ========================= */
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(7,21,47,.94);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid rgba(255,255,255,.08);
-    }
-
-    .topbar-inner {
-      max-width: 1200px;
-      margin: auto;
-      min-height: 76px;
-      padding: 0 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: white;
-    }
-
-    .brand-mark {
-      width: 42px;
-      height: 42px;
-      border-radius: 13px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #2563eb, #06b6d4);
-      font-weight: 800;
-      font-size: 15px;
-      box-shadow: 0 8px 25px rgba(37,99,235,.28);
-    }
-
-    .brand-text strong {
-      display: block;
-      font-size: 14px;
-      letter-spacing: .08em;
-    }
-
-    .brand-text span {
-      display: block;
-      font-size: 11px;
-      color: rgba(255,255,255,.55);
-      margin-top: 1px;
-    }
-
-    .top-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .member-mini {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      color: white;
-      font-size: 12px;
-      background: rgba(255,255,255,.07);
-      border: 1px solid rgba(255,255,255,.1);
-      padding: 7px 12px 7px 8px;
-      border-radius: 999px;
-    }
-
-    .avatar {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #2563eb, #06b6d4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .logout-btn {
-      border: 1px solid rgba(255,255,255,.13);
-      background: rgba(255,255,255,.06);
-      color: white;
-      border-radius: 10px;
-      padding: 9px 13px;
-      cursor: pointer;
-      font-size: 12px;
-      transition: .2s;
-    }
-
-    .logout-btn:hover {
-      background: rgba(255,255,255,.12);
-    }
-
-    /* =========================
-       HERO
-    ========================= */
-
-    .hero {
-      position: relative;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at 10% 10%, rgba(37,99,235,.3), transparent 25%),
-        radial-gradient(circle at 90% 20%, rgba(6,182,212,.18), transparent 25%),
-        linear-gradient(135deg, #07152f 0%, #0b2043 55%, #0d2a4f 100%);
-      color: white;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      width: 420px;
-      height: 420px;
-      right: -160px;
-      top: -180px;
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 50%;
-      box-shadow:
-        0 0 0 55px rgba(255,255,255,.015),
-        0 0 0 110px rgba(255,255,255,.01);
-    }
-
-    .hero-inner {
-      position: relative;
-      max-width: 1200px;
-      margin: auto;
-      padding: 68px 20px 54px;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.1);
-      color: #bcd7ff;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-
-    .eyebrow-dot {
-      width: 7px;
-      height: 7px;
-      background: #34d399;
-      border-radius: 50%;
-      box-shadow: 0 0 12px #34d399;
-    }
-
-    .hero-grid {
-      margin-top: 26px;
-      display: grid;
-      grid-template-columns: 1.35fr .65fr;
-      gap: 45px;
-      align-items: end;
-    }
-
-    .hero h1 {
-      max-width: 760px;
-      font-family: "Plus Jakarta Sans", sans-serif;
-      font-size: clamp(38px, 6vw, 66px);
-      line-height: 1.02;
-      letter-spacing: -.045em;
-      margin-bottom: 20px;
-    }
-
-    .hero h1 span {
-      background: linear-gradient(90deg, #ffffff, #75d7ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero-description {
-      max-width: 680px;
-      color: rgba(255,255,255,.67);
-      font-size: 16px;
-      line-height: 1.8;
-    }
-
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
-
-    .hero-stat {
-      padding: 16px;
-      border: 1px solid rgba(255,255,255,.1);
-      background: rgba(255,255,255,.055);
-      backdrop-filter: blur(12px);
-      border-radius: 17px;
-    }
-
-    .hero-stat strong {
-      display: block;
-      font-size: 23px;
-      font-weight: 800;
-    }
-
-    .hero-stat span {
-      color: rgba(255,255,255,.55);
-      font-size: 11px;
-    }
-
-    /* =========================
-       DASHBOARD
-    ========================= */
-
-    .main {
-      max-width: 1200px;
-      margin: auto;
-      padding: 32px 20px 70px;
-    }
-
-    .progress-dashboard {
-      margin-top: -4px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 20px;
-      align-items: center;
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      padding: 21px;
-      box-shadow: var(--shadow);
-    }
-
-    .progress-label {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-      margin-bottom: 9px;
-    }
-
-    .progress-label strong {
-      font-size: 14px;
-    }
-
-    .progress-percent {
-      color: var(--blue);
-      font-weight: 800;
-      font-size: 14px;
-    }
-
-    .progress-track {
-      height: 9px;
-      background: #eaf0f7;
-      border-radius: 99px;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      height: 100%;
-      width: 0%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, #2563eb, #06b6d4);
-      transition: width .5s ease;
-    }
-
-    .progress-meta {
-      display: flex;
-      gap: 20px;
-      color: var(--muted);
-      font-size: 11px;
-      margin-top: 8px;
-    }
-
-    .current-badge {
-      min-width: 120px;
-      text-align: center;
-      padding: 13px 17px;
-      border-radius: 15px;
-      background: #eff6ff;
-      border: 1px solid #dbeafe;
-      color: var(--blue-dark);
-    }
-
-    .current-badge strong {
-      display: block;
-      font-size: 21px;
-    }
-
-    .current-badge span {
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-
-    /* =========================
-       DAY NAV
-    ========================= */
-
-    .section-heading {
-      margin: 36px 0 15px;
-    }
-
-    .section-heading h2 {
-      font-family: "Plus Jakarta Sans", sans-serif;
-      font-size: 20px;
-      letter-spacing: -.025em;
-    }
-
-    .section-heading p {
-      color: var(--muted);
-      font-size: 12px;
-      margin-top: 4px;
-    }
-
-    .day-nav {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 5px;
-      scrollbar-width: thin;
-    }
-
-    .day-btn {
-      flex: 0 0 auto;
-      min-width: 76px;
-      border: 1px solid var(--border);
-      background: white;
-      color: var(--text);
-      padding: 10px 12px;
-      border-radius: 14px;
-      cursor: pointer;
-      transition: .2s;
-      text-align: left;
-    }
-
-    .day-btn:hover:not(:disabled) {
-      transform: translateY(-2px);
-      border-color: #bfd5ff;
-    }
-
-    .day-btn.active {
-      background: var(--navy);
-      color: white;
-      border-color: var(--navy);
-      box-shadow: 0 10px 25px rgba(7,21,47,.18);
-    }
-
-    .day-btn.completed {
-      background: var(--green-soft);
-      border-color: #bbf7d0;
-      color: #166534;
-    }
-
-    .day-btn:disabled {
-      opacity: .45;
-      cursor: not-allowed;
-    }
-
-    .day-number {
-      display: block;
-      font-size: 10px;
-      font-weight: 800;
-      text-transform: uppercase;
-      opacity: .65;
-    }
-
-    .day-name {
-      display: block;
-      font-size: 11px;
-      font-weight: 800;
-      margin-top: 3px;
-      white-space: nowrap;
-    }
-
-    /* =========================
-       TRAINING CARD
-    ========================= */
-
-    .training-card {
-      margin-top: 25px;
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 28px;
-      box-shadow: var(--shadow-lg);
-      overflow: hidden;
-    }
-
-    .training-top {
-      padding: 30px;
-      background:
-        radial-gradient(circle at 90% 0%, rgba(37,99,235,.1), transparent 30%),
-        linear-gradient(135deg, #ffffff, #f7faff);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .day-kicker {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      color: var(--blue);
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-
-    .day-kicker .line {
-      width: 28px;
-      height: 2px;
-      background: var(--blue);
-      border-radius: 99px;
-    }
-
-    .training-title {
-      margin-top: 11px;
-      font-family: "Plus Jakarta Sans", sans-serif;
-      font-size: clamp(28px, 4vw, 43px);
-      line-height: 1.1;
-      letter-spacing: -.035em;
-    }
-
-    .training-subtitle {
-      margin-top: 10px;
-      color: var(--muted);
-      font-size: 14px;
-      max-width: 760px;
-    }
-
-    .training-tags {
-      margin-top: 19px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 7px 11px;
-      border-radius: 999px;
-      background: #f1f5f9;
-      border: 1px solid #e2e8f0;
-      color: #475569;
-      font-size: 10px;
-      font-weight: 800;
-    }
-
-    .training-body {
-      padding: 30px;
-    }
-
-    .mission-banner {
-      padding: 22px;
-      border-radius: 20px;
-      background: linear-gradient(135deg, #07152f, #123664);
-      color: white;
-      position: relative;
-      overflow: hidden;
-      margin-bottom: 25px;
-    }
-
-    .mission-banner::after {
-      content: "MISSION";
-      position: absolute;
-      right: -5px;
-      top: 10px;
-      font-size: 58px;
-      font-weight: 800;
-      color: rgba(255,255,255,.035);
-      letter-spacing: .08em;
-    }
-
-    .mission-banner small {
-      color: #9ec8ff;
-      font-weight: 800;
-      text-transform: uppercase;
-      font-size: 10px;
-      letter-spacing: .1em;
-    }
-
-    .mission-banner h3 {
-      margin-top: 5px;
-      font-size: 20px;
-    }
-
-    .mission-banner p {
-      margin-top: 6px;
-      color: rgba(255,255,255,.65);
-      font-size: 12px;
-      max-width: 760px;
-    }
-
-    .content-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .content-card {
-      border: 1px solid var(--border);
-      background: var(--surface-soft);
-      border-radius: 20px;
-      padding: 21px;
-    }
-
-    .content-card.full {
-      grid-column: 1 / -1;
-    }
-
-    .card-icon {
-      width: 38px;
-      height: 38px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 12px;
-      background: white;
-      border: 1px solid var(--border);
-      font-size: 18px;
-      margin-bottom: 13px;
-    }
-
-    .content-card h3 {
-      font-size: 14px;
-      margin-bottom: 7px;
-      font-weight: 800;
-    }
-
-    .content-card p {
-      color: #53647d;
-      font-size: 12px;
-      line-height: 1.8;
-    }
-
-    .task-list {
-      list-style: none;
-      margin-top: 13px;
-      display: grid;
-      gap: 9px;
-    }
-
-    .task-item {
-      display: flex;
-      gap: 9px;
-      align-items: flex-start;
-      color: #53647d;
-      font-size: 12px;
-    }
-
-    .task-item::before {
-      content: "✓";
-      flex: 0 0 auto;
-      width: 19px;
-      height: 19px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #dbeafe;
-      color: var(--blue);
-      font-size: 10px;
-      font-weight: 900;
-    }
-
-    .proof-box {
-      margin-top: 12px;
-      padding: 14px;
-      border-radius: 13px;
-      background: white;
-      border: 1px dashed #cbd5e1;
-      color: #475569;
-      font-size: 11px;
-    }
-
-    .pro-tip {
-      background:
-        linear-gradient(135deg, #fffaf0, #fffdf7);
-      border-color: #f4dfae;
-    }
-
-    .pro-tip .card-icon {
-      background: #fff7df;
-      border-color: #f4dfae;
-    }
-
-    /* =========================
-       CHECKLIST
-    ========================= */
-
-    .completion-box {
-      margin-top: 24px;
-      border-radius: 20px;
-      padding: 21px;
-      background: #f8fafc;
-      border: 1px solid var(--border);
-    }
-
-    .completion-title {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 14px;
-      font-weight: 800;
-    }
-
-    .completion-checkbox {
-      margin-top: 15px;
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      padding: 13px;
-      border-radius: 14px;
-      background: white;
-      border: 1px solid var(--border);
-      cursor: pointer;
-      font-size: 12px;
-      color: #475569;
-    }
-
-    .completion-checkbox input {
-      margin-top: 3px;
-      accent-color: var(--blue);
-    }
-
-    .complete-btn {
-      width: 100%;
-      border: none;
-      margin-top: 14px;
-      padding: 15px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, #2563eb, #1d4ed8);
-      color: white;
-      font-size: 13px;
-      font-weight: 800;
-      cursor: pointer;
-      box-shadow: 0 12px 25px rgba(37,99,235,.22);
-      transition: .2s;
-    }
-
-    .complete-btn:hover:not(:disabled) {
-      transform: translateY(-2px);
-      box-shadow: 0 16px 32px rgba(37,99,235,.3);
-    }
-
-    .complete-btn:disabled {
-      background: #cbd5e1;
-      box-shadow: none;
-      cursor: not-allowed;
-    }
-
-    /* =========================
-       LOCK
-    ========================= */
-
-    .lock-box {
-      margin-top: 22px;
-      padding: 21px;
-      border-radius: 19px;
-      background: #fff8eb;
-      border: 1px solid #f5dfb0;
-      text-align: center;
-    }
-
-    .lock-icon {
-      font-size: 28px;
-      margin-bottom: 6px;
-    }
-
-    .lock-box h3 {
-      font-size: 15px;
-    }
-
-    .lock-box p {
-      margin-top: 4px;
-      color: #7c6540;
-      font-size: 11px;
-    }
-
-    .timer {
-      margin-top: 10px;
-      font-size: 21px;
-      font-weight: 800;
-      color: #9a6700;
-    }
-
-    /* =========================
-       FINAL TEST
-    ========================= */
-
-    .assessment {
-      margin-top: 25px;
-      border-radius: 28px;
-      overflow: hidden;
-      background: linear-gradient(135deg, #07152f, #0c2850);
-      color: white;
-      box-shadow: var(--shadow-lg);
-    }
-
-    .assessment-head {
-      padding: 30px;
-      border-bottom: 1px solid rgba(255,255,255,.08);
-    }
-
-    .assessment-head .eyebrow {
-      color: #b9d7ff;
-    }
-
-    .assessment-head h2 {
-      font-family: "Plus Jakarta Sans", sans-serif;
-      font-size: 31px;
-      margin-top: 15px;
-    }
-
-    .assessment-head p {
-      color: rgba(255,255,255,.6);
-      max-width: 700px;
-      font-size: 13px;
-      margin-top: 7px;
-    }
-
-    .assessment-body {
-      padding: 30px;
-    }
-
-    .question {
-      padding: 20px;
-      border-radius: 18px;
-      background: rgba(255,255,255,.055);
-      border: 1px solid rgba(255,255,255,.09);
-      margin-bottom: 13px;
-    }
-
-    .question-number {
-      color: #78c9ff;
-      font-size: 10px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: .1em;
-    }
-
-    .question h3 {
-      font-size: 14px;
-      margin: 5px 0 13px;
-    }
-
-    .option {
-      display: block;
-      padding: 10px 12px;
-      border-radius: 11px;
-      background: rgba(255,255,255,.045);
-      margin-top: 7px;
-      cursor: pointer;
-      font-size: 11px;
-      color: rgba(255,255,255,.72);
-      transition: .2s;
-    }
-
-    .option:hover {
-      background: rgba(255,255,255,.09);
-    }
-
-    .option input {
-      accent-color: #60a5fa;
-      margin-right: 7px;
-    }
-
-    .submit-test {
-      width: 100%;
-      margin-top: 10px;
-      padding: 15px;
-      border: none;
-      border-radius: 14px;
-      background: linear-gradient(135deg, #f5b942, #f59e0b);
-      color: #07152f;
-      font-weight: 900;
-      cursor: pointer;
-      font-size: 13px;
-    }
-
-    .result-box {
-      margin-top: 18px;
-      padding: 22px;
-      border-radius: 17px;
-      background: rgba(255,255,255,.07);
-      border: 1px solid rgba(255,255,255,.1);
-      text-align: center;
-    }
-
-    .score {
-      font-size: 38px;
-      font-weight: 900;
-    }
-
-    /* =========================
-       CERTIFICATE
-    ========================= */
-
-    .certificate {
-      margin-top: 25px;
-      padding: 42px 30px;
-      border-radius: 28px;
-      text-align: center;
-      background:
-        radial-gradient(circle at top, rgba(245,185,66,.18), transparent 35%),
-        linear-gradient(135deg, #07152f, #102d53);
-      color: white;
-      border: 1px solid rgba(245,185,66,.22);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .certificate-badge {
-      width: 78px;
-      height: 78px;
-      border-radius: 50%;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #f5b942, #f59e0b);
-      color: #07152f;
-      font-size: 31px;
-      box-shadow: 0 15px 35px rgba(245,185,66,.25);
-    }
-
-    .certificate h2 {
-      margin-top: 20px;
-      font-family: "Plus Jakarta Sans", sans-serif;
-      font-size: 34px;
-      letter-spacing: -.03em;
-    }
-
-    .certificate p {
-      color: rgba(255,255,255,.65);
-      max-width: 600px;
-      margin: 8px auto 0;
-      font-size: 12px;
-    }
-
-    .certificate-name {
-      margin-top: 18px;
-      font-size: 20px;
-      font-weight: 800;
-      color: #f7d37b;
-    }
-
-    /* =========================
-       FOOTER
-    ========================= */
-
-    footer {
-      max-width: 1200px;
-      margin: auto;
-      padding: 0 20px 45px;
-      color: #8a98aa;
-      font-size: 10px;
-      text-align: center;
-    }
-
-    /* =========================
-       MOBILE
-    ========================= */
-
-    @media (max-width: 800px) {
-      .hero-grid {
-        grid-template-columns: 1fr;
-        gap: 25px;
-      }
-
-      .hero-inner {
-        padding-top: 48px;
-      }
-
-      .hero h1 {
-        font-size: 41px;
-      }
-
-      .progress-dashboard {
-        grid-template-columns: 1fr;
-      }
-
-      .current-badge {
-        width: 100%;
-      }
-
-      .content-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .content-card.full {
-        grid-column: auto;
-      }
-
-      .training-top,
-      .training-body,
-      .assessment-head,
-      .assessment-body {
-        padding: 22px;
-      }
-    }
-
-    @media (max-width: 560px) {
-      .brand-text {
-        display: none;
-      }
-
-      .member-mini span {
-        display: none;
-      }
-
-      .topbar-inner {
-        min-height: 66px;
-      }
-
-      .hero-stats {
-        gap: 7px;
-      }
-
-      .hero-stat {
-        padding: 12px;
-      }
-
-      .hero-stat strong {
-        font-size: 18px;
-      }
-
-      .hero h1 {
-        font-size: 35px;
-      }
-
-      .main {
-        padding-left: 12px;
-        padding-right: 12px;
-      }
-
-      .training-card,
-      .assessment,
-      .certificate {
-        border-radius: 21px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>IBB Promoter Academy | Indian Business Bureau</title>
+
+<meta name="description" content="IBB Promoter Academy — Learn practical campaign, content, communication and reporting skills.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+:root{
+  --bg:#f5f7fb;
+  --surface:#fff;
+  --surface-soft:#f8fafc;
+  --navy:#07152f;
+  --navy2:#0d2347;
+  --blue:#2563eb;
+  --blue-dark:#1d4ed8;
+  --cyan:#06b6d4;
+  --gold:#f5b942;
+  --green:#16a34a;
+  --green-soft:#ecfdf3;
+  --red:#dc2626;
+  --text:#10213f;
+  --muted:#64748b;
+  --border:#e5eaf2;
+  --shadow:0 20px 55px rgba(15,35,70,.08);
+  --shadow-lg:0 30px 80px rgba(8,28,60,.16);
+  --radius:22px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html{scroll-behavior:smooth}
+
+body{
+  font-family:"Manrope","Plus Jakarta Sans",Arial,sans-serif;
+  background:
+    radial-gradient(circle at top left,rgba(37,99,235,.06),transparent 32%),
+    radial-gradient(circle at 80% 20%,rgba(6,182,212,.05),transparent 28%),
+    var(--bg);
+  color:var(--text);
+  line-height:1.65;
+}
+
+button{font-family:inherit}
+
+.hidden{display:none!important}
+
+/* LOADING */
+
+#loadingScreen{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#07152f;
+  color:white;
+}
+
+.loader-box{text-align:center}
+
+.loader-logo{
+  width:64px;
+  height:64px;
+  margin:auto auto 18px;
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,#2563eb,#06b6d4);
+  font-size:26px;
+  font-weight:800;
+  box-shadow:0 20px 50px rgba(37,99,235,.35);
+}
+
+.loader-box h2{font-size:20px;margin-bottom:6px}
+.loader-box p{color:rgba(255,255,255,.65);font-size:13px}
+
+.spinner{
+  width:25px;
+  height:25px;
+  border:3px solid rgba(255,255,255,.18);
+  border-top-color:white;
+  border-radius:50%;
+  margin:20px auto 0;
+  animation:spin .8s linear infinite;
+}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* HEADER */
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(7,21,47,.94);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.topbar-inner{
+  max-width:1200px;
+  margin:auto;
+  min-height:76px;
+  padding:0 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:white;
+}
+
+.brand-mark{
+  width:42px;
+  height:42px;
+  border-radius:13px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,#2563eb,#06b6d4);
+  font-weight:800;
+  font-size:15px;
+  box-shadow:0 8px 25px rgba(37,99,235,.28);
+}
+
+.brand-text strong{
+  display:block;
+  font-size:14px;
+  letter-spacing:.08em;
+}
+
+.brand-text span{
+  display:block;
+  font-size:11px;
+  color:rgba(255,255,255,.55);
+  margin-top:1px;
+}
+
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.member-mini{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  color:white;
+  font-size:12px;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.1);
+  padding:7px 12px 7px 8px;
+  border-radius:999px;
+}
+
+.avatar{
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#2563eb,#06b6d4);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  font-weight:800;
+}
+
+.logout-btn{
+  border:1px solid rgba(255,255,255,.13);
+  background:rgba(255,255,255,.06);
+  color:white;
+  border-radius:10px;
+  padding:9px 13px;
+  cursor:pointer;
+  font-size:12px;
+}
+
+.logout-btn:hover{background:rgba(255,255,255,.12)}
+
+/* HERO */
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 10% 10%,rgba(37,99,235,.3),transparent 25%),
+    radial-gradient(circle at 90% 20%,rgba(6,182,212,.18),transparent 25%),
+    linear-gradient(135deg,#07152f 0%,#0b2043 55%,#0d2a4f 100%);
+  color:white;
+}
+
+.hero-inner{
+  position:relative;
+  max-width:1200px;
+  margin:auto;
+  padding:68px 20px 54px;
+}
+
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.1);
+  color:#bcd7ff;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.eyebrow-dot{
+  width:7px;
+  height:7px;
+  background:#34d399;
+  border-radius:50%;
+  box-shadow:0 0 12px #34d399;
+}
+
+.hero-grid{
+  margin-top:26px;
+  display:grid;
+  grid-template-columns:1.35fr .65fr;
+  gap:45px;
+  align-items:end;
+}
+
+.hero h1{
+  max-width:760px;
+  font-family:"Plus Jakarta Sans",sans-serif;
+  font-size:clamp(38px,6vw,66px);
+  line-height:1.02;
+  letter-spacing:-.045em;
+  margin-bottom:20px;
+}
+
+.hero h1 span{
+  background:linear-gradient(90deg,#fff,#75d7ff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.hero-description{
+  max-width:700px;
+  color:rgba(255,255,255,.67);
+  font-size:16px;
+  line-height:1.8;
+}
+
+.hero-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.hero-stat{
+  padding:16px;
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.055);
+  backdrop-filter:blur(12px);
+  border-radius:17px;
+}
+
+.hero-stat strong{
+  display:block;
+  font-size:23px;
+  font-weight:800;
+}
+
+.hero-stat span{
+  color:rgba(255,255,255,.55);
+  font-size:11px;
+}
+
+/* MAIN */
+
+.main{
+  max-width:1200px;
+  margin:auto;
+  padding:32px 20px 70px;
+}
+
+/* PROGRESS */
+
+.progress-dashboard{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:20px;
+  align-items:center;
+  background:white;
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:21px;
+  box-shadow:var(--shadow);
+}
+
+.progress-label{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:9px;
+}
+
+.progress-label strong{font-size:14px}
+
+.progress-percent{
+  color:var(--blue);
+  font-weight:800;
+  font-size:14px;
+}
+
+.progress-track{
+  height:9px;
+  background:#eaf0f7;
+  border-radius:99px;
+  overflow:hidden;
+}
+
+.progress-fill{
+  height:100%;
+  width:0%;
+  border-radius:inherit;
+  background:linear-gradient(90deg,#2563eb,#06b6d4);
+  transition:width .5s ease;
+}
+
+.progress-meta{
+  display:flex;
+  gap:20px;
+  color:var(--muted);
+  font-size:11px;
+  margin-top:8px;
+}
+
+.current-badge{
+  min-width:120px;
+  text-align:center;
+  padding:13px 17px;
+  border-radius:15px;
+  background:#eff6ff;
+  border:1px solid #dbeafe;
+  color:var(--blue-dark);
+}
+
+.current-badge strong{
+  display:block;
+  font-size:21px;
+}
+
+.current-badge span{
+  font-size:10px;
+  font-weight:700;
+  text-transform:uppercase;
+}
+
+/* SECTION */
+
+.section-heading{margin:36px 0 15px}
+
+.section-heading h2{
+  font-family:"Plus Jakarta Sans",sans-serif;
+  font-size:20px;
+  letter-spacing:-.025em;
+}
+
+.section-heading p{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:4px;
+}
+
+/* DAY NAV */
+
+.day-nav{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding-bottom:5px;
+  scrollbar-width:thin;
+}
+
+.day-btn{
+  flex:0 0 auto;
+  min-width:76px;
+  border:1px solid var(--border);
+  background:white;
+  color:var(--text);
+  padding:10px 12px;
+  border-radius:14px;
+  cursor:pointer;
+  transition:.2s;
+  text-align:left;
+}
+
+.day-btn:hover:not(:disabled){
+  transform:translateY(-2px);
+  border-color:#bfd5ff;
+}
+
+.day-btn.active{
+  background:var(--navy);
+  color:white;
+  border-color:var(--navy);
+  box-shadow:0 10px 25px rgba(7,21,47,.18);
+}
+
+.day-btn.completed{
+  background:var(--green-soft);
+  border-color:#bbf7d0;
+  color:#166534;
+}
+
+.day-btn:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
+
+.day-number{
+  display:block;
+  font-size:10px;
+  font-weight:800;
+  text-transform:uppercase;
+  opacity:.65;
+}
+
+.day-name{
+  display:block;
+  font-size:11px;
+  font-weight:800;
+  margin-top:3px;
+  white-space:nowrap;
+}
+
+/* TRAINING */
+
+.training-card{
+  margin-top:25px;
+  background:white;
+  border:1px solid var(--border);
+  border-radius:28px;
+  box-shadow:var(--shadow-lg);
+  overflow:hidden;
+}
+
+.training-top{
+  padding:30px;
+  background:
+    radial-gradient(circle at 90% 0%,rgba(37,99,235,.1),transparent 30%),
+    linear-gradient(135deg,#fff,#f7faff);
+  border-bottom:1px solid var(--border);
+}
+
+.day-kicker{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  color:var(--blue);
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.day-kicker .line{
+  width:28px;
+  height:2px;
+  background:var(--blue);
+  border-radius:99px;
+}
+
+.training-title{
+  margin-top:11px;
+  font-family:"Plus Jakarta Sans",sans-serif;
+  font-size:clamp(28px,4vw,43px);
+  line-height:1.1;
+  letter-spacing:-.035em;
+}
+
+.training-subtitle{
+  margin-top:10px;
+  color:var(--muted);
+  font-size:14px;
+  max-width:800px;
+}
+
+.training-tags{
+  margin-top:19px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.tag{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:7px 11px;
+  border-radius:999px;
+  background:#f1f5f9;
+  border:1px solid #e2e8f0;
+  color:#475569;
+  font-size:10px;
+  font-weight:800;
+}
+
+.training-body{padding:30px}
+
+/* MISSION */
+
+.mission-banner{
+  padding:22px;
+  border-radius:20px;
+  background:linear-gradient(135deg,#07152f,#123664);
+  color:white;
+  position:relative;
+  overflow:hidden;
+  margin-bottom:25px;
+}
+
+.mission-banner small{
+  color:#9ec8ff;
+  font-weight:800;
+  text-transform:uppercase;
+  font-size:10px;
+  letter-spacing:.1em;
+}
+
+.mission-banner h3{
+  margin-top:5px;
+  font-size:20px;
+}
+
+.mission-banner p{
+  margin-top:6px;
+  color:rgba(255,255,255,.65);
+  font-size:12px;
+  max-width:800px;
+}
+
+/* LESSON */
+
+.lesson-box{
+  margin-bottom:16px;
+  border:1px solid #dbeafe;
+  background:linear-gradient(135deg,#eff6ff,#f8fbff);
+  border-radius:20px;
+  padding:23px;
+}
+
+.lesson-heading{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  margin-bottom:12px;
+}
+
+.lesson-heading-icon{
+  width:38px;
+  height:38px;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:white;
+  border:1px solid #dbeafe;
+  font-size:18px;
+}
+
+.lesson-heading h3{
+  font-size:15px;
+  font-weight:800;
+}
+
+.lesson-content{
+  color:#40536f;
+  font-size:13px;
+  line-height:1.9;
+}
+
+.lesson-content p{margin-bottom:10px}
+.lesson-content p:last-child{margin-bottom:0}
+
+.lesson-content strong{color:#10213f}
+
+.key-points{
+  margin-top:14px;
+  display:grid;
+  gap:8px;
+}
+
+.key-point{
+  padding:10px 12px;
+  background:white;
+  border:1px solid #e1eaf7;
+  border-radius:12px;
+  font-size:12px;
+  color:#475569;
+}
+
+/* CONTENT GRID */
+
+.content-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+
+.content-card{
+  border:1px solid var(--border);
+  background:var(--surface-soft);
+  border-radius:20px;
+  padding:21px;
+}
+
+.content-card.full{grid-column:1/-1}
+
+.card-icon{
+  width:38px;
+  height:38px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  background:white;
+  border:1px solid var(--border);
+  font-size:18px;
+  margin-bottom:13px;
+}
+
+.content-card h3{
+  font-size:14px;
+  margin-bottom:7px;
+  font-weight:800;
+}
+
+.content-card p{
+  color:#53647d;
+  font-size:12px;
+  line-height:1.8;
+}
+
+/* EXAMPLE */
+
+.example-box{
+  margin-top:12px;
+  display:grid;
+  gap:9px;
+}
+
+.example-good,
+.example-bad{
+  padding:13px;
+  border-radius:12px;
+  font-size:11px;
+  line-height:1.7;
+}
+
+.example-good{
+  background:#ecfdf3;
+  border:1px solid #bbf7d0;
+  color:#166534;
+}
+
+.example-bad{
+  background:#fff1f2;
+  border:1px solid #fecdd3;
+  color:#9f1239;
+}
+
+/* TASKS */
+
+.task-list{
+  list-style:none;
+  margin-top:13px;
+  display:grid;
+  gap:9px;
+}
+
+.task-item{
+  display:flex;
+  gap:9px;
+  align-items:flex-start;
+  color:#53647d;
+  font-size:12px;
+}
+
+.task-item::before{
+  content:"✓";
+  flex:0 0 auto;
+  width:19px;
+  height:19px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#dbeafe;
+  color:var(--blue);
+  font-size:10px;
+  font-weight:900;
+}
+
+/* CHECKLIST */
+
+.checklist{
+  margin-top:13px;
+  display:grid;
+  gap:8px;
+}
+
+.check-item{
+  display:flex;
+  align-items:flex-start;
+  gap:9px;
+  padding:10px;
+  background:white;
+  border:1px solid var(--border);
+  border-radius:11px;
+  color:#53647d;
+  font-size:11px;
+}
+
+.check-item input{
+  margin-top:3px;
+  accent-color:var(--blue);
+}
+
+/* PROOF */
+
+.proof-box{
+  margin-top:12px;
+  padding:14px;
+  border-radius:13px;
+  background:white;
+  border:1px dashed #cbd5e1;
+  color:#475569;
+  font-size:11px;
+  line-height:1.7;
+}
+
+/* REFLECTION */
+
+.reflection-box{
+  margin-top:13px;
+  padding:14px;
+  border-radius:13px;
+  background:white;
+  border:1px solid var(--border);
+}
+
+.reflection-box label{
+  display:block;
+  font-size:11px;
+  font-weight:800;
+  margin-bottom:7px;
+  color:#334155;
+}
+
+.reflection-box textarea{
+  width:100%;
+  min-height:85px;
+  resize:vertical;
+  border:1px solid #dbe2ea;
+  border-radius:10px;
+  padding:10px;
+  font-family:inherit;
+  font-size:11px;
+  outline:none;
+}
+
+.reflection-box textarea:focus{
+  border-color:#93c5fd;
+  box-shadow:0 0 0 3px rgba(37,99,235,.08);
+}
+
+/* PRO TIP */
+
+.pro-tip{
+  background:linear-gradient(135deg,#fffaf0,#fffdf7);
+  border-color:#f4dfae;
+}
+
+.pro-tip .card-icon{
+  background:#fff7df;
+  border-color:#f4dfae;
+}
+
+/* ETHICS */
+
+.ethics-box{
+  margin-top:16px;
+  padding:20px;
+  border-radius:18px;
+  background:#fff7ed;
+  border:1px solid #fed7aa;
+}
+
+.ethics-box h3{
+  font-size:14px;
+  color:#9a3412;
+}
+
+.ethics-box p{
+  margin-top:6px;
+  font-size:11px;
+  color:#7c4a2a;
+  line-height:1.8;
+}
+
+.ethics-list{
+  margin-top:10px;
+  list-style:none;
+  display:grid;
+  gap:6px;
+}
+
+.ethics-list li{
+  font-size:11px;
+  color:#7c4a2a;
+}
+
+.ethics-list li::before{
+  content:"•";
+  margin-right:7px;
+  font-weight:900;
+}
+
+/* COMPLETION */
+
+.completion-box{
+  margin-top:24px;
+  border-radius:20px;
+  padding:21px;
+  background:#f8fafc;
+  border:1px solid var(--border);
+}
+
+.completion-title{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:14px;
+  font-weight:800;
+}
+
+.completion-checkbox{
+  margin-top:15px;
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  padding:13px;
+  border-radius:14px;
+  background:white;
+  border:1px solid var(--border);
+  cursor:pointer;
+  font-size:12px;
+  color:#475569;
+}
+
+.completion-checkbox input{
+  margin-top:3px;
+  accent-color:var(--blue);
+}
+
+.complete-btn{
+  width:100%;
+  border:none;
+  margin-top:14px;
+  padding:15px;
+  border-radius:14px;
+  background:linear-gradient(135deg,#2563eb,#1d4ed8);
+  color:white;
+  font-size:13px;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow:0 12px 25px rgba(37,99,235,.22);
+  transition:.2s;
+}
+
+.complete-btn:hover:not(:disabled){
+  transform:translateY(-2px);
+}
+
+.complete-btn:disabled{
+  background:#cbd5e1;
+  box-shadow:none;
+  cursor:not-allowed;
+}
+
+/* LOCK */
+
+.lock-box{
+  margin-top:22px;
+  padding:21px;
+  border-radius:19px;
+  background:#fff8eb;
+  border:1px solid #f5dfb0;
+  text-align:center;
+}
+
+.lock-icon{font-size:28px;margin-bottom:6px}
+.lock-box h3{font-size:15px}
+.lock-box p{
+  margin-top:4px;
+  color:#7c6540;
+  font-size:11px;
+}
+
+.timer{
+  margin-top:10px;
+  font-size:21px;
+  font-weight:800;
+  color:#9a6700;
+}
+
+/* FINAL TEST */
+
+.assessment{
+  margin-top:25px;
+  border-radius:28px;
+  overflow:hidden;
+  background:linear-gradient(135deg,#07152f,#0c2850);
+  color:white;
+  box-shadow:var(--shadow-lg);
+}
+
+.assessment-head{
+  padding:30px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.assessment-head h2{
+  font-family:"Plus Jakarta Sans",sans-serif;
+  font-size:31px;
+  margin-top:15px;
+}
+
+.assessment-head p{
+  color:rgba(255,255,255,.6);
+  max-width:700px;
+  font-size:13px;
+  margin-top:7px;
+}
+
+.assessment-body{padding:30px}
+
+.question{
+  padding:20px;
+  border-radius:18px;
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.09);
+  margin-bottom:13px;
+}
+
+.question-number{
+  color:#78c9ff;
+  font-size:10px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+}
+
+.question h3{
+  font-size:14px;
+  margin:5px 0 13px;
+}
+
+.option{
+  display:block;
+  padding:10px 12px;
+  border-radius:11px;
+  background:rgba(255,255,255,.045);
+  margin-top:7px;
+  cursor:pointer;
+  font-size:11px;
+  color:rgba(255,255,255,.72);
+}
+
+.option:hover{background:rgba(255,255,255,.09)}
+
+.option input{
+  accent-color:#60a5fa;
+  margin-right:7px;
+}
+
+.submit-test{
+  width:100%;
+  margin-top:10px;
+  padding:15px;
+  border:none;
+  border-radius:14px;
+  background:linear-gradient(135deg,#f5b942,#f59e0b);
+  color:#07152f;
+  font-weight:900;
+  cursor:pointer;
+  font-size:13px;
+}
+
+.result-box{
+  margin-top:18px;
+  padding:22px;
+  border-radius:17px;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.1);
+  text-align:center;
+}
+
+.score{
+  font-size:38px;
+  font-weight:900;
+}
+
+/* CERTIFICATE */
+
+.certificate{
+  margin-top:25px;
+  padding:42px 30px;
+  border-radius:28px;
+  text-align:center;
+  background:
+    radial-gradient(circle at top,rgba(245,185,66,.18),transparent 35%),
+    linear-gradient(135deg,#07152f,#102d53);
+  color:white;
+  border:1px solid rgba(245,185,66,.22);
+  box-shadow:var(--shadow-lg);
+}
+
+.certificate-badge{
+  width:78px;
+  height:78px;
+  border-radius:50%;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,#f5b942,#f59e0b);
+  color:#07152f;
+  font-size:31px;
+}
+
+.certificate h2{
+  margin-top:20px;
+  font-family:"Plus Jakarta Sans",sans-serif;
+  font-size:34px;
+}
+
+.certificate p{
+  color:rgba(255,255,255,.65);
+  max-width:600px;
+  margin:8px auto 0;
+  font-size:12px;
+}
+
+.certificate-name{
+  margin-top:18px;
+  font-size:20px;
+  font-weight:800;
+  color:#f7d37b;
+}
+
+/* FOOTER */
+
+footer{
+  max-width:1200px;
+  margin:auto;
+  padding:0 20px 45px;
+  color:#8a98aa;
+  font-size:10px;
+  text-align:center;
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+  .hero-grid{grid-template-columns:1fr;gap:25px}
+  .hero-inner{padding-top:48px}
+  .hero h1{font-size:41px}
+  .progress-dashboard{grid-template-columns:1fr}
+  .current-badge{width:100%}
+  .content-grid{grid-template-columns:1fr}
+  .content-card.full{grid-column:auto}
+  .training-top,
+  .training-body,
+  .assessment-head,
+  .assessment-body{padding:22px}
+}
+
+@media(max-width:560px){
+  .brand-text{display:none}
+  .member-mini span{display:none}
+  .topbar-inner{min-height:66px}
+  .hero-stat{padding:12px}
+  .hero-stat strong{font-size:18px}
+  .hero h1{font-size:35px}
+  .main{padding-left:12px;padding-right:12px}
+  .training-card,
+  .assessment,
+  .certificate{border-radius:21px}
+}
+</style>
 </head>
 
 <body>
 
-  <!-- =========================
-       LOADING SCREEN
-  ========================== -->
+<div id="loadingScreen">
+  <div class="loader-box">
+    <div class="loader-logo">IBB</div>
+    <h2>Opening your Academy</h2>
+    <p>Verifying your member session...</p>
+    <div class="spinner"></div>
+  </div>
+</div>
 
-  <div id="loadingScreen">
-    <div class="loader-box">
-      <div class="loader-logo">IBB</div>
-      <h2>Opening your Academy</h2>
-      <p>Verifying your member session...</p>
-      <div class="spinner"></div>
+<div id="app" class="hidden">
+
+<header class="topbar">
+  <div class="topbar-inner">
+
+    <div class="brand">
+      <div class="brand-mark">IBB</div>
+      <div class="brand-text">
+        <strong>INDIAN BUSINESS BUREAU</strong>
+        <span>Promoter Academy</span>
+      </div>
     </div>
+
+    <div class="top-actions">
+      <div class="member-mini">
+        <div class="avatar" id="avatar">I</div>
+        <span id="topMemberName">IBB Member</span>
+      </div>
+
+      <button class="logout-btn" id="logoutBtn">Logout</button>
+    </div>
+
   </div>
+</header>
 
-  <!-- =========================
-       APP
-  ========================== -->
+<section class="hero">
 
-  <div id="app" class="hidden">
+  <div class="hero-inner">
 
-    <!-- TOPBAR -->
-    <header class="topbar">
-      <div class="topbar-inner">
+    <div class="eyebrow">
+      <span class="eyebrow-dot"></span>
+      10-Day Promoter Academy
+    </div>
 
-        <div class="brand">
-          <div class="brand-mark">IBB</div>
+    <div class="hero-grid">
 
-          <div class="brand-text">
-            <strong>INDIAN BUSINESS BUREAU</strong>
-            <span>Promoter Academy</span>
-          </div>
-        </div>
+      <div>
+        <h1>
+          Learn the skill.
+          <span>Build the habit.</span>
+        </h1>
 
-        <div class="top-actions">
-
-          <div class="member-mini">
-            <div class="avatar" id="avatar">I</div>
-            <span id="topMemberName">IBB Member</span>
-          </div>
-
-          <button class="logout-btn" id="logoutBtn">
-            Logout
-          </button>
-
-        </div>
-
-      </div>
-    </header>
-
-    <!-- HERO -->
-    <section class="hero">
-
-      <div class="hero-inner">
-
-        <div class="eyebrow">
-          <span class="eyebrow-dot"></span>
-          10-Day Promoter Academy
-        </div>
-
-        <div class="hero-grid">
-
-          <div>
-            <h1>
-              Don't just join the community.
-              <span>Become valuable to it.</span>
-            </h1>
-
-            <p class="hero-description">
-              A practical 10-day journey designed to help you understand
-              campaigns, create better content, build proof, and develop
-              the habits of a reliable IBB promoter.
-            </p>
-          </div>
-
-          <div class="hero-stats">
-
-            <div class="hero-stat">
-              <strong>10</strong>
-              <span>Training Days</span>
-            </div>
-
-            <div class="hero-stat">
-              <strong>20</strong>
-              <span>Assessment Qs</span>
-            </div>
-
-            <div class="hero-stat">
-              <strong>80%</strong>
-              <span>Pass Mark</span>
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-    <main class="main">
-
-      <!-- PROGRESS -->
-      <section class="progress-dashboard">
-
-        <div>
-
-          <div class="progress-label">
-            <strong>Your Academy Progress</strong>
-            <span class="progress-percent" id="progressPercent">0%</span>
-          </div>
-
-          <div class="progress-track">
-            <div class="progress-fill" id="progressFill"></div>
-          </div>
-
-          <div class="progress-meta">
-            <span id="completedText">0 of 10 days completed</span>
-            <span id="consistencyText">Build your consistency</span>
-          </div>
-
-        </div>
-
-        <div class="current-badge">
-          <strong id="currentDayBadge">DAY 1</strong>
-          <span>Current mission</span>
-        </div>
-
-      </section>
-
-      <!-- DAY NAVIGATION -->
-      <div class="section-heading">
-        <h2>Your 10-Day Journey</h2>
-        <p>Each day unlocks the next part of your promoter skillset.</p>
-      </div>
-
-      <div class="day-nav" id="dayNav"></div>
-
-      <!-- TRAINING -->
-      <section id="trainingSection">
-
-        <div class="training-card">
-
-          <div class="training-top">
-
-            <div class="day-kicker">
-              <span class="line"></span>
-              Day <span id="dayNumber">1</span>
-            </div>
-
-            <h2 class="training-title" id="dayTitle">
-              Welcome to IBB
-            </h2>
-
-            <p class="training-subtitle" id="daySubtitle"></p>
-
-            <div class="training-tags">
-              <span class="tag">⏱ <span id="dayTime">15 min</span></span>
-              <span class="tag">🎯 Practical</span>
-              <span class="tag">⚡ Skill Building</span>
-            </div>
-
-          </div>
-
-          <div class="training-body">
-
-            <!-- MISSION -->
-            <div class="mission-banner">
-
-              <small>Today's objective</small>
-
-              <h3 id="missionTitle">
-                Understand your role.
-              </h3>
-
-              <p id="missionText"></p>
-
-            </div>
-
-            <!-- CONTENT -->
-            <div class="content-grid">
-
-              <div class="content-card">
-
-                <div class="card-icon">🧠</div>
-
-                <h3>What you'll master</h3>
-
-                <p id="learnText"></p>
-
-              </div>
-
-              <div class="content-card">
-
-                <div class="card-icon">🚀</div>
-
-                <h3>Your mission</h3>
-
-                <p id="taskIntro"></p>
-
-                <ul class="task-list" id="taskList"></ul>
-
-              </div>
-
-              <div class="content-card">
-
-                <div class="card-icon">📸</div>
-
-                <h3>Proof of completion</h3>
-
-                <div class="proof-box" id="proofText"></div>
-
-              </div>
-
-              <div class="content-card pro-tip">
-
-                <div class="card-icon">💡</div>
-
-                <h3>IBB Pro Insight</h3>
-
-                <p id="tipText"></p>
-
-              </div>
-
-            </div>
-
-            <!-- COMPLETION -->
-            <div class="completion-box">
-
-              <div class="completion-title">
-                <span>✅</span>
-                <span>Daily completion check</span>
-              </div>
-
-              <label class="completion-checkbox">
-                <input type="checkbox" id="completionCheck" />
-                <span>
-                  I completed today's learning and practical mission.
-                </span>
-              </label>
-
-              <button
-                class="complete-btn"
-                id="completeBtn"
-                disabled
-              >
-                Mark Day Complete →
-              </button>
-
-            </div>
-
-            <!-- LOCK -->
-            <div class="lock-box hidden" id="lockBox">
-
-              <div class="lock-icon">🔒</div>
-
-              <h3>Next mission is warming up</h3>
-
-              <p>
-                To keep the Academy practical, the next day unlocks
-                24 hours after your previous completion.
-              </p>
-
-              <div class="timer" id="timer">
-                24:00:00
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-      <!-- FINAL ASSESSMENT -->
-      <section
-        class="assessment hidden"
-        id="assessmentSection"
-      >
-
-        <div class="assessment-head">
-
-          <div class="eyebrow">
-            🏆 Final Assessment
-          </div>
-
-          <h2>Ready to prove your promoter skillset?</h2>
-
-          <p>
-            Complete the final assessment after finishing the 10-day
-            Academy. You need at least 80% to become IBB Promoter Certified.
-          </p>
-
-        </div>
-
-        <div class="assessment-body">
-
-          <form id="testForm"></form>
-
-          <button
-            class="submit-test"
-            id="submitTest"
-          >
-            Submit Final Assessment →
-          </button>
-
-          <div
-            class="result-box hidden"
-            id="resultBox"
-          ></div>
-
-        </div>
-
-      </section>
-
-      <!-- CERTIFICATE -->
-      <section
-        class="certificate hidden"
-        id="certificateSection"
-      >
-
-        <div class="certificate-badge">
-          🏆
-        </div>
-
-        <h2>IBB PROMOTER CERTIFIED</h2>
-
-        <p>
-          You completed the IBB Promoter Academy and demonstrated
-          the required understanding through the final assessment.
+        <p class="hero-description">
+          A practical 10-day training journey covering campaign basics,
+          business research, content creation, UGC, publishing,
+          proof, communication and professional promoter habits.
         </p>
+      </div>
 
-        <div
-          class="certificate-name"
-          id="certificateName"
-        >
-          IBB Promoter
+      <div class="hero-stats">
+
+        <div class="hero-stat">
+          <strong>10</strong>
+          <span>Training Days</span>
         </div>
 
-      </section>
+        <div class="hero-stat">
+          <strong>20</strong>
+          <span>Assessment Qs</span>
+        </div>
 
-    </main>
+        <div class="hero-stat">
+          <strong>80%</strong>
+          <span>Pass Mark</span>
+        </div>
 
-    <footer>
-      Indian Business Bureau • IBB Promoter Academy
-      <br />
-      Build skills. Create proof. Become reliable.
-    </footer>
+      </div>
+
+    </div>
 
   </div>
 
-  <script>
-
-    /* =========================================================
-       SUPABASE CONFIG
-       ========================================================= */
-
-    const SUPABASE_URL =
-      "https://tvantyrkjxoljjpnadac.supabase.co";
-
-    /*
-      IMPORTANT:
-      Paste your SUPABASE PUBLISHABLE KEY here.
-
-      Do NOT use a sb_secret key / service_role key.
-    */
-
-    const SUPABASE_PUBLISHABLE_KEY =
-      "sb_publishable_t0Z_jIqNeUde0fZ4YS8h3Q_fQHLO_GV";
-
-    const supabaseClient =
-      window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_PUBLISHABLE_KEY
-      );
-
-
-    /* =========================================================
-       TRAINING DATA
-       ========================================================= */
-
-    const trainingData = [
-
-      {
-        title: "Welcome to IBB",
-        subtitle:
-          "Understand the community, your role and the mindset of a reliable promoter.",
-        time: "15 min",
-        mission:
-          "Understand what makes a promoter valuable inside a business community.",
-        missionText:
-          "Before creating content or joining campaigns, understand the bigger picture: trust, consistency, communication and responsible promotion.",
-        learn:
-          "You'll learn how IBB works, why promoters matter and what behaviour creates long-term trust.",
-        taskIntro:
-          "Get your foundation ready.",
-        tasks: [
-          "Read the IBB community guidelines",
-          "Understand what a promoter is responsible for",
-          "Write down one skill you want to improve during these 10 days"
-        ],
-        proof:
-          "Your proof can simply be a short written note containing your learning goal and one thing you understood about the promoter role.",
-        tip:
-          "A strong promoter is not the person who posts the most. It is the person the community can depend on."
-      },
-
-      {
-        title: "How Campaigns Work",
-        subtitle:
-          "Learn how a campaign moves from brief to content to proof.",
-        time: "20 min",
-        mission:
-          "See a campaign from the business's point of view.",
-        missionText:
-          "Understand the journey: campaign brief → promoter action → content → proof → verification.",
-        learn:
-          "You'll learn why campaign instructions matter and how small mistakes can affect the final result.",
-        taskIntro:
-          "Break down a campaign.",
-        tasks: [
-          "Identify the campaign objective",
-          "Identify the exact deliverables",
-          "Identify what proof would be required",
-          "Write one question you would ask before starting"
-        ],
-        proof:
-          "Create a simple campaign flow in your notes showing the 5 steps from brief to verification.",
-        tip:
-          "Never rush into a campaign before understanding the brief. Clarity saves more time than speed."
-      },
-
-      {
-        title: "Create Better Photos",
-        subtitle:
-          "Learn simple principles that make ordinary business photos look intentional.",
-        time: "20 min",
-        mission:
-          "Turn a normal photo into useful business content.",
-        missionText:
-          "Focus on light, framing, cleanliness, context and the story the photo communicates.",
-        learn:
-          "You'll learn practical composition basics without needing expensive equipment.",
-        taskIntro:
-          "Practice your eye.",
-        tasks: [
-          "Find a product or business object",
-          "Take one clean well-lit photo",
-          "Try a second angle",
-          "Compare both and choose the stronger one"
-        ],
-        proof:
-          "Keep both photos and write one sentence explaining why your selected photo is stronger.",
-        tip:
-          "Good content usually starts before the camera opens. First clean the scene, then frame it."
-      },
-
-      {
-        title: "Make Engaging Reels",
-        subtitle:
-          "Understand the structure behind short-form business content.",
-        time: "25 min",
-        mission:
-          "Build a short video with a clear beginning, middle and end.",
-        missionText:
-          "Your goal is not complicated editing. Your goal is making someone understand why the content deserves attention.",
-        learn:
-          "You'll learn hooks, pacing, visual changes and simple calls to action.",
-        taskIntro:
-          "Create a mini reel.",
-        tasks: [
-          "Write a one-line hook",
-          "Record 3–5 short clips",
-          "Arrange them into a simple sequence",
-          "Add a clear ending"
-        ],
-        proof:
-          "Create a short practice reel, even if you don't publish it.",
-        tip:
-          "The first few seconds answer one question: 'Why should I keep watching?'"
-      },
-
-      {
-        title: "UGC That Feels Real",
-        subtitle:
-          "Learn how authentic user-generated content builds trust.",
-        time: "20 min",
-        mission:
-          "Create content that feels like a real recommendation, not an advertisement.",
-        missionText:
-          "People connect with specific experiences, honest observations and natural language.",
-        learn:
-          "You'll learn how to combine personal experience with useful information without sounding scripted.",
-        taskIntro:
-          "Write a natural UGC concept.",
-        tasks: [
-          "Choose one product or service",
-          "Write your genuine first impression",
-          "Add one useful detail",
-          "Finish with a natural recommendation"
-        ],
-        proof:
-          "Save your script or talking points. Keep the language conversational.",
-        tip:
-          "Authenticity is not about being perfect. It is about sounding like a real person."
-      },
-
-      {
-        title: "Edit Like a Pro",
-        subtitle:
-          "Learn the editing decisions that make content feel cleaner.",
-        time: "25 min",
-        mission:
-          "Improve clarity without over-editing.",
-        missionText:
-          "Use cuts, captions, timing and sound intentionally. Every edit should make the message easier to follow.",
-        learn:
-          "You'll learn the difference between decoration and useful editing.",
-        taskIntro:
-          "Upgrade one piece of content.",
-        tasks: [
-          "Remove unnecessary pauses",
-          "Add readable captions",
-          "Improve the opening",
-          "Check the final video on mobile"
-        ],
-        proof:
-          "Keep a before/after version or write down the three edits you made.",
-        tip:
-          "Professional editing often looks simple because unnecessary things have been removed."
-      },
-
-      {
-        title: "Publish & Promote",
-        subtitle:
-          "Understand how to publish content responsibly and effectively.",
-        time: "20 min",
-        mission:
-          "Learn to publish with purpose instead of simply posting.",
-        missionText:
-          "Think about caption clarity, timing, audience, tags and the action you want viewers to take.",
-        learn:
-          "You'll learn the basics of turning content into a useful business touchpoint.",
-        taskIntro:
-          "Build a publishing plan.",
-        tasks: [
-          "Write a short caption",
-          "Choose a relevant audience",
-          "Choose an appropriate call to action",
-          "Check the post before publishing"
-        ],
-        proof:
-          "Save your planned caption and posting checklist.",
-        tip:
-          "Promotion without relevance feels like noise. Promotion with context feels useful."
-      },
-
-      {
-        title: "Proof & Verification",
-        subtitle:
-          "Learn why proper proof is one of the most important promoter habits.",
-        time: "15 min",
-        mission:
-          "Understand how to document your work clearly.",
-        missionText:
-          "A completed task without reliable proof can be difficult to verify. Learn what makes evidence useful.",
-        learn:
-          "You'll learn how screenshots, links, timestamps and clear records support campaign verification.",
-        taskIntro:
-          "Create a proof checklist.",
-        tasks: [
-          "List the action you completed",
-          "Identify what evidence proves it",
-          "Record where the evidence is stored",
-          "Check that another person could understand it"
-        ],
-        proof:
-          "Create your own four-step proof checklist for future campaigns.",
-        tip:
-          "If someone else cannot understand your proof in a few seconds, your documentation probably needs improvement."
-      },
-
-      {
-        title: "Become a Reliable Promoter",
-        subtitle:
-          "Build the habits businesses and communities value.",
-        time: "20 min",
-        mission:
-          "Move from 'someone who participates' to 'someone people can trust'.",
-        missionText:
-          "Reliability comes from communication, deadlines, accurate proof and professional behaviour.",
-        learn:
-          "You'll learn the behaviours that make a promoter easier to work with.",
-        taskIntro:
-          "Design your promoter standard.",
-        tasks: [
-          "Write your communication rules",
-          "Create a simple deadline habit",
-          "Create a proof habit",
-          "Write one behaviour you will never compromise on"
-        ],
-        proof:
-          "Save your personal Promoter Standard as a short checklist.",
-        tip:
-          "Skills get you noticed. Reliability gets you invited back."
-      },
-
-      {
-        title: "Final Campaign Challenge",
-        subtitle:
-          "Bring everything together and think like a real campaign operator.",
-        time: "30 min",
-        mission:
-          "Design a complete campaign response from brief to proof.",
-        missionText:
-          "Use everything you've learned: content, communication, execution and verification.",
-        learn:
-          "You'll bring your knowledge together into one practical campaign workflow.",
-        taskIntro:
-          "Complete your final challenge.",
-        tasks: [
-          "Choose a fictional business",
-          "Define the campaign objective",
-          "Create a content idea",
-          "Define your proof",
-          "Explain how you would communicate completion"
-        ],
-        proof:
-          "Create a one-page campaign plan containing objective, content idea, execution steps and proof.",
-        tip:
-          "The strongest promoters think beyond the post. They understand the whole campaign journey."
-      }
-
-    ];
-
-
-    /* =========================================================
-       FINAL TEST QUESTIONS
-       ========================================================= */
-
-    const questions = [
-
-      {
-        q: "What is the most important first step before joining a campaign?",
-        options: [
-          "Post immediately",
-          "Understand the campaign brief",
-          "Ask for payment",
-          "Copy another promoter"
-        ],
-        answer: 1
-      },
-
-      {
-        q: "What makes a promoter valuable?",
-        options: [
-          "Posting randomly",
-          "Being reliable and clear",
-          "Using expensive equipment",
-          "Having the most followers"
-        ],
-        answer: 1
-      },
-
-      {
-        q: "What is good business photography mainly about?",
-        options: [
-          "Expensive cameras",
-          "Lighting, framing and context",
-          "Filters only",
-          "Maximum brightness"
-        ],
-        answer: 1
-      },
-
-      {
-        q: "What should a short-form video do early?",
-        options: [
-          "Hide the main point",
-          "Give viewers a reason to continue",
-          "Use as many effects as possible",
-          "Show a long intro"
-        ],
-        answer: 1
-      },
-
-      {
-        q: "UGC generally works best when it feels:",
-        options: [
-          "Over-scripted",
-          "Natural and specific",
-          "Completely generic",
-          "Unrelated to the product"
-        ],
-        answer: 1
-      },
-
-      {
-        q: "What is the purpose of editing?",
-        options: [
-          "Add every possible effect",
-          "Make the message clearer",
-          "Make the video longer",
-          "Hide mistakes only"
-        ],
-        answer: 1
-      },
-
-      {
-        q: "A good call to action should be:",
-        options: [
-          "Relevant and clear",
-          "Completely unrelated",
-          "Extremely confusing",
-          "Missing"
-        ],
-        answer: 0
-      },
-
-      {
-        q: "Why is proof important?",
-        options: [
-          "It makes content longer",
-          "It supports verification",
-          "It replaces communication",
-          "It increases followers automatically"
-        ],
-        answer: 1
-      },
-
-      {
-        q: "Which behaviour builds trust?",
-        options: [
-          "Ignoring deadlines",
-          "Clear communication",
-          "Changing campaign requirements",
-          "Submitting unclear proof"
-        ],
-        answer: 1
-      },
-
-      {
-        q: "A reliable promoter should:",
-        options: [
-          "Disappear after receiving a brief",
-          "Communicate clearly and complete commitments",
-          "Avoid documentation",
-          "Ignore instructions"
-        ],
-        answer: 1
-      },
-
-      {
-        q: "What should you do when a campaign instruction is unclear?",
-        options: [
-          "Guess",
-          "Ask a clear question",
-          "Ignore it",
-          "Change the campaign"
-        ],
-        answer: 1
-      },
-
-      {
-        q: "What is a useful proof record?",
-        options: [
-          "Something nobody can understand",
-          "Clear evidence connected to the task",
-          "An unrelated screenshot",
-          "A blank message"
-        ],
-        answer: 1
-      },
-
-      {
-        q: "Professional content should primarily be:",
-        options: [
-          "Useful and relevant",
-          "Random",
-          "Misleading",
-          "Unclear"
-        ],
-        answer: 0
-      },
-
-      {
-        q: "What is a strong promoter mindset?",
-        options: [
-          "Do the minimum",
-          "Create value and remain dependable",
-          "Focus only on followers",
-          "Ignore feedback"
-        ],
-        answer: 1
-      },
-
-      {
-        q: "What makes a reel easier to watch?",
-        options: [
-          "Unnecessary pauses",
-          "Clear pacing",
-          "Long silent sections",
-          "No structure"
-        ],
-        answer: 1
-      },
-
-      {
-        q: "Before publishing, you should:",
-        options: [
-          "Skip checking",
-          "Review the content",
-          "Delete the caption",
-          "Ignore the audience"
-        ],
-        answer: 1
-      },
-
-      {
-        q: "Why does context matter in promotion?",
-        options: [
-          "It helps the audience understand relevance",
-          "It hides the business",
-          "It makes posts confusing",
-          "It removes the need for proof"
-        ],
-        answer: 0
-      },
-
-      {
-        q: "A promoter's personal standard should include:",
-        options: [
-          "Communication and accountability",
-          "Ignoring tasks",
-          "Random posting",
-          "No documentation"
-        ],
-        answer: 0
-      },
-
-      {
-        q: "What should a campaign plan contain?",
-        options: [
-          "Only a caption",
-          "Objective, execution and proof",
-          "Only hashtags",
-          "Only a photo"
-        ],
-        answer: 1
-      },
-
-      {
-        q: "What is the best long-term promoter advantage?",
-        options: [
-          "Being dependable",
-          "Posting the most",
-          "Using the most effects",
-          "Having the longest captions"
-        ],
-        answer: 0
-      }
-
-    ];
-
-
-    /* =========================================================
-       STATE
-    ========================================================= */
-
-    let currentUser = null;
-    let profile = null;
-
-    let memberName = "IBB Promoter";
-    let memberId = "IBB Member";
-
-    let currentDay = 1;
-    let lastCompletion = null;
-    let completedDays = [];
-
-    let timerInterval = null;
-
-
-    /* =========================================================
-       DOM
-    ========================================================= */
-
-    const loadingScreen =
-      document.getElementById("loadingScreen");
-
-    const app =
-      document.getElementById("app");
-
-    const dayNav =
-      document.getElementById("dayNav");
-
-    const dayNumber =
-      document.getElementById("dayNumber");
-
-    const dayTitle =
-      document.getElementById("dayTitle");
-
-    const daySubtitle =
-      document.getElementById("daySubtitle");
-
-    const dayTime =
-      document.getElementById("dayTime");
-
-    const missionTitle =
-      document.getElementById("missionTitle");
-
-    const missionText =
-      document.getElementById("missionText");
-
-    const learnText =
-      document.getElementById("learnText");
-
-    const taskIntro =
-      document.getElementById("taskIntro");
-
-    const taskList =
-      document.getElementById("taskList");
-
-    const proofText =
-      document.getElementById("proofText");
-
-    const tipText =
-      document.getElementById("tipText");
-
-    const completionCheck =
-      document.getElementById("completionCheck");
-
-    const completeBtn =
-      document.getElementById("completeBtn");
-
-    const lockBox =
-      document.getElementById("lockBox");
-
-    const timer =
-      document.getElementById("timer");
-
-    const progressFill =
-      document.getElementById("progressFill");
-
-    const progressPercent =
-      document.getElementById("progressPercent");
-
-    const completedText =
-      document.getElementById("completedText");
-
-    const consistencyText =
-      document.getElementById("consistencyText");
-
-    const currentDayBadge =
-      document.getElementById("currentDayBadge");
-
-    const topMemberName =
-      document.getElementById("topMemberName");
-
-    const avatar =
-      document.getElementById("avatar");
-
-    const assessmentSection =
-      document.getElementById("assessmentSection");
-
-    const certificateSection =
-      document.getElementById("certificateSection");
-
-    const certificateName =
-      document.getElementById("certificateName");
-
-
-    /* =========================================================
-       STORAGE
-    ========================================================= */
-
-    function storageKey(name) {
-      return `${name}_${memberId}`;
-    }
-
-
-    function loadProgress() {
-
-      completedDays =
-        JSON.parse(
-          localStorage.getItem(
-            storageKey("ibb_10day_completed")
-          ) || "[]"
-        );
-
-      currentDay =
-        parseInt(
-          localStorage.getItem(
-            storageKey("ibb_10day_current")
-          ) || "1"
-        );
-
-      lastCompletion =
-        localStorage.getItem(
-          storageKey("ibb_10day_last_completion")
-        );
-
-      if (currentDay < 1) currentDay = 1;
-
-      if (currentDay > 10) currentDay = 10;
-
-    }
-
-
-    function saveProgress() {
-
-      localStorage.setItem(
-        storageKey("ibb_10day_completed"),
-        JSON.stringify(completedDays)
-      );
-
-      localStorage.setItem(
-        storageKey("ibb_10day_current"),
-        currentDay
-      );
-
-      if (lastCompletion) {
-
-        localStorage.setItem(
-          storageKey("ibb_10day_last_completion"),
-          lastCompletion
-        );
-
-      }
-
-    }
-
-
-    /* =========================================================
-       SUPABASE AUTH
-    ========================================================= */
-
-    async function checkAuth() {
-
-      try {
-
-        if (
-          SUPABASE_PUBLISHABLE_KEY ===
-          "PASTE_YOUR_PUBLISHABLE_KEY_HERE"
-        ) {
-
-          alert(
-            "Supabase publishable key is missing. Please paste your publishable key inside training.html."
-          );
-
-          return false;
-        }
-
-
-        const {
-          data,
-          error
-        } =
-          await supabaseClient.auth.getSession();
-
-
-        if (error) {
-
-          console.error(error);
-
-          return false;
-        }
-
-
-        if (!data.session) {
-
-          window.location.href = "login.html";
-
-          return false;
-        }
-
-
-        currentUser =
-          data.session.user;
-
-
-        /*
-          Load profile safely.
-
-          We use select("*") so we don't assume
-          exact profile column names.
-        */
-
-        const {
-          data: profileData,
-          error: profileError
-        } =
-          await supabaseClient
-            .from("profiles")
-            .select("*")
-            .eq("id", currentUser.id)
-            .single();
-
-
-        if (profileError) {
-
-          console.warn(
-            "Profile could not be loaded:",
-            profileError.message
-          );
-
-        }
-
-
-        profile = profileData || null;
-
-
-        /*
-          Name fallback order
-        */
-
-        memberName =
-          profile?.full_name ||
-          profile?.name ||
-          profile?.display_name ||
-          currentUser?.user_metadata?.full_name ||
-          currentUser?.user_metadata?.name ||
-          currentUser?.email?.split("@")[0] ||
-          "IBB Promoter";
-
-
-        /*
-          Member ID fallback order
-        */
-
-        memberId =
-          profile?.member_id ||
-          sessionStorage.getItem("ibb_member_id") ||
-          "IBB Member";
-
-
-        /*
-          Keep existing payment/session information
-          working with the new training page.
-        */
-
-        sessionStorage.setItem(
-          "ibb_name",
-          memberName
-        );
-
-        sessionStorage.setItem(
-          "ibb_member_id",
-          memberId
-        );
-
-
-        return true;
-
-      } catch (error) {
-
-        console.error(
-          "Authentication error:",
-          error
-        );
-
-        return false;
-      }
-
-    }
-
-
-    /* =========================================================
-       UI
-    ========================================================= */
-
-    function setupMemberUI() {
-
-      topMemberName.textContent =
-        memberName;
-
-      certificateName.textContent =
-        memberName;
-
-      const firstLetter =
-        memberName
-          .trim()
-          .charAt(0)
-          .toUpperCase();
-
-      avatar.textContent =
-        firstLetter || "I";
-
-    }
-
-
-    function renderDayNav() {
-
-      dayNav.innerHTML = "";
-
-      for (
-        let i = 1;
-        i <= trainingData.length;
-        i++
-      ) {
-
-        const data =
-          trainingData[i - 1];
-
-        const btn =
-          document.createElement("button");
-
-        btn.className =
-          "day-btn";
-
-        if (i === currentDay) {
-
-          btn.classList.add("active");
-
-        }
-
-        if (completedDays.includes(i)) {
-
-          btn.classList.add("completed");
-
-        }
-
-
-        const previousCompleted =
-          i === 1 ||
-          completedDays.includes(i - 1);
-
-
-        /*
-          Allow current day.
-          Future days stay locked.
-        */
-
-        if (
-          i > currentDay &&
-          !completedDays.includes(i)
-        ) {
-
-          btn.disabled = true;
-
-        }
-
-
-        btn.innerHTML = `
-          <span class="day-number">
-            ${completedDays.includes(i) ? "✓ Completed" : "Day " + i}
-          </span>
-          <span class="day-name">
-            ${data.title}
-          </span>
-        `;
-
-
-        btn.addEventListener(
-          "click",
-          () => {
-
-            currentDay = i;
-
-            renderAll();
-
-          }
-        );
-
-
-        dayNav.appendChild(btn);
-
-      }
-
-    }
-
-
-    function renderTraining() {
-
-      const data =
-        trainingData[currentDay - 1];
-
-
-      dayNumber.textContent =
-        currentDay;
-
-      dayTitle.textContent =
-        data.title;
-
-      daySubtitle.textContent =
-        data.subtitle;
-
-      dayTime.textContent =
-        data.time;
-
-      missionTitle.textContent =
-        data.mission;
-
-      missionText.textContent =
-        data.missionText;
-
-      learnText.textContent =
-        data.learn;
-
-      taskIntro.textContent =
-        data.taskIntro;
-
-      proofText.textContent =
-        data.proof;
-
-      tipText.textContent =
-        data.tip;
-
-
-      taskList.innerHTML = "";
-
-      data.tasks.forEach(task => {
-
-        const li =
-          document.createElement("li");
-
-        li.className =
-          "task-item";
-
-        li.textContent =
-          task;
-
-        taskList.appendChild(li);
-
-      });
-
-
-      completionCheck.checked = false;
-
-      completeBtn.disabled =
-        true;
-
-
-      const alreadyCompleted =
-        completedDays.includes(currentDay);
-
-
-      if (alreadyCompleted) {
-
-        completionCheck.checked =
-          true;
-
-        completionCheck.disabled =
-          true;
-
-        completeBtn.textContent =
-          "✓ Day Completed";
-
-        completeBtn.disabled =
-          true;
-
-        lockBox.classList.add("hidden");
-
-      } else {
-
-        completionCheck.disabled =
-          false;
-
-        completeBtn.textContent =
-          "Mark Day Complete →";
-
-        /*
-          Day 1 is immediately available.
-          Later days wait 24 hours after
-          previous completion.
-        */
-
-        if (
-          currentDay > 1 &&
-          lastCompletion
-        ) {
-
-          const diff =
-            Date.now() -
-            new Date(lastCompletion).getTime();
-
-          const required =
-            24 * 60 * 60 * 1000;
-
-
-          if (diff < required) {
-
-            lockBox.classList.remove(
-              "hidden"
-            );
-
-            startTimer(
-              required - diff
-            );
-
-          } else {
-
-            lockBox.classList.add(
-              "hidden"
-            );
-
-            stopTimer();
-
-          }
+</section>
 
-        } else {
+<main class="main">
 
-          lockBox.classList.add(
-            "hidden"
-          );
+<section class="progress-dashboard">
 
-          stopTimer();
+  <div>
 
-        }
+    <div class="progress-label">
+      <strong>Your Academy Progress</strong>
+      <span class="progress-percent" id="progressPercent">0%</span>
+    </div>
 
-      }
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
 
+    <div class="progress-meta">
+      <span id="completedText">0 of 10 days completed</span>
+      <span id="consistencyText">Start your journey</span>
+    </div>
 
-      currentDayBadge.textContent =
-        `DAY ${currentDay}`;
+  </div>
 
-    }
+  <div class="current-badge">
+    <strong id="currentDayBadge">DAY 1</strong>
+    <span>Current mission</span>
+  </div>
 
+</section>
 
-    function renderProgress() {
+<div class="section-heading">
+  <h2>Your 10-Day Journey</h2>
+  <p>Complete each lesson and practical mission to unlock the next day.</p>
+</div>
 
-      const count =
-        completedDays.length;
+<div class="day-nav" id="dayNav"></div>
 
-      const percent =
-        Math.round(
-          (count / 10) * 100
-        );
+<section id="trainingSection">
 
-      progressFill.style.width =
-        `${percent}%`;
+<div class="training-card">
 
-      progressPercent.textContent =
-        `${percent}%`;
+<div class="training-top">
 
-      completedText.textContent =
-        `${count} of 10 days completed`;
+<div class="day-kicker">
+  <span class="line"></span>
+  Day <span id="dayNumber">1</span>
+</div>
 
+<h2 class="training-title" id="dayTitle">Welcome to IBB</h2>
 
-      if (count === 0) {
+<p class="training-subtitle" id="daySubtitle"></p>
 
-        consistencyText.textContent =
-          "Start your journey";
+<div class="training-tags">
+  <span class="tag">⏱ <span id="dayTime">20 min</span></span>
+  <span class="tag">📖 Learning</span>
+  <span class="tag">🛠 Practice</span>
+  <span class="tag">🎯 Skill Building</span>
+</div>
 
-      } else if (count < 4) {
+</div>
 
-        consistencyText.textContent =
-          "Build your consistency";
+<div class="training-body">
 
-      } else if (count < 8) {
+<div class="mission-banner">
+  <small>Today's objective</small>
+  <h3 id="missionTitle"></h3>
+  <p id="missionText"></p>
+</div>
 
-        consistencyText.textContent =
-          "You're building momentum";
+<!-- ACTUAL LESSON -->
 
-      } else if (count < 10) {
+<div class="lesson-box">
 
-        consistencyText.textContent =
-          "Almost Academy complete";
+  <div class="lesson-heading">
+    <div class="lesson-heading-icon">📖</div>
+    <h3>Learn — Core Training Material</h3>
+  </div>
 
-      } else {
+  <div class="lesson-content" id="lessonContent"></div>
 
-        consistencyText.textContent =
-          "Academy completed 🎉";
+  <div class="key-points" id="keyPoints"></div>
 
-      }
+</div>
 
-    }
+<div class="content-grid">
 
+<div class="content-card">
 
-    function renderAssessmentVisibility() {
+  <div class="card-icon">💡</div>
 
-      const allCompleted =
-        completedDays.length >= 10;
+  <h3>Real Example</h3>
 
+  <p id="exampleText"></p>
 
-      if (allCompleted) {
+  <div class="example-box">
 
-        assessmentSection.classList.remove(
-          "hidden"
-        );
+    <div class="example-good">
+      <strong>✓ Better approach</strong><br>
+      <span id="goodExample"></span>
+    </div>
 
-        renderTest();
+    <div class="example-bad">
+      <strong>✕ Avoid this</strong><br>
+      <span id="badExample"></span>
+    </div>
 
-      } else {
+  </div>
 
-        assessmentSection.classList.add(
-          "hidden"
-        );
+</div>
 
-      }
+<div class="content-card">
 
+  <div class="card-icon">⚠️</div>
 
-      const passed =
-        localStorage.getItem(
-          storageKey("ibb_final_test")
-        ) === "passed";
+  <h3>Common Mistakes</h3>
 
+  <ul class="task-list" id="mistakeList"></ul>
 
-      if (passed) {
+</div>
 
-        certificateSection.classList.remove(
-          "hidden"
-        );
+<div class="content-card">
 
-      }
+  <div class="card-icon">🛠</div>
 
-    }
+  <h3>Practical Exercise</h3>
 
+  <p id="taskIntro"></p>
 
-    function renderAll() {
+  <ul class="task-list" id="taskList"></ul>
 
-      renderDayNav();
+</div>
 
-      renderTraining();
+<div class="content-card">
 
-      renderProgress();
+  <div class="card-icon">☑️</div>
 
-      renderAssessmentVisibility();
+  <h3>Skill Checklist</h3>
 
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
+  <div class="checklist" id="checklist"></div>
 
-    }
+</div>
 
+<div class="content-card">
 
-    /* =========================================================
-       COMPLETION
-    ========================================================= */
+  <div class="card-icon">📸</div>
 
-    completionCheck.addEventListener(
-      "change",
-      () => {
+  <h3>Proof of Completion</h3>
 
-        completeBtn.disabled =
-          !completionCheck.checked;
+  <div class="proof-box" id="proofText"></div>
 
-      }
-    );
+</div>
 
+<div class="content-card pro-tip">
 
-    completeBtn.addEventListener(
-      "click",
-      () => {
+  <div class="card-icon">💎</div>
 
-        if (
-          !completionCheck.checked
-        ) return;
+  <h3>IBB Pro Insight</h3>
 
+  <p id="tipText"></p>
 
-        if (
-          !completedDays.includes(
-            currentDay
-          )
-        ) {
+</div>
 
-          completedDays.push(
-            currentDay
-          );
+<div class="content-card full">
 
-          completedDays.sort(
-            (a, b) => a - b
-          );
+  <div class="card-icon">📝</div>
 
-          lastCompletion =
-            new Date().toISOString();
+  <h3>Reflection</h3>
 
+  <p id="reflectionPrompt"></p>
 
-          /*
-            Move current day forward.
-          */
+  <div class="reflection-box">
+    <label for="reflectionText">
+      Write your answer in your own words.
+    </label>
 
-          if (
-            currentDay < 10
-          ) {
+    <textarea
+      id="reflectionText"
+      placeholder="Write what you learned or what you would do differently..."
+    ></textarea>
+  </div>
 
-            currentDay++;
+</div>
 
-          }
+</div>
 
+<div class="ethics-box">
 
-          saveProgress();
+  <h3>🛡 Responsible Promotion Rule</h3>
 
-          renderAll();
+  <p>
+    Good promotion must be truthful and responsible. Never create fake
+    reviews, fake experiences, misleading claims or fabricated proof.
+    Follow the campaign brief and disclose promotional relationships
+    when required by the platform or applicable rules.
+  </p>
 
-          alert(
-            currentDay > 10
-              ? "Excellent! You completed the Academy."
-              : "Day completed! Your next mission is now scheduled."
-          );
+  <ul class="ethics-list">
+    <li>Use real experiences and accurate information.</li>
+    <li>Do not promise results that you cannot support.</li>
+    <li>Do not manipulate screenshots, engagement or proof.</li>
+    <li>Ask when a campaign instruction is unclear.</li>
+  </ul>
 
-        }
+</div>
 
-      }
-    );
+<div class="completion-box">
 
+  <div class="completion-title">
+    <span>✅</span>
+    <span>Daily completion check</span>
+  </div>
 
-    /* =========================================================
-       TIMER
-    ========================================================= */
+  <label class="completion-checkbox">
+    <input type="checkbox" id="completionCheck">
+    <span>
+      I completed today's lesson, practical exercise,
+      checklist and reflection honestly.
+    </span>
+  </label>
 
-    function stopTimer() {
+  <button class="complete-btn" id="completeBtn" disabled>
+    Mark Day Complete →
+  </button>
 
-      if (timerInterval) {
+</div>
 
-        clearInterval(
-          timerInterval
-        );
+<div class="lock-box hidden" id="lockBox">
 
-        timerInterval = null;
+  <div class="lock-icon">🔒</div>
 
-      }
+  <h3>Next lesson unlocks soon</h3>
 
-    }
+  <p>
+    The next training day becomes available 24 hours after
+    your previous day is completed.
+  </p>
 
+  <div class="timer" id="timer">24:00:00</div>
 
-    function startTimer(milliseconds) {
+</div>
 
-      stopTimer();
+</div>
+</div>
 
+</section>
 
-      function update() {
+<!-- FINAL ASSESSMENT -->
 
-        if (
-          milliseconds <= 0
-        ) {
+<section class="assessment hidden" id="assessmentSection">
 
-          stopTimer();
+<div class="assessment-head">
 
-          lockBox.classList.add(
-            "hidden"
-          );
+<div class="eyebrow">
+  🏆 Final Assessment
+</div>
 
-          return;
+<h2>Ready to prove your promoter skillset?</h2>
 
-        }
+<p>
+  Complete all 10 training days first. The final assessment contains
+  20 questions and requires at least 80% to pass.
+</p>
 
+</div>
 
-        const totalSeconds =
-          Math.floor(
-            milliseconds / 1000
-          );
+<div class="assessment-body">
 
-        const hours =
-          Math.floor(
-            totalSeconds / 3600
-          );
+<form id="testForm"></form>
 
-        const minutes =
-          Math.floor(
-            (totalSeconds % 3600) / 60
-          );
+<button class="submit-test" id="submitTest">
+  Submit Final Assessment →
+</button>
 
-        const seconds =
-          totalSeconds % 60;
+<div class="result-box hidden" id="resultBox"></div>
 
+</div>
 
-        timer.textContent =
-          `${String(hours).padStart(2,"0")}:` +
-          `${String(minutes).padStart(2,"0")}:` +
-          `${String(seconds).padStart(2,"0")}`;
+</section>
 
+<!-- CERTIFICATE -->
 
-        milliseconds -= 1000;
+<section class="certificate hidden" id="certificateSection">
 
-      }
+<div class="certificate-badge">🏆</div>
 
+<h2>IBB PROMOTER CERTIFIED</h2>
 
-      update();
+<p>
+  You completed the IBB Promoter Academy and demonstrated
+  the required understanding through the final assessment.
+</p>
 
-      timerInterval =
-        setInterval(
-          update,
-          1000
-        );
+<div class="certificate-name" id="certificateName">
+  IBB Promoter
+</div>
 
-    }
+</section>
 
+</main>
 
-    /* =========================================================
-       FINAL TEST
-    ========================================================= */
+<footer>
+  Indian Business Bureau • IBB Promoter Academy
+  <br>
+  Learn skills. Create responsibly. Build trust.
+</footer>
 
-    function renderTest() {
+</div>
 
-      const form =
-        document.getElementById(
-          "testForm"
-        );
+<script>
 
+/* =========================================================
+   SUPABASE
+========================================================= */
 
-      form.innerHTML = "";
+const SUPABASE_URL =
+"https://tvantyrkjxoljjpnadac.supabase.co";
 
+const SUPABASE_PUBLISHABLE_KEY =
+"sb_publishable_t0Z_jIqNeUde0fZ4YS8h3Q_fQHLO_GV";
 
-      questions.forEach(
-        (question, index) => {
+const supabaseClient =
+window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
 
-          const box =
-            document.createElement(
-              "div"
-            );
 
-          box.className =
-            "question";
-
-
-          let optionsHTML = "";
-
-
-          question.options.forEach(
-            (option, optionIndex) => {
-
-              optionsHTML += `
-                <label class="option">
-                  <input
-                    type="radio"
-                    name="q${index}"
-                    value="${optionIndex}"
-                  />
-                  ${option}
-                </label>
-              `;
-
-            }
-          );
-
-
-          box.innerHTML = `
-            <div class="question-number">
-              Question ${index + 1}
-            </div>
-
-            <h3>
-              ${question.q}
-            </h3>
-
-            ${optionsHTML}
-          `;
-
-
-          form.appendChild(box);
-
-        }
-      );
-
-    }
-
-
-    document
-      .getElementById("submitTest")
-      .addEventListener(
-        "click",
-        () => {
-
-          let score = 0;
-
-          let answered = 0;
-
-
-          questions.forEach(
-            (question, index) => {
-
-              const selected =
-                document.querySelector(
-                  `input[name="q${index}"]:checked`
-                );
-
-
-              if (selected) {
-
-                answered++;
-
-
-                if (
-                  Number(
-                    selected.value
-                  ) ===
-                  question.answer
-                ) {
-
-                  score++;
-
-                }
-
-              }
-
-            }
-          );
-
-
-          if (
-            answered < questions.length
-          ) {
-
-            alert(
-              "Please answer all 20 questions before submitting."
-            );
-
-            return;
-
-          }
-
-
-          const percentage =
-            Math.round(
-              (score /
-                questions.length) *
-              100
-            );
-
-
-          const resultBox =
-            document.getElementById(
-              "resultBox"
-            );
-
-
-          resultBox.classList.remove(
-            "hidden"
-          );
-
-
-          if (
-            percentage >= 80
-          ) {
-
-            resultBox.innerHTML = `
-              <div class="score">
-                ${percentage}%
-              </div>
-
-              <strong>
-                🎉 Assessment Passed
-              </strong>
-
-              <p>
-                Excellent work, ${escapeHTML(memberName)}.
-                You are now IBB Promoter Certified.
-              </p>
-            `;
-
-
-            localStorage.setItem(
-              storageKey("ibb_final_test"),
-              "passed"
-            );
-
-
-            certificateName.textContent =
-              memberName;
-
-
-            certificateSection.classList.remove(
-              "hidden"
-            );
-
-
-            certificateSection.scrollIntoView({
-              behavior: "smooth"
-            });
-
-
-          } else {
-
-            resultBox.innerHTML = `
-              <div class="score">
-                ${percentage}%
-              </div>
-
-              <strong>
-                Keep going — assessment not passed yet.
-              </strong>
-
-              <p>
-                You need 80% to pass.
-                Review the Academy and try again.
-              </p>
-            `;
-
-          }
-
-        }
-      );
-
-
-    /* =========================================================
-       SAFE HTML
-    ========================================================= */
-
-    function escapeHTML(value) {
-
-      return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-
-    }
-
-
-    /* =========================================================
-       LOGOUT
-    ========================================================= */
-
-    document
-      .getElementById("logoutBtn")
-      .addEventListener(
-        "click",
-        async () => {
-
-          const {
-            error
-          } =
-            await supabaseClient.auth.signOut();
-
-
-          if (error) {
-
-            console.error(error);
-
-            alert(
-              "Logout failed. Please try again."
-            );
-
-            return;
-
-          }
-
-
-          window.location.href =
-            "login.html";
-
-        }
-      );
-
-
-    /* =========================================================
-       AUTH STATE
-    ========================================================= */
-
-    supabaseClient.auth.onAuthStateChange(
-      (event, session) => {
-
-        if (
-          event === "SIGNED_OUT"
-        ) {
-
-          window.location.href =
-            "login.html";
-
-        }
-
-      }
-    );
-
-
-    /* =========================================================
-       START
-    ========================================================= */
-
-    async function startApp() {
-
-      const authenticated =
-        await checkAuth();
-
-
-      if (!authenticated) {
-
-        return;
-
-      }
-
-
-      setupMemberUI();
-
-      loadProgress();
-
-      renderAll();
-
-
-      loadingScreen.classList.add(
-        "hidden"
-      );
-
-      app.classList.remove(
-        "hidden"
-      );
-
-    }
-
-
-    startApp();
-
-  </script>
-
-</body>
-</html>
+/* ================================================*
+```
