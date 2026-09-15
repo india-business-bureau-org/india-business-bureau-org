@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,114 +6,209 @@
 
 <title>IBB Promoter Academy | Indian Business Bureau</title>
 
-<meta name="description" content="IBB Promoter Academy — Learn practical campaign, content, communication and reporting skills.">
+<meta
+  name="description"
+  content="IBB Promoter Academy — Learn practical campaign, content, communication and reporting skills."
+>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+  rel="stylesheet"
+>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 :root{
   --bg:#f5f7fb;
-  --surface:#fff;
+  --surface:#ffffff;
   --surface-soft:#f8fafc;
+
   --navy:#07152f;
   --navy2:#0d2347;
+
   --blue:#2563eb;
   --blue-dark:#1d4ed8;
   --cyan:#06b6d4;
   --gold:#f5b942;
+
   --green:#16a34a;
   --green-soft:#ecfdf3;
+
   --red:#dc2626;
+  --red-soft:#fef2f2;
+
+  --orange:#ea580c;
+  --orange-soft:#fff7ed;
+
   --text:#10213f;
   --muted:#64748b;
+
   --border:#e5eaf2;
+
   --shadow:0 20px 55px rgba(15,35,70,.08);
   --shadow-lg:0 30px 80px rgba(8,28,60,.16);
+
   --radius:22px;
 }
 
-*{box-sizing:border-box;margin:0;padding:0}
-
-html{scroll-behavior:smooth}
-
-body{
-  font-family:"Manrope","Plus Jakarta Sans",Arial,sans-serif;
-  background:
-    radial-gradient(circle at top left,rgba(37,99,235,.06),transparent 32%),
-    radial-gradient(circle at 80% 20%,rgba(6,182,212,.05),transparent 28%),
-    var(--bg);
-  color:var(--text);
-  line-height:1.65;
+*{
+  box-sizing:border-box;
 }
 
-button{font-family:inherit}
+html{
+  scroll-behavior:smooth;
+}
 
-.hidden{display:none!important}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:"Manrope",sans-serif;
+  line-height:1.6;
+}
 
-/* LOADING */
+button,
+input,
+textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+/* =========================
+   LOADING SCREEN
+========================= */
 
 #loadingScreen{
   position:fixed;
   inset:0;
   z-index:9999;
+
   display:flex;
   align-items:center;
   justify-content:center;
-  background:#07152f;
+
+  background:
+    radial-gradient(circle at 20% 20%,rgba(37,99,235,.18),transparent 30%),
+    radial-gradient(circle at 80% 80%,rgba(6,182,212,.14),transparent 30%),
+    var(--navy);
+
   color:white;
+
+  transition:
+    opacity .4s ease,
+    visibility .4s ease;
 }
 
-.loader-box{text-align:center}
+#loadingScreen.hidden{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
 
-.loader-logo{
-  width:64px;
-  height:64px;
-  margin:auto auto 18px;
-  border-radius:18px;
+.loading-card{
+  width:min(420px,90%);
+  text-align:center;
+  padding:42px 28px;
+}
+
+.loading-logo{
+  width:78px;
+  height:78px;
+  margin:0 auto 22px;
+
   display:flex;
   align-items:center;
   justify-content:center;
-  background:linear-gradient(135deg,#2563eb,#06b6d4);
-  font-size:26px;
+
+  border-radius:22px;
+
+  background:linear-gradient(
+    135deg,
+    var(--gold),
+    #ffd978
+  );
+
+  color:var(--navy);
+
+  font-family:"Plus Jakarta Sans",sans-serif;
+  font-size:25px;
   font-weight:800;
-  box-shadow:0 20px 50px rgba(37,99,235,.35);
+
+  box-shadow:0 15px 45px rgba(245,185,66,.25);
 }
 
-.loader-box h2{font-size:20px;margin-bottom:6px}
-.loader-box p{color:rgba(255,255,255,.65);font-size:13px}
+.loading-card h2{
+  margin:0 0 8px;
 
-.spinner{
-  width:25px;
-  height:25px;
+  font-family:"Plus Jakarta Sans",sans-serif;
+  font-size:25px;
+}
+
+.loading-card p{
+  margin:0;
+  color:#b9c6dc;
+  font-size:14px;
+}
+
+.loading-card small{
+  display:inline-block;
+  margin-top:6px;
+  color:#fca5a5;
+}
+
+.loading-spinner{
+  width:34px;
+  height:34px;
+
+  margin:25px auto 0;
+
   border:3px solid rgba(255,255,255,.18);
-  border-top-color:white;
+  border-top-color:var(--gold);
+
   border-radius:50%;
-  margin:20px auto 0;
+
   animation:spin .8s linear infinite;
 }
 
-@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes spin{
+  to{
+    transform:rotate(360deg);
+  }
+}
 
-/* HEADER */
+/* =========================
+   TOP BAR
+========================= */
 
 .topbar{
   position:sticky;
   top:0;
-  z-index:100;
-  background:rgba(7,21,47,.94);
+  z-index:1000;
+
+  background:rgba(7,21,47,.95);
   backdrop-filter:blur(18px);
+
   border-bottom:1px solid rgba(255,255,255,.08);
 }
 
 .topbar-inner{
-  max-width:1200px;
+  width:min(1180px,92%);
   margin:auto;
-  min-height:76px;
-  padding:0 20px;
+
+  min-height:72px;
+
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -131,1073 +225,1294 @@ button{font-family:inherit}
 .brand-mark{
   width:42px;
   height:42px;
-  border-radius:13px;
+
   display:flex;
   align-items:center;
   justify-content:center;
-  background:linear-gradient(135deg,#2563eb,#06b6d4);
+
+  border-radius:12px;
+
+  background:linear-gradient(
+    135deg,
+    var(--gold),
+    #ffe29a
+  );
+
+  color:var(--navy);
+
   font-weight:800;
-  font-size:15px;
-  box-shadow:0 8px 25px rgba(37,99,235,.28);
+  font-size:14px;
 }
 
 .brand-text strong{
   display:block;
+
+  font-family:"Plus Jakarta Sans",sans-serif;
   font-size:14px;
-  letter-spacing:.08em;
 }
 
 .brand-text span{
   display:block;
-  font-size:11px;
-  color:rgba(255,255,255,.55);
-  margin-top:1px;
-}
 
-.top-actions{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.member-mini{
-  display:flex;
-  align-items:center;
-  gap:9px;
-  color:white;
-  font-size:12px;
-  background:rgba(255,255,255,.07);
-  border:1px solid rgba(255,255,255,.1);
-  padding:7px 12px 7px 8px;
-  border-radius:999px;
-}
-
-.avatar{
-  width:30px;
-  height:30px;
-  border-radius:50%;
-  background:linear-gradient(135deg,#2563eb,#06b6d4);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:12px;
-  font-weight:800;
-}
-
-.logout-btn{
-  border:1px solid rgba(255,255,255,.13);
-  background:rgba(255,255,255,.06);
-  color:white;
-  border-radius:10px;
-  padding:9px 13px;
-  cursor:pointer;
-  font-size:12px;
-}
-
-.logout-btn:hover{background:rgba(255,255,255,.12)}
-
-/* HERO */
-
-.hero{
-  position:relative;
-  overflow:hidden;
-  background:
-    radial-gradient(circle at 10% 10%,rgba(37,99,235,.3),transparent 25%),
-    radial-gradient(circle at 90% 20%,rgba(6,182,212,.18),transparent 25%),
-    linear-gradient(135deg,#07152f 0%,#0b2043 55%,#0d2a4f 100%);
-  color:white;
-}
-
-.hero-inner{
-  position:relative;
-  max-width:1200px;
-  margin:auto;
-  padding:68px 20px 54px;
-}
-
-.eyebrow{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:7px 12px;
-  border-radius:999px;
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.1);
-  color:#bcd7ff;
-  font-size:11px;
-  font-weight:800;
-  letter-spacing:.08em;
+  color:#9fb0ca;
+  font-size:10px;
+  letter-spacing:1px;
   text-transform:uppercase;
 }
 
-.eyebrow-dot{
-  width:7px;
-  height:7px;
-  background:#34d399;
-  border-radius:50%;
-  box-shadow:0 0 12px #34d399;
+.member-area{
+  display:flex;
+  align-items:center;
+  gap:12px;
 }
 
-.hero-grid{
-  margin-top:26px;
-  display:grid;
-  grid-template-columns:1.35fr .65fr;
-  gap:45px;
-  align-items:end;
+.avatar{
+  width:40px;
+  height:40px;
+
+  border-radius:50%;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:linear-gradient(
+    135deg,
+    var(--blue),
+    var(--cyan)
+  );
+
+  color:white;
+  font-weight:800;
+}
+
+.member-info{
+  color:white;
+}
+
+.member-info strong{
+  display:block;
+  font-size:13px;
+}
+
+.member-info span{
+  display:block;
+  color:#9fb0ca;
+  font-size:10px;
+}
+
+.logout-btn{
+  border:1px solid rgba(255,255,255,.14);
+
+  background:rgba(255,255,255,.06);
+  color:white;
+
+  padding:9px 14px;
+  border-radius:10px;
+
+  font-size:12px;
+  font-weight:700;
+}
+
+.logout-btn:hover{
+  background:rgba(255,255,255,.12);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  background:
+    radial-gradient(circle at 10% 10%,rgba(37,99,235,.28),transparent 32%),
+    radial-gradient(circle at 90% 90%,rgba(6,182,212,.18),transparent 30%),
+    var(--navy);
+
+  color:white;
+  padding:65px 0 75px;
+}
+
+.hero-inner{
+  width:min(1180px,92%);
+  margin:auto;
+}
+
+.hero-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+
+  padding:7px 12px;
+
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:999px;
+
+  background:rgba(255,255,255,.06);
+
+  color:#d8e2f2;
+
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.4px;
 }
 
 .hero h1{
-  max-width:760px;
+  max-width:800px;
+
+  margin:18px 0 14px;
+
   font-family:"Plus Jakarta Sans",sans-serif;
-  font-size:clamp(38px,6vw,66px);
-  line-height:1.02;
-  letter-spacing:-.045em;
-  margin-bottom:20px;
+
+  font-size:clamp(36px,5vw,62px);
+  line-height:1.05;
+  letter-spacing:-2px;
 }
 
 .hero h1 span{
-  background:linear-gradient(90deg,#fff,#75d7ff);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+  color:var(--gold);
 }
 
-.hero-description{
-  max-width:700px;
-  color:rgba(255,255,255,.67);
+.hero p{
+  max-width:720px;
+
+  margin:0;
+
+  color:#b9c6dc;
+
   font-size:16px;
-  line-height:1.8;
 }
 
 .hero-stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+
+  margin-top:32px;
 }
 
 .hero-stat{
-  padding:16px;
-  border:1px solid rgba(255,255,255,.1);
+  min-width:145px;
+
+  padding:15px 17px;
+
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:15px;
+
   background:rgba(255,255,255,.055);
-  backdrop-filter:blur(12px);
-  border-radius:17px;
 }
 
 .hero-stat strong{
   display:block;
-  font-size:23px;
-  font-weight:800;
+  font-size:22px;
+  color:white;
 }
 
 .hero-stat span{
-  color:rgba(255,255,255,.55);
+  display:block;
+  margin-top:2px;
+
+  color:#9fb0ca;
   font-size:11px;
 }
 
-/* MAIN */
+/* =========================
+   MAIN
+========================= */
 
 .main{
-  max-width:1200px;
-  margin:auto;
-  padding:32px 20px 70px;
+  width:min(1180px,92%);
+  margin:-38px auto 70px;
+  position:relative;
+  z-index:2;
 }
 
-/* PROGRESS */
+/* =========================
+   PROGRESS
+========================= */
 
-.progress-dashboard{
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:20px;
-  align-items:center;
-  background:white;
+.progress-card{
+  background:var(--surface);
   border:1px solid var(--border);
-  border-radius:22px;
-  padding:21px;
+
+  border-radius:var(--radius);
+
+  padding:25px;
+
   box-shadow:var(--shadow);
 }
 
-.progress-label{
+.progress-top{
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  gap:15px;
-  margin-bottom:9px;
+  align-items:center;
+  gap:20px;
 }
 
-.progress-label strong{font-size:14px}
+.progress-top h3{
+  margin:0;
+
+  font-family:"Plus Jakarta Sans",sans-serif;
+  font-size:18px;
+}
+
+.progress-top p{
+  margin:4px 0 0;
+  color:var(--muted);
+  font-size:12px;
+}
 
 .progress-percent{
-  color:var(--blue);
+  font-size:25px;
   font-weight:800;
-  font-size:14px;
+  color:var(--blue);
 }
 
 .progress-track{
-  height:9px;
-  background:#eaf0f7;
-  border-radius:99px;
+  height:10px;
+
+  margin-top:20px;
+
+  background:#edf1f7;
+  border-radius:999px;
+
   overflow:hidden;
 }
 
 .progress-fill{
   height:100%;
-  width:0%;
-  border-radius:inherit;
-  background:linear-gradient(90deg,#2563eb,#06b6d4);
+  width:0;
+
+  background:linear-gradient(
+    90deg,
+    var(--blue),
+    var(--cyan)
+  );
+
+  border-radius:999px;
+
   transition:width .5s ease;
 }
 
-.progress-meta{
-  display:flex;
-  gap:20px;
-  color:var(--muted);
-  font-size:11px;
-  margin-top:8px;
-}
-
-.current-badge{
-  min-width:120px;
-  text-align:center;
-  padding:13px 17px;
-  border-radius:15px;
-  background:#eff6ff;
-  border:1px solid #dbeafe;
-  color:var(--blue-dark);
-}
-
-.current-badge strong{
-  display:block;
-  font-size:21px;
-}
-
-.current-badge span{
-  font-size:10px;
-  font-weight:700;
-  text-transform:uppercase;
-}
-
-/* SECTION */
-
-.section-heading{margin:36px 0 15px}
-
-.section-heading h2{
-  font-family:"Plus Jakarta Sans",sans-serif;
-  font-size:20px;
-  letter-spacing:-.025em;
-}
-
-.section-heading p{
-  color:var(--muted);
-  font-size:12px;
-  margin-top:4px;
-}
-
-/* DAY NAV */
+/* =========================
+   DAY NAV
+========================= */
 
 .day-nav{
-  display:flex;
+  display:grid;
+  grid-template-columns:repeat(10,1fr);
   gap:8px;
-  overflow-x:auto;
-  padding-bottom:5px;
-  scrollbar-width:thin;
+
+  margin-top:18px;
 }
 
 .day-btn{
-  flex:0 0 auto;
-  min-width:76px;
+  min-height:62px;
+
   border:1px solid var(--border);
-  background:white;
-  color:var(--text);
-  padding:10px 12px;
   border-radius:14px;
-  cursor:pointer;
+
+  background:white;
+
+  color:var(--muted);
+
+  font-size:11px;
+  font-weight:800;
+
   transition:.2s;
-  text-align:left;
+}
+
+.day-btn span{
+  display:block;
+  font-size:17px;
+  margin-bottom:2px;
 }
 
 .day-btn:hover:not(:disabled){
-  transform:translateY(-2px);
-  border-color:#bfd5ff;
+  border-color:#bfd0ee;
+  transform:translateY(-1px);
 }
 
 .day-btn.active{
   background:var(--navy);
   color:white;
   border-color:var(--navy);
-  box-shadow:0 10px 25px rgba(7,21,47,.18);
 }
 
 .day-btn.completed{
   background:var(--green-soft);
+  color:var(--green);
   border-color:#bbf7d0;
-  color:#166534;
 }
 
 .day-btn:disabled{
-  opacity:.45;
   cursor:not-allowed;
+  opacity:.48;
 }
 
-.day-number{
-  display:block;
-  font-size:10px;
-  font-weight:800;
-  text-transform:uppercase;
-  opacity:.65;
-}
-
-.day-name{
-  display:block;
-  font-size:11px;
-  font-weight:800;
-  margin-top:3px;
-  white-space:nowrap;
-}
-
-/* TRAINING */
+/* =========================
+   TRAINING CARD
+========================= */
 
 .training-card{
-  margin-top:25px;
+  margin-top:20px;
+
   background:white;
   border:1px solid var(--border);
-  border-radius:28px;
-  box-shadow:var(--shadow-lg);
+
+  border-radius:var(--radius);
+
+  box-shadow:var(--shadow);
+
   overflow:hidden;
 }
 
-.training-top{
-  padding:30px;
+.training-header{
+  padding:32px;
+
   background:
-    radial-gradient(circle at 90% 0%,rgba(37,99,235,.1),transparent 30%),
-    linear-gradient(135deg,#fff,#f7faff);
+    radial-gradient(circle at 90% 10%,rgba(37,99,235,.1),transparent 32%),
+    linear-gradient(180deg,#fff,#f8fbff);
+
   border-bottom:1px solid var(--border);
 }
 
-.day-kicker{
-  display:flex;
+.day-label{
+  display:inline-flex;
   align-items:center;
-  gap:9px;
+
+  padding:6px 10px;
+
+  background:#eff6ff;
   color:var(--blue);
-  font-size:11px;
+
+  border-radius:999px;
+
+  font-size:10px;
   font-weight:800;
-  letter-spacing:.08em;
+  letter-spacing:.7px;
   text-transform:uppercase;
 }
 
-.day-kicker .line{
-  width:28px;
-  height:2px;
-  background:var(--blue);
-  border-radius:99px;
-}
+.training-header h2{
+  margin:14px 0 7px;
 
-.training-title{
-  margin-top:11px;
   font-family:"Plus Jakarta Sans",sans-serif;
-  font-size:clamp(28px,4vw,43px);
-  line-height:1.1;
-  letter-spacing:-.035em;
+
+  font-size:clamp(25px,4vw,37px);
+  line-height:1.15;
 }
 
 .training-subtitle{
-  margin-top:10px;
+  margin:0;
+
+  max-width:760px;
+
   color:var(--muted);
   font-size:14px;
-  max-width:800px;
 }
 
-.training-tags{
-  margin-top:19px;
+.training-meta{
   display:flex;
   flex-wrap:wrap;
-  gap:8px;
+  gap:9px;
+
+  margin-top:18px;
 }
 
-.tag{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
+.meta-pill{
   padding:7px 11px;
+
+  background:white;
+
+  border:1px solid var(--border);
   border-radius:999px;
-  background:#f1f5f9;
-  border:1px solid #e2e8f0;
-  color:#475569;
-  font-size:10px;
-  font-weight:800;
-}
 
-.training-body{padding:30px}
+  color:var(--muted);
 
-/* MISSION */
-
-.mission-banner{
-  padding:22px;
-  border-radius:20px;
-  background:linear-gradient(135deg,#07152f,#123664);
-  color:white;
-  position:relative;
-  overflow:hidden;
-  margin-bottom:25px;
-}
-
-.mission-banner small{
-  color:#9ec8ff;
-  font-weight:800;
-  text-transform:uppercase;
-  font-size:10px;
-  letter-spacing:.1em;
-}
-
-.mission-banner h3{
-  margin-top:5px;
-  font-size:20px;
-}
-
-.mission-banner p{
-  margin-top:6px;
-  color:rgba(255,255,255,.65);
-  font-size:12px;
-  max-width:800px;
-}
-
-/* LESSON */
-
-.lesson-box{
-  margin-bottom:16px;
-  border:1px solid #dbeafe;
-  background:linear-gradient(135deg,#eff6ff,#f8fbff);
-  border-radius:20px;
-  padding:23px;
-}
-
-.lesson-heading{
-  display:flex;
-  gap:10px;
-  align-items:center;
-  margin-bottom:12px;
-}
-
-.lesson-heading-icon{
-  width:38px;
-  height:38px;
-  border-radius:12px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:white;
-  border:1px solid #dbeafe;
-  font-size:18px;
-}
-
-.lesson-heading h3{
-  font-size:15px;
-  font-weight:800;
-}
-
-.lesson-content{
-  color:#40536f;
-  font-size:13px;
-  line-height:1.9;
-}
-
-.lesson-content p{margin-bottom:10px}
-.lesson-content p:last-child{margin-bottom:0}
-
-.lesson-content strong{color:#10213f}
-
-.key-points{
-  margin-top:14px;
-  display:grid;
-  gap:8px;
-}
-
-.key-point{
-  padding:10px 12px;
-  background:white;
-  border:1px solid #e1eaf7;
-  border-radius:12px;
-  font-size:12px;
-  color:#475569;
-}
-
-/* CONTENT GRID */
-
-.content-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
-}
-
-.content-card{
-  border:1px solid var(--border);
-  background:var(--surface-soft);
-  border-radius:20px;
-  padding:21px;
-}
-
-.content-card.full{grid-column:1/-1}
-
-.card-icon{
-  width:38px;
-  height:38px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:12px;
-  background:white;
-  border:1px solid var(--border);
-  font-size:18px;
-  margin-bottom:13px;
-}
-
-.content-card h3{
-  font-size:14px;
-  margin-bottom:7px;
-  font-weight:800;
-}
-
-.content-card p{
-  color:#53647d;
-  font-size:12px;
-  line-height:1.8;
-}
-
-/* EXAMPLE */
-
-.example-box{
-  margin-top:12px;
-  display:grid;
-  gap:9px;
-}
-
-.example-good,
-.example-bad{
-  padding:13px;
-  border-radius:12px;
   font-size:11px;
-  line-height:1.7;
+  font-weight:700;
 }
 
-.example-good{
-  background:#ecfdf3;
-  border:1px solid #bbf7d0;
-  color:#166534;
-}
-
-.example-bad{
-  background:#fff1f2;
-  border:1px solid #fecdd3;
-  color:#9f1239;
-}
-
-/* TASKS */
-
-.task-list{
-  list-style:none;
-  margin-top:13px;
-  display:grid;
-  gap:9px;
-}
-
-.task-item{
-  display:flex;
-  gap:9px;
-  align-items:flex-start;
-  color:#53647d;
-  font-size:12px;
-}
-
-.task-item::before{
-  content:"✓";
-  flex:0 0 auto;
-  width:19px;
-  height:19px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#dbeafe;
-  color:var(--blue);
-  font-size:10px;
-  font-weight:900;
-}
-
-/* CHECKLIST */
-
-.checklist{
-  margin-top:13px;
-  display:grid;
-  gap:8px;
-}
-
-.check-item{
-  display:flex;
-  align-items:flex-start;
-  gap:9px;
-  padding:10px;
-  background:white;
-  border:1px solid var(--border);
-  border-radius:11px;
-  color:#53647d;
-  font-size:11px;
-}
-
-.check-item input{
-  margin-top:3px;
-  accent-color:var(--blue);
-}
-
-/* PROOF */
-
-.proof-box{
-  margin-top:12px;
-  padding:14px;
-  border-radius:13px;
-  background:white;
-  border:1px dashed #cbd5e1;
-  color:#475569;
-  font-size:11px;
-  line-height:1.7;
-}
-
-/* REFLECTION */
-
-.reflection-box{
-  margin-top:13px;
-  padding:14px;
-  border-radius:13px;
-  background:white;
-  border:1px solid var(--border);
-}
-
-.reflection-box label{
-  display:block;
-  font-size:11px;
-  font-weight:800;
-  margin-bottom:7px;
-  color:#334155;
-}
-
-.reflection-box textarea{
-  width:100%;
-  min-height:85px;
-  resize:vertical;
-  border:1px solid #dbe2ea;
-  border-radius:10px;
-  padding:10px;
-  font-family:inherit;
-  font-size:11px;
-  outline:none;
-}
-
-.reflection-box textarea:focus{
-  border-color:#93c5fd;
-  box-shadow:0 0 0 3px rgba(37,99,235,.08);
-}
-
-/* PRO TIP */
-
-.pro-tip{
-  background:linear-gradient(135deg,#fffaf0,#fffdf7);
-  border-color:#f4dfae;
-}
-
-.pro-tip .card-icon{
-  background:#fff7df;
-  border-color:#f4dfae;
-}
-
-/* ETHICS */
-
-.ethics-box{
-  margin-top:16px;
-  padding:20px;
-  border-radius:18px;
-  background:#fff7ed;
-  border:1px solid #fed7aa;
-}
-
-.ethics-box h3{
-  font-size:14px;
-  color:#9a3412;
-}
-
-.ethics-box p{
-  margin-top:6px;
-  font-size:11px;
-  color:#7c4a2a;
-  line-height:1.8;
-}
-
-.ethics-list{
-  margin-top:10px;
-  list-style:none;
-  display:grid;
-  gap:6px;
-}
-
-.ethics-list li{
-  font-size:11px;
-  color:#7c4a2a;
-}
-
-.ethics-list li::before{
-  content:"•";
-  margin-right:7px;
-  font-weight:900;
-}
-
-/* COMPLETION */
-
-.completion-box{
-  margin-top:24px;
-  border-radius:20px;
-  padding:21px;
-  background:#f8fafc;
-  border:1px solid var(--border);
-}
-
-.completion-title{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-size:14px;
-  font-weight:800;
-}
-
-.completion-checkbox{
-  margin-top:15px;
-  display:flex;
-  align-items:flex-start;
-  gap:10px;
-  padding:13px;
-  border-radius:14px;
-  background:white;
-  border:1px solid var(--border);
-  cursor:pointer;
-  font-size:12px;
-  color:#475569;
-}
-
-.completion-checkbox input{
-  margin-top:3px;
-  accent-color:var(--blue);
-}
-
-.complete-btn{
-  width:100%;
-  border:none;
-  margin-top:14px;
-  padding:15px;
-  border-radius:14px;
-  background:linear-gradient(135deg,#2563eb,#1d4ed8);
-  color:white;
-  font-size:13px;
-  font-weight:800;
-  cursor:pointer;
-  box-shadow:0 12px 25px rgba(37,99,235,.22);
-  transition:.2s;
-}
-
-.complete-btn:hover:not(:disabled){
-  transform:translateY(-2px);
-}
-
-.complete-btn:disabled{
-  background:#cbd5e1;
-  box-shadow:none;
-  cursor:not-allowed;
-}
-
-/* LOCK */
+/* =========================
+   LOCK
+========================= */
 
 .lock-box{
-  margin-top:22px;
-  padding:21px;
-  border-radius:19px;
-  background:#fff8eb;
-  border:1px solid #f5dfb0;
-  text-align:center;
+  margin:24px 32px 0;
+
+  padding:20px;
+
+  border:1px solid #fed7aa;
+  border-radius:17px;
+
+  background:var(--orange-soft);
 }
 
-.lock-icon{font-size:28px;margin-bottom:6px}
-.lock-box h3{font-size:15px}
+.lock-box strong{
+  display:block;
+  color:#9a3412;
+  font-size:14px;
+}
+
 .lock-box p{
-  margin-top:4px;
-  color:#7c6540;
-  font-size:11px;
+  margin:5px 0 0;
+
+  color:#9a3412;
+  font-size:12px;
 }
 
 .timer{
   margin-top:10px;
-  font-size:21px;
+
+  color:#c2410c;
+
+  font-size:20px;
   font-weight:800;
-  color:#9a6700;
 }
 
-/* FINAL TEST */
+/* =========================
+   TRAINING CONTENT
+========================= */
+
+.training-content{
+  padding:32px;
+}
+
+.section{
+  margin-bottom:30px;
+}
+
+.section:last-child{
+  margin-bottom:0;
+}
+
+.section h3{
+  margin:0 0 10px;
+
+  font-family:"Plus Jakarta Sans",sans-serif;
+  font-size:18px;
+}
+
+.section p{
+  margin:0;
+
+  color:#4b5d77;
+  font-size:14px;
+}
+
+.mission{
+  padding:21px;
+
+  border:1px solid #bfdbfe;
+  border-radius:18px;
+
+  background:#eff6ff;
+}
+
+.mission h3{
+  color:#1d4ed8;
+}
+
+.mission p{
+  color:#36547d;
+}
+
+.lesson{
+  padding:24px;
+
+  border:1px solid var(--border);
+  border-radius:18px;
+
+  background:#fbfcfe;
+}
+
+.lesson p{
+  white-space:pre-line;
+}
+
+.point-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.point{
+  padding:16px;
+
+  border:1px solid var(--border);
+  border-radius:15px;
+
+  background:white;
+}
+
+.point strong{
+  display:block;
+
+  margin-bottom:4px;
+
+  font-size:13px;
+}
+
+.point p{
+  font-size:12px;
+}
+
+.example-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+
+.example-box{
+  padding:19px;
+
+  border-radius:17px;
+
+  border:1px solid var(--border);
+}
+
+.example-box.good{
+  background:var(--green-soft);
+  border-color:#bbf7d0;
+}
+
+.example-box.bad{
+  background:var(--red-soft);
+  border-color:#fecaca;
+}
+
+.example-box h4{
+  margin:0 0 7px;
+  font-size:13px;
+}
+
+.example-box p{
+  font-size:12px;
+}
+
+.mistakes{
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+
+.mistakes li{
+  position:relative;
+
+  margin:9px 0;
+  padding-left:27px;
+
+  color:#4b5d77;
+  font-size:13px;
+}
+
+.mistakes li::before{
+  content:"×";
+
+  position:absolute;
+  left:0;
+  top:-1px;
+
+  width:19px;
+  height:19px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:50%;
+
+  background:var(--red-soft);
+  color:var(--red);
+
+  font-weight:800;
+}
+
+.task-intro{
+  margin-bottom:13px !important;
+}
+
+.task-list{
+  display:grid;
+  gap:10px;
+}
+
+.task-item{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+
+  padding:15px;
+
+  border:1px solid var(--border);
+  border-radius:15px;
+
+  background:white;
+}
+
+.task-item input{
+  margin-top:3px;
+
+  width:17px;
+  height:17px;
+
+  accent-color:var(--blue);
+}
+
+.task-item label{
+  flex:1;
+
+  color:#334966;
+
+  font-size:13px;
+}
+
+.checklist{
+  display:grid;
+  gap:10px;
+}
+
+.check-row{
+  display:flex;
+  align-items:flex-start;
+  gap:11px;
+
+  padding:14px;
+
+  border:1px solid var(--border);
+  border-radius:14px;
+
+  background:#fff;
+}
+
+.check-row input{
+  width:17px;
+  height:17px;
+
+  margin-top:2px;
+
+  accent-color:var(--green);
+}
+
+.check-row label{
+  color:#40536d;
+  font-size:12px;
+}
+
+.proof-box{
+  padding:20px;
+
+  border:1px solid #fde68a;
+  border-radius:17px;
+
+  background:#fffbeb;
+}
+
+.proof-box strong{
+  color:#92400e;
+}
+
+.proof-box p{
+  margin-top:5px;
+  color:#92400e;
+  font-size:12px;
+}
+
+.insight{
+  padding:20px;
+
+  border-radius:17px;
+
+  background:var(--navy);
+  color:white;
+}
+
+.insight h3{
+  color:var(--gold);
+}
+
+.insight p{
+  color:#c7d2e3;
+}
+
+.reflection textarea{
+  width:100%;
+  min-height:105px;
+
+  resize:vertical;
+
+  padding:14px 15px;
+
+  border:1px solid var(--border);
+  border-radius:14px;
+
+  outline:none;
+
+  color:var(--text);
+
+  background:white;
+}
+
+.reflection textarea:focus{
+  border-color:#93c5fd;
+  box-shadow:0 0 0 4px rgba(37,99,235,.08);
+}
+
+.reflection small{
+  display:block;
+  margin-top:5px;
+  color:var(--muted);
+  font-size:10px;
+}
+
+.responsible{
+  padding:20px;
+
+  border:1px solid #c7d2fe;
+  border-radius:17px;
+
+  background:#eef2ff;
+}
+
+.responsible strong{
+  color:#3730a3;
+}
+
+.responsible p{
+  margin-top:6px;
+  color:#4338ca;
+  font-size:12px;
+}
+
+/* =========================
+   COMPLETE
+========================= */
+
+.completion-area{
+  margin-top:30px;
+
+  padding-top:28px;
+
+  border-top:1px solid var(--border);
+}
+
+.complete-btn{
+  width:100%;
+
+  padding:15px 20px;
+
+  border:0;
+  border-radius:14px;
+
+  background:linear-gradient(
+    135deg,
+    var(--blue),
+    var(--blue-dark)
+  );
+
+  color:white;
+
+  font-size:14px;
+  font-weight:800;
+
+  box-shadow:0 12px 28px rgba(37,99,235,.2);
+
+  transition:.2s;
+}
+
+.complete-btn:hover:not(:disabled){
+  transform:translateY(-1px);
+  box-shadow:0 16px 35px rgba(37,99,235,.25);
+}
+
+.complete-btn:disabled{
+  cursor:not-allowed;
+  opacity:.45;
+  box-shadow:none;
+}
+
+.completed-message{
+  display:none;
+
+  margin-top:15px;
+
+  padding:15px;
+
+  border-radius:14px;
+
+  background:var(--green-soft);
+  border:1px solid #bbf7d0;
+
+  color:#166534;
+
+  font-size:12px;
+  font-weight:700;
+}
+
+.completed-message.show{
+  display:block;
+}
+
+/* =========================
+   ASSESSMENT
+========================= */
 
 .assessment{
   margin-top:25px;
-  border-radius:28px;
+
+  background:white;
+
+  border:1px solid var(--border);
+
+  border-radius:var(--radius);
+
+  box-shadow:var(--shadow);
+
   overflow:hidden;
-  background:linear-gradient(135deg,#07152f,#0c2850);
-  color:white;
-  box-shadow:var(--shadow-lg);
 }
 
-.assessment-head{
+.assessment-header{
   padding:30px;
-  border-bottom:1px solid rgba(255,255,255,.08);
+
+  background:
+    radial-gradient(circle at 90% 20%,rgba(245,185,66,.12),transparent 30%),
+    var(--navy);
+
+  color:white;
 }
 
-.assessment-head h2{
+.assessment-header h2{
+  margin:0 0 7px;
+
   font-family:"Plus Jakarta Sans",sans-serif;
-  font-size:31px;
-  margin-top:15px;
+  font-size:28px;
 }
 
-.assessment-head p{
-  color:rgba(255,255,255,.6);
-  max-width:700px;
+.assessment-header p{
+  margin:0;
+
+  color:#b9c6dc;
   font-size:13px;
-  margin-top:7px;
 }
 
-.assessment-body{padding:30px}
-
-.question{
-  padding:20px;
-  border-radius:18px;
-  background:rgba(255,255,255,.055);
-  border:1px solid rgba(255,255,255,.09);
-  margin-bottom:13px;
+.assessment-body{
+  padding:30px;
 }
 
-.question-number{
-  color:#78c9ff;
-  font-size:10px;
+.test-question{
+  padding:21px 0;
+
+  border-bottom:1px solid var(--border);
+}
+
+.test-question:first-child{
+  padding-top:0;
+}
+
+.test-question:last-child{
+  border-bottom:0;
+}
+
+.question-title{
+  margin:0 0 13px;
+
   font-weight:800;
-  text-transform:uppercase;
-  letter-spacing:.1em;
-}
-
-.question h3{
   font-size:14px;
-  margin:5px 0 13px;
 }
 
 .option{
-  display:block;
-  padding:10px 12px;
-  border-radius:11px;
-  background:rgba(255,255,255,.045);
-  margin-top:7px;
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+
+  margin:8px 0;
+
+  padding:12px;
+
+  border:1px solid var(--border);
+  border-radius:12px;
+
   cursor:pointer;
-  font-size:11px;
-  color:rgba(255,255,255,.72);
 }
 
-.option:hover{background:rgba(255,255,255,.09)}
+.option:hover{
+  border-color:#bfdbfe;
+  background:#f8fbff;
+}
 
 .option input{
-  accent-color:#60a5fa;
-  margin-right:7px;
+  margin-top:3px;
+  accent-color:var(--blue);
+}
+
+.option span{
+  font-size:12px;
+  color:#40536d;
 }
 
 .submit-test{
   width:100%;
-  margin-top:10px;
+
+  margin-top:20px;
+
   padding:15px;
-  border:none;
+
+  border:0;
   border-radius:14px;
-  background:linear-gradient(135deg,#f5b942,#f59e0b);
-  color:#07152f;
-  font-weight:900;
-  cursor:pointer;
+
+  background:var(--navy);
+
+  color:white;
+
+  font-weight:800;
+}
+
+.test-result{
+  display:none;
+
+  margin-top:20px;
+
+  padding:18px;
+
+  border-radius:15px;
+
   font-size:13px;
+  font-weight:700;
 }
 
-.result-box{
-  margin-top:18px;
-  padding:22px;
-  border-radius:17px;
-  background:rgba(255,255,255,.07);
-  border:1px solid rgba(255,255,255,.1);
-  text-align:center;
+.test-result.show{
+  display:block;
 }
 
-.score{
-  font-size:38px;
-  font-weight:900;
+.test-result.pass{
+  background:var(--green-soft);
+  border:1px solid #bbf7d0;
+  color:#166534;
 }
 
-/* CERTIFICATE */
+.test-result.fail{
+  background:var(--red-soft);
+  border:1px solid #fecaca;
+  color:#991b1b;
+}
+
+/* =========================
+   CERTIFICATE
+========================= */
 
 .certificate{
+  display:none;
+
   margin-top:25px;
+
   padding:42px 30px;
-  border-radius:28px;
+
   text-align:center;
+
+  border:2px solid #e7c56b;
+  border-radius:var(--radius);
+
   background:
-    radial-gradient(circle at top,rgba(245,185,66,.18),transparent 35%),
-    linear-gradient(135deg,#07152f,#102d53);
-  color:white;
-  border:1px solid rgba(245,185,66,.22);
-  box-shadow:var(--shadow-lg);
+    radial-gradient(circle at 50% 0,rgba(245,185,66,.13),transparent 40%),
+    white;
+
+  box-shadow:var(--shadow);
+}
+
+.certificate.show{
+  display:block;
 }
 
 .certificate-badge{
-  width:78px;
-  height:78px;
-  border-radius:50%;
-  margin:auto;
+  width:70px;
+  height:70px;
+
+  margin:0 auto 18px;
+
   display:flex;
   align-items:center;
   justify-content:center;
-  background:linear-gradient(135deg,#f5b942,#f59e0b);
-  color:#07152f;
-  font-size:31px;
+
+  border-radius:50%;
+
+  background:#fff7d6;
+
+  font-size:30px;
 }
 
 .certificate h2{
-  margin-top:20px;
+  margin:0;
+
   font-family:"Plus Jakarta Sans",sans-serif;
-  font-size:34px;
+  font-size:30px;
 }
 
 .certificate p{
-  color:rgba(255,255,255,.65);
-  max-width:600px;
-  margin:8px auto 0;
-  font-size:12px;
+  margin:8px 0 0;
+
+  color:var(--muted);
+  font-size:13px;
 }
 
 .certificate-name{
-  margin-top:18px;
-  font-size:20px;
+  margin-top:22px;
+
+  font-family:"Plus Jakarta Sans",sans-serif;
+  font-size:24px;
   font-weight:800;
-  color:#f7d37b;
+
+  color:var(--navy);
 }
 
-/* FOOTER */
+.certificate-id{
+  margin-top:8px;
+
+  color:var(--muted);
+  font-size:11px;
+}
+
+/* =========================
+   FOOTER
+========================= */
 
 footer{
-  max-width:1200px;
-  margin:auto;
-  padding:0 20px 45px;
-  color:#8a98aa;
-  font-size:10px;
+  padding:30px 20px 45px;
+
   text-align:center;
+
+  color:#8290a5;
+  font-size:11px;
 }
 
-/* MOBILE */
+/* =========================
+   RESPONSIVE
+========================= */
 
-@media(max-width:800px){
-  .hero-grid{grid-template-columns:1fr;gap:25px}
-  .hero-inner{padding-top:48px}
-  .hero h1{font-size:41px}
-  .progress-dashboard{grid-template-columns:1fr}
-  .current-badge{width:100%}
-  .content-grid{grid-template-columns:1fr}
-  .content-card.full{grid-column:auto}
-  .training-top,
-  .training-body,
-  .assessment-head,
-  .assessment-body{padding:22px}
+@media(max-width:900px){
+
+  .day-nav{
+    grid-template-columns:repeat(5,1fr);
+  }
+
+  .point-grid,
+  .example-grid{
+    grid-template-columns:1fr;
+  }
+
 }
 
-@media(max-width:560px){
-  .brand-text{display:none}
-  .member-mini span{display:none}
-  .topbar-inner{min-height:66px}
-  .hero-stat{padding:12px}
-  .hero-stat strong{font-size:18px}
-  .hero h1{font-size:35px}
-  .main{padding-left:12px;padding-right:12px}
-  .training-card,
-  .assessment,
-  .certificate{border-radius:21px}
+@media(max-width:650px){
+
+  .topbar-inner{
+    min-height:64px;
+  }
+
+  .member-info{
+    display:none;
+  }
+
+  .brand-text{
+    display:none;
+  }
+
+  .hero{
+    padding:45px 0 60px;
+  }
+
+  .hero h1{
+    letter-spacing:-1px;
+  }
+
+  .main{
+    width:94%;
+    margin-top:-28px;
+  }
+
+  .progress-card{
+    padding:19px;
+  }
+
+  .day-nav{
+    grid-template-columns:repeat(5,1fr);
+  }
+
+  .day-btn{
+    min-height:54px;
+  }
+
+  .day-btn span{
+    font-size:15px;
+  }
+
+  .training-header,
+  .training-content,
+  .assessment-body,
+  .assessment-header{
+    padding:22px;
+  }
+
+  .lock-box{
+    margin:20px 22px 0;
+  }
+
+  .hero-stats{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .hero-stat{
+    min-width:0;
+  }
+
+  .certificate{
+    padding:32px 20px;
+  }
+
+}
+
+/* =========================
+   HIDDEN
+========================= */
+
+.hidden{
+  display:none !important;
 }
 </style>
 </head>
 
 <body>
 
+<!-- =========================
+     LOADING
+========================= -->
+
 <div id="loadingScreen">
-  <div class="loader-box">
-    <div class="loader-logo">IBB</div>
-    <h2>Opening your Academy</h2>
-    <p>Verifying your member session...</p>
-    <div class="spinner"></div>
+
+  <div class="loading-card">
+
+    <div class="loading-logo">
+      IBB
+    </div>
+
+    <h2>
+      Opening your Academy
+    </h2>
+
+    <p id="loadingText">
+      Verifying your member session...
+    </p>
+
+    <div class="loading-spinner"></div>
+
   </div>
+
 </div>
 
-<div id="app" class="hidden">
+
+<!-- =========================
+     TOPBAR
+========================= -->
 
 <header class="topbar">
+
   <div class="topbar-inner">
 
-    <div class="brand">
-      <div class="brand-mark">IBB</div>
+    <a href="index.html" class="brand">
+
+      <div class="brand-mark">
+        IBB
+      </div>
+
       <div class="brand-text">
-        <strong>INDIAN BUSINESS BUREAU</strong>
-        <span>Promoter Academy</span>
-      </div>
-    </div>
+        <strong>
+          Indian Business Bureau
+        </strong>
 
-    <div class="top-actions">
-      <div class="member-mini">
-        <div class="avatar" id="avatar">I</div>
-        <span id="topMemberName">IBB Member</span>
+        <span>
+          Promoter Academy
+        </span>
       </div>
 
-      <button class="logout-btn" id="logoutBtn">Logout</button>
+    </a>
+
+
+    <div class="member-area">
+
+      <div class="avatar" id="avatar">
+        I
+      </div>
+
+      <div class="member-info">
+
+        <strong id="memberName">
+          IBB Promoter
+        </strong>
+
+        <span id="memberId">
+          Member
+        </span>
+
+      </div>
+
+      <button
+        class="logout-btn"
+        id="logoutBtn"
+        type="button"
+      >
+        Logout
+      </button>
+
     </div>
 
   </div>
+
 </header>
+
+
+<!-- =========================
+     HERO
+========================= -->
 
 <section class="hero">
 
   <div class="hero-inner">
 
-    <div class="eyebrow">
-      <span class="eyebrow-dot"></span>
-      10-Day Promoter Academy
+    <div class="hero-badge">
+      🎓 MEMBER TRAINING PROGRAM
     </div>
 
-    <div class="hero-grid">
+    <h1>
+      10-Day
+      <span>Promoter Academy</span>
+    </h1>
 
-      <div>
-        <h1>
-          Learn the skill.
-          <span>Build the habit.</span>
-        </h1>
+    <p>
+      Learn practical skills for campaign understanding,
+      content creation, social media, proof submission,
+      communication and responsible promotion.
+    </p>
 
-        <p class="hero-description">
-          A practical 10-day training journey covering campaign basics,
-          business research, content creation, UGC, publishing,
-          proof, communication and professional promoter habits.
-        </p>
+
+    <div class="hero-stats">
+
+      <div class="hero-stat">
+        <strong>10</strong>
+        <span>Training Days</span>
       </div>
 
-      <div class="hero-stats">
+      <div class="hero-stat">
+        <strong>20</strong>
+        <span>Assessment Questions</span>
+      </div>
 
-        <div class="hero-stat">
-          <strong>10</strong>
-          <span>Training Days</span>
-        </div>
+      <div class="hero-stat">
+        <strong>80%</strong>
+        <span>Pass Mark</span>
+      </div>
 
-        <div class="hero-stat">
-          <strong>20</strong>
-          <span>Assessment Qs</span>
-        </div>
-
-        <div class="hero-stat">
-          <strong>80%</strong>
-          <span>Pass Mark</span>
-        </div>
-
+      <div class="hero-stat">
+        <strong>1</strong>
+        <span>Final Certificate</span>
       </div>
 
     </div>
@@ -1205,332 +1520,3183 @@ footer{
   </div>
 
 </section>
+
+
+<!-- =========================
+     MAIN
+========================= -->
 
 <main class="main">
 
-<section class="progress-dashboard">
 
-  <div>
+  <!-- PROGRESS -->
 
-    <div class="progress-label">
-      <strong>Your Academy Progress</strong>
-      <span class="progress-percent" id="progressPercent">0%</span>
+  <section class="progress-card">
+
+    <div class="progress-top">
+
+      <div>
+        <h3>
+          Your Academy Progress
+        </h3>
+
+        <p id="progressText">
+          0 of 10 days completed
+        </p>
+      </div>
+
+      <div
+        class="progress-percent"
+        id="progressPercent"
+      >
+        0%
+      </div>
+
     </div>
 
     <div class="progress-track">
-      <div class="progress-fill" id="progressFill"></div>
+
+      <div
+        class="progress-fill"
+        id="progressFill"
+      ></div>
+
     </div>
 
-    <div class="progress-meta">
-      <span id="completedText">0 of 10 days completed</span>
-      <span id="consistencyText">Start your journey</span>
+  </section>
+
+
+  <!-- DAY NAV -->
+
+  <nav
+    class="day-nav"
+    id="dayNav"
+    aria-label="Training days"
+  ></nav>
+
+
+  <!-- TRAINING -->
+
+  <section
+    class="training-card"
+    id="trainingCard"
+  >
+
+    <div class="training-header">
+
+      <div class="day-label" id="dayLabel">
+        Day 1
+      </div>
+
+      <h2 id="dayTitle">
+        Loading...
+      </h2>
+
+      <p
+        class="training-subtitle"
+        id="daySubtitle"
+      ></p>
+
+      <div
+        class="training-meta"
+        id="trainingMeta"
+      ></div>
+
     </div>
 
-  </div>
 
-  <div class="current-badge">
-    <strong id="currentDayBadge">DAY 1</strong>
-    <span>Current mission</span>
-  </div>
+    <div
+      class="lock-box hidden"
+      id="lockBox"
+    >
 
-</section>
+      <strong>
+        🔒 Next training day is locked
+      </strong>
 
-<div class="section-heading">
-  <h2>Your 10-Day Journey</h2>
-  <p>Complete each lesson and practical mission to unlock the next day.</p>
-</div>
+      <p>
+        Complete the required waiting period before
+        starting your next Academy mission.
+      </p>
 
-<div class="day-nav" id="dayNav"></div>
+      <div
+        class="timer"
+        id="timer"
+      >
+        24:00:00
+      </div>
 
-<section id="trainingSection">
-
-<div class="training-card">
-
-<div class="training-top">
-
-<div class="day-kicker">
-  <span class="line"></span>
-  Day <span id="dayNumber">1</span>
-</div>
-
-<h2 class="training-title" id="dayTitle">Welcome to IBB</h2>
-
-<p class="training-subtitle" id="daySubtitle"></p>
-
-<div class="training-tags">
-  <span class="tag">⏱ <span id="dayTime">20 min</span></span>
-  <span class="tag">📖 Learning</span>
-  <span class="tag">🛠 Practice</span>
-  <span class="tag">🎯 Skill Building</span>
-</div>
-
-</div>
-
-<div class="training-body">
-
-<div class="mission-banner">
-  <small>Today's objective</small>
-  <h3 id="missionTitle"></h3>
-  <p id="missionText"></p>
-</div>
-
-<!-- ACTUAL LESSON -->
-
-<div class="lesson-box">
-
-  <div class="lesson-heading">
-    <div class="lesson-heading-icon">📖</div>
-    <h3>Learn — Core Training Material</h3>
-  </div>
-
-  <div class="lesson-content" id="lessonContent"></div>
-
-  <div class="key-points" id="keyPoints"></div>
-
-</div>
-
-<div class="content-grid">
-
-<div class="content-card">
-
-  <div class="card-icon">💡</div>
-
-  <h3>Real Example</h3>
-
-  <p id="exampleText"></p>
-
-  <div class="example-box">
-
-    <div class="example-good">
-      <strong>✓ Better approach</strong><br>
-      <span id="goodExample"></span>
     </div>
 
-    <div class="example-bad">
-      <strong>✕ Avoid this</strong><br>
-      <span id="badExample"></span>
+
+    <div
+      class="training-content"
+      id="trainingContent"
+    ></div>
+
+  </section>
+
+
+  <!-- ASSESSMENT -->
+
+  <section
+    class="assessment hidden"
+    id="assessmentSection"
+  >
+
+    <div class="assessment-header">
+
+      <h2>
+        🏆 Final Assessment
+      </h2>
+
+      <p>
+        Complete all 20 questions. You need at least
+        80% to pass the Academy.
+      </p>
+
     </div>
 
-  </div>
-
-</div>
-
-<div class="content-card">
-
-  <div class="card-icon">⚠️</div>
-
-  <h3>Common Mistakes</h3>
-
-  <ul class="task-list" id="mistakeList"></ul>
-
-</div>
-
-<div class="content-card">
-
-  <div class="card-icon">🛠</div>
-
-  <h3>Practical Exercise</h3>
-
-  <p id="taskIntro"></p>
-
-  <ul class="task-list" id="taskList"></ul>
-
-</div>
-
-<div class="content-card">
-
-  <div class="card-icon">☑️</div>
-
-  <h3>Skill Checklist</h3>
-
-  <div class="checklist" id="checklist"></div>
-
-</div>
-
-<div class="content-card">
-
-  <div class="card-icon">📸</div>
-
-  <h3>Proof of Completion</h3>
-
-  <div class="proof-box" id="proofText"></div>
-
-</div>
-
-<div class="content-card pro-tip">
-
-  <div class="card-icon">💎</div>
-
-  <h3>IBB Pro Insight</h3>
-
-  <p id="tipText"></p>
-
-</div>
-
-<div class="content-card full">
-
-  <div class="card-icon">📝</div>
-
-  <h3>Reflection</h3>
-
-  <p id="reflectionPrompt"></p>
-
-  <div class="reflection-box">
-    <label for="reflectionText">
-      Write your answer in your own words.
-    </label>
-
-    <textarea
-      id="reflectionText"
-      placeholder="Write what you learned or what you would do differently..."
-    ></textarea>
-  </div>
-
-</div>
-
-</div>
-
-<div class="ethics-box">
-
-  <h3>🛡 Responsible Promotion Rule</h3>
-
-  <p>
-    Good promotion must be truthful and responsible. Never create fake
-    reviews, fake experiences, misleading claims or fabricated proof.
-    Follow the campaign brief and disclose promotional relationships
-    when required by the platform or applicable rules.
-  </p>
-
-  <ul class="ethics-list">
-    <li>Use real experiences and accurate information.</li>
-    <li>Do not promise results that you cannot support.</li>
-    <li>Do not manipulate screenshots, engagement or proof.</li>
-    <li>Ask when a campaign instruction is unclear.</li>
-  </ul>
-
-</div>
-
-<div class="completion-box">
-
-  <div class="completion-title">
-    <span>✅</span>
-    <span>Daily completion check</span>
-  </div>
-
-  <label class="completion-checkbox">
-    <input type="checkbox" id="completionCheck">
-    <span>
-      I completed today's lesson, practical exercise,
-      checklist and reflection honestly.
-    </span>
-  </label>
-
-  <button class="complete-btn" id="completeBtn" disabled>
-    Mark Day Complete →
-  </button>
-
-</div>
-
-<div class="lock-box hidden" id="lockBox">
-
-  <div class="lock-icon">🔒</div>
-
-  <h3>Next lesson unlocks soon</h3>
-
-  <p>
-    The next training day becomes available 24 hours after
-    your previous day is completed.
-  </p>
-
-  <div class="timer" id="timer">24:00:00</div>
-
-</div>
-
-</div>
-</div>
-
-</section>
-
-<!-- FINAL ASSESSMENT -->
-
-<section class="assessment hidden" id="assessmentSection">
-
-<div class="assessment-head">
-
-<div class="eyebrow">
-  🏆 Final Assessment
-</div>
-
-<h2>Ready to prove your promoter skillset?</h2>
-
-<p>
-  Complete all 10 training days first. The final assessment contains
-  20 questions and requires at least 80% to pass.
-</p>
-
-</div>
-
-<div class="assessment-body">
-
-<form id="testForm"></form>
-
-<button class="submit-test" id="submitTest">
-  Submit Final Assessment →
-</button>
-
-<div class="result-box hidden" id="resultBox"></div>
-
-</div>
-
-</section>
-
-<!-- CERTIFICATE -->
-
-<section class="certificate hidden" id="certificateSection">
-
-<div class="certificate-badge">🏆</div>
-
-<h2>IBB PROMOTER CERTIFIED</h2>
-
-<p>
-  You completed the IBB Promoter Academy and demonstrated
-  the required understanding through the final assessment.
-</p>
-
-<div class="certificate-name" id="certificateName">
-  IBB Promoter
-</div>
-
-</section>
+    <div
+      class="assessment-body"
+      id="assessmentBody"
+    ></div>
+
+  </section>
+
+
+  <!-- CERTIFICATE -->
+
+  <section
+    class="certificate"
+    id="certificate"
+  >
+
+    <div class="certificate-badge">
+      🏆
+    </div>
+
+    <h2>
+      Academy Completed
+    </h2>
+
+    <p>
+      Congratulations! You successfully completed
+      the IBB Promoter Academy.
+    </p>
+
+    <div
+      class="certificate-name"
+      id="certificateName"
+    >
+      IBB Promoter
+    </div>
+
+    <div
+      class="certificate-id"
+      id="certificateId"
+    >
+      Member ID
+    </div>
+
+  </section>
 
 </main>
 
+
 <footer>
-  Indian Business Bureau • IBB Promoter Academy
+  Indian Business Bureau · Promoter Academy
   <br>
-  Learn skills. Create responsibly. Build trust.
+  Learn. Create. Communicate. Deliver responsibly.
 </footer>
 
-</div>
 
 <script>
 
 /* =========================================================
-   SUPABASE
+   SUPABASE CONFIG
 ========================================================= */
 
 const SUPABASE_URL =
-"https://tvantyrkjxoljjpnadac.supabase.co";
+  "https://tvantyrkjxoljjpnadac.supabase.co";
 
 const SUPABASE_PUBLISHABLE_KEY =
-"sb_publishable_t0Z_jIqNeUde0fZ4YS8h3Q_fQHLO_GV";
+  "sb_publishable_t0Z_jIqNeUde0fZ4YS8h3Q_fQHLO_GV";
+
+
+/* =========================================================
+   SUPABASE CLIENT
+========================================================= */
 
 const supabaseClient =
-window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_PUBLISHABLE_KEY
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+
+/* =========================================================
+   GLOBAL STATE
+========================================================= */
+
+let currentUser = null;
+let profile = null;
+
+let memberName = "IBB Promoter";
+let memberId = "IBB Member";
+
+let currentDay = 1;
+
+let completedDays = [];
+let lastCompletion = null;
+
+let timerInterval = null;
+
+let testRendered = false;
+
+
+/* =========================================================
+   TRAINING DATA
+========================================================= */
+
+const trainingData = [
+
+  {
+    title:"IBB & Promoter Fundamentals",
+
+    subtitle:
+      "Understand the promoter role, professional mindset and responsible participation.",
+
+    time:"20 min",
+
+    mission:
+      "Understand what a valuable promoter actually does.",
+
+    missionText:
+      "Before creating content, understand your responsibility: follow instructions, communicate clearly, create useful content and document your work honestly.",
+
+    lesson:
+`A promoter is more than someone who posts something online.
+
+A reliable promoter follows a simple workflow:
+
+Understand → Plan → Create → Publish/Execute → Prove → Communicate
+
+Your value comes from reliability, relevance and trust.
+
+If a campaign brief is unclear, ask before acting. If something changes, communicate it. If proof is required, organise it properly.
+
+Never create fake proof, fake reviews or fake experiences.`,
+
+    points:[
+      "Understand the campaign objective before starting.",
+      "Create content that is relevant to the intended audience.",
+      "Communicate clearly when something is unclear or delayed.",
+      "Keep campaign evidence organised.",
+      "Never fabricate reviews, screenshots, results or experiences."
+    ],
+
+    example:
+      "A local café wants to promote its breakfast menu. A good promoter first understands the offer, checks the required content, creates honest content and keeps proof of the completed work.",
+
+    good:
+      "Good approach: understand the campaign, create useful content, follow instructions and submit genuine proof.",
+
+    bad:
+      "Poor approach: copy another person's content, claim an experience you never had or create fake screenshots.",
+
+    mistakes:[
+      "Starting without reading the full campaign brief.",
+      "Assuming unclear instructions instead of asking.",
+      "Submitting incomplete or confusing proof.",
+      "Making claims that cannot be supported.",
+      "Ignoring deadlines or communication."
+    ],
+
+    taskIntro:
+      "Complete these learning tasks before marking Day 1 complete.",
+
+    tasks:[
+      "Write down what you think a professional promoter is responsible for.",
+      "List three behaviours that help build trust.",
+      "Identify one promoter skill you personally want to improve."
+    ],
+
+    checklist:[
+      "I understand the basic promoter workflow.",
+      "I understand why honest proof matters.",
+      "I know when I should ask for clarification."
+    ],
+
+    proof:
+      "For your own learning record, keep your written answers or notes. Do not submit fabricated proof.",
+
+    reflection:
+      "What does being a reliable promoter mean to you?",
+
+    tip:
+      "IBB Pro Insight: Reliability is a skill. People remember the promoter who communicates clearly and delivers consistently."
+  },
+
+
+  {
+    title:"Campaign Basics",
+
+    subtitle:
+      "Learn how to read a campaign brief and turn it into clear actions.",
+
+    time:"25 min",
+
+    mission:
+      "Learn how to convert a campaign brief into a simple action plan.",
+
+    missionText:
+      "A campaign brief normally tells you what needs to happen, who it is for, what needs to be delivered and how completion will be verified.",
+
+    lesson:
+`Before doing any campaign work, identify six things:
+
+1. Objective — What is the campaign trying to achieve?
+2. Audience — Who should care about it?
+3. Deliverable — What exactly do you need to create or do?
+4. Deadline — When must it be completed?
+5. Proof — What evidence is required?
+6. Clarification — What is still unclear?
+
+Do not start with the content. Start with the objective.`,
+
+    points:[
+      "Read the complete brief before acting.",
+      "Separate the objective from the deliverable.",
+      "Know the deadline before planning your work.",
+      "Understand exactly what proof is expected.",
+      "Ask questions before making assumptions."
+    ],
+
+    example:
+      "A salon launches a new haircut service. The campaign objective may be awareness, the audience may be local customers, the deliverable could be a short video and the proof could be a live post link.",
+
+    good:
+      "Good approach: write the objective, audience, deliverable, deadline and proof requirement before creating content.",
+
+    bad:
+      "Poor approach: immediately make a random post without understanding what the campaign is trying to achieve.",
+
+    mistakes:[
+      "Confusing campaign objective with content format.",
+      "Forgetting the deadline.",
+      "Not checking proof requirements.",
+      "Guessing campaign details.",
+      "Ignoring required approval steps."
+    ],
+
+    taskIntro:
+      "Create a fictional campaign brief.",
+
+    tasks:[
+      "Choose a fictional local business.",
+      "Write one clear campaign objective.",
+      "Define the intended audience.",
+      "Choose one content deliverable.",
+      "Write a realistic deadline.",
+      "Define what genuine proof would show completion."
+    ],
+
+    checklist:[
+      "I can identify a campaign objective.",
+      "I can define the target audience.",
+      "I can identify the required deliverable.",
+      "I understand the importance of proof."
+    ],
+
+    proof:
+      "Keep your fictional campaign brief as your learning exercise.",
+
+    reflection:
+      "Which part of a campaign brief would you check first and why?",
+
+    tip:
+      "IBB Pro Insight: A clear brief saves time. Five minutes of planning can prevent hours of incorrect work."
+  },
+
+
+  {
+    title:"Business Research",
+
+    subtitle:
+      "Learn how to understand a business, its audience, offer and useful customer benefits.",
+
+    time:"25 min",
+
+    mission:
+      "Learn basic research before creating promotional content.",
+
+    missionText:
+      "Good promotional content starts with understanding the business instead of simply repeating its name.",
+
+    lesson:
+`Use this simple research framework:
+
+Business → Audience → Offer → Benefit → Evidence
+
+Business:
+What does the business actually do?
+
+Audience:
+Who is most likely to use it?
+
+Offer:
+What product, service or experience is being promoted?
+
+Benefit:
+Why could it be useful to the audience?
+
+Evidence:
+Which facts can be supported by the business information?
+
+Avoid unsupported promises.
+
+For example, a fitness studio can describe its classes and facilities without promising guaranteed weight-loss results.`,
+
+    points:[
+      "Understand the business category.",
+      "Identify the likely customer.",
+      "Understand the actual offer.",
+      "Describe benefits without exaggeration.",
+      "Use facts that can be supported."
+    ],
+
+    example:
+      "A neighbourhood fitness studio offers group classes. Useful research could include class types, timings, location and facilities. Avoid claiming guaranteed health or weight-loss outcomes.",
+
+    good:
+      "Good approach: explain what the business offers and why it may be useful to the audience.",
+
+    bad:
+      "Poor approach: promise guaranteed results or invent facts about the business.",
+
+    mistakes:[
+      "Copying generic marketing language.",
+      "Making claims without evidence.",
+      "Ignoring the actual audience.",
+      "Using outdated or incorrect information.",
+      "Assuming benefits without checking."
+    ],
+
+    taskIntro:
+      "Create a mini business research sheet.",
+
+    tasks:[
+      "Choose a fictional local business.",
+      "Describe its main product or service.",
+      "Define its likely audience.",
+      "Write three factual benefits.",
+      "Write one claim you should NOT make without evidence."
+    ],
+
+    checklist:[
+      "I can identify a business audience.",
+      "I can describe an offer clearly.",
+      "I understand the difference between benefits and guarantees.",
+      "I know why evidence matters."
+    ],
+
+    proof:
+      "Keep your research sheet for your own training record.",
+
+    reflection:
+      "Why is research important before creating promotional content?",
+
+    tip:
+      "IBB Pro Insight: Better research usually produces better content because your message becomes specific instead of generic."
+  },
+
+
+  {
+    title:"Content Writing",
+
+    subtitle:
+      "Learn a simple structure for useful captions and promotional messages.",
+
+    time:"25 min",
+
+    mission:
+      "Write content that captures attention without becoming misleading.",
+
+    missionText:
+      "Use a simple structure to make your message easy to understand.",
+
+    lesson:
+`A useful promotional caption can follow:
+
+HOOK → CONTEXT → BENEFIT → CTA
+
+Hook:
+Give the reader a reason to continue.
+
+Context:
+Explain what is being promoted.
+
+Benefit:
+Explain why it may be useful or interesting.
+
+CTA:
+Tell the reader what to do next.
+
+Keep the language natural.
+
+Avoid fake urgency, unsupported claims and exaggerated promises.`,
+
+    points:[
+      "Start with a clear hook.",
+      "Give enough context to understand the offer.",
+      "Explain a realistic benefit.",
+      "Use a relevant call to action.",
+      "Keep claims accurate."
+    ],
+
+    example:
+      "A café promoting a weekend breakfast could use a hook about a relaxed weekend breakfast, explain the menu, mention useful details and end with a CTA to check the menu or visit.",
+
+    good:
+      "Good approach: clear, specific, natural and useful.",
+
+    bad:
+      "Poor approach: ALL CAPS, fake scarcity, unrealistic promises and irrelevant hashtags.",
+
+    mistakes:[
+      "Starting with a vague sentence.",
+      "Using too many hashtags.",
+      "Writing a CTA unrelated to the objective.",
+      "Making unsupported claims.",
+      "Copying captions without adapting them."
+    ],
+
+    taskIntro:
+      "Write a complete fictional promotional caption.",
+
+    tasks:[
+      "Choose a fictional local business.",
+      "Write a one-line hook.",
+      "Add two lines of useful context.",
+      "Write one realistic benefit.",
+      "Finish with a clear CTA."
+    ],
+
+    checklist:[
+      "My caption has a clear hook.",
+      "The reader can understand the offer.",
+      "My benefit is realistic.",
+      "My CTA is relevant."
+    ],
+
+    proof:
+      "Save your caption as a learning exercise.",
+
+    reflection:
+      "What makes a promotional caption feel useful instead of pushy?",
+
+    tip:
+      "IBB Pro Insight: Clarity beats cleverness. If the audience cannot understand the message quickly, the content needs improvement."
+  },
+
+
+  {
+    title:"Photography",
+
+    subtitle:
+      "Learn practical principles for clean and useful promotional photos.",
+
+    time:"25 min",
+
+    mission:
+      "Create photos where the subject is clear and the environment supports the message.",
+
+    missionText:
+      "Good promotional photography does not require expensive equipment. Clean composition, lighting and context often matter more.",
+
+    lesson:
+`Use this simple photography workflow:
+
+Clean Scene → Good Light → Clear Subject → Useful Angle → Review
+
+Clean Scene:
+Remove unnecessary distractions.
+
+Good Light:
+Use available natural or suitable lighting.
+
+Clear Subject:
+Make sure the product or service is easy to see.
+
+Useful Angle:
+Choose an angle that helps the viewer understand the subject.
+
+Review:
+Check focus, exposure and distracting elements before publishing.`,
+
+    points:[
+      "Clean the scene before shooting.",
+      "Use light that makes the subject visible.",
+      "Keep the main subject obvious.",
+      "Choose an angle with useful context.",
+      "Review the image before publishing."
+    ],
+
+    example:
+      "For a bakery cake, a clean table, natural window light, a clear view of the cake and a small amount of surrounding context can communicate quality better than a cluttered image.",
+
+    good:
+      "Good approach: clean frame, clear subject, balanced lighting and useful context.",
+
+    bad:
+      "Poor approach: dark photo, messy background, blocked subject or extreme filters.",
+
+    mistakes:[
+      "Shooting against very strong light.",
+      "Leaving distracting objects in the frame.",
+      "Using excessive filters.",
+      "Posting blurry photos.",
+      "Taking too many almost-identical photos without selecting the best one."
+    ],
+
+    taskIntro:
+      "Complete a simple photography comparison exercise.",
+
+    tasks:[
+      "Take or imagine two photos of the same subject.",
+      "Compare the lighting.",
+      "Compare the background.",
+      "Compare which photo communicates the subject better.",
+      "Write one improvement for the weaker photo."
+    ],
+
+    checklist:[
+      "I understand basic lighting.",
+      "I understand why background matters.",
+      "I can identify a clear subject.",
+      "I know why reviewing a photo matters."
+    ],
+
+    proof:
+      "Keep your photo comparison notes or practice images.",
+
+    reflection:
+      "What is the first thing you notice when you look at a promotional photo?",
+
+    tip:
+      "IBB Pro Insight: A phone camera can produce useful content when the person behind it pays attention to light, cleanliness and composition."
+  },
+
+
+  {
+    title:"Reels & Short Video",
+
+    subtitle:
+      "Learn how to plan short videos with a clear beginning, middle and end.",
+
+    time:"30 min",
+
+    mission:
+      "Build a short video that communicates one clear idea.",
+
+    missionText:
+      "Short videos work better when every shot has a purpose.",
+
+    lesson:
+`Use this basic structure:
+
+BEGINNING → MIDDLE → END
+
+Beginning:
+Create a reason to watch.
+
+Middle:
+Show the useful product, service or experience.
+
+End:
+Give context and a relevant next step.
+
+Before recording, make a simple shot list.
+
+Example:
+
+Shot 1 — exterior or opening
+Shot 2 — product/service
+Shot 3 — useful detail
+Shot 4 — final context or CTA
+
+Keep movement intentional and avoid unnecessary effects.`,
+
+    points:[
+      "Start with a clear hook.",
+      "Use shots that support the main message.",
+      "Keep the video focused on one idea.",
+      "Use readable text when needed.",
+      "End with useful context or CTA."
+    ],
+
+    example:
+      "A restaurant introducing a new dish could show the restaurant, the preparation, the finished dish and a final frame with the dish name and relevant information.",
+
+    good:
+      "Good approach: four purposeful shots that tell one simple story.",
+
+    bad:
+      "Poor approach: random clips, excessive transitions and no clear point.",
+
+    mistakes:[
+      "No hook at the beginning.",
+      "Too many unrelated shots.",
+      "Unreadable text.",
+      "Overusing transitions.",
+      "Forgetting the audience or objective."
+    ],
+
+    taskIntro:
+      "Create a four-shot fictional Reel plan.",
+
+    tasks:[
+      "Write your opening shot.",
+      "Write your second shot showing the main subject.",
+      "Write your useful detail shot.",
+      "Write your final context or CTA shot.",
+      "Write the main message in one sentence."
+    ],
+
+    checklist:[
+      "My video has a clear beginning.",
+      "Each shot has a purpose.",
+      "The main subject is easy to understand.",
+      "The ending gives useful context."
+    ],
+
+    proof:
+      "Keep your four-shot plan as a learning exercise.",
+
+    reflection:
+      "What makes a short video easy to follow?",
+
+    tip:
+      "IBB Pro Insight: Do not try to say everything. One clear message is usually stronger than five confusing messages."
+  },
+
+
+  {
+    title:"UGC & Authentic Reviews",
+
+    subtitle:
+      "Understand authentic user-generated content and responsible personal experiences.",
+
+    time:"30 min",
+
+    mission:
+      "Learn how to create personal content without inventing experiences or misleading audiences.",
+
+    missionText:
+      "Authenticity means your experience and statements should be genuine. Promotional content should never require you to pretend that something happened when it did not.",
+
+    lesson:
+`Separate personal observation from factual claims.
+
+Personal observation:
+"I liked the presentation."
+
+Factual claim:
+"The business is open until 10 PM."
+
+A factual claim should be checked.
+
+Never invent:
+• customer experiences
+• reviews
+• testimonials
+• results
+• screenshots
+• before/after outcomes
+
+If promotional disclosure is required by the platform, law or campaign instructions, follow the applicable disclosure requirements.`,
+
+    points:[
+      "Only describe experiences you genuinely had.",
+      "Separate opinions from factual claims.",
+      "Do not invent testimonials.",
+      "Do not promise guaranteed results.",
+      "Follow applicable disclosure requirements."
+    ],
+
+    example:
+      "For a skincare product, a genuine user can describe their actual experience. They should not claim that the product guarantees a specific medical or cosmetic result without appropriate evidence.",
+
+    good:
+      "Good approach: honest personal observation, clear factual boundaries and appropriate disclosure.",
+
+    bad:
+      "Poor approach: pretending to be a customer, inventing results or copying another person's testimonial.",
+
+    mistakes:[
+      "Using fake first-person experiences.",
+      "Making medical or guaranteed-result claims.",
+      "Copying testimonials.",
+      "Hiding material promotional context.",
+      "Presenting opinion as fact."
+    ],
+
+    taskIntro:
+      "Write an ethical UGC script for a fictional product.",
+
+    tasks:[
+      "Choose a fictional product.",
+      "Write one genuine-sounding observation without inventing a real experience.",
+      "Write one factual product detail.",
+      "Write one statement you would avoid without evidence.",
+      "Add a suitable disclosure line if the content is promotional."
+    ],
+
+    checklist:[
+      "I understand authentic UGC.",
+      "I know not to invent experiences.",
+      "I can distinguish opinion from fact.",
+      "I understand responsible promotional disclosure."
+    ],
+
+    proof:
+      "Keep your fictional UGC script as a learning exercise.",
+
+    reflection:
+      "Why can fake reviews damage trust?",
+
+    tip:
+      "IBB Pro Insight: Trust is difficult to build and easy to lose. Never trade long-term credibility for one piece of content."
+  },
+
+
+  {
+    title:"Publishing & Social Media",
+
+    subtitle:
+      "Learn how to review, publish and communicate content responsibly.",
+
+    time:"25 min",
+
+    mission:
+      "Build a reliable pre-publishing routine.",
+
+    missionText:
+      "Publishing is not the final click. It is the final quality check.",
+
+    lesson:
+`Before publishing, review:
+
+1. Facts
+2. Spelling
+3. Visual quality
+4. Tags/mentions
+5. CTA
+6. Required disclosure
+7. Campaign instructions
+
+Then ask:
+
+Does this content match the audience?
+
+Does it support the campaign objective?
+
+Could a viewer misunderstand any claim?
+
+Only publish after the content is ready.`,
+
+    points:[
+      "Check facts before publishing.",
+      "Review spelling and readability.",
+      "Use relevant tags and mentions.",
+      "Make the CTA match the objective.",
+      "Follow campaign-specific instructions."
+    ],
+
+    example:
+      "A new local service campaign should have a clear description, relevant audience, accurate business information and a CTA that helps the viewer take the intended next step.",
+
+    good:
+      "Good approach: review everything once before publishing.",
+
+    bad:
+      "Poor approach: publish immediately and discover incorrect information afterward.",
+
+    mistakes:[
+      "Incorrect business information.",
+      "Broken links.",
+      "Irrelevant hashtags.",
+      "Missing disclosure when required.",
+      "Publishing without proofreading."
+    ],
+
+    taskIntro:
+      "Create your own pre-publish checklist.",
+
+    tasks:[
+      "Write a fictional caption.",
+      "Identify the intended audience.",
+      "Add three relevant tags.",
+      "Write one CTA.",
+      "Perform a five-point pre-publish review."
+    ],
+
+    checklist:[
+      "I know what to check before publishing.",
+      "I understand audience relevance.",
+      "I can write a useful CTA.",
+      "I understand why proofreading matters."
+    ],
+
+    proof:
+      "Keep your checklist as a reusable publishing routine.",
+
+    reflection:
+      "Which pre-publish check is easiest to forget?",
+
+    tip:
+      "IBB Pro Insight: Professional content often looks simple because the creator checked the details before publishing."
+  },
+
+
+  {
+    title:"Proof, Reporting & Professionalism",
+
+    subtitle:
+      "Learn how to document work and communicate clearly with campaign stakeholders.",
+
+    time:"25 min",
+
+    mission:
+      "Make your work easy to verify and your communication easy to understand.",
+
+    missionText:
+      "Proof should answer what happened, when it happened and where it can be checked.",
+
+    lesson:
+`Useful proof may include appropriate:
+
+• live links
+• screenshots
+• timestamps
+• content references
+• campaign IDs
+• other evidence specifically requested by the campaign
+
+Good reporting is short and organised.
+
+Example:
+
+Campaign: ABC-001
+Action: Instagram Reel published
+Date: 15 September
+Proof: live post link
+Status: Completed
+
+If there is a delay, communicate early.
+
+Do not create fake evidence to make an incomplete task appear complete.`,
+
+    points:[
+      "Submit proof in the requested format.",
+      "Keep evidence organised.",
+      "Use clear dates and references.",
+      "Communicate delays early.",
+      "Never fabricate completion evidence."
+    ],
+
+    example:
+      "After publishing approved campaign content, a promoter can provide the requested live link and screenshot with the relevant campaign reference.",
+
+    good:
+      "Good approach: concise, organised and genuine proof.",
+
+    bad:
+      "Poor approach: unrelated screenshots, missing context or fabricated evidence.",
+
+    mistakes:[
+      "Submitting proof without campaign context.",
+      "Sending multiple confusing screenshots.",
+      "Not mentioning a delay.",
+      "Submitting proof for the wrong campaign.",
+      "Fabricating evidence."
+    ],
+
+    taskIntro:
+      "Practice professional campaign communication.",
+
+    tasks:[
+      "Write a sample campaign completion message.",
+      "Create a proof checklist.",
+      "Write a professional delay message.",
+      "Write a clarification question for an unclear brief."
+    ],
+
+    checklist:[
+      "I know what useful proof looks like.",
+      "I can write a clear completion message.",
+      "I can communicate a delay professionally.",
+      "I understand why fake proof is unacceptable."
+    ],
+
+    proof:
+      "Keep your sample messages and proof checklist.",
+
+    reflection:
+      "What makes a campaign report easy for another person to verify?",
+
+    tip:
+      "IBB Pro Insight: Good reporting reduces follow-up questions. Make your work easy for the next person to understand."
+  },
+
+
+  {
+    title:"Final Campaign Challenge",
+
+    subtitle:
+      "Combine everything you learned into one complete campaign plan.",
+
+    time:"35 min",
+
+    mission:
+      "Build a complete fictional campaign plan from brief to reporting.",
+
+    missionText:
+      "This final challenge combines the skills from all ten days. The scenario is fictional and is meant for training.",
+
+    lesson:
+`Use the complete workflow:
+
+UNDERSTAND
+↓
+PLAN
+↓
+EXECUTE
+↓
+VERIFY
+↓
+COMMUNICATE
+↓
+IMPROVE
+
+Fictional scenario:
+
+A local café wants to promote its weekend breakfast menu.
+
+Your job is to create a one-page campaign plan.
+
+Include:
+
+• campaign objective
+• target audience
+• key offer
+• content idea
+• photo or Reel plan
+• caption structure
+• CTA
+• proof plan
+• communication plan
+• one risk or mistake to avoid
+
+Important:
+This is a fictional training exercise.
+
+Do not submit fabricated real-world results as proof of an actual campaign.`,
+
+    points:[
+      "Turn a brief into a clear plan.",
+      "Research the audience and offer.",
+      "Choose appropriate content.",
+      "Plan genuine proof.",
+      "Communicate professionally."
+    ],
+
+    example:
+      "A strong plan might target local weekend customers, highlight the breakfast menu, use a four-shot Reel, provide useful menu context and finish with a relevant CTA.",
+
+    good:
+      "Good approach: clear objective, relevant audience, useful content, honest claims and organised proof.",
+
+    bad:
+      "Poor approach: vague objective, random content, fake testimonials or fabricated campaign results.",
+
+    mistakes:[
+      "Trying to include too many ideas.",
+      "Forgetting the audience.",
+      "Using unsupported claims.",
+      "Ignoring proof requirements.",
+      "Treating communication as an afterthought."
+    ],
+
+    taskIntro:
+      "Complete your final fictional campaign plan.",
+
+    tasks:[
+      "Write the campaign objective.",
+      "Define the target audience.",
+      "Describe the offer.",
+      "Create a photo or Reel concept.",
+      "Write the caption structure.",
+      "Add a relevant CTA.",
+      "Define genuine proof.",
+      "Write a professional completion message.",
+      "Identify one risk to avoid."
+    ],
+
+    checklist:[
+      "My objective is clear.",
+      "My audience is defined.",
+      "My content idea supports the objective.",
+      "My proof plan is realistic.",
+      "My communication plan is clear."
+    ],
+
+    proof:
+      "Keep your final fictional campaign plan. Remember that fictional practice work must not be presented as real campaign completion.",
+
+    reflection:
+      "What is the most important skill you learned during the Academy?",
+
+    tip:
+      "IBB Pro Insight: A dependable promoter is not just creative. They are organised, honest, communicative and consistent."
+  }
+
+];
+
+
+/* =========================================================
+   FINAL ASSESSMENT
+========================================================= */
+
+const assessmentQuestions = [
+
+  {
+    q:"What should you do first when receiving a campaign?",
+    options:[
+      "Immediately publish something",
+      "Understand the campaign brief",
+      "Copy another promoter",
+      "Create random hashtags"
+    ],
+    answer:1
+  },
+
+  {
+    q:"Which behaviour best represents a reliable promoter?",
+    options:[
+      "Ignoring messages",
+      "Making unsupported promises",
+      "Communicating clearly",
+      "Submitting random screenshots"
+    ],
+    answer:2
+  },
+
+  {
+    q:"Which research sequence is most useful?",
+    options:[
+      "Business → Audience → Offer → Benefit → Evidence",
+      "Hashtags → Filters → Music → Caption",
+      "CTA → Logo → Random photo → Publish",
+      "Follower count → Likes → Comments → Publish"
+    ],
+    answer:0
+  },
+
+  {
+    q:"Which structure is useful for a promotional caption?",
+    options:[
+      "Hook → Context → Benefit → CTA",
+      "CTA → Hashtags → Random claim → Hook",
+      "Logo → Emoji → Hashtags → End",
+      "Question → Fake review → Guarantee → End"
+    ],
+    answer:0
+  },
+
+  {
+    q:"What is important when taking a promotional photo?",
+    options:[
+      "Maximum filters",
+      "Dark lighting",
+      "Clear subject and useful composition",
+      "Random background"
+    ],
+    answer:2
+  },
+
+  {
+    q:"What should the beginning of a short video do?",
+    options:[
+      "Confuse the viewer",
+      "Create a reason to watch",
+      "Show unrelated footage",
+      "Hide the main subject"
+    ],
+    answer:1
+  },
+
+  {
+    q:"What makes UGC authentic?",
+    options:[
+      "Inventing an experience",
+      "Copying another person's review",
+      "Using genuine experience and honest statements",
+      "Guaranteeing results"
+    ],
+    answer:2
+  },
+
+  {
+    q:"What should you do with an unsupported claim?",
+    options:[
+      "Publish it anyway",
+      "Make it stronger",
+      "Avoid or verify it",
+      "Call it a testimonial"
+    ],
+    answer:2
+  },
+
+  {
+    q:"What is good campaign proof?",
+    options:[
+      "Unrelated screenshots",
+      "Evidence that clearly shows the requested work",
+      "A copied image",
+      "A made-up result"
+    ],
+    answer:1
+  },
+
+  {
+    q:"What should you do if a campaign instruction is unclear?",
+    options:[
+      "Guess",
+      "Ignore it",
+      "Ask for clarification",
+      "Submit fake proof"
+    ],
+    answer:2
+  },
+
+  {
+    q:"Good proof should generally make it clear:",
+    options:[
+      "What happened and how it can be verified",
+      "How many emojis were used",
+      "How many random hashtags exist",
+      "Nothing specific"
+    ],
+    answer:0
+  },
+
+  {
+    q:"What should you do before publishing?",
+    options:[
+      "Skip review",
+      "Review facts, spelling and campaign requirements",
+      "Delete all context",
+      "Add unsupported claims"
+    ],
+    answer:1
+  },
+
+  {
+    q:"Which CTA is best?",
+    options:[
+      "A CTA unrelated to the campaign",
+      "A relevant next step",
+      "A fake emergency",
+      "A misleading guarantee"
+    ],
+    answer:1
+  },
+
+  {
+    q:"What should a genuine testimonial be based on?",
+    options:[
+      "An invented experience",
+      "A real experience",
+      "A copied review",
+      "A guaranteed outcome"
+    ],
+    answer:1
+  },
+
+  {
+    q:"Why is audience relevance important?",
+    options:[
+      "It helps the content communicate with the intended people",
+      "It guarantees viral results",
+      "It replaces research",
+      "It makes proof unnecessary"
+    ],
+    answer:0
+  },
+
+  {
+    q:"What should you do if you know you will miss a deadline?",
+    options:[
+      "Stay silent",
+      "Fabricate completion",
+      "Communicate early",
+      "Delete the campaign"
+    ],
+    answer:2
+  },
+
+  {
+    q:"What should a campaign plan contain?",
+    options:[
+      "Only hashtags",
+      "Objective, audience, deliverable and proof plan",
+      "Only a logo",
+      "Only a caption"
+    ],
+    answer:1
+  },
+
+  {
+    q:"Which behaviour is responsible promotion?",
+    options:[
+      "Fake reviews",
+      "Misleading claims",
+      "Honest and supportable communication",
+      "Fabricated results"
+    ],
+    answer:2
+  },
+
+  {
+    q:"Which workflow best represents professional campaign work?",
+    options:[
+      "Publish → Guess → Proof → Ignore",
+      "Understand → Plan → Execute → Verify → Communicate",
+      "Copy → Publish → Forget",
+      "Post → Delete → Repeat"
+    ],
+    answer:1
+  },
+
+  {
+    q:"What makes a promoter dependable?",
+    options:[
+      "Creativity only",
+      "Fast posting only",
+      "Consistency, communication and honest delivery",
+      "Follower count only"
+    ],
+    answer:2
+  }
+
+];
+
+
+/* =========================================================
+   DOM
+========================================================= */
+
+const loadingScreen =
+  document.getElementById("loadingScreen");
+
+const loadingText =
+  document.getElementById("loadingText");
+
+const memberNameEl =
+  document.getElementById("memberName");
+
+const memberIdEl =
+  document.getElementById("memberId");
+
+const avatarEl =
+  document.getElementById("avatar");
+
+const logoutBtn =
+  document.getElementById("logoutBtn");
+
+const dayNav =
+  document.getElementById("dayNav");
+
+const dayLabel =
+  document.getElementById("dayLabel");
+
+const dayTitle =
+  document.getElementById("dayTitle");
+
+const daySubtitle =
+  document.getElementById("daySubtitle");
+
+const trainingMeta =
+  document.getElementById("trainingMeta");
+
+const trainingContent =
+  document.getElementById("trainingContent");
+
+const lockBox =
+  document.getElementById("lockBox");
+
+const timerEl =
+  document.getElementById("timer");
+
+const progressText =
+  document.getElementById("progressText");
+
+const progressPercent =
+  document.getElementById("progressPercent");
+
+const progressFill =
+  document.getElementById("progressFill");
+
+const assessmentSection =
+  document.getElementById("assessmentSection");
+
+const assessmentBody =
+  document.getElementById("assessmentBody");
+
+const certificate =
+  document.getElementById("certificate");
+
+const certificateName =
+  document.getElementById("certificateName");
+
+const certificateId =
+  document.getElementById("certificateId");
+
+
+/* =========================================================
+   STORAGE
+========================================================= */
+
+function storageKey(name){
+
+  return `${name}_${memberId}`;
+
+}
+
+
+function saveProgress(){
+
+  localStorage.setItem(
+    storageKey("ibb_10day_completed"),
+    JSON.stringify(completedDays)
+  );
+
+  localStorage.setItem(
+    storageKey("ibb_10day_current"),
+    String(currentDay)
+  );
+
+  if(lastCompletion){
+
+    localStorage.setItem(
+      storageKey("ibb_10day_last_completion"),
+      lastCompletion
+    );
+
+  }
+
+}
+
+
+function loadProgress(){
+
+  try{
+
+    completedDays =
+      JSON.parse(
+        localStorage.getItem(
+          storageKey("ibb_10day_completed")
+        ) || "[]"
+      );
+
+    if(!Array.isArray(completedDays)){
+
+      completedDays=[];
+
+    }
+
+  }catch{
+
+    completedDays=[];
+
+  }
+
+
+  currentDay =
+    parseInt(
+      localStorage.getItem(
+        storageKey("ibb_10day_current")
+      ) || "1",
+      10
+    );
+
+
+  lastCompletion =
+    localStorage.getItem(
+      storageKey("ibb_10day_last_completion")
+    );
+
+
+  if(currentDay < 1){
+
+    currentDay=1;
+
+  }
+
+  if(currentDay > 10){
+
+    currentDay=10;
+
+  }
+
+
+  completedDays =
+    completedDays
+      .filter(day =>
+        Number.isInteger(day) &&
+        day >= 1 &&
+        day <= 10
+      )
+      .filter(
+        (day,index,array)=>
+          array.indexOf(day)===index
+      )
+      .sort((a,b)=>a-b);
+
+
+  if(completedDays.length < 10){
+
+    const firstIncomplete =
+      trainingData.findIndex(
+        (_,index)=>
+          !completedDays.includes(index+1)
+      );
+
+
+    if(firstIncomplete >= 0){
+
+      const correctDay =
+        firstIncomplete + 1;
+
+      currentDay =
+        correctDay;
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================
+   24 HOUR LOCK
+========================================================= */
+
+function getUnlockTime(){
+
+  if(!lastCompletion){
+
+    return null;
+
+  }
+
+  return new Date(
+    new Date(lastCompletion).getTime()
+    +
+    24 * 60 * 60 * 1000
+  );
+
+}
+
+
+function isCurrentDayLocked(){
+
+  if(completedDays.includes(currentDay)){
+
+    return false;
+
+  }
+
+  if(!lastCompletion){
+
+    return false;
+
+  }
+
+  const unlockTime =
+    getUnlockTime();
+
+  return new Date() < unlockTime;
+
+}
+
+
+function updateTimer(){
+
+  if(timerInterval){
+
+    clearInterval(timerInterval);
+
+    timerInterval=null;
+
+  }
+
+
+  if(!isCurrentDayLocked()){
+
+    lockBox.classList.add("hidden");
+
+    return;
+
+  }
+
+
+  lockBox.classList.remove("hidden");
+
+
+  function tick(){
+
+    const unlockTime =
+      getUnlockTime();
+
+    if(!unlockTime){
+
+      lockBox.classList.add("hidden");
+
+      return;
+
+    }
+
+
+    const remaining =
+      unlockTime.getTime()
+      -
+      Date.now();
+
+
+    if(remaining <= 0){
+
+      lockBox.classList.add("hidden");
+
+      clearInterval(timerInterval);
+
+      timerInterval=null;
+
+      renderAll();
+
+      return;
+
+    }
+
+
+    const hours =
+      Math.floor(
+        remaining / (1000*60*60)
+      );
+
+    const minutes =
+      Math.floor(
+        (remaining % (1000*60*60))
+        /
+        (1000*60)
+      );
+
+    const seconds =
+      Math.floor(
+        (remaining % (1000*60))
+        /
+        1000
+      );
+
+
+    timerEl.textContent =
+      String(hours).padStart(2,"0")
+      + ":" +
+      String(minutes).padStart(2,"0")
+      + ":" +
+      String(seconds).padStart(2,"0");
+
+  }
+
+
+  tick();
+
+  timerInterval =
+    setInterval(tick,1000);
+
+}
+
+
+/* =========================================================
+   AUTH
+========================================================= */
+
+async function checkAuth(){
+
+  try{
+
+    if(
+      !window.supabase ||
+      !supabaseClient
+    ){
+
+      throw new Error(
+        "Supabase failed to load."
+      );
+
+    }
+
+
+    loadingText.textContent =
+      "Checking your member session...";
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient.auth.getSession();
+
+
+    if(error){
+
+      console.error(
+        "Session error:",
+        error
+      );
+
+      throw error;
+
+    }
+
+
+    const session =
+      data?.session;
+
+
+    if(!session){
+
+      window.location.replace(
+        "login.html"
+      );
+
+      return;
+
+    }
+
+
+    currentUser =
+      session.user;
+
+
+    loadingText.textContent =
+      "Loading your member profile...";
+
+
+    /*
+      Profile is optional.
+
+      If your profiles table does not contain
+      this member yet, Academy will still open.
+    */
+
+    try{
+
+      const {
+        data:profileData,
+        error:profileError
+      } =
+        await supabaseClient
+          .from("profiles")
+          .select("*")
+          .eq("id",currentUser.id)
+          .maybeSingle();
+
+
+      if(profileError){
+
+        console.warn(
+          "Profile could not be loaded:",
+          profileError
+        );
+
+      }
+
+
+      profile =
+        profileData || {};
+
+    }catch(profileErr){
+
+      console.warn(
+        "Profile request failed:",
+        profileErr
+      );
+
+      profile={};
+
+    }
+
+
+    /*
+      Name fallback chain
+    */
+
+    memberName =
+      profile?.full_name ||
+      profile?.name ||
+      profile?.display_name ||
+      currentUser.user_metadata?.full_name ||
+      currentUser.user_metadata?.name ||
+      currentUser.email?.split("@")[0] ||
+      "IBB Promoter";
+
+
+    /*
+      IMPORTANT:
+      Never use a shared "IBB Member" fallback
+      for progress storage.
+
+      Supabase user ID gives every account
+      its own localStorage progress.
+    */
+
+    memberId =
+      profile?.member_id ||
+      sessionStorage.getItem("ibb_member_id") ||
+      currentUser.id;
+
+
+    sessionStorage.setItem(
+      "ibb_name",
+      memberName
+    );
+
+    sessionStorage.setItem(
+      "ibb_member_id",
+      memberId
+    );
+
+
+    /*
+      Update header
+    */
+
+    memberNameEl.textContent =
+      memberName;
+
+    memberIdEl.textContent =
+      memberId === currentUser.id
+        ? "IBB Member"
+        : memberId;
+
+
+    avatarEl.textContent =
+      memberName
+        .trim()
+        .charAt(0)
+        .toUpperCase();
+
+
+    /*
+      Load user-specific progress
+    */
+
+    loadProgress();
+
+    renderAll();
+
+
+    /*
+      Hide loading screen
+    */
+
+    loadingText.textContent =
+      "Academy ready.";
+
+
+    setTimeout(()=>{
+
+      loadingScreen.classList.add(
+        "hidden"
+      );
+
+    },250);
+
+
+  }catch(error){
+
+    console.error(
+      "Academy authentication error:",
+      error
+    );
+
+
+    loadingText.innerHTML =
+      "Unable to open your Academy.<br>" +
+      "<small>Please refresh the page and try again.</small>";
+
+
+    setTimeout(()=>{
+
+      window.location.replace(
+        "login.html"
+      );
+
+    },2500);
+
+  }
+
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+logoutBtn.addEventListener(
+  "click",
+  async ()=>{
+
+    logoutBtn.disabled=true;
+
+    logoutBtn.textContent=
+      "Logging out...";
+
+
+    try{
+
+      await supabaseClient.auth.signOut();
+
+    }catch(error){
+
+      console.error(
+        "Logout error:",
+        error
+      );
+
+    }
+
+
+    sessionStorage.removeItem(
+      "ibb_name"
+    );
+
+    sessionStorage.removeItem(
+      "ibb_member_id"
+    );
+
+
+    window.location.replace(
+      "login.html"
+    );
+
+  }
 );
 
 
-/* ================================================*
-```
+/* =========================================================
+   DAY NAVIGATION
+========================================================= */
+
+function renderDayNav(){
+
+  dayNav.innerHTML="";
+
+
+  trainingData.forEach(
+    (day,index)=>{
+
+      const dayNumber =
+        index + 1;
+
+      const button =
+        document.createElement("button");
+
+
+      button.type="button";
+
+      button.className =
+        "day-btn";
+
+
+      if(
+        completedDays.includes(
+          dayNumber
+        )
+      ){
+
+        button.classList.add(
+          "completed"
+        );
+
+      }
+
+
+      if(dayNumber===currentDay){
+
+        button.classList.add(
+          "active"
+        );
+
+      }
+
+
+      /*
+        Future days remain disabled.
+
+        Current day and completed days
+        are accessible.
+      */
+
+      const canOpen =
+        completedDays.includes(dayNumber)
+        ||
+        dayNumber===currentDay;
+
+
+      button.disabled =
+        !canOpen;
+
+
+      button.innerHTML =
+        `
+          <span>${dayNumber}</span>
+          ${
+            completedDays.includes(dayNumber)
+              ? "✓ Done"
+              : "Day"
+          }
+        `;
+
+
+      button.addEventListener(
+        "click",
+        ()=>{
+
+          if(button.disabled){
+
+            return;
+
+          }
+
+
+          currentDay =
+            dayNumber;
+
+
+          saveProgress();
+
+          renderAll();
+
+          window.scrollTo({
+            top:document.getElementById(
+              "trainingCard"
+            ).offsetTop - 90,
+            behavior:"smooth"
+          });
+
+        }
+      );
+
+
+      dayNav.appendChild(button);
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   TRAINING RENDER
+========================================================= */
+
+function renderTraining(){
+
+  const data =
+    trainingData[currentDay-1];
+
+
+  dayLabel.textContent =
+    `Day ${currentDay}`;
+
+
+  dayTitle.textContent =
+    data.title;
+
+
+  daySubtitle.textContent =
+    data.subtitle;
+
+
+  trainingMeta.innerHTML =
+    `
+      <div class="meta-pill">
+        ⏱ ${data.time}
+      </div>
+
+      <div class="meta-pill">
+        📚 Practical Training
+      </div>
+
+      <div class="meta-pill">
+        ${
+          completedDays.includes(currentDay)
+            ? "✓ Completed"
+            : "● In Progress"
+        }
+      </div>
+    `;
+
+
+  const locked =
+    isCurrentDayLocked();
+
+
+  if(locked){
+
+    trainingContent.innerHTML =
+      `
+        <div class="section">
+          <div class="lesson">
+            <h3>
+              Your next lesson is scheduled
+            </h3>
+
+            <p>
+              You completed your previous mission.
+              The next training day becomes available
+              after the 24-hour learning interval.
+            </p>
+          </div>
+        </div>
+      `;
+
+    updateTimer();
+
+    return;
+
+  }
+
+
+  lockBox.classList.add(
+    "hidden"
+  );
+
+
+  const alreadyCompleted =
+    completedDays.includes(
+      currentDay
+    );
+
+
+  let html="";
+
+
+  /*
+    Mission
+  */
+
+  html +=
+    `
+      <div class="section mission">
+
+        <h3>
+          🎯 Today's Mission
+        </h3>
+
+        <p>
+          <strong>
+            ${escapeHTML(data.mission)}
+          </strong>
+        </p>
+
+        <p style="margin-top:8px;">
+          ${escapeHTML(data.missionText)}
+        </p>
+
+      </div>
+    `;
+
+
+  /*
+    Core lesson
+  */
+
+  html +=
+    `
+      <div class="section">
+
+        <h3>
+          📖 Core Training
+        </h3>
+
+        <div class="lesson">
+
+          <p>
+            ${escapeHTML(data.lesson)}
+          </p>
+
+        </div>
+
+      </div>
+    `;
+
+
+  /*
+    Key points
+  */
+
+  html +=
+    `
+      <div class="section">
+
+        <h3>
+          🧠 Key Points
+        </h3>
+
+        <div class="point-grid">
+
+          ${data.points.map(
+            point =>
+              `
+                <div class="point">
+
+                  <strong>
+                    ✓ ${escapeHTML(point)}
+                  </strong>
+
+                </div>
+              `
+          ).join("")}
+
+        </div>
+
+      </div>
+    `;
+
+
+  /*
+    Example
+  */
+
+  html +=
+    `
+      <div class="section">
+
+        <h3>
+          💡 Real-World Example
+        </h3>
+
+        <div class="example-box good">
+
+          <h4>
+            Example
+          </h4>
+
+          <p>
+            ${escapeHTML(data.example)}
+          </p>
+
+        </div>
+
+      </div>
+    `;
+
+
+  /*
+    Good / bad
+  */
+
+  html +=
+    `
+      <div class="section">
+
+        <h3>
+          ⚖️ Better vs Poor Approach
+        </h3>
+
+        <div class="example-grid">
+
+          <div class="example-box good">
+
+            <h4>
+              ✓ Better Approach
+            </h4>
+
+            <p>
+              ${escapeHTML(data.good)}
+            </p>
+
+          </div>
+
+
+          <div class="example-box bad">
+
+            <h4>
+              × Poor Approach
+            </h4>
+
+            <p>
+              ${escapeHTML(data.bad)}
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+    `;
+
+
+  /*
+    Mistakes
+  */
+
+  html +=
+    `
+      <div class="section">
+
+        <h3>
+          🚫 Common Mistakes
+        </h3>
+
+        <ul class="mistakes">
+
+          ${data.mistakes.map(
+            mistake =>
+              `
+                <li>
+                  ${escapeHTML(mistake)}
+                </li>
+              `
+          ).join("")}
+
+        </ul>
+
+      </div>
+    `;
+
+
+  /*
+    Tasks
+  */
+
+  html +=
+    `
+      <div class="section">
+
+        <h3>
+          🛠 Practical Exercise
+        </h3>
+
+        <p class="task-intro">
+          ${escapeHTML(data.taskIntro)}
+        </p>
+
+        <div class="task-list">
+
+          ${data.tasks.map(
+            (task,index)=>
+              `
+                <div class="task-item">
+
+                  <input
+                    type="checkbox"
+                    id="task_${currentDay}_${index}"
+                    class="task-check"
+                    ${alreadyCompleted ? "disabled" : ""}
+                  >
+
+                  <label
+                    for="task_${currentDay}_${index}"
+                  >
+                    ${escapeHTML(task)}
+                  </label>
+
+                </div>
+              `
+          ).join("")}
+
+        </div>
+
+      </div>
+    `;
+
+
+  /*
+    Skill checklist
+  */
+
+  html +=
+    `
+      <div class="section">
+
+        <h3>
+          ✅ Skill Checklist
+        </h3>
+
+        <div class="checklist">
+
+          ${data.checklist.map(
+            (item,index)=>
+              `
+                <div class="check-row">
+
+                  <input
+                    type="checkbox"
+                    id="skill_${currentDay}_${index}"
+                    class="skill-check"
+                    ${alreadyCompleted ? "checked disabled" : ""}
+                  >
+
+                  <label
+                    for="skill_${currentDay}_${index}"
+                  >
+                    ${escapeHTML(item)}
+                  </label>
+
+                </div>
+              `
+          ).join("")}
+
+        </div>
+
+      </div>
+    `;
+
+
+  /*
+    Proof
+  */
+
+  html +=
+    `
+      <div class="section">
+
+        <h3>
+          📌 Proof of Learning
+        </h3>
+
+        <div class="proof-box">
+
+          <strong>
+            Keep your work organised
+          </strong>
+
+          <p>
+            ${escapeHTML(data.proof)}
+          </p>
+
+        </div>
+
+      </div>
+    `;
+
+
+  /*
+    Insight
+  */
+
+  html +=
+    `
+      <div class="section">
+
+        <div class="insight">
+
+          <h3>
+            💎 IBB Pro Insight
+          </h3>
+
+          <p>
+            ${escapeHTML(data.tip)}
+          </p>
+
+        </div>
+
+      </div>
+    `;
+
+
+  /*
+    Reflection
+  */
+
+  const savedReflection =
+    localStorage.getItem(
+      storageKey(
+        `ibb_reflection_day_${currentDay}`
+      )
+    ) || "";
+
+
+  html +=
+    `
+      <div class="section reflection">
+
+        <h3>
+          ✍️ Reflection
+        </h3>
+
+        <p style="margin-bottom:10px;">
+          ${escapeHTML(data.reflection)}
+        </p>
+
+        <textarea
+          id="reflectionText"
+          placeholder="Write your reflection here..."
+          ${alreadyCompleted ? "disabled" : ""}
+        >${escapeHTML(savedReflection)}</textarea>
+
+        <small>
+          Minimum 10 characters required.
+        </small>
+
+      </div>
+    `;
+
+
+  /*
+    Responsible promotion
+  */
+
+  html +=
+    `
+      <div class="section responsible">
+
+        <strong>
+          🛡 Responsible Promotion Rule
+        </strong>
+
+        <p>
+          Never create fake reviews, fake experiences,
+          fake screenshots, misleading claims or fabricated
+          campaign results. Promotional content should be
+          honest, supportable and compliant with applicable
+          campaign/platform requirements.
+        </p>
+
+      </div>
+    `;
+
+
+  /*
+    Completion
+  */
+
+  html +=
+    `
+      <div class="completion-area">
+
+        <button
+          type="button"
+          class="complete-btn"
+          id="completeBtn"
+          ${alreadyCompleted ? "disabled" : ""}
+        >
+          ${
+            alreadyCompleted
+              ? "✓ Day Completed"
+              : "Complete Day ${currentDay}"
+          }
+        </button>
+
+        <div
+          class="completed-message ${
+            alreadyCompleted ? "show" : ""
+          }"
+        >
+          ✓ You completed this training day.
+        </div>
+
+      </div>
+    `;
+
+
+  trainingContent.innerHTML =
+    html;
+
+
+  if(alreadyCompleted){
+
+    return;
+
+  }
+
+
+  const completeBtn =
+    document.getElementById(
+      "completeBtn"
+    );
+
+  const reflectionText =
+    document.getElementById(
+      "reflectionText"
+    );
+
+  const taskChecks =
+    Array.from(
+      document.querySelectorAll(
+        ".task-check"
+      )
+    );
+
+  const skillChecks =
+    Array.from(
+      document.querySelectorAll(
+        ".skill-check"
+      )
+    );
+
+
+  function updateCompleteButton(){
+
+    const allTasksDone =
+      taskChecks.every(
+        checkbox =>
+          checkbox.checked
+      );
+
+
+    const allSkillsDone =
+      skillChecks.every(
+        checkbox =>
+          checkbox.checked
+      );
+
+
+    const reflectionValid =
+      reflectionText.value.trim().length
+      >=
+      10;
+
+
+    completeBtn.disabled =
+      !allTasksDone ||
+      !allSkillsDone ||
+      !reflectionValid;
+
+  }
+
+
+  [
+    ...taskChecks,
+    ...skillChecks
+  ].forEach(
+    checkbox => {
+
+      checkbox.addEventListener(
+        "change",
+        updateCompleteButton
+      );
+
+    }
+  );
+
+
+  reflectionText.addEventListener(
+    "input",
+    updateCompleteButton
+  );
+
+
+  updateCompleteButton();
+
+
+  completeBtn.addEventListener(
+    "click",
+    ()=>{
+
+      if(completeBtn.disabled){
+
+        return;
+
+      }
+
+
+      const reflection =
+        reflectionText.value.trim();
+
+
+      localStorage.setItem(
+        storageKey(
+          `ibb_reflection_day_${currentDay}`
+        ),
+        reflection
+      );
+
+
+      const completedToday =
+        currentDay;
+
+
+      if(
+        !completedDays.includes(
+          completedToday
+        )
+      ){
+
+        completedDays.push(
+          completedToday
+        );
+
+      }
+
+
+      completedDays.sort(
+        (a,b)=>a-b
+      );
+
+
+      lastCompletion =
+        new Date().toISOString();
+
+
+      /*
+        Move to next day.
+
+        Day 10 stays at Day 10.
+      */
+
+      if(
+        completedToday < 10
+      ){
+
+        currentDay =
+          completedToday + 1;
+
+      }else{
+
+        currentDay =
+          completedToday;
+
+      }
+
+
+      saveProgress();
+
+      renderAll();
+
+
+      if(
+        completedDays.length === 10
+      ){
+
+        alert(
+          "🎉 Excellent! You completed all 10 Academy days. Your Final Assessment is now unlocked."
+        );
+
+
+        setTimeout(()=>{
+
+          assessmentSection.scrollIntoView({
+            behavior:"smooth"
+          });
+
+        },300);
+
+      }else{
+
+        alert(
+          "✓ Day completed! Your next training day will unlock after 24 hours."
+        );
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   PROGRESS RENDER
+========================================================= */
+
+function renderProgress(){
+
+  const completed =
+    completedDays.length;
+
+
+  const percent =
+    Math.round(
+      (completed / 10) * 100
+    );
+
+
+  progressText.textContent =
+    `${completed} of 10 days completed`;
+
+
+  progressPercent.textContent =
+    `${percent}%`;
+
+
+  progressFill.style.width =
+    `${percent}%`;
+
+}
+
+
+/* =========================================================
+   ASSESSMENT VISIBILITY
+========================================================= */
+
+function renderAssessmentVisibility(){
+
+  const academyComplete =
+    completedDays.length === 10;
+
+
+  if(!academyComplete){
+
+    assessmentSection.classList.add(
+      "hidden"
+    );
+
+    certificate.classList.remove(
+      "show"
+    );
+
+    return;
+
+  }
+
+
+  assessmentSection.classList.remove(
+    "hidden"
+  );
+
+
+  if(!testRendered){
+
+    renderTest();
+
+    testRendered=true;
+
+  }
+
+
+  const savedTest =
+    localStorage.getItem(
+      storageKey("ibb_final_test")
+    );
+
+
+  if(savedTest === "PASSED"){
+
+    certificate.classList.add(
+      "show"
+    );
+
+    certificateName.textContent =
+      memberName;
+
+    certificateId.textContent =
+      `Member ID: ${memberId}`;
+
+  }
+
+}
+
+
+/* =========================================================
+   ASSESSMENT RENDER
+========================================================= */
+
+function renderTest(){
+
+  assessmentBody.innerHTML =
+    "";
+
+
+  const form =
+    document.createElement(
+      "form"
+    );
+
+
+  form.id="assessmentForm";
+
+
+  assessmentQuestions.forEach(
+    (question,index)=>{
+
+      const questionDiv =
+        document.createElement(
+          "div"
+        );
+
+
+      questionDiv.className =
+        "test-question";
+
+
+      let optionsHTML="";
+
+
+      question.options.forEach(
+        (option,optionIndex)=>{
+
+          optionsHTML +=
+            `
+              <label class="option">
+
+                <input
+                  type="radio"
+                  name="question_${index}"
+                  value="${optionIndex}"
+                >
+
+                <span>
+                  ${escapeHTML(option)}
+                </span>
+
+              </label>
+            `;
+
+        }
+      );
+
+
+      questionDiv.innerHTML =
+        `
+          <p class="question-title">
+            ${index+1}. ${escapeHTML(question.q)}
+          </p>
+
+          ${optionsHTML}
+        `;
+
+
+      form.appendChild(
+        questionDiv
+      );
+
+    }
+  );
+
+
+  const submitButton =
+    document.createElement(
+      "button"
+    );
+
+
+  submitButton.type="submit";
+
+  submitButton.className=
+    "submit-test";
+
+  submitButton.textContent=
+    "Submit Final Assessment";
+
+
+  form.appendChild(
+    submitButton
+  );
+
+
+  const result =
+    document.createElement(
+      "div"
+    );
+
+
+  result.className=
+    "test-result";
+
+
+  form.appendChild(
+    result
+  );
+
+
+  assessmentBody.appendChild(
+    form
+  );
+
+
+  form.addEventListener(
+    "submit",
+    event => {
+
+      event.preventDefault();
+
+
+      let score=0;
+
+      let answered=0;
+
+
+      assessmentQuestions.forEach(
+        (question,index)=>{
+
+          const selected =
+            form.querySelector(
+              `input[name="question_${index}"]:checked`
+            );
+
+
+          if(selected){
+
+            answered++;
+
+
+            if(
+              Number(selected.value)
+              ===
+              question.answer
+            ){
+
+              score++;
+
+            }
+
+          }
+
+        }
+      );
+
+
+      if(
+        answered <
+        assessmentQuestions.length
+      ){
+
+        result.className=
+          "test-result show fail";
+
+        result.textContent=
+          `Please answer all ${assessmentQuestions.length} questions before submitting.`;
+
+        return;
+
+      }
+
+
+      const percentage =
+        Math.round(
+          (score /
+          assessmentQuestions.length)
+          *
+          100
+        );
+
+
+      if(
+        percentage >= 80
+      ){
+
+        localStorage.setItem(
+          storageKey(
+            "ibb_final_test"
+          ),
+          "PASSED"
+        );
+
+
+        result.className=
+          "test-result show pass";
+
+
+        result.textContent=
+          `🎉 Congratulations! You scored ${score}/${assessmentQuestions.length} (${percentage}%). You passed the Final Assessment.`;
+
+
+        submitButton.disabled=true;
+
+        submitButton.textContent=
+          "✓ Assessment Passed";
+
+
+        certificate.classList.add(
+          "show"
+        );
+
+
+        certificateName.textContent=
+          memberName;
+
+
+        certificateId.textContent=
+          `Member ID: ${memberId}`;
+
+
+        setTimeout(()=>{
+
+          certificate.scrollIntoView({
+            behavior:"smooth"
+          });
+
+        },400);
+
+      }else{
+
+        result.className=
+          "test-result show fail";
+
+
+        result.textContent=
+          `You scored ${score}/${assessmentQuestions.length} (${percentage}%). You need 80% to pass. Review the training and try again.`;
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   RENDER ALL
+========================================================= */
+
+function renderAll(){
+
+  renderProgress();
+
+  renderDayNav();
+
+  renderTraining();
+
+  renderAssessmentVisibility();
+
+}
+
+
+/* =========================================================
+   HTML ESCAPE
+========================================================= */
+
+function escapeHTML(value){
+
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  ()=>{
+    checkAuth();
+  }
+);
+
+</script>
+
+</body>
+</html>
