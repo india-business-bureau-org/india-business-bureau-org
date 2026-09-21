@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>IBB Training | Indian Business Bureau</title>
+  <title>IBB Training | 10 Day Member Training</title>
 
   <meta
     name="description"
-    content="Indian Business Bureau professional 10-day member training portal."
-  >
+    content="Indian Business Bureau 10 Day Member Training Portal"
+  />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,24 +17,24 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap"
     rel="stylesheet"
-  >
+  />
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
     :root {
       --bg: #07090d;
-      --panel: #0e131b;
-      --panel2: #111822;
-      --line: #202a38;
-      --gold: #e5c675;
-      --gold2: #f3d991;
-      --green: #54c99b;
-      --red: #ff7070;
-      --blue: #6ea8ff;
+      --bg2: #0b0f15;
+      --card: #10151d;
+      --card2: #131a23;
+      --border: rgba(255,255,255,0.08);
       --text: #f5f7fa;
-      --muted: #9aa6b5;
-      --shadow: 0 20px 60px rgba(0,0,0,.35);
+      --muted: #9da7b5;
+      --gold: #e5c675;
+      --green: #54c99b;
+      --red: #ff6b6b;
+      --blue: #6ea8ff;
+      --shadow: 0 20px 60px rgba(0,0,0,0.35);
     }
 
     * {
@@ -43,185 +43,127 @@
       padding: 0;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
-      min-height: 100vh;
+      font-family: Inter, sans-serif;
       background:
-        radial-gradient(circle at top right, rgba(229,198,117,.08), transparent 30%),
-        radial-gradient(circle at bottom left, rgba(84,201,155,.05), transparent 25%),
+        radial-gradient(circle at top right, rgba(229,198,117,0.07), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(84,201,155,0.05), transparent 28%),
         var(--bg);
       color: var(--text);
-      font-family: "Inter", sans-serif;
+      min-height: 100vh;
     }
 
     button,
-    textarea,
-    input {
-      font: inherit;
+    textarea {
+      font-family: inherit;
     }
 
     button {
       cursor: pointer;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    .app {
+      display: flex;
+      min-height: 100vh;
     }
 
-    .hidden {
-      display: none !important;
-    }
+    /* ================= SIDEBAR ================= */
 
-    /* LOADING */
-
-    #loadingScreen {
+    .sidebar {
+      width: 285px;
+      background: rgba(10,13,18,0.96);
+      border-right: 1px solid var(--border);
+      padding: 24px 18px;
       position: fixed;
-      inset: 0;
-      z-index: 9999;
-      background: var(--bg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-    .loader {
-      width: 44px;
-      height: 44px;
-      border: 3px solid #202938;
-      border-top-color: var(--gold);
-      border-radius: 50%;
-      animation: spin .8s linear infinite;
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    /* HEADER */
-
-    header {
-      height: 72px;
-      border-bottom: 1px solid var(--line);
-      background: rgba(7,9,13,.88);
-      backdrop-filter: blur(16px);
-      position: sticky;
+      left: 0;
       top: 0;
-      z-index: 1000;
-    }
-
-    .header-inner {
-      max-width: 1500px;
-      height: 100%;
-      margin: auto;
-      padding: 0 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
+      bottom: 0;
+      overflow-y: auto;
+      z-index: 20;
     }
 
     .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 0;
+      padding: 8px 10px 24px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 18px;
     }
 
-    .brand-logo {
-      width: 40px;
-      height: 40px;
-      border-radius: 11px;
-      background: linear-gradient(135deg, var(--gold), #9e7c2c);
-      color: #080a0e;
-      display: grid;
-      place-items: center;
-      font-weight: 900;
-      font-family: "Manrope", sans-serif;
+    .brand-name {
+      font-family: Manrope, sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
     }
 
-    .brand-text strong {
-      display: block;
-      font-family: "Manrope", sans-serif;
-      font-size: 15px;
-      letter-spacing: .2px;
-    }
-
-    .brand-text span {
-      color: var(--muted);
-      font-size: 11px;
-    }
-
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .member-badge {
-      border: 1px solid var(--line);
-      background: var(--panel);
-      border-radius: 999px;
-      padding: 9px 14px;
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .member-badge strong {
+    .brand-name span {
       color: var(--gold);
     }
 
-    .logout-btn {
-      border: 1px solid #343d4a;
-      background: transparent;
-      color: var(--text);
-      border-radius: 9px;
-      padding: 9px 14px;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .logout-btn:hover {
-      border-color: var(--red);
-      color: var(--red);
-    }
-
-    /* LAYOUT */
-
-    .app {
-      max-width: 1500px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: 290px 1fr;
-      min-height: calc(100vh - 72px);
-    }
-
-    /* SIDEBAR */
-
-    aside {
-      border-right: 1px solid var(--line);
-      padding: 24px 18px;
-      position: sticky;
-      top: 72px;
-      height: calc(100vh - 72px);
-      overflow-y: auto;
-      background: rgba(7,9,13,.55);
-    }
-
-    .sidebar-title {
+    .brand-sub {
+      margin-top: 6px;
       color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .member-box {
+      background: linear-gradient(
+        145deg,
+        rgba(229,198,117,0.10),
+        rgba(255,255,255,0.02)
+      );
+      border: 1px solid rgba(229,198,117,0.15);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 20px;
+    }
+
+    .member-label {
+      color: var(--muted);
+      font-size: 11px;
       text-transform: uppercase;
-      letter-spacing: 1.5px;
-      font-size: 10px;
-      font-weight: 800;
-      margin: 0 10px 14px;
+      letter-spacing: 1px;
+    }
+
+    .member-name {
+      font-size: 14px;
+      font-weight: 700;
+      margin-top: 5px;
+      word-break: break-word;
+    }
+
+    .member-id {
+      color: var(--gold);
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .progress-wrap {
+      margin-top: 14px;
+    }
+
+    .progress-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 7px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: #1c232d;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--gold), var(--green));
+      border-radius: 999px;
+      transition: 0.3s;
     }
 
     .day-list {
@@ -235,447 +177,442 @@
       border: 1px solid transparent;
       background: transparent;
       color: var(--muted);
-      padding: 12px 12px;
+      text-align: left;
+      padding: 11px 12px;
       border-radius: 11px;
       display: flex;
       align-items: center;
       gap: 11px;
-      text-align: left;
-      transition: .2s ease;
+      transition: 0.2s;
     }
 
-    .day-btn:hover:not(:disabled) {
-      background: var(--panel);
-      border-color: var(--line);
+    .day-btn:hover {
+      background: rgba(255,255,255,0.04);
       color: var(--text);
     }
 
     .day-btn.active {
-      background: rgba(229,198,117,.09);
-      border-color: rgba(229,198,117,.35);
-      color: var(--gold2);
+      background: rgba(229,198,117,0.09);
+      border-color: rgba(229,198,117,0.18);
+      color: var(--text);
     }
 
-    .day-btn:disabled {
-      cursor: not-allowed;
-      opacity: .45;
-    }
-
-    .day-number {
-      width: 31px;
-      height: 31px;
-      border-radius: 9px;
-      display: grid;
-      place-items: center;
-      background: #171e28;
-      border: 1px solid #273140;
-      font-size: 11px;
-      font-weight: 800;
-      flex: 0 0 auto;
-    }
-
-    .day-btn.completed .day-number {
-      background: rgba(84,201,155,.13);
-      border-color: rgba(84,201,155,.4);
+    .day-btn.completed {
       color: var(--green);
     }
 
+    .day-btn.locked {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .day-number {
+      min-width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: #181f28;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
     .day-btn.active .day-number {
-      background: rgba(229,198,117,.15);
-      border-color: rgba(229,198,117,.4);
-      color: var(--gold);
+      background: var(--gold);
+      color: #0b0d10;
     }
 
     .day-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
       min-width: 0;
-      flex: 1;
     }
 
-    .day-info strong {
-      display: block;
+    .day-title-small {
       font-size: 12px;
-      margin-bottom: 3px;
-    }
-
-    .day-info span {
-      display: block;
-      font-size: 10px;
-      color: var(--muted);
+      font-weight: 700;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .lock {
-      font-size: 13px;
-    }
-
-    /* MAIN */
-
-    main {
-      padding: 30px;
-      min-width: 0;
-    }
-
-    .top-grid {
-      display: grid;
-      grid-template-columns: 1.7fr 1fr;
-      gap: 18px;
-      margin-bottom: 22px;
-    }
-
-    .welcome-card,
-    .progress-card,
-    .content-card,
-    .assessment-card,
-    .certificate-card {
-      background: linear-gradient(145deg, rgba(17,24,34,.95), rgba(11,15,21,.95));
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      box-shadow: var(--shadow);
-    }
-
-    .welcome-card {
-      padding: 27px;
-    }
-
-    .eyebrow {
-      color: var(--gold);
+    .day-status {
       font-size: 10px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 10px;
-    }
-
-    .welcome-card h1 {
-      font-family: "Manrope", sans-serif;
-      font-size: clamp(25px, 3vw, 38px);
-      line-height: 1.12;
-      margin-bottom: 10px;
-    }
-
-    .welcome-card p {
       color: var(--muted);
-      max-width: 720px;
-      line-height: 1.7;
-      font-size: 13px;
     }
 
-    .progress-card {
-      padding: 22px;
+    .logout-btn {
+      width: 100%;
+      margin-top: 22px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      border-radius: 10px;
+      padding: 11px;
+      font-weight: 600;
     }
 
-    .progress-head {
+    .logout-btn:hover {
+      border-color: rgba(255,107,107,0.35);
+      color: var(--red);
+    }
+
+    /* ================= MAIN ================= */
+
+    .main {
+      margin-left: 285px;
+      width: calc(100% - 285px);
+      padding: 34px;
+    }
+
+    .topbar {
+      max-width: 1100px;
+      margin: 0 auto 24px;
       display: flex;
       justify-content: space-between;
-      gap: 15px;
       align-items: center;
-      margin-bottom: 12px;
-    }
-
-    .progress-head span {
-      color: var(--muted);
-      font-size: 11px;
-    }
-
-    .progress-head strong {
-      color: var(--gold);
-      font-size: 20px;
-    }
-
-    .progress-bar {
-      height: 9px;
-      border-radius: 999px;
-      background: #1a222d;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      height: 100%;
-      width: 0;
-      background: linear-gradient(90deg, var(--gold), var(--gold2));
-      border-radius: inherit;
-      transition: width .35s ease;
-    }
-
-    .progress-meta {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 11px;
-      color: var(--muted);
-      font-size: 10px;
-    }
-
-    /* CONTENT */
-
-    .content-card {
-      padding: 30px;
-    }
-
-    .day-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
       gap: 20px;
-      padding-bottom: 22px;
-      border-bottom: 1px solid var(--line);
-      margin-bottom: 24px;
     }
 
-    .day-header h2 {
-      font-family: "Manrope", sans-serif;
-      font-size: 26px;
-      margin-bottom: 8px;
+    .topbar-left h1 {
+      font-family: Manrope, sans-serif;
+      font-size: clamp(24px, 4vw, 38px);
+      letter-spacing: -1.2px;
     }
 
-    .day-header p {
+    .topbar-left p {
       color: var(--muted);
-      font-size: 13px;
-      line-height: 1.6;
+      margin-top: 7px;
+      font-size: 14px;
     }
 
-    .day-tag {
-      border: 1px solid rgba(229,198,117,.3);
-      color: var(--gold);
-      background: rgba(229,198,117,.07);
+    .status-pill {
+      border: 1px solid rgba(84,201,155,0.2);
+      background: rgba(84,201,155,0.07);
+      color: var(--green);
       padding: 8px 12px;
       border-radius: 999px;
-      font-size: 10px;
-      font-weight: 800;
+      font-size: 11px;
+      font-weight: 700;
       white-space: nowrap;
     }
 
-    .section {
-      margin-bottom: 28px;
+    .content {
+      max-width: 1100px;
+      margin: 0 auto;
     }
 
-    .section h3 {
-      font-family: "Manrope", sans-serif;
-      font-size: 17px;
-      margin-bottom: 11px;
+    .hero-card {
+      background:
+        linear-gradient(
+          135deg,
+          rgba(229,198,117,0.10),
+          rgba(255,255,255,0.025)
+        );
+      border: 1px solid rgba(229,198,117,0.14);
+      border-radius: 22px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+      margin-bottom: 22px;
     }
 
-    .section p {
-      color: #c2cbd6;
-      font-size: 13px;
+    .day-label {
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      margin-bottom: 9px;
+    }
+
+    .hero-card h2 {
+      font-family: Manrope, sans-serif;
+      font-size: clamp(25px, 4vw, 38px);
+      line-height: 1.15;
+      letter-spacing: -1px;
+    }
+
+    .hero-card .intro {
+      color: var(--muted);
+      max-width: 780px;
+      line-height: 1.75;
+      margin-top: 13px;
+      font-size: 15px;
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: rgba(16,21,29,0.88);
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      padding: 23px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.18);
+    }
+
+    .card.full {
+      grid-column: 1 / -1;
+    }
+
+    .card h3 {
+      font-family: Manrope, sans-serif;
+      font-size: 18px;
+      margin-bottom: 14px;
+    }
+
+    .card h3 .emoji {
+      margin-right: 7px;
+    }
+
+    .card p {
+      color: #c7ced8;
+      line-height: 1.75;
+      font-size: 14px;
+    }
+
+    .card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .card li {
+      position: relative;
+      padding-left: 24px;
+      color: #c7ced8;
+      line-height: 1.65;
+      font-size: 14px;
+    }
+
+    .card li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--green);
+      font-weight: 800;
+    }
+
+    .simple-example {
+      border-left: 3px solid var(--gold);
+      background: rgba(229,198,117,0.055);
+      padding: 17px 18px;
+      border-radius: 0 12px 12px 0;
+      margin-top: 12px;
+      color: #d9dee6;
       line-height: 1.8;
+      font-size: 14px;
     }
 
-    .section ul {
-      padding-left: 20px;
+    .important {
+      border-left: 3px solid var(--red);
+      background: rgba(255,107,107,0.05);
+      padding: 17px 18px;
+      border-radius: 0 12px 12px 0;
+      color: #e4caca;
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
       margin-top: 10px;
     }
 
-    .section li {
-      color: #c2cbd6;
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #0d1218;
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      border-radius: 11px;
+    }
+
+    .step-num {
+      width: 28px;
+      height: 28px;
+      min-width: 28px;
+      border-radius: 50%;
+      background: rgba(229,198,117,0.12);
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .step-text {
+      color: #d4dae2;
       font-size: 13px;
-      line-height: 1.8;
-      margin-bottom: 5px;
+      line-height: 1.5;
     }
-
-    .highlight {
-      border: 1px solid rgba(229,198,117,.22);
-      background: rgba(229,198,117,.055);
-      border-radius: 13px;
-      padding: 16px;
-      margin: 16px 0;
-    }
-
-    .highlight strong {
-      color: var(--gold2);
-    }
-
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0,1fr));
-      gap: 13px;
-      margin-top: 15px;
-    }
-
-    .info-box {
-      background: rgba(255,255,255,.025);
-      border: 1px solid var(--line);
-      border-radius: 13px;
-      padding: 16px;
-    }
-
-    .info-box strong {
-      display: block;
-      color: var(--text);
-      margin-bottom: 7px;
-      font-size: 12px;
-    }
-
-    .info-box span {
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.6;
-    }
-
-    /* PRACTICAL */
 
     .task-box {
-      margin-top: 18px;
-      padding: 20px;
-      border-radius: 15px;
-      border: 1px solid rgba(84,201,155,.22);
-      background: rgba(84,201,155,.045);
+      margin-top: 25px;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(84,201,155,0.07),
+          rgba(255,255,255,0.015)
+        );
+      border: 1px solid rgba(84,201,155,0.16);
+      border-radius: 18px;
+      padding: 24px;
     }
 
-    .task-box h4 {
-      color: var(--green);
-      font-size: 13px;
+    .task-box h3 {
       margin-bottom: 8px;
     }
 
-    .task-box p {
-      margin-bottom: 13px;
+    .task-description {
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 14px;
+      margin-bottom: 15px;
     }
 
     textarea {
       width: 100%;
-      min-height: 120px;
+      min-height: 145px;
       resize: vertical;
-      border: 1px solid var(--line);
       background: #090d12;
+      border: 1px solid var(--border);
+      border-radius: 12px;
       color: var(--text);
-      border-radius: 11px;
-      padding: 13px;
+      padding: 14px;
       outline: none;
       line-height: 1.6;
-      font-size: 12px;
-    }
-
-    textarea:focus {
-      border-color: rgba(229,198,117,.55);
-    }
-
-    .reflection-label {
-      display: block;
-      font-size: 11px;
-      color: var(--muted);
-      margin-bottom: 8px;
-      font-weight: 700;
-    }
-
-    /* ACTION */
-
-    .action-area {
-      margin-top: 25px;
-      padding-top: 22px;
-      border-top: 1px solid var(--line);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-
-    .timer-box {
-      color: var(--muted);
-      font-size: 11px;
-      line-height: 1.6;
-    }
-
-    .timer-box strong {
-      display: block;
-      color: var(--gold);
       font-size: 14px;
     }
 
-    .complete-btn {
+    textarea:focus {
+      border-color: rgba(229,198,117,0.4);
+    }
+
+    .task-actions {
+      margin-top: 12px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .primary-btn {
       border: none;
+      background: linear-gradient(135deg, var(--gold), #cbaa55);
+      color: #111;
+      padding: 12px 18px;
       border-radius: 10px;
-      padding: 13px 20px;
-      background: linear-gradient(135deg, var(--gold2), var(--gold));
-      color: #090b0e;
-      font-size: 12px;
-      font-weight: 900;
-      min-width: 190px;
+      font-weight: 800;
+      font-size: 13px;
+      box-shadow: 0 8px 22px rgba(229,198,117,0.12);
     }
 
-    .complete-btn:hover {
+    .primary-btn:hover {
       transform: translateY(-1px);
-      filter: brightness(1.04);
     }
 
-    .complete-btn:disabled {
+    .primary-btn:disabled {
+      opacity: 0.45;
       cursor: not-allowed;
-      opacity: .45;
       transform: none;
     }
 
-    .notice {
-      padding: 13px 15px;
-      border-radius: 11px;
-      margin-top: 15px;
-      font-size: 11px;
-      line-height: 1.6;
-    }
-
-    .notice.info {
-      background: rgba(110,168,255,.07);
-      border: 1px solid rgba(110,168,255,.2);
-      color: #a9c8ff;
-    }
-
-    .notice.success {
-      background: rgba(84,201,155,.07);
-      border: 1px solid rgba(84,201,155,.22);
-      color: #8ce3bf;
-    }
-
-    .notice.error {
-      background: rgba(255,112,112,.07);
-      border: 1px solid rgba(255,112,112,.22);
-      color: #ffaaaa;
-    }
-
-    /* ASSESSMENT */
-
-    .assessment-card {
-      padding: 30px;
+    .unlock-box {
       margin-top: 22px;
+      background: #0c1117;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
     }
 
-    .assessment-card h2 {
-      font-family: "Manrope", sans-serif;
-      font-size: 25px;
-      margin-bottom: 8px;
-    }
-
-    .assessment-card > p {
-      color: var(--muted);
+    .unlock-title {
       font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .timer {
+      font-family: Manrope, sans-serif;
+      font-size: 30px;
+      font-weight: 800;
+      color: var(--gold);
+      margin-top: 8px;
+      letter-spacing: 2px;
+    }
+
+    .next-btn-wrap {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 20px;
+    }
+
+    /* ================= ASSESSMENT ================= */
+
+    .assessment {
+      display: none;
+    }
+
+    .assessment.show {
+      display: block;
+    }
+
+    .assessment-intro {
+      background: rgba(229,198,117,0.07);
+      border: 1px solid rgba(229,198,117,0.13);
+      border-radius: 16px;
+      padding: 20px;
       line-height: 1.7;
-      margin-bottom: 25px;
+      color: #d6dce4;
+      margin-bottom: 20px;
     }
 
     .question {
+      background: #0d1218;
+      border: 1px solid var(--border);
+      border-radius: 14px;
       padding: 19px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.015);
-      border-radius: 13px;
-      margin-bottom: 14px;
+      margin-bottom: 13px;
     }
 
     .question-title {
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
       line-height: 1.6;
       margin-bottom: 13px;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
 
     .option {
       display: flex;
       gap: 10px;
       align-items: flex-start;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.5;
-      padding: 8px 0;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      color: #cbd2dc;
       cursor: pointer;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .option:hover {
+      background: rgba(255,255,255,0.03);
     }
 
     .option input {
@@ -683,248 +620,194 @@
       accent-color: var(--gold);
     }
 
-    .assessment-submit {
-      width: 100%;
-      margin-top: 12px;
-      border: none;
-      border-radius: 10px;
-      padding: 14px;
-      background: linear-gradient(135deg, var(--gold2), var(--gold));
-      color: #090b0e;
-      font-weight: 900;
-      font-size: 12px;
-    }
-
-    /* CERTIFICATE */
-
-    .certificate-card {
-      margin-top: 22px;
-      padding: 45px;
-      text-align: center;
-      border-color: rgba(229,198,117,.4);
-      background:
-        radial-gradient(circle at center, rgba(229,198,117,.09), transparent 50%),
-        var(--panel);
-    }
-
-    .certificate-icon {
-      font-size: 45px;
-      margin-bottom: 14px;
-    }
-
-    .certificate-card h2 {
-      font-family: "Manrope", sans-serif;
-      color: var(--gold2);
-      font-size: 30px;
-      margin-bottom: 8px;
-    }
-
-    .certificate-card p {
-      color: var(--muted);
-      font-size: 13px;
+    .result-box {
+      display: none;
+      margin-top: 20px;
+      padding: 22px;
+      border-radius: 15px;
       line-height: 1.7;
     }
 
-    .certificate-name {
-      margin: 24px 0;
-      font-family: "Manrope", sans-serif;
-      font-size: 25px;
+    .result-box.show {
+      display: block;
+    }
+
+    .result-pass {
+      background: rgba(84,201,155,0.08);
+      border: 1px solid rgba(84,201,155,0.2);
+      color: #c9f3e3;
+    }
+
+    .result-fail {
+      background: rgba(255,107,107,0.07);
+      border: 1px solid rgba(255,107,107,0.18);
+      color: #f0cccc;
+    }
+
+    /* ================= CERTIFICATE ================= */
+
+    .certificate {
+      display: none;
+      margin-top: 24px;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(229,198,117,0.12),
+          rgba(84,201,155,0.06)
+        );
+      border: 1px solid rgba(229,198,117,0.25);
+      border-radius: 20px;
+      padding: 34px;
+      text-align: center;
+    }
+
+    .certificate.show {
+      display: block;
+    }
+
+    .certificate-logo {
+      color: var(--gold);
+      font-size: 12px;
+      letter-spacing: 3px;
       font-weight: 800;
+    }
+
+    .certificate h2 {
+      font-family: Manrope, sans-serif;
+      font-size: 30px;
+      margin-top: 14px;
+    }
+
+    .certificate p {
+      color: var(--muted);
+      line-height: 1.7;
+      margin-top: 10px;
+    }
+
+    .certificate-name {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--gold);
+      margin: 20px 0 8px;
     }
 
     .certificate-meta {
-      color: var(--muted);
-      font-size: 11px;
+      color: #d5dbe3;
+      font-size: 13px;
+      line-height: 1.8;
     }
 
-    .print-btn {
-      margin-top: 24px;
-      border: 1px solid rgba(229,198,117,.4);
-      background: rgba(229,198,117,.08);
-      color: var(--gold);
-      border-radius: 10px;
-      padding: 12px 18px;
-      font-weight: 800;
+    /* ================= MOBILE ================= */
+
+    .mobile-header {
+      display: none;
     }
 
-    /* TOAST */
-
-    #toast {
-      position: fixed;
-      right: 22px;
-      bottom: 22px;
-      z-index: 5000;
-      max-width: 360px;
-      padding: 14px 17px;
-      border-radius: 12px;
-      background: #111820;
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-      font-size: 12px;
-      line-height: 1.5;
-      transform: translateY(20px);
-      opacity: 0;
-      pointer-events: none;
-      transition: .25s ease;
-    }
-
-    #toast.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    #toast.success {
-      border-color: rgba(84,201,155,.35);
-    }
-
-    #toast.error {
-      border-color: rgba(255,112,112,.35);
-    }
-
-    /* MOBILE */
-
-    @media (max-width: 1050px) {
-      .app {
-        grid-template-columns: 235px 1fr;
+    @media (max-width: 900px) {
+      .sidebar {
+        width: 240px;
       }
 
-      .top-grid {
+      .main {
+        margin-left: 240px;
+        width: calc(100% - 240px);
+        padding: 22px;
+      }
+
+      .section-grid {
         grid-template-columns: 1fr;
       }
+
+      .card.full {
+        grid-column: auto;
+      }
     }
 
-    @media (max-width: 800px) {
-      header {
-        height: 64px;
-      }
-
-      .header-inner {
-        padding: 0 14px;
-      }
-
-      .brand-text span {
-        display: none;
-      }
-
-      .member-badge {
-        display: none;
-      }
-
+    @media (max-width: 720px) {
       .app {
         display: block;
       }
 
-      aside {
-        position: relative;
-        top: auto;
-        height: auto;
-        border-right: none;
-        border-bottom: 1px solid var(--line);
-        padding: 14px;
+      .mobile-header {
+        display: flex;
+        position: sticky;
+        top: 0;
+        z-index: 30;
+        background: rgba(7,9,13,0.96);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+        padding: 13px 15px;
+        align-items: center;
+        justify-content: space-between;
       }
 
-      .day-list {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
+      .mobile-brand {
+        font-family: Manrope, sans-serif;
+        font-weight: 800;
       }
 
-      .day-btn {
-        justify-content: center;
-        padding: 7px;
+      .mobile-brand span {
+        color: var(--gold);
       }
 
-      .day-info {
-        display: none;
+      .menu-btn {
+        width: 40px;
+        height: 40px;
+        border: 1px solid var(--border);
+        background: #11161d;
+        color: var(--text);
+        border-radius: 9px;
+        font-size: 19px;
       }
 
-      .lock {
-        display: none;
+      .sidebar {
+        transform: translateX(-100%);
+        transition: 0.25s;
+        width: 285px;
+        z-index: 40;
       }
 
-      .day-number {
-        width: 34px;
-        height: 34px;
+      .sidebar.open {
+        transform: translateX(0);
       }
 
-      main {
-        padding: 16px;
+      .main {
+        margin-left: 0;
+        width: 100%;
+        padding: 17px 13px 30px;
       }
 
-      .content-card,
-      .assessment-card {
-        padding: 20px;
-      }
-
-      .day-header {
+      .topbar {
+        align-items: flex-start;
         flex-direction: column;
+        margin-bottom: 16px;
       }
 
-      .info-grid {
-        grid-template-columns: 1fr;
+      .hero-card {
+        padding: 21px;
+        border-radius: 17px;
       }
 
-      .action-area {
-        align-items: stretch;
+      .card {
+        padding: 18px;
       }
 
-      .complete-btn {
+      .task-box {
+        padding: 18px;
+      }
+
+      .next-btn-wrap,
+      .task-actions {
+        justify-content: stretch;
+      }
+
+      .next-btn-wrap .primary-btn,
+      .task-actions .primary-btn {
         width: 100%;
       }
-    }
 
-    @media (max-width: 480px) {
-      .day-list {
-        grid-template-columns: repeat(5, 1fr);
-      }
-
-      .welcome-card {
-        padding: 20px;
-      }
-
-      .welcome-card h1 {
+      .timer {
         font-size: 25px;
-      }
-
-      .certificate-card {
-        padding: 30px 18px;
-      }
-    }
-
-    /* PRINT */
-
-    @media print {
-      body {
-        background: white;
-        color: black;
-      }
-
-      header,
-      aside,
-      .top-grid,
-      .content-card,
-      .assessment-card,
-      .print-btn {
-        display: none !important;
-      }
-
-      .certificate-card {
-        display: block !important;
-        color: black;
-        border: 2px solid #222;
-        box-shadow: none;
-        margin: 0;
-        min-height: 80vh;
-        padding-top: 150px;
-      }
-
-      .certificate-card h2,
-      .certificate-name {
-        color: black;
-      }
-
-      .certificate-card p,
-      .certificate-meta {
-        color: #333;
       }
     }
   </style>
@@ -932,91 +815,62 @@
 
 <body>
 
-  <!-- LOADING -->
-  <div id="loadingScreen">
-    <div class="loader"></div>
-    <strong>Loading IBB Training...</strong>
-    <span style="color:#9aa6b5;font-size:12px;">
-      Please wait
-    </span>
+  <div class="mobile-header">
+    <div class="mobile-brand">
+      <span>IBB</span> Training
+    </div>
+
+    <button
+      class="menu-btn"
+      id="menuBtn"
+      type="button"
+      aria-label="Menu"
+    >
+      ☰
+    </button>
   </div>
 
-  <!-- HEADER -->
-  <header>
-    <div class="header-inner">
-
-      <a href="index.html" class="brand">
-        <div class="brand-logo">IBB</div>
-
-        <div class="brand-text">
-          <strong>Indian Business Bureau</strong>
-          <span>People. Businesses. Opportunities.</span>
-        </div>
-      </a>
-
-      <div class="header-right">
-
-        <div class="member-badge">
-          Member:
-          <strong id="headerMemberId">—</strong>
-        </div>
-
-        <button
-          type="button"
-          class="logout-btn"
-          id="logoutBtn"
-        >
-          Logout
-        </button>
-
-      </div>
-    </div>
-  </header>
-
-  <!-- APP -->
   <div class="app">
 
-    <!-- SIDEBAR -->
-    <aside>
+    <!-- ================= SIDEBAR ================= -->
 
-      <div class="sidebar-title">
-        10-Day Training
+    <aside class="sidebar" id="sidebar">
+
+      <div class="brand">
+        <div class="brand-name">
+          Indian <span>Business Bureau</span>
+        </div>
+
+        <div class="brand-sub">
+          10 Day Member Training Portal
+        </div>
       </div>
 
-      <div class="day-list" id="dayList"></div>
+      <div class="member-box">
 
-    </aside>
+        <div class="member-label">
+          Member
+        </div>
 
-    <!-- MAIN -->
-    <main>
+        <div
+          class="member-name"
+          id="memberName"
+        >
+          Loading...
+        </div>
 
-      <!-- TOP -->
-      <div class="top-grid">
+        <div
+          class="member-id"
+          id="memberId"
+        >
+          IBB Member
+        </div>
 
-        <section class="welcome-card">
+        <div class="progress-wrap">
 
-          <div class="eyebrow">
-            IBB Member Training
-          </div>
-
-          <h1>
-            Welcome,
-            <span id="memberName">Member</span>
-          </h1>
-
-          <p>
-            Complete your professional IBB training step by step.
-            Learn the system, understand your responsibilities,
-            complete practical tasks and pass the final assessment.
-          </p>
-
-        </section>
-
-        <section class="progress-card">
-
-          <div class="progress-head">
-            <span>Overall Progress</span>
-            <strong id="progressPercent">0%</strong>
+          <div class="progress-top">
+            <span>Training Progress</span>
+            <span id="progressText">0 / 10</span>
           </div>
 
           <div class="progress-bar">
@@ -1026,46 +880,261 @@
             ></div>
           </div>
 
-          <div class="progress-meta">
-            <span id="progressText">
-              0 of 10 days completed
-            </span>
+        </div>
 
-            <span id="currentDayText">
-              Day 1
-            </span>
+      </div>
+
+      <div
+        class="day-list"
+        id="dayList"
+      ></div>
+
+      <button
+        class="logout-btn"
+        id="logoutBtn"
+        type="button"
+      >
+        Logout
+      </button>
+
+    </aside>
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+      <div class="topbar">
+
+        <div class="topbar-left">
+
+          <h1>
+            IBB Member Training
+          </h1>
+
+          <p>
+            Step by step seekho, samjho aur practical kaam karo.
+          </p>
+
+        </div>
+
+        <div class="status-pill">
+          ● Training Active
+        </div>
+
+      </div>
+
+      <div class="content">
+
+        <!-- ================= DAY CONTENT ================= -->
+
+        <section id="dayContent">
+
+          <div class="hero-card">
+
+            <div
+              class="day-label"
+              id="dayLabel"
+            >
+              DAY 1
+            </div>
+
+            <h2 id="dayTitle">
+              IBB KYA HAI?
+            </h2>
+
+            <p
+              class="intro"
+              id="dayIntro"
+            >
+              Loading...
+            </p>
+
+          </div>
+
+          <div
+            class="section-grid"
+            id="sectionGrid"
+          ></div>
+
+          <div class="task-box">
+
+            <h3>
+              📝 Aaj ka Practical Task
+            </h3>
+
+            <div
+              class="task-description"
+              id="taskDescription"
+            >
+              Loading...
+            </div>
+
+            <textarea
+              id="taskAnswer"
+              placeholder="Apna answer yahan simple words mein likho..."
+            ></textarea>
+
+            <div class="task-actions">
+
+              <button
+                class="primary-btn"
+                id="completeDayBtn"
+                type="button"
+              >
+                Day Complete Karo
+              </button>
+
+            </div>
+
+          </div>
+
+          <div
+            class="unlock-box"
+            id="unlockBox"
+            style="display:none;"
+          >
+
+            <div class="unlock-title">
+              Agla day unlock hone mein time baaki hai
+            </div>
+
+            <div
+              class="timer"
+              id="timer"
+            >
+              24:00:00
+            </div>
+
+          </div>
+
+          <div class="next-btn-wrap">
+
+            <button
+              class="primary-btn"
+              id="nextDayBtn"
+              type="button"
+              style="display:none;"
+            >
+              Next Day →
+            </button>
+
+          </div>
+
+        </section>
+
+        <!-- ================= FINAL ASSESSMENT ================= -->
+
+        <section
+          class="assessment"
+          id="assessment"
+        >
+
+          <div class="hero-card">
+
+            <div class="day-label">
+              FINAL TEST
+            </div>
+
+            <h2>
+              🎓 IBB Final Assessment
+            </h2>
+
+            <p class="intro">
+              Ab 10 din ki training complete karne ke baad
+              ek chhota final test hoga. Har question ko dhyan
+              se padho aur jo answer aapko sahi lagta hai use select karo.
+            </p>
+
+          </div>
+
+          <div class="assessment-intro">
+
+            <strong>Test ka simple rule:</strong>
+
+            <br><br>
+
+            Total <strong>20 questions</strong> hain.
+
+            <br>
+
+            Pass hone ke liye kam se kam
+            <strong>80%</strong> marks chahiye.
+
+            <br>
+
+            Matlab 20 mein se kam se kam
+            <strong>16 questions sahi</strong> hone chahiye.
+
+            <br><br>
+
+            Tension lene ki zarurat nahi hai.
+            Training mein jo seekha hai uske basis par answer do.
+
+          </div>
+
+          <div id="questionsContainer"></div>
+
+          <button
+            class="primary-btn"
+            id="submitTestBtn"
+            type="button"
+          >
+            Final Test Submit Karo
+          </button>
+
+          <div
+            class="result-box"
+            id="resultBox"
+          ></div>
+
+          <div
+            class="certificate"
+            id="certificate"
+          >
+
+            <div class="certificate-logo">
+              INDIAN BUSINESS BUREAU
+            </div>
+
+            <h2>
+              Training Completion Certificate
+            </h2>
+
+            <p>
+              Yeh certificate certify karta hai ki
+              neeche diye gaye member ne IBB ki 10 Day
+              Member Training successfully complete ki hai.
+            </p>
+
+            <div
+              class="certificate-name"
+              id="certificateName"
+            >
+              Member Name
+            </div>
+
+            <div
+              class="certificate-meta"
+              id="certificateMeta"
+            >
+              IBB Member
+            </div>
+
           </div>
 
         </section>
 
       </div>
 
-      <!-- CONTENT -->
-      <section
-        class="content-card"
-        id="trainingContent"
-      ></section>
-
-      <!-- ASSESSMENT -->
-      <section
-        class="assessment-card hidden"
-        id="assessmentSection"
-      ></section>
-
-      <!-- CERTIFICATE -->
-      <section
-        class="certificate-card hidden"
-        id="certificateSection"
-      ></section>
-
     </main>
-  </div>
 
-  <div id="toast"></div>
+  </div>
 
   <script>
     /* =========================================================
-       SUPABASE CONFIGURATION
+       IBB TRAINING PORTAL
+       10 DAY TRAINING
+       Simple Hinglish / Roman Hindi
        ========================================================= */
 
     const SUPABASE_URL =
@@ -1073,1081 +1142,1176 @@
 
     /*
       IMPORTANT:
-      Paste the SAME publishable/anon key that you already use
-      in your working login.html.
 
-      DO NOT use a service_role/secret key here.
+      Yahan apni login.html wali SAME
+      Supabase Publishable / Anon Key paste karo.
+
+      service_role key yahan KABHI mat lagana.
     */
 
     const SUPABASE_PUBLISHABLE_KEY =
       "sb_publishable_t0Z_jIqNeUde0fZ4YS8h3Q_fQHLO_GV";
 
-    const supabaseClient =
-      window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_PUBLISHABLE_KEY
-      );
-
-
-    /* =========================================================
-       SETTINGS
-       ========================================================= */
-
     const TOTAL_DAYS = 10;
 
     /*
-      Day 1 starts immediately.
-
-      After a member completes a day,
-      the next day becomes available after 24 hours.
+      Har day complete hone ke baad
+      next day 24 hours baad unlock hoga.
     */
-
     const UNLOCK_HOURS = 24;
 
-    const STORAGE_PREFIX = "ibb_10day_";
-
-
-    /* =========================================================
-       TRAINING CONTENT
-       ========================================================= */
-
-    const trainingDays = [
-
-      {
-        day: 1,
-        title: "Understanding IBB",
-        subtitle: "Foundation, purpose and member role",
-        tag: "FOUNDATION",
-
-        sections: [
-
-          {
-            title: "What is Indian Business Bureau?",
-            text:
-              "Indian Business Bureau (IBB) is a structured business community designed to connect businesses with people through organised campaigns, tasks and opportunities."
-          },
-
-          {
-            title: "How the IBB system works",
-            text:
-              "IBB works as a managed system. Businesses can approach IBB for campaigns and promotional requirements. The IBB management team communicates with clients, plans campaigns and distributes suitable tasks to community members."
-          },
-
-          {
-            title: "Your role as an IBB member",
-            text:
-              "Your role is to complete the tasks assigned by the IBB team accurately and professionally. Members should follow campaign instructions, complete tasks on time and submit required proof."
-          }
-
-        ],
-
-        boxes: [
-          ["Management", "Handles business communication and campaign coordination."],
-          ["Members", "Complete assigned tasks and submit required proof."],
-          ["Businesses", "Provide campaign requirements to IBB."],
-          ["System", "Connects requirements with organised member tasks."]
-        ],
-
-        task:
-          "In your own words, explain what IBB does and what your responsibility is as an IBB member."
-      },
-
-
-      {
-        day: 2,
-        title: "Professional Member Behaviour",
-        subtitle: "Discipline, communication and responsibility",
-        tag: "PROFESSIONALISM",
-
-        sections: [
-
-          {
-            title: "Professional behaviour",
-            text:
-              "Every IBB member represents the community when completing an assigned campaign task. Accuracy, honesty, punctuality and respectful communication are essential."
-          },
-
-          {
-            title: "What members should NOT do",
-            text:
-              "Members should not contact IBB clients directly unless the management team specifically authorises it. Members should not make promises to clients, change campaign instructions, submit false proof or misuse business information."
-          },
-
-          {
-            title: "Why discipline matters",
-            text:
-              "A campaign depends on multiple members completing tasks correctly. One incorrect submission can affect campaign reporting and the business relationship."
-          }
-
-        ],
-
-        boxes: [
-          ["Be Accurate", "Follow instructions exactly."],
-          ["Be On Time", "Complete assigned tasks within the given deadline."],
-          ["Be Honest", "Submit genuine work and genuine proof."],
-          ["Stay Professional", "Respect the IBB team and campaign requirements."]
-        ],
-
-        task:
-          "Write five professional rules that you will follow as an IBB member."
-      },
-
-
-      {
-        day: 3,
-        title: "Understanding Campaigns",
-        subtitle: "How business campaigns are organised",
-        tag: "CAMPAIGNS",
-
-        sections: [
-
-          {
-            title: "What is a campaign?",
-            text:
-              "A campaign is a structured set of promotional activities created around a business objective. A campaign may include social media activities, content participation, local promotion or other approved tasks."
-          },
-
-          {
-            title: "Campaign instructions",
-            text:
-              "Each campaign can have different instructions. Always read the complete task before starting. Pay attention to the required platform, content, timing, hashtags, captions, proof and deadline."
-          },
-
-          {
-            title: "Never assume",
-            text:
-              "If an instruction is unclear, ask the IBB management team before completing the task. Do not guess when a campaign requirement can affect the final result."
-          }
-
-        ],
-
-        boxes: [
-          ["Campaign", "A structured business promotion activity."],
-          ["Task", "A specific action assigned to a member."],
-          ["Deadline", "The time by which the task must be completed."],
-          ["Proof", "Evidence showing that the task was completed."]
-        ],
-
-        task:
-          "Create a simple imaginary campaign for a local cafe and list three tasks members could complete."
-      },
-
-
-      {
-        day: 4,
-        title: "Social Media Task Training",
-        subtitle: "Posts, reels, stories and campaign participation",
-        tag: "SOCIAL MEDIA",
-
-        sections: [
-
-          {
-            title: "Social media tasks",
-            text:
-              "Some campaigns may require members to participate through social media. The exact action depends on the campaign instructions."
-          },
-
-          {
-            title: "Content quality",
-            text:
-              "When a campaign requires content, make sure the content is clear, appropriate and follows the provided instructions. Do not modify required campaign information without permission."
-          },
-
-          {
-            title: "Proof of completion",
-            text:
-              "If proof is requested, provide the correct screenshot, link or other evidence specified by the campaign manager."
-          }
-
-        ],
-
-        boxes: [
-          ["Post", "Publish approved campaign content."],
-          ["Reel", "Publish or participate in approved short-form video content."],
-          ["Story", "Share approved campaign content through stories when instructed."],
-          ["Proof", "Submit evidence according to the campaign instructions."]
-        ],
-
-        task:
-          "Explain the difference between a post, reel and story and give one example of when each might be used."
-      },
-
-
-      {
-        day: 5,
-        title: "Lead & Task Management",
-        subtitle: "Receiving, understanding and completing tasks",
-        tag: "TASK MANAGEMENT",
-
-        sections: [
-
-          {
-            title: "How tasks reach members",
-            text:
-              "IBB management can distribute tasks to suitable members based on campaign requirements. Members should check the provided instructions carefully."
-          },
-
-          {
-            title: "Task checklist",
-            text:
-              "Before starting, understand what must be done, where it must be done, what proof is required and when the task must be completed."
-          },
-
-          {
-            title: "Completion reporting",
-            text:
-              "After completing the task, submit the required proof through the channel specified by IBB management."
-          }
-
-        ],
-
-        boxes: [
-          ["Read", "Understand the full task."],
-          ["Execute", "Complete the required action."],
-          ["Verify", "Check that the task meets instructions."],
-          ["Submit", "Send the required proof."]
-        ],
-
-        task:
-          "Write a four-step checklist that you would follow whenever you receive a new IBB task."
-      },
-
-
-      {
-        day: 6,
-        title: "Quality Control",
-        subtitle: "How to avoid mistakes and rejected tasks",
-        tag: "QUALITY",
-
-        sections: [
-
-          {
-            title: "Why quality matters",
-            text:
-              "Businesses expect campaign work to follow the agreed requirements. Poor-quality or incomplete submissions can create additional work for the management team."
-          },
-
-          {
-            title: "Common mistakes",
-            text:
-              "Common mistakes include missing deadlines, incorrect captions, wrong links, incomplete screenshots, submitting the wrong content or failing to follow a specific campaign instruction."
-          },
-
-          {
-            title: "Self-check before submission",
-            text:
-              "Always review your work once before submitting proof. Confirm that the correct task was completed and that the evidence clearly proves completion."
-          }
-
-        ],
-
-        boxes: [
-          ["Accuracy", "Did you follow the exact instruction?"],
-          ["Completeness", "Did you finish every required step?"],
-          ["Proof", "Does your proof clearly show completion?"],
-          ["Deadline", "Was the task completed on time?"]
-        ],
-
-        task:
-          "List five mistakes that could cause an IBB campaign task to be rejected."
-      },
-
-
-      {
-        day: 7,
-        title: "Business & Client Protection",
-        subtitle: "Confidentiality, boundaries and escalation",
-        tag: "TRUST",
-
-        sections: [
-
-          {
-            title: "Client communication boundary",
-            text:
-              "IBB management handles business/client communication. Members should not independently contact clients unless management specifically authorises the communication."
-          },
-
-          {
-            title: "Confidential information",
-            text:
-              "Business details, campaign instructions, contact information and internal IBB information should be handled responsibly and should not be shared outside authorised channels."
-          },
-
-          {
-            title: "When something goes wrong",
-            text:
-              "If you encounter a problem, do not create your own solution that changes the campaign. Report the issue to the IBB management team and wait for instructions."
-          }
-
-        ],
-
-        boxes: [
-          ["Protect", "Handle business information responsibly."],
-          ["Escalate", "Report problems to management."],
-          ["Do Not Promise", "Never make unauthorised promises to clients."],
-          ["Stay Within Role", "Follow your assigned responsibilities."]
-        ],
-
-        task:
-          "Explain why IBB members should not directly contact clients without management approval."
-      },
-
-
-      {
-        day: 8,
-        title: "Productivity & Time Management",
-        subtitle: "Managing flexible work responsibly",
-        tag: "PRODUCTIVITY",
-
-        sections: [
-
-          {
-            title: "Flexible work requires discipline",
-            text:
-              "Flexible participation does not mean ignoring deadlines. Members should organise their available time so assigned tasks are completed correctly and on schedule."
-          },
-
-          {
-            title: "Daily routine",
-            text:
-              "A simple routine can include checking assigned tasks, completing priority tasks, reviewing work and submitting proof."
-          },
-
-          {
-            title: "Managing multiple tasks",
-            text:
-              "When multiple tasks are assigned, identify deadlines first. Complete urgent tasks while maintaining quality."
-          }
-
-        ],
-
-        boxes: [
-          ["Check", "Review new assignments."],
-          ["Prioritise", "Identify deadlines and importance."],
-          ["Complete", "Finish the work carefully."],
-          ["Report", "Submit proof and completion status."]
-        ],
-
-        task:
-          "Create a simple daily routine you would use to manage IBB tasks."
-      },
-
-
-      {
-        day: 9,
-        title: "Professional Growth",
-        subtitle: "Building reliability and long-term value",
-        tag: "GROWTH",
-
-        sections: [
-
-          {
-            title: "Reliability",
-            text:
-              "Members who consistently follow instructions, meet deadlines and submit accurate proof build a reliable participation record."
-          },
-
-          {
-            title: "Learning from feedback",
-            text:
-              "Feedback is an opportunity to improve. If a task needs correction, understand what went wrong and avoid repeating the same mistake."
-          },
-
-          {
-            title: "Long-term mindset",
-            text:
-              "Focus on consistent quality rather than trying to complete tasks quickly at the expense of accuracy."
-          }
-
-        ],
-
-        boxes: [
-          ["Consistency", "Deliver quality repeatedly."],
-          ["Learning", "Improve after feedback."],
-          ["Reliability", "Meet commitments."],
-          ["Professionalism", "Protect the quality of the IBB community."]
-        ],
-
-        task:
-          "Write three areas in which you personally want to improve during your IBB journey."
-      },
-
-
-      {
-        day: 10,
-        title: "Final Readiness",
-        subtitle: "Review, responsibility and assessment preparation",
-        tag: "FINAL DAY",
-
-        sections: [
-
-          {
-            title: "Your complete IBB role",
-            text:
-              "By this stage you should understand the IBB structure, campaign participation, task completion, quality control, confidentiality, professional behaviour and the importance of following management instructions."
-          },
-
-          {
-            title: "Before completing the training",
-            text:
-              "Review the previous nine days. Make sure you understand your role and the difference between management responsibilities and member responsibilities."
-          },
-
-          {
-            title: "Final assessment",
-            text:
-              "After completing Day 10, you can take the final assessment. The assessment contains 20 questions. A score of at least 80% is required to pass."
-          }
-
-        ],
-
-        boxes: [
-          ["Understand", "Know the IBB system."],
-          ["Follow", "Follow campaign instructions."],
-          ["Protect", "Respect business and internal information."],
-          ["Deliver", "Complete assigned tasks professionally."]
-        ],
-
-        task:
-          "In your own words, explain the complete IBB member process from receiving a task to submitting proof."
-      }
-
-    ];
-
-
-    /* =========================================================
-       FINAL ASSESSMENT
-       ========================================================= */
-
-    const questions = [
-
-      {
-        q: "What is the main purpose of IBB?",
-        options: [
-          "To replace local businesses",
-          "To connect businesses with people through organised opportunities and campaigns",
-          "To provide personal loans",
-          "To operate as a social media platform"
-        ],
-        answer: 1
-      },
-
-      {
-        q: "Who handles business/client communication?",
-        options: [
-          "Every member independently",
-          "Random members",
-          "IBB management team",
-          "Nobody"
-        ],
-        answer: 2
-      },
-
-      {
-        q: "What should a member do if an instruction is unclear?",
-        options: [
-          "Guess",
-          "Ignore the task",
-          "Change the instruction",
-          "Ask IBB management for clarification"
-        ],
-        answer: 3
-      },
-
-      {
-        q: "What is campaign proof?",
-        options: [
-          "A personal opinion",
-          "A payment receipt only",
-          "Evidence showing that the required task was completed",
-          "A random screenshot"
-        ],
-        answer: 2
-      },
-
-      {
-        q: "What should you do before submitting task proof?",
-        options: [
-          "Delete the proof",
-          "Check that the task and proof meet the instructions",
-          "Change the campaign",
-          "Send incomplete evidence"
-        ],
-        answer: 1
-      },
-
-      {
-        q: "What is important when completing an assigned task?",
-        options: [
-          "Speed only",
-          "Accuracy and following instructions",
-          "Ignoring deadlines",
-          "Changing requirements"
-        ],
-        answer: 1
-      },
-
-      {
-        q: "Should members contact clients directly without approval?",
-        options: [
-          "Yes, always",
-          "Only when they feel like it",
-          "No, unless management specifically authorises it",
-          "Yes, if the client is local"
-        ],
-        answer: 2
-      },
-
-      {
-        q: "What should happen when a task has a deadline?",
-        options: [
-          "The deadline can always be ignored",
-          "Complete it within the specified deadline",
-          "Wait until the campaign ends",
-          "Submit unrelated proof"
-        ],
-        answer: 1
-      },
-
-      {
-        q: "Why is confidentiality important?",
-        options: [
-          "It protects business and internal information",
-          "It increases social media followers",
-          "It removes deadlines",
-          "It changes membership"
-        ],
-        answer: 0
-      },
-
-      {
-        q: "What should you do when you make a mistake?",
-        options: [
-          "Hide it",
-          "Blame someone else",
-          "Report it and follow management instructions",
-          "Delete the entire campaign"
-        ],
-        answer: 2
-      },
-
-      {
-        q: "What does professional behaviour include?",
-        options: [
-          "Ignoring instructions",
-          "Honesty, respect, accuracy and responsibility",
-          "Making unauthorised promises",
-          "Submitting fake proof"
-        ],
-        answer: 1
-      },
-
-      {
-        q: "What is a task checklist useful for?",
-        options: [
-          "Avoiding work",
-          "Understanding required actions and proof",
-          "Changing client requirements",
-          "Removing campaign deadlines"
-        ],
-        answer: 1
-      },
-
-      {
-        q: "What should you do after receiving a new task?",
-        options: [
-          "Start without reading",
-          "Read and understand the complete instructions",
-          "Forward it publicly",
-          "Change the task"
-        ],
-        answer: 1
-      },
-
-      {
-        q: "What is quality control?",
-        options: [
-          "Checking work against requirements before submission",
-          "Posting random content",
-          "Ignoring mistakes",
-          "Skipping proof"
-        ],
-        answer: 0
-      },
-
-      {
-        q: "Why are deadlines important?",
-        options: [
-          "Campaigns depend on coordinated completion",
-          "They are optional",
-          "They only apply to management",
-          "They do not matter"
-        ],
-        answer: 0
-      },
-
-      {
-        q: "What is a good way to manage multiple tasks?",
-        options: [
-          "Ignore all deadlines",
-          "Prioritise according to deadlines and requirements",
-          "Complete random tasks",
-          "Submit incomplete work"
-        ],
-        answer: 1
-      },
-
-      {
-        q: "How should members handle feedback?",
-        options: [
-          "Ignore it",
-          "Use it to improve future work",
-          "Argue with every instruction",
-          "Delete their account"
-        ],
-        answer: 1
-      },
-
-      {
-        q: "What creates reliability?",
-        options: [
-          "Consistent quality and meeting commitments",
-          "Ignoring instructions",
-          "Submitting fake proof",
-          "Missing deadlines"
-        ],
-        answer: 0
-      },
-
-      {
-        q: "What should members do with confidential IBB information?",
-        options: [
-          "Share it publicly",
-          "Handle it responsibly through authorised channels",
-          "Post it online",
-          "Send it to strangers"
-        ],
-        answer: 1
-      },
-
-      {
-        q: "What is the correct basic task process?",
-        options: [
-          "Guess → submit → ask",
-          "Read → understand → complete → verify → submit proof",
-          "Submit → read → change",
-          "Ignore → wait → submit"
-        ],
-        answer: 1
-      }
-
-    ];
-
-
-    /* =========================================================
-       STATE
-       ========================================================= */
-
+    let supabaseClient = null;
     let currentUser = null;
-    let profile = null;
+    let currentProfile = null;
 
     let currentDay = 1;
 
-    let completedDays = [];
+    let completedDays = {};
 
-    let lastCompletion = null;
+    let lastCompletionTimes = {};
 
-    let countdownInterval = null;
+    let currentTimerInterval = null;
+
+    let currentTaskAnswers = {};
+
+    const dayData = [
+
+      /* =====================================================
+         DAY 1
+         ===================================================== */
+
+      {
+        day: 1,
+
+        title: "IBB KYA HAI?",
+
+        intro:
+          "Aaj hum simple language mein samjhenge ki Indian Business Bureau yani IBB kya hai, IBB ka basic purpose kya hai aur ek IBB member ka role kya hota hai.",
+
+        sections: [
+
+          {
+            title: "🟡 Aaj hum kya seekhenge?",
+
+            type: "list",
+
+            content: [
+              "IBB kya hai.",
+              "IBB ka basic system kaise kaam karta hai.",
+              "Business aur IBB ke beech ka connection.",
+              "Member ko kya kaam karna hota hai.",
+              "Management aur member ka role alag kyun hota hai."
+            ]
+          },
+
+          {
+            title: "🟢 IBB ko simple language mein samjho",
+
+            type: "text",
+
+            content:
+              "Indian Business Bureau ek business-focused community aur task system hai jahan businesses ko promotion, campaign aur different support activities mein help di ja sakti hai. IBB management business ke saath communication handle karti hai aur members ko suitable tasks deti hai."
+          },
+
+          {
+            title: "🏪 Simple Example",
+
+            type: "example",
+
+            content:
+              "Maan lo Amritsar mein ek salon hai. Salon apni promotion karwana chahta hai. Salon IBB management se contact karta hai. IBB management campaign ki details samajhti hai. Uske baad members ko suitable tasks diye ja sakte hain, jaise post dekhna, reel campaign mein participate karna ya required proof submit karna."
+          },
+
+          {
+            title: "🔴 Important Rule",
+
+            type: "important",
+
+            content:
+              "Member ko client ya business owner se directly contact nahi karna hai jab tak IBB management specifically permission na de. Business/client communication management handle karegi."
+          }
+
+        ],
+
+        task:
+          "Apne words mein likho: IBB kya hai aur ek IBB member ka main role kya hai? 3–5 lines mein simple answer do."
+      },
+
+
+      /* =====================================================
+         DAY 2
+         ===================================================== */
+
+      {
+        day: 2,
+
+        title: "MEMBER KO KYA KARNA HAI?",
+
+        intro:
+          "Aaj hum samjhenge ki jab aapko IBB se koi task mile to usko sahi tarike se kaise complete karna hai.",
+
+        sections: [
+
+          {
+            title: "🟡 Simple language mein samjho",
+
+            type: "text",
+
+            content:
+              "Aapko jo task milega, sabse pehle usko pura padhna hai. Jaldi mein kaam start nahi karna. Pehle samjho ki kya karna hai, kab karna hai aur proof kya dena hai."
+          },
+
+          {
+            title: "🔵 Task complete karne ka basic process",
+
+            type: "steps",
+
+            content: [
+              "Task dekho.",
+              "Instructions dhyan se padho.",
+              "Jo kaam bola gaya hai wahi karo.",
+              "Kaam complete hone ke baad proof collect karo.",
+              "Proof ko sahi format mein submit karo."
+            ]
+          },
+
+          {
+            title: "🟢 Simple Example",
+
+            type: "example",
+
+            content:
+              "Aapko task mila: 'IBB campaign ki ek post apne social media account par share karo aur screenshot submit karo.' Pehle instruction padho. Phir post share karo. Share hone ke baad screenshot lo. Phir screenshot submit karo."
+          },
+
+          {
+            title: "🔴 Guess karke task mat karo",
+
+            type: "important",
+
+            content:
+              "Agar task samajh nahi aa raha hai to apni taraf se guess mat karo. IBB management se clarification lo. Galat kaam karne se task reject ho sakta hai."
+          }
+
+        ],
+
+        task:
+          "Neeche 5 steps likho jo aap task receive karne ke baad follow karoge."
+      },
+
+
+      /* =====================================================
+         DAY 3
+         ===================================================== */
+
+      {
+        day: 3,
+
+        title: "CAMPAIGN KYA HOTA HAI?",
+
+        intro:
+          "Aaj hum campaign ka meaning aur campaign mein member ka role simple example ke saath samjhenge.",
+
+        sections: [
+
+          {
+            title: "🟡 Campaign ko simple language mein samjho",
+
+            type: "text",
+
+            content:
+              "Campaign ka matlab ek planned activity ya promotion hota hai jisme ek business ke liye specific kaam kiye jaate hain. Har campaign ka apna goal, instructions aur proof requirement ho sakti hai."
+          },
+
+          {
+            title: "🟢 Campaign mein kya information ho sakti hai?",
+
+            type: "list",
+
+            content: [
+              "Business ya campaign ka naam.",
+              "Kya kaam karna hai.",
+              "Kaam kab tak complete karna hai.",
+              "Kis platform par kaam karna hai.",
+              "Kya proof submit karna hai.",
+              "Koi special rule ya instruction."
+            ]
+          },
+
+          {
+            title: "🏪 Simple Example",
+
+            type: "example",
+
+            content:
+              "Maan lo ek local gym apni new membership campaign chala raha hai. IBB management campaign details prepare karegi. Members ko specific task mil sakta hai, jaise approved content ko share karna. Member ko wahi content aur wahi instructions follow karni hain."
+          },
+
+          {
+            title: "🔴 Apni taraf se changes mat karo",
+
+            type: "important",
+
+            content:
+              "Agar campaign mein specific caption, photo, link ya format diya gaya hai to usko apni marzi se change mat karo. Agar change ki zarurat lage to pehle management se poochho."
+          }
+
+        ],
+
+        task:
+          "Ek imaginary salon campaign ka example banao. Likho: business kya hai, task kya hai aur proof kya submit karna hoga."
+      },
+
+
+      /* =====================================================
+         DAY 4
+         ===================================================== */
+
+      {
+        day: 4,
+
+        title: "SOCIAL MEDIA TASK KAISE KARNA HAI?",
+
+        intro:
+          "Aaj hum social media related tasks ko simple steps mein samjhenge, jaise post, reel, story aur proof.",
+
+        sections: [
+
+          {
+            title: "🟡 Social media task mein kya ho sakta hai?",
+
+            type: "list",
+
+            content: [
+              "Approved post share karna.",
+              "Reel campaign mein participate karna.",
+              "Story lagana.",
+              "Approved link use karna.",
+              "Required screenshot ya proof submit karna."
+            ]
+          },
+
+          {
+            title: "🔵 Kaam ka simple process",
+
+            type: "steps",
+
+            content: [
+              "Jo content diya gaya hai usko dekho.",
+              "Caption aur instructions padho.",
+              "Required platform par post/reel/story karo.",
+              "Post live hai ya nahi check karo.",
+              "Screenshot ya required proof save karo."
+            ]
+          },
+
+          {
+            title: "🟢 Proof kya hota hai?",
+
+            type: "text",
+
+            content:
+              "Proof ka matlab evidence hota hai ki aapne task complete kiya hai. Example: screenshot, post link ya jo proof management ne specifically manga ho."
+          },
+
+          {
+            title: "🔴 Fake proof kabhi mat do",
+
+            type: "important",
+
+            content:
+              "Kabhi bhi edited, fake ya galat proof submit mat karo. Agar task complete nahi hua hai to sach batao. Trust IBB system ka bahut important part hai."
+          }
+
+        ],
+
+        task:
+          "Ek social media task ka example likho aur batao ki us task ke complete hone ke baad kaunsa proof diya ja sakta hai."
+      },
+
+
+      /* =====================================================
+         DAY 5
+         ===================================================== */
+
+      {
+        day: 5,
+
+        title: "TASK AUR LEAD MANAGEMENT",
+
+        intro:
+          "Aaj hum samjhenge ki task ya lead milne ke baad member ko kaise organized rehna hai.",
+
+        sections: [
+
+          {
+            title: "🟡 Task milne ke baad kya karo?",
+
+            type: "steps",
+
+            content: [
+              "Task ko dhyan se padho.",
+              "Deadline note karo.",
+              "Important instructions samjho.",
+              "Agar koi doubt hai to poochho.",
+              "Task complete karo.",
+              "Proof submit karo."
+            ]
+          },
+
+          {
+            title: "🟢 Lead ka simple meaning",
+
+            type: "text",
+
+            content:
+              "Lead ka matlab kisi possible business opportunity ya interested person/business ki information ho sakti hai. IBB mein lead ka handling management process ke according hoga."
+          },
+
+          {
+            title: "🔴 Member ko client se directly baat nahi karni",
+
+            type: "important",
+
+            content:
+              "Agar kisi task mein business/client ki information mile to us person ko apni taraf se call ya message mat karo. Management ke instructions ka wait karo."
+          },
+
+          {
+            title: "🏪 Simple Example",
+
+            type: "example",
+
+            content:
+              "Maan lo ek cafe IBB ke through promotion ke liye interested hai. Member ko cafe owner ka number mil gaya. Member ko khud owner ko WhatsApp ya call nahi karna hai. Management client communication handle karegi."
+          }
+
+        ],
+
+        task:
+          "Agar aapko kisi business ki contact information task ke andar mil jaye to aap kya karoge? Simple steps mein answer do."
+      },
+
+
+      /* =====================================================
+         DAY 6
+         ===================================================== */
+
+      {
+        day: 6,
+
+        title: "QUALITY CHECK — GALTI KAISE BACHAYE?",
+
+        intro:
+          "Aaj hum seekhenge ki task submit karne se pehle quality check kaise karna hai taaki avoidable mistakes kam ho.",
+
+        sections: [
+
+          {
+            title: "🟡 Submit karne se pehle 5 checks",
+
+            type: "list",
+
+            content: [
+              "Kya maine correct task kiya?",
+              "Kya maine instructions follow ki?",
+              "Kya content correct hai?",
+              "Kya proof clearly dikh raha hai?",
+              "Kya maine deadline ke andar submit kiya?"
+            ]
+          },
+
+          {
+            title: "🟢 Simple Example",
+
+            type: "example",
+
+            content:
+              "Aapko ek specific photo post karne ko bola gaya tha. Aapne post kar di. Submit karne se pehle check karo ki photo correct hai, caption correct hai, post live hai aur screenshot clear hai."
+          },
+
+          {
+            title: "🔴 Jaldi ke chakkar mein submit mat karo",
+
+            type: "important",
+
+            content:
+              "Task complete karna important hai, lekin bina check kiye submit karna sahi nahi hai. 1 minute ka quality check future problem ko bachaa sakta hai."
+          },
+
+          {
+            title: "🧠 Yaad rakho",
+
+            type: "text",
+
+            content:
+              "Correct kaam + correct proof + correct time = better task completion."
+          }
+
+        ],
+
+        task:
+          "Apne liye ek 5-point task checklist likho jo aap har task submit karne se pehle check karoge."
+      },
+
+
+      /* =====================================================
+         DAY 7
+         ===================================================== */
+
+      {
+        day: 7,
+
+        title: "BUSINESS AUR CLIENT PROTECTION",
+
+        intro:
+          "Aaj ka topic bahut important hai. Hum samjhenge ki business information, client information aur IBB ke internal matters ko responsibly handle kaise karna hai.",
+
+        sections: [
+
+          {
+            title: "🟡 Confidential information kya hoti hai?",
+
+            type: "text",
+
+            content:
+              "Jo information public nahi hai aur IBB ya business ne private rakhi hai, usko confidential information samjha ja sakta hai. Aisi information ko bina permission kisi aur ke saath share nahi karna chahiye."
+          },
+
+          {
+            title: "🟢 Kya share nahi karna?",
+
+            type: "list",
+
+            content: [
+              "Private client details.",
+              "Internal IBB instructions.",
+              "Private business information.",
+              "Passwords ya login information.",
+              "Internal screenshots jo public nahi hain."
+            ]
+          },
+
+          {
+            title: "🔴 Direct client contact",
+
+            type: "important",
+
+            content:
+              "Member ko client/business owner se directly contact nahi karna hai jab tak management permission na de. Agar client ki taraf se direct message aa jaye to management ko inform karo."
+          },
+
+          {
+            title: "🏪 Simple Example",
+
+            type: "example",
+
+            content:
+              "Aapko ek business ka private WhatsApp number diya gaya hai. Aapko us number par khud promotion offer nahi bhejna. Number ka use sirf wahi karna hai jo IBB management ne clearly bola ho."
+          }
+
+        ],
+
+        task:
+          "Confidential information ko safe rakhne ke 4 simple rules likho."
+      },
+
+
+      /* =====================================================
+         DAY 8
+         ===================================================== */
+
+      {
+        day: 8,
+
+        title: "TIME MANAGEMENT AUR PRODUCTIVITY",
+
+        intro:
+          "IBB tasks flexible ho sakte hain, lekin flexible timing ka matlab ye nahi ki task ko ignore kiya ja sakta hai. Aaj hum time management seekhenge.",
+
+        sections: [
+
+          {
+            title: "🟡 Flexible timing ka simple meaning",
+
+            type: "text",
+
+            content:
+              "Flexible timing ka matlab ho sakta hai ki aap apne available time ke according task complete kar sakein. Lekin har task ki deadline aur instructions ko follow karna zaroori hai."
+          },
+
+          {
+            title: "🔵 Daily simple routine",
+
+            type: "steps",
+
+            content: [
+              "Apne pending tasks check karo.",
+              "Sabse important task pehle dekho.",
+              "Deadline note karo.",
+              "Task complete karo.",
+              "Proof submit karo.",
+              "Last mein pending tasks dobara check karo."
+            ]
+          },
+
+          {
+            title: "🟢 Multiple tasks kaise handle karein?",
+
+            type: "list",
+
+            content: [
+              "Sab tasks ek jagah note karo.",
+              "Deadline ke according priority set karo.",
+              "Ek task ko properly complete karo.",
+              "Important task ko last minute par mat chhodo.",
+              "Doubt ho to jaldi management se poochho."
+            ]
+          },
+
+          {
+            title: "🔴 Deadline ignore mat karo",
+
+            type: "important",
+
+            content:
+              "Agar kisi genuine reason se task time par complete nahi ho sakta to management ko jaldi inform karo. Last minute tak wait karna problem create kar sakta hai."
+          }
+
+        ],
+
+        task:
+          "Apna ek simple daily routine likho jisme aap IBB task ke liye time kaise nikaloge."
+      },
+
+
+      /* =====================================================
+         DAY 9
+         ===================================================== */
+
+      {
+        day: 9,
+
+        title: "PROFESSIONAL GROWTH AUR TRUST",
+
+        intro:
+          "Aaj hum samjhenge ki IBB mein long-term kaam karne ke liye sirf task complete karna hi nahi, balki reliable aur responsible hona bhi important hai.",
+
+        sections: [
+
+          {
+            title: "🟡 Reliable member kaun hota hai?",
+
+            type: "list",
+
+            content: [
+              "Jo task ko seriously leta hai.",
+              "Jo instructions follow karta hai.",
+              "Jo deadline ka dhyan rakhta hai.",
+              "Jo fake proof nahi deta.",
+              "Jo mistake hone par sach batata hai.",
+              "Jo feedback se improve karta hai."
+            ]
+          },
+
+          {
+            title: "🟢 Feedback ko kaise lena hai?",
+
+            type: "text",
+
+            content:
+              "Agar management aapko correction batati hai to usko personal problem mat samjho. Feedback ka purpose task quality improve karna hai."
+          },
+
+          {
+            title: "🏆 Growth ka simple formula",
+
+            type: "example",
+
+            content:
+              "Consistency + Accuracy + Responsibility + Communication = Better professional growth."
+          },
+
+          {
+            title: "🔴 Mistake ho jaye to kya karo?",
+
+            type: "important",
+
+            content:
+              "Mistake hide mat karo. Management ko batao ki kya hua. Agar possible ho to correction ka solution bhi batao. Honest communication trust ko strong banata hai."
+          }
+
+        ],
+
+        task:
+          "Ek situation likho jahan aapse task mein mistake ho gayi. Batao aap management ko kaise inform karoge aur kya solution doge."
+      },
+
+
+      /* =====================================================
+         DAY 10
+         ===================================================== */
+
+      {
+        day: 10,
+
+        title: "FINAL READINESS — AB AAP READY HO",
+
+        intro:
+          "Aaj hum poori training ko short mein revise karenge. Iske baad final assessment hoga.",
+
+        sections: [
+
+          {
+            title: "🟡 10 din mein humne kya seekha?",
+
+            type: "list",
+
+            content: [
+              "IBB kya hai.",
+              "Member ka role kya hai.",
+              "Task ko kaise read aur complete karna hai.",
+              "Campaign kaise samajhna hai.",
+              "Social media task aur proof kaise handle karna hai.",
+              "Lead aur client information ko responsibly kaise handle karna hai.",
+              "Quality check kaise karna hai.",
+              "Confidential information ko safe kaise rakhna hai.",
+              "Time aur tasks ko kaise manage karna hai.",
+              "Professional aur responsible member kaise banna hai."
+            ]
+          },
+
+          {
+            title: "🟢 Basic Task Formula",
+
+            type: "steps",
+
+            content: [
+              "Task dekho.",
+              "Instruction padho.",
+              "Doubt ho to poochho.",
+              "Task complete karo.",
+              "Quality check karo.",
+              "Proof submit karo.",
+              "Management ke next instruction ka wait karo."
+            ]
+          },
+
+          {
+            title: "🔴 Sabse important rules",
+
+            type: "important",
+
+            content:
+              "Client se bina permission direct contact nahi karna. Fake proof nahi dena. Private information share nahi karni. Instructions ignore nahi karni. Deadline ka dhyan rakhna. Mistake ho to hide nahi karni."
+          },
+
+          {
+            title: "🎯 Final Message",
+
+            type: "text",
+
+            content:
+              "IBB mein kaam ka simple rule hai: jo task mile usko samjho, sahi tarike se karo, proof do aur responsible raho. Agar aap consistent aur honest rahoge to aap long-term better opportunities ke liye ready ho sakte ho."
+          }
+
+        ],
+
+        task:
+          "Final preparation ke liye likho: IBB mein ek responsible member banne ke liye aap kin 5 rules ko hamesha follow karoge."
+      }
+
+    ];
 
 
     /* =========================================================
-       DOM
+       FINAL ASSESSMENT QUESTIONS
        ========================================================= */
 
-    const loadingScreen =
-      document.getElementById("loadingScreen");
+    const assessmentQuestions = [
 
-    const dayList =
-      document.getElementById("dayList");
+      {
+        q: "1. IBB ka basic purpose kya hai?",
+        options: [
+          "Business aur members ko structured tasks/opportunities ke through connect karna",
+          "Sirf games khelna",
+          "Sirf personal chatting karna",
+          "Sirf advertisements dekhna"
+        ],
+        answer: 0
+      },
 
-    const trainingContent =
-      document.getElementById("trainingContent");
+      {
+        q: "2. Business/client se communication normally kaun handle karega?",
+        options: [
+          "Har member apni marzi se",
+          "IBB management",
+          "Koi bhi unknown person",
+          "Sirf social media follower"
+        ],
+        answer: 1
+      },
 
-    const assessmentSection =
-      document.getElementById("assessmentSection");
+      {
+        q: "3. Agar task samajh nahi aa raha ho to kya karna chahiye?",
+        options: [
+          "Guess karke kar do",
+          "Task ignore kar do",
+          "Management se clarification lo",
+          "Kisi random person se poochho"
+        ],
+        answer: 2
+      },
 
-    const certificateSection =
-      document.getElementById("certificateSection");
+      {
+        q: "4. Task proof ka matlab kya hai?",
+        options: [
+          "Task complete hone ka evidence",
+          "Member ka personal photo",
+          "Random screenshot",
+          "Sirf message"
+        ],
+        answer: 0
+      },
 
-    const memberName =
-      document.getElementById("memberName");
+      {
+        q: "5. Proof submit karne se pehle kya karna chahiye?",
+        options: [
+          "Kuch check nahi karna",
+          "Quality check karna",
+          "Proof delete karna",
+          "Task change karna"
+        ],
+        answer: 1
+      },
 
-    const headerMemberId =
-      document.getElementById("headerMemberId");
+      {
+        q: "6. Instructions follow karna kyun important hai?",
+        options: [
+          "Taaki task sahi tarike se complete ho",
+          "Taaki time waste ho",
+          "Taaki task difficult lage",
+          "Koi reason nahi"
+        ],
+        answer: 0
+      },
 
-    const progressPercent =
-      document.getElementById("progressPercent");
+      {
+        q: "7. Kya member client ko apni taraf se direct message kar sakta hai?",
+        options: [
+          "Haan, kabhi bhi",
+          "Haan, bina bataye",
+          "Sirf management ki permission/instruction ke according",
+          "Sirf raat ko"
+        ],
+        answer: 2
+      },
 
-    const progressFill =
-      document.getElementById("progressFill");
+      {
+        q: "8. Deadline ka kya matlab hai?",
+        options: [
+          "Task complete karne ka required time",
+          "Member ka birthday",
+          "Login ka password",
+          "Business ka address"
+        ],
+        answer: 0
+      },
 
-    const progressText =
-      document.getElementById("progressText");
+      {
+        q: "9. Private client information ke saath kya karna chahiye?",
+        options: [
+          "Sabko share karna",
+          "Social media par post karna",
+          "Responsible aur confidential rakhna",
+          "Friends ko bhejna"
+        ],
+        answer: 2
+      },
 
-    const currentDayText =
-      document.getElementById("currentDayText");
+      {
+        q: "10. Agar task mein mistake ho jaye to?",
+        options: [
+          "Hide karo",
+          "Fake proof do",
+          "Management ko inform karo aur correction try karo",
+          "Account delete karo"
+        ],
+        answer: 2
+      },
+
+      {
+        q: "11. Professional behaviour ka example kya hai?",
+        options: [
+          "Instructions follow karna aur respectful rehna",
+          "Task ignore karna",
+          "Fake information dena",
+          "Client ko bina permission contact karna"
+        ],
+        answer: 0
+      },
+
+      {
+        q: "12. Task checklist ka use kyun karte hain?",
+        options: [
+          "Mistakes kam karne ke liye",
+          "Task delay karne ke liye",
+          "Password banane ke liye",
+          "Client ko call karne ke liye"
+        ],
+        answer: 0
+      },
+
+      {
+        q: "13. Task receive karne ke baad first step kya hai?",
+        options: [
+          "Turant guess karke start karna",
+          "Instructions padhna",
+          "Task kisi aur ko bhejna",
+          "Task delete karna"
+        ],
+        answer: 1
+      },
+
+      {
+        q: "14. Quality check ka simple meaning kya hai?",
+        options: [
+          "Submit karne se pehle kaam dobara check karna",
+          "Task ko delete karna",
+          "Client ko call karna",
+          "Password change karna"
+        ],
+        answer: 0
+      },
+
+      {
+        q: "15. Deadline miss hone wali ho to kya karna chahiye?",
+        options: [
+          "Kuch na batao",
+          "Last minute tak chup raho",
+          "Management ko jaldi inform karo",
+          "Fake proof submit karo"
+        ],
+        answer: 2
+      },
+
+      {
+        q: "16. Multiple tasks kaise manage karne chahiye?",
+        options: [
+          "Sabko ignore karo",
+          "Tasks aur deadlines note karke priority set karo",
+          "Randomly koi bhi task karo",
+          "Sirf easiest task karo"
+        ],
+        answer: 1
+      },
+
+      {
+        q: "17. Feedback milne par kya karna chahiye?",
+        options: [
+          "Ignore karo",
+          "Gussa karo",
+          "Samjho aur improvement karo",
+          "Account band karo"
+        ],
+        answer: 2
+      },
+
+      {
+        q: "18. Reliable member kaun hota hai?",
+        options: [
+          "Jo responsible aur consistent hota hai",
+          "Jo task ignore karta hai",
+          "Jo fake proof deta hai",
+          "Jo instructions nahi padhta"
+        ],
+        answer: 0
+      },
+
+      {
+        q: "19. Private IBB information ko kaise handle karna chahiye?",
+        options: [
+          "Publicly share karna",
+          "Friends ko bhejna",
+          "Confidential rakhna",
+          "Social media par post karna"
+        ],
+        answer: 2
+      },
+
+      {
+        q: "20. Basic correct task process kya hai?",
+        options: [
+          "Task dekho → instruction padho → complete karo → check karo → proof submit karo",
+          "Guess karo → submit karo",
+          "Proof banao → phir task dekho",
+          "Client ko contact karo → task samjho"
+        ],
+        answer: 0
+      }
+
+    ];
 
 
     /* =========================================================
-       HELPERS
+       LOCAL STORAGE
        ========================================================= */
 
-    function showToast(message, type = "") {
+    function getStoragePrefix() {
 
-      const toast =
-        document.getElementById("toast");
-
-      toast.textContent = message;
-
-      toast.className = "";
-
-      toast.classList.add("show");
-
-      if (type) {
-        toast.classList.add(type);
+      if (!currentUser) {
+        return "ibb_10day_guest_";
       }
 
-      setTimeout(() => {
-        toast.classList.remove("show");
-      }, 3500);
+      return "ibb_10day_" + currentUser.id + "_";
     }
 
 
-    function storageKey(name) {
+    function loadLocalProgress() {
 
-      if (!currentUser) {
-        return STORAGE_PREFIX + name;
+      const prefix = getStoragePrefix();
+
+      try {
+
+        completedDays =
+          JSON.parse(
+            localStorage.getItem(
+              prefix + "completedDays"
+            ) || "{}"
+          );
+
+        lastCompletionTimes =
+          JSON.parse(
+            localStorage.getItem(
+              prefix + "lastCompletionTimes"
+            ) || "{}"
+          );
+
+        currentTaskAnswers =
+          JSON.parse(
+            localStorage.getItem(
+              prefix + "taskAnswers"
+            ) || "{}"
+          );
+
+      } catch (error) {
+
+        completedDays = {};
+        lastCompletionTimes = {};
+        currentTaskAnswers = {};
+
       }
 
-      return (
-        STORAGE_PREFIX +
-        name +
-        "_" +
-        currentUser.id
-      );
     }
 
 
-    function saveProgress() {
+    function saveLocalProgress() {
 
-      if (!currentUser) {
-        return;
-      }
+      const prefix = getStoragePrefix();
 
       localStorage.setItem(
-        storageKey("completed"),
+        prefix + "completedDays",
         JSON.stringify(completedDays)
       );
 
       localStorage.setItem(
-        storageKey("current"),
-        String(currentDay)
+        prefix + "lastCompletionTimes",
+        JSON.stringify(lastCompletionTimes)
       );
 
-      if (lastCompletion) {
-
-        localStorage.setItem(
-          storageKey("last_completion"),
-          String(lastCompletion)
-        );
-
-      } else {
-
-        localStorage.removeItem(
-          storageKey("last_completion")
-        );
-      }
-    }
-
-
-    function loadProgress() {
-
-      if (!currentUser) {
-        return;
-      }
-
-      try {
-
-        const savedCompleted =
-          localStorage.getItem(
-            storageKey("completed")
-          );
-
-        const savedCurrent =
-          localStorage.getItem(
-            storageKey("current")
-          );
-
-        const savedLast =
-          localStorage.getItem(
-            storageKey("last_completion")
-          );
-
-
-        if (savedCompleted) {
-
-          const parsed =
-            JSON.parse(savedCompleted);
-
-          if (Array.isArray(parsed)) {
-
-            completedDays =
-              parsed
-                .map(Number)
-                .filter(
-                  day =>
-                    Number.isInteger(day) &&
-                    day >= 1 &&
-                    day <= TOTAL_DAYS
-                );
-
-          }
-
-        }
-
-
-        if (savedCurrent) {
-
-          const parsedCurrent =
-            Number(savedCurrent);
-
-          if (
-            Number.isInteger(parsedCurrent) &&
-            parsedCurrent >= 1 &&
-            parsedCurrent <= TOTAL_DAYS
-          ) {
-
-            currentDay = parsedCurrent;
-
-          }
-
-        }
-
-
-        if (savedLast) {
-
-          const parsedLast =
-            Number(savedLast);
-
-          if (
-            Number.isFinite(parsedLast) &&
-            parsedLast > 0
-          ) {
-
-            lastCompletion = parsedLast;
-
-          }
-
-        }
-
-      } catch (error) {
-
-        console.error(
-          "Progress loading error:",
-          error
-        );
-
-      }
-
-
-      /*
-        Safety:
-        If previous days are completed,
-        automatically calculate the next required day.
-      */
-
-      const highestCompleted =
-        completedDays.length
-          ? Math.max(...completedDays)
-          : 0;
-
-      if (highestCompleted >= TOTAL_DAYS) {
-
-        currentDay = TOTAL_DAYS;
-
-      } else if (
-        highestCompleted + 1 > currentDay
-      ) {
-
-        currentDay =
-          highestCompleted + 1;
-
-      }
-
-    }
-
-
-    function isCompleted(day) {
-
-      return completedDays.includes(day);
-
-    }
-
-
-    function hoursPassed(timestamp) {
-
-      if (!timestamp) {
-        return Infinity;
-      }
-
-      return (
-        Date.now() - Number(timestamp)
-      ) / (1000 * 60 * 60);
-
-    }
-
-
-    function canUnlockDay(day) {
-
-      if (day === 1) {
-        return true;
-      }
-
-      if (!isCompleted(day - 1)) {
-        return false;
-      }
-
-      /*
-        The next day opens 24 hours after
-        the previous day was completed.
-      */
-
-      if (!lastCompletion) {
-        return false;
-      }
-
-      return (
-        hoursPassed(lastCompletion) >=
-        UNLOCK_HOURS
-      );
-
-    }
-
-
-    function remainingMilliseconds() {
-
-      if (!lastCompletion) {
-        return 0;
-      }
-
-      const unlockTime =
-        Number(lastCompletion) +
-        UNLOCK_HOURS * 60 * 60 * 1000;
-
-      return Math.max(
-        0,
-        unlockTime - Date.now()
-      );
-
-    }
-
-
-    function formatCountdown(milliseconds) {
-
-      const totalSeconds =
-        Math.ceil(
-          milliseconds / 1000
-        );
-
-      const hours =
-        Math.floor(
-          totalSeconds / 3600
-        );
-
-      const minutes =
-        Math.floor(
-          (totalSeconds % 3600) / 60
-        );
-
-      const seconds =
-        totalSeconds % 60;
-
-      return (
-        String(hours).padStart(2, "0") +
-        ":" +
-        String(minutes).padStart(2, "0") +
-        ":" +
-        String(seconds).padStart(2, "0")
+      localStorage.setItem(
+        prefix + "taskAnswers",
+        JSON.stringify(currentTaskAnswers)
       );
 
     }
 
 
     /* =========================================================
-       PROFILE
+       AUTH
        ========================================================= */
+
+    async function initializeSupabase() {
+
+      if (
+        !SUPABASE_PUBLISHABLE_KEY ||
+        SUPABASE_PUBLISHABLE_KEY.includes(
+          "sb_publishable_t0Z_jIqNeUde0fZ4YS8h3Q_fQHLO_GV"
+        )
+      ) {
+
+        alert(
+          "Supabase key missing hai. training.html mein apni login.html wali Publishable/Anon key paste karo."
+        );
+
+        return false;
+      }
+
+      supabaseClient =
+        window.supabase.createClient(
+          SUPABASE_URL,
+          SUPABASE_PUBLISHABLE_KEY
+        );
+
+      return true;
+    }
+
+
+    async function loadCurrentUser() {
+
+      const {
+        data,
+        error
+      } =
+        await supabaseClient.auth.getSession();
+
+      if (error) {
+
+        console.error(error);
+
+        window.location.href = "login.html";
+
+        return false;
+      }
+
+      currentUser = data.session?.user || null;
+
+      if (!currentUser) {
+
+        window.location.href = "login.html";
+
+        return false;
+      }
+
+      return true;
+    }
+
 
     async function loadProfile() {
 
-      if (!currentUser) {
-        return;
-      }
-
-      try {
-
-        const {
-          data,
-          error
-        } = await supabaseClient
+      const {
+        data,
+        error
+      } =
+        await supabaseClient
           .from("profiles")
           .select("*")
           .eq("id", currentUser.id)
           .maybeSingle();
 
-
-        if (error) {
-          console.error(
-            "Profile error:",
-            error
-          );
-          return;
-        }
-
-
-        profile = data;
-
-
-        if (profile) {
-
-          memberName.textContent =
-            profile.full_name ||
-            currentUser.user_metadata?.full_name ||
-            "Member";
-
-          headerMemberId.textContent =
-            profile.member_id ||
-            "IBB Member";
-
-        } else {
-
-          memberName.textContent =
-            currentUser.user_metadata?.full_name ||
-            "Member";
-
-          headerMemberId.textContent =
-            "IBB Member";
-
-        }
-
-      } catch (error) {
+      if (error) {
 
         console.error(
-          "Profile loading failed:",
+          "Profile load error:",
           error
         );
 
+        currentProfile = null;
+
+      } else {
+
+        currentProfile = data;
       }
 
+      updateMemberUI();
+
+      return true;
+    }
+
+
+    function updateMemberUI() {
+
+      const name =
+        currentProfile?.full_name ||
+        currentUser?.user_metadata?.full_name ||
+        currentUser?.email?.split("@")[0] ||
+        "IBB Member";
+
+      const memberId =
+        currentProfile?.member_id ||
+        "IBB Member";
+
+      document.getElementById(
+        "memberName"
+      ).textContent = name;
+
+      document.getElementById(
+        "memberId"
+      ).textContent = memberId;
+    }
+
+
+    /* =========================================================
+       DAY ACCESS
+       ========================================================= */
+
+    function isDayCompleted(day) {
+
+      return completedDays[String(day)] === true;
+    }
+
+
+    function getUnlockTimeForDay(day) {
+
+      if (day <= 1) {
+        return 0;
+      }
+
+      const previousDay =
+        day - 1;
+
+      const previousCompletion =
+        lastCompletionTimes[
+          String(previousDay)
+        ];
+
+      if (!previousCompletion) {
+        return Infinity;
+      }
+
+      return (
+        Number(previousCompletion) +
+        UNLOCK_HOURS * 60 * 60 * 1000
+      );
+    }
+
+
+    function isDayUnlocked(day) {
+
+      if (day === 1) {
+        return true;
+      }
+
+      if (!isDayCompleted(day - 1)) {
+        return false;
+      }
+
+      const unlockTime =
+        getUnlockTimeForDay(day);
+
+      return Date.now() >= unlockTime;
+    }
+
+
+    function getHighestAvailableDay() {
+
+      let highest = 1;
+
+      for (
+        let day = 2;
+        day <= TOTAL_DAYS;
+        day++
+      ) {
+
+        if (isDayUnlocked(day)) {
+          highest = day;
+        } else {
+          break;
+        }
+
+      }
+
+      return highest;
     }
 
 
@@ -2155,384 +2319,491 @@
        SIDEBAR
        ========================================================= */
 
-    function renderSidebar() {
+    function renderDayList() {
+
+      const dayList =
+        document.getElementById("dayList");
 
       dayList.innerHTML = "";
 
-      trainingDays.forEach(day => {
+      for (
+        let i = 1;
+        i <= TOTAL_DAYS;
+        i++
+      ) {
+
+        const day =
+          dayData[i - 1];
 
         const button =
           document.createElement("button");
 
         button.type = "button";
 
-        button.className = "day-btn";
+        button.className =
+          "day-btn";
 
-        if (day.day === currentDay) {
+        if (i === currentDay) {
           button.classList.add("active");
         }
 
-        if (isCompleted(day.day)) {
+        if (isDayCompleted(i)) {
           button.classList.add("completed");
         }
 
-
         const unlocked =
-          canUnlockDay(day.day);
+          isDayUnlocked(i);
 
+        if (!unlocked) {
+          button.classList.add("locked");
+        }
 
-        button.disabled =
-          !unlocked;
+        let statusText = "Locked";
 
+        if (isDayCompleted(i)) {
+          statusText = "Complete ✓";
+        } else if (unlocked) {
+          statusText = "Available";
+        }
 
         button.innerHTML = `
 
           <div class="day-number">
-            ${isCompleted(day.day)
-              ? "✓"
-              : day.day}
+            ${i}
           </div>
 
           <div class="day-info">
 
-            <strong>
-              Day ${day.day}
-            </strong>
+            <div class="day-title-small">
+              Day ${i} — ${day.title}
+            </div>
 
-            <span>
-              ${day.title}
-            </span>
+            <div class="day-status">
+              ${statusText}
+            </div>
 
           </div>
 
-          ${
-            unlocked
-              ? ""
-              : `<span class="lock">🔒</span>`
-          }
-
         `;
-
 
         button.addEventListener(
           "click",
           () => {
 
-            if (!canUnlockDay(day.day)) {
+            if (!isDayUnlocked(i)) {
 
-              showToast(
-                day.day === 1
-                  ? "Day 1 is available."
-                  : "This day is still locked.",
-                "error"
-              );
+              showLockedMessage(i);
 
               return;
             }
 
-            currentDay = day.day;
+            currentDay = i;
 
-            saveProgress();
+            renderDay();
 
-            renderSidebar();
-
-            renderCurrentDay();
-
-            window.scrollTo({
-              top: 0,
-              behavior: "smooth"
-            });
+            closeMobileMenu();
 
           }
         );
 
-
         dayList.appendChild(button);
+      }
 
-      });
-
+      updateProgressUI();
     }
 
-
-    /* =========================================================
-       PROGRESS UI
-       ========================================================= */
 
     function updateProgressUI() {
 
       const completedCount =
-        completedDays.length;
+        Object.values(completedDays)
+          .filter(Boolean)
+          .length;
 
-      const percent =
-        Math.round(
-          (completedCount / TOTAL_DAYS) * 100
-        );
+      document.getElementById(
+        "progressText"
+      ).textContent =
+        `${completedCount} / ${TOTAL_DAYS}`;
+
+      const percentage =
+        (completedCount / TOTAL_DAYS) * 100;
+
+      document.getElementById(
+        "progressFill"
+      ).style.width =
+        percentage + "%";
+    }
 
 
-      progressPercent.textContent =
-        percent + "%";
+    function showLockedMessage(day) {
 
-      progressFill.style.width =
-        percent + "%";
+      if (day > 1) {
 
-      progressText.textContent =
-        completedCount +
-        " of " +
-        TOTAL_DAYS +
-        " days completed";
+        const previousDay = day - 1;
 
-      currentDayText.textContent =
-        "Day " + currentDay;
+        if (!isDayCompleted(previousDay)) {
+
+          alert(
+            `Day ${day} abhi locked hai.\n\nPehle Day ${previousDay} complete karo.`
+          );
+
+          return;
+        }
+
+        const unlockTime =
+          getUnlockTimeForDay(day);
+
+        const remaining =
+          unlockTime - Date.now();
+
+        if (remaining > 0) {
+
+          alert(
+            `Day ${day} abhi unlock nahi hua hai.\n\nPehle previous day complete hua hai. Agla day 24 hours ke baad unlock hoga.`
+          );
+
+        }
+
+      }
 
     }
 
 
     /* =========================================================
-       RENDER CURRENT DAY
+       RENDER DAY
        ========================================================= */
 
-    function renderCurrentDay() {
+    function renderDay() {
 
-      clearInterval(countdownInterval);
+      const day =
+        dayData[currentDay - 1];
 
-      countdownInterval = null;
-
-
-      const dayData =
-        trainingDays.find(
-          day => day.day === currentDay
-        );
-
-
-      if (!dayData) {
+      if (!day) {
         return;
       }
 
+      document.getElementById(
+        "dayLabel"
+      ).textContent =
+        `DAY ${day.day}`;
 
-      const alreadyCompleted =
-        isCompleted(currentDay);
+      document.getElementById(
+        "dayTitle"
+      ).textContent =
+        day.title;
 
+      document.getElementById(
+        "dayIntro"
+      ).textContent =
+        day.intro;
 
-      let html = `
+      const grid =
+        document.getElementById(
+          "sectionGrid"
+        );
 
-        <div class="day-header">
+      grid.innerHTML = "";
 
-          <div>
+      day.sections.forEach(
+        section => {
 
-            <div class="eyebrow">
-              Day ${dayData.day} of ${TOTAL_DAYS}
-            </div>
+          const card =
+            document.createElement("div");
 
-            <h2>
-              ${dayData.title}
-            </h2>
+          card.className =
+            "card";
 
-            <p>
-              ${dayData.subtitle}
-            </p>
+          if (
+            section.type === "list" &&
+            section.content.length > 5
+          ) {
+            card.classList.add("full");
+          }
 
-          </div>
-
-          <div class="day-tag">
-            ${dayData.tag}
-          </div>
-
-        </div>
-
-      `;
-
-
-      dayData.sections.forEach(section => {
-
-        html += `
-
-          <div class="section">
-
+          let html = `
             <h3>
               ${section.title}
             </h3>
-
-            <p>
-              ${section.text}
-            </p>
-
-          </div>
-
-        `;
-
-      });
-
-
-      if (dayData.boxes) {
-
-        html += `
-          <div class="info-grid">
-        `;
-
-        dayData.boxes.forEach(box => {
-
-          html += `
-
-            <div class="info-box">
-
-              <strong>
-                ${box[0]}
-              </strong>
-
-              <span>
-                ${box[1]}
-              </span>
-
-            </div>
-
           `;
 
-        });
+          if (
+            section.type === "text"
+          ) {
 
-        html += `
-          </div>
-        `;
-
-      }
-
-
-      html += `
-
-        <div class="task-box">
-
-          <h4>
-            PRACTICAL TASK
-          </h4>
-
-          <p>
-            ${dayData.task}
-          </p>
-
-          <label
-            class="reflection-label"
-            for="reflection"
-          >
-            Your response
-          </label>
-
-          <textarea
-            id="reflection"
-            placeholder="Write your answer here..."
-            ${alreadyCompleted ? "disabled" : ""}
-          ></textarea>
-
-        </div>
-
-      `;
-
-
-      if (alreadyCompleted) {
-
-        html += `
-
-          <div class="notice success">
-            ✓ You have already completed Day
-            ${currentDay}.
-          </div>
-
-        `;
-
-      }
-
-
-      html += `
-
-        <div class="action-area">
-
-          <div
-            class="timer-box"
-            id="timerBox"
-          ></div>
-
-          <button
-            type="button"
-            class="complete-btn"
-            id="completeBtn"
-            ${alreadyCompleted ? "disabled" : ""}
-          >
-            ${
-              alreadyCompleted
-                ? "Day Completed ✓"
-                : currentDay === TOTAL_DAYS
-                  ? "Complete Day 10"
-                  : "Complete Day " + currentDay
-            }
-          </button>
-
-        </div>
-
-      `;
-
-
-      trainingContent.innerHTML =
-        html;
-
-
-      const reflection =
-        document.getElementById("reflection");
-
-      const completeBtn =
-        document.getElementById("completeBtn");
-
-      const savedReflection =
-        localStorage.getItem(
-          storageKey(
-            "reflection_" + currentDay
-          )
-        );
-
-
-      if (
-        reflection &&
-        savedReflection
-      ) {
-
-        reflection.value =
-          savedReflection;
-
-      }
-
-
-      if (reflection && !alreadyCompleted) {
-
-        reflection.addEventListener(
-          "input",
-          () => {
-
-            localStorage.setItem(
-              storageKey(
-                "reflection_" + currentDay
-              ),
-              reflection.value
-            );
+            html += `
+              <p>
+                ${section.content}
+              </p>
+            `;
 
           }
+
+          else if (
+            section.type === "list"
+          ) {
+
+            html += `
+              <ul>
+                ${section.content
+                  .map(
+                    item =>
+                      `<li>${item}</li>`
+                  )
+                  .join("")}
+              </ul>
+            `;
+
+          }
+
+          else if (
+            section.type === "example"
+          ) {
+
+            html += `
+              <div class="simple-example">
+                ${section.content}
+              </div>
+            `;
+
+          }
+
+          else if (
+            section.type === "important"
+          ) {
+
+            html += `
+              <div class="important">
+                ${section.content}
+              </div>
+            `;
+
+          }
+
+          else if (
+            section.type === "steps"
+          ) {
+
+            html += `
+              <div class="steps">
+
+                ${section.content
+                  .map(
+                    (item, index) => `
+
+                      <div class="step">
+
+                        <div class="step-num">
+                          ${index + 1}
+                        </div>
+
+                        <div class="step-text">
+                          ${item}
+                        </div>
+
+                      </div>
+
+                    `
+                  )
+                  .join("")}
+
+              </div>
+            `;
+
+          }
+
+          card.innerHTML = html;
+
+          grid.appendChild(card);
+
+        }
+      );
+
+      const answer =
+        currentTaskAnswers[
+          String(currentDay)
+        ] || "";
+
+      document.getElementById(
+        "taskAnswer"
+      ).value = answer;
+
+      document.getElementById(
+        "taskDescription"
+      ).textContent =
+        day.task;
+
+      const completeButton =
+        document.getElementById(
+          "completeDayBtn"
         );
+
+      const nextButton =
+        document.getElementById(
+          "nextDayBtn"
+        );
+
+      const unlockBox =
+        document.getElementById(
+          "unlockBox"
+        );
+
+      if (isDayCompleted(currentDay)) {
+
+        completeButton.disabled = true;
+
+        completeButton.textContent =
+          "Day Already Complete ✓";
+
+        if (
+          currentDay < TOTAL_DAYS
+        ) {
+
+          const nextDay =
+            currentDay + 1;
+
+          if (
+            isDayUnlocked(nextDay)
+          ) {
+
+            nextButton.style.display =
+              "inline-block";
+
+            unlockBox.style.display =
+              "none";
+
+          } else {
+
+            nextButton.style.display =
+              "none";
+
+            unlockBox.style.display =
+              "block";
+
+            startUnlockTimer(nextDay);
+
+          }
+
+        } else {
+
+          nextButton.style.display =
+            "none";
+
+          unlockBox.style.display =
+            "none";
+
+          showAssessment();
+
+        }
+
+      } else {
+
+        completeButton.disabled =
+          false;
+
+        completeButton.textContent =
+          "Day Complete Karo";
+
+        nextButton.style.display =
+          "none";
+
+        unlockBox.style.display =
+          "none";
 
       }
 
+      renderDayList();
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+
+
+    /* =========================================================
+       SAVE TASK
+       ========================================================= */
+
+    document
+      .getElementById("taskAnswer")
+      .addEventListener(
+        "input",
+        function() {
+
+          currentTaskAnswers[
+            String(currentDay)
+          ] = this.value;
+
+          saveLocalProgress();
+
+        }
+      );
+
+
+    /* =========================================================
+       COMPLETE DAY
+       ========================================================= */
+
+    document
+      .getElementById("completeDayBtn")
+      .addEventListener(
+        "click",
+        completeCurrentDay
+      );
+
+
+    function completeCurrentDay() {
+
+      const answer =
+        document
+          .getElementById("taskAnswer")
+          .value
+          .trim();
+
+      if (answer.length < 10) {
+
+        alert(
+          "Pehle practical task ka answer likho.\n\nSimple words mein answer do. Kam se kam 10 characters likhna zaroori hai."
+        );
+
+        document
+          .getElementById("taskAnswer")
+          .focus();
+
+        return;
+      }
+
+      currentTaskAnswers[
+        String(currentDay)
+      ] = answer;
+
+      completedDays[
+        String(currentDay)
+      ] = true;
+
+      lastCompletionTimes[
+        String(currentDay)
+      ] = Date.now();
+
+      saveLocalProgress();
+
+      alert(
+        `Great! Day ${currentDay} complete ho gaya.`
+      );
 
       if (
-        completeBtn &&
-        !alreadyCompleted
+        currentDay === TOTAL_DAYS
       ) {
 
-        completeBtn.addEventListener(
-          "click",
-          completeCurrentDay
-        );
+        renderDay();
 
+        showAssessment();
+
+        return;
       }
 
-
-      updateTimer();
-
-      updateProgressUI();
+      renderDay();
 
     }
 
@@ -2541,376 +2812,211 @@
        TIMER
        ========================================================= */
 
-    function updateTimer() {
+    function startUnlockTimer(nextDay) {
 
-      const timerBox =
-        document.getElementById("timerBox");
+      if (currentTimerInterval) {
 
-      if (!timerBox) {
-        return;
-      }
-
-
-      clearInterval(countdownInterval);
-
-
-      if (isCompleted(currentDay)) {
-
-        if (currentDay < TOTAL_DAYS) {
-
-          timerBox.innerHTML = `
-            Next day unlocks according to
-            the training schedule.
-          `;
-
-        } else {
-
-          timerBox.innerHTML = `
-            <strong>Training Completed</strong>
-            Final assessment is available below.
-          `;
-
-        }
-
-        return;
-      }
-
-
-      if (currentDay === 1) {
-
-        timerBox.innerHTML = `
-          <strong>Day 1 Available</strong>
-          Complete the lesson and practical task.
-        `;
-
-        return;
-
-      }
-
-
-      if (!canUnlockDay(currentDay)) {
-
-        timerBox.innerHTML = `
-          <strong id="countdownText">
-            Locked
-          </strong>
-          Complete the previous day and wait
-          for the required unlock period.
-        `;
-
-
-        countdownInterval =
-          setInterval(() => {
-
-            const remaining =
-              remainingMilliseconds();
-
-
-            if (remaining <= 0) {
-
-              clearInterval(
-                countdownInterval
-              );
-
-              renderSidebar();
-
-              renderCurrentDay();
-
-              return;
-
-            }
-
-
-            const countdownText =
-              document.getElementById(
-                "countdownText"
-              );
-
-
-            if (countdownText) {
-
-              countdownText.textContent =
-                "Unlocks in " +
-                formatCountdown(
-                  remaining
-                );
-
-            }
-
-          }, 1000);
-
-      } else {
-
-        timerBox.innerHTML = `
-          <strong>Day Available</strong>
-          You can complete this training day now.
-        `;
-
-      }
-
-    }
-
-
-    /* =========================================================
-       COMPLETE CURRENT DAY
-       ========================================================= */
-
-    function completeCurrentDay() {
-
-      if (isCompleted(currentDay)) {
-        return;
-      }
-
-
-      if (!canUnlockDay(currentDay)) {
-
-        showToast(
-          "This training day is still locked.",
-          "error"
+        clearInterval(
+          currentTimerInterval
         );
 
-        return;
-
       }
 
-
-      const reflection =
+      const timer =
         document.getElementById(
-          "reflection"
+          "timer"
         );
 
+      function updateTimer() {
 
-      const answer =
-        reflection
-          ? reflection.value.trim()
-          : "";
+        const unlockTime =
+          getUnlockTimeForDay(nextDay);
 
+        const remaining =
+          unlockTime - Date.now();
 
-      if (answer.length < 10) {
+        if (remaining <= 0) {
 
-        showToast(
-          "Please complete the practical task with at least 10 characters.",
-          "error"
-        );
-
-        if (reflection) {
-          reflection.focus();
-        }
-
-        return;
-
-      }
-
-
-      /*
-        Save the practical answer locally
-        for this specific authenticated member.
-      */
-
-      localStorage.setItem(
-        storageKey(
-          "reflection_" + currentDay
-        ),
-        answer
-      );
-
-
-      /*
-        Mark this day as completed.
-      */
-
-      if (!completedDays.includes(currentDay)) {
-
-        completedDays.push(
-          currentDay
-        );
-
-        completedDays =
-          [...new Set(completedDays)]
-            .sort(
-              (a, b) => a - b
-            );
-
-      }
-
-
-      /*
-        IMPORTANT:
-        The 24-hour timer starts exactly
-        when the current day is completed.
-      */
-
-      lastCompletion =
-        Date.now();
-
-
-      if (currentDay < TOTAL_DAYS) {
-
-        currentDay =
-          currentDay + 1;
-
-      }
-
-
-      saveProgress();
-
-      renderSidebar();
-
-      renderCurrentDay();
-
-      updateProgressUI();
-
-
-      showToast(
-        currentDay <= TOTAL_DAYS
-          ? "Training day completed successfully."
-          : "Training completed.",
-        "success"
-      );
-
-
-      /*
-        If Day 10 was just completed,
-        show final assessment.
-      */
-
-      if (
-        completedDays.includes(TOTAL_DAYS)
-      ) {
-
-        setTimeout(() => {
-
-          renderAssessment();
-
-          assessmentSection.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-          });
-
-        }, 250);
-
-      }
-
-    }
-
-
-    /* =========================================================
-       FINAL ASSESSMENT
-       ========================================================= */
-
-    function renderAssessment() {
-
-      if (
-        !completedDays.includes(TOTAL_DAYS)
-      ) {
-
-        assessmentSection.classList.add(
-          "hidden"
-        );
-
-        return;
-
-      }
-
-
-      assessmentSection.classList.remove(
-        "hidden"
-      );
-
-
-      let html = `
-
-        <h2>
-          Final Assessment
-        </h2>
-
-        <p>
-          Answer all 20 questions. You need
-          at least 80% to pass the assessment.
-        </p>
-
-      `;
-
-
-      questions.forEach(
-        (question, index) => {
-
-          html += `
-
-            <div class="question">
-
-              <div class="question-title">
-                ${index + 1}. ${question.q}
-              </div>
-
-          `;
-
-
-          question.options.forEach(
-            (option, optionIndex) => {
-
-              html += `
-
-                <label class="option">
-
-                  <input
-                    type="radio"
-                    name="question_${index}"
-                    value="${optionIndex}"
-                  >
-
-                  <span>
-                    ${option}
-                  </span>
-
-                </label>
-
-              `;
-
-            }
+          clearInterval(
+            currentTimerInterval
           );
 
+          timer.textContent =
+            "UNLOCKED";
 
-          html += `
-            </div>
-          `;
+          renderDayList();
+
+          if (
+            currentDay === nextDay - 1
+          ) {
+            renderDay();
+          }
+
+          return;
+        }
+
+        const totalSeconds =
+          Math.floor(
+            remaining / 1000
+          );
+
+        const hours =
+          Math.floor(
+            totalSeconds / 3600
+          );
+
+        const minutes =
+          Math.floor(
+            (totalSeconds % 3600) / 60
+          );
+
+        const seconds =
+          totalSeconds % 60;
+
+        timer.textContent =
+          `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+
+      }
+
+      updateTimer();
+
+      currentTimerInterval =
+        setInterval(
+          updateTimer,
+          1000
+        );
+
+    }
+
+
+    /* =========================================================
+       NEXT DAY
+       ========================================================= */
+
+    document
+      .getElementById("nextDayBtn")
+      .addEventListener(
+        "click",
+        function() {
+
+          const nextDay =
+            currentDay + 1;
+
+          if (
+            nextDay <= TOTAL_DAYS &&
+            isDayUnlocked(nextDay)
+          ) {
+
+            currentDay =
+              nextDay;
+
+            renderDay();
+
+          } else {
+
+            showLockedMessage(
+              nextDay
+            );
+
+          }
 
         }
       );
 
 
-      html += `
+    /* =========================================================
+       ASSESSMENT
+       ========================================================= */
 
-        <button
-          type="button"
-          class="assessment-submit"
-          id="assessmentSubmit"
-        >
-          Submit Final Assessment
-        </button>
+    function renderAssessmentQuestions() {
 
-        <div
-          id="assessmentResult"
-          class="notice hidden"
-        ></div>
-
-      `;
-
-
-      assessmentSection.innerHTML =
-        html;
-
-
-      document
-        .getElementById(
-          "assessmentSubmit"
-        )
-        .addEventListener(
-          "click",
-          submitAssessment
+      const container =
+        document.getElementById(
+          "questionsContainer"
         );
 
+      container.innerHTML = "";
+
+      assessmentQuestions.forEach(
+        (question, index) => {
+
+          const div =
+            document.createElement("div");
+
+          div.className =
+            "question";
+
+          div.innerHTML = `
+
+            <div class="question-title">
+              ${question.q}
+            </div>
+
+            <div class="options">
+
+              ${question.options
+                .map(
+                  (option, optionIndex) => `
+
+                    <label class="option">
+
+                      <input
+                        type="radio"
+                        name="question_${index}"
+                        value="${optionIndex}"
+                      />
+
+                      <span>
+                        ${option}
+                      </span>
+
+                    </label>
+
+                  `
+                )
+                .join("")}
+
+            </div>
+
+          `;
+
+          container.appendChild(div);
+
+        }
+      );
+
     }
+
+
+    function showAssessment() {
+
+      document
+        .getElementById("dayContent")
+        .style.display = "none";
+
+      const assessment =
+        document.getElementById(
+          "assessment"
+        );
+
+      assessment.classList.add("show");
+
+      renderAssessmentQuestions();
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+
+
+    document
+      .getElementById("submitTestBtn")
+      .addEventListener(
+        "click",
+        submitAssessment
+      );
 
 
     function submitAssessment() {
@@ -2919,8 +3025,7 @@
 
       let unanswered = 0;
 
-
-      questions.forEach(
+      assessmentQuestions.forEach(
         (question, index) => {
 
           const selected =
@@ -2928,15 +3033,12 @@
               `input[name="question_${index}"]:checked`
             );
 
-
           if (!selected) {
 
             unanswered++;
 
             return;
-
           }
-
 
           if (
             Number(selected.value) ===
@@ -2951,96 +3053,99 @@
       );
 
 
-      const percentage =
-        Math.round(
-          (score / questions.length) * 100
-        );
-
-
-      const result =
-        document.getElementById(
-          "assessmentResult"
-        );
-
-
       if (unanswered > 0) {
 
-        result.className =
-          "notice error";
-
-        result.textContent =
-          "Please answer all " +
-          questions.length +
-          " questions before submitting.";
-
-        result.classList.remove(
-          "hidden"
+        alert(
+          `Abhi ${unanswered} question unanswered hain.\n\nPlease sabhi questions ka answer select karo.`
         );
 
         return;
-
       }
 
 
-      localStorage.setItem(
-        storageKey("assessment_score"),
-        String(score)
+      const percentage =
+        Math.round(
+          (score / assessmentQuestions.length) *
+          100
+        );
+
+
+      const resultBox =
+        document.getElementById(
+          "resultBox"
+        );
+
+      resultBox.classList.remove(
+        "result-pass",
+        "result-fail"
       );
 
 
       if (percentage >= 80) {
 
-        result.className =
-          "notice success";
+        resultBox.classList.add(
+          "show",
+          "result-pass"
+        );
 
-        result.innerHTML =
-          `
-            <strong>
-              Assessment Passed ✓
-            </strong>
-            <br>
-            Your score:
-            ${score}/${questions.length}
+        resultBox.innerHTML = `
+
+          <strong>🎉 Congratulations!</strong>
+
+          <br><br>
+
+          Aapne final assessment successfully pass kar liya.
+
+          <br><br>
+
+          Score:
+          <strong>
+            ${score}/${assessmentQuestions.length}
             (${percentage}%)
-          `;
+          </strong>
 
-        result.classList.remove(
-          "hidden"
+          <br><br>
+
+          Aapne IBB ki 10 Day Member Training complete kar li hai.
+
+        `;
+
+        generateCertificate(
+          percentage,
+          score
         );
 
-
-        localStorage.setItem(
-          storageKey("training_completed"),
-          "true"
-        );
-
-
-        showCertificate(
-          percentage
-        );
-
+        document.getElementById(
+          "submitTestBtn"
+        ).disabled = true;
 
       } else {
 
-        result.className =
-          "notice error";
-
-        result.innerHTML =
-          `
-            <strong>
-              Assessment Not Passed
-            </strong>
-            <br>
-            Your score:
-            ${score}/${questions.length}
-            (${percentage}%).
-            You need at least 80% to pass.
-            Please review the training and try again.
-          `;
-
-        result.classList.remove(
-          "hidden"
+        resultBox.classList.add(
+          "show",
+          "result-fail"
         );
+
+        resultBox.innerHTML = `
+
+          <strong>Test abhi pass nahi hua.</strong>
+
+          <br><br>
+
+          Aapka score:
+          <strong>
+            ${score}/${assessmentQuestions.length}
+            (${percentage}%)
+          </strong>
+
+          <br><br>
+
+          Pass hone ke liye 80% chahiye.
+
+          Training ke important points dobara padho
+          aur test phir se attempt karo.
+
+        `;
 
       }
 
@@ -3051,112 +3156,61 @@
        CERTIFICATE
        ========================================================= */
 
-    function showCertificate(score) {
+    function generateCertificate(
+      percentage,
+      score
+    ) {
 
-      certificateSection.classList.remove(
-        "hidden"
-      );
-
-
-      const name =
-        profile?.full_name ||
-        currentUser?.user_metadata?.full_name ||
-        "IBB Member";
-
-
-      const memberId =
-        profile?.member_id ||
-        "IBB Member";
-
-
-      const date =
-        new Date().toLocaleDateString(
-          "en-IN",
-          {
-            day: "2-digit",
-            month: "long",
-            year: "numeric"
-          }
+      const certificate =
+        document.getElementById(
+          "certificate"
         );
 
+      const name =
+        currentProfile?.full_name ||
+        currentUser?.user_metadata?.full_name ||
+        currentUser?.email?.split("@")[0] ||
+        "IBB Member";
 
-      certificateSection.innerHTML = `
+      const memberId =
+        currentProfile?.member_id ||
+        "IBB Member";
 
-        <div class="certificate-icon">
-          🏆
-        </div>
 
-        <div class="eyebrow">
-          Indian Business Bureau
-        </div>
+      document.getElementById(
+        "certificateName"
+      ).textContent =
+        name;
 
-        <h2>
-          Training Completion Certificate
-        </h2>
 
-        <p>
-          This certificate recognises the successful
-          completion of the IBB 10-Day Member Training
-          and final assessment.
-        </p>
+      document.getElementById(
+        "certificateMeta"
+      ).innerHTML = `
 
-        <div class="certificate-name">
-          ${escapeHtml(name)}
-        </div>
+        Member ID:
+        <strong>${memberId}</strong>
 
-        <div class="certificate-meta">
-          Member ID:
-          <strong>
-            ${escapeHtml(memberId)}
-          </strong>
-          <br><br>
-          Assessment Score:
-          <strong>
-            ${score}%
-          </strong>
-          <br><br>
-          Completion Date:
-          <strong>
-            ${date}
-          </strong>
-        </div>
+        <br>
 
-        <button
-          type="button"
-          class="print-btn"
-          onclick="window.print()"
-        >
-          Print Certificate
-        </button>
+        Final Score:
+        <strong>${score}/20 (${percentage}%)</strong>
+
+        <br>
+
+        Training:
+        <strong>10 Day IBB Member Training</strong>
+
+        <br>
+
+        Completion Date:
+        <strong>${new Date().toLocaleDateString("en-IN")}</strong>
 
       `;
 
-    }
 
-
-    function escapeHtml(value) {
-
-      return String(value)
-        .replace(
-          /&/g,
-          "&amp;"
-        )
-        .replace(
-          /</g,
-          "&lt;"
-        )
-        .replace(
-          />/g,
-          "&gt;"
-        )
-        .replace(
-          /"/g,
-          "&quot;"
-        )
-        .replace(
-          /'/g,
-          "&#039;"
-        );
+      certificate.classList.add(
+        "show"
+      );
 
     }
 
@@ -3169,192 +3223,102 @@
       .getElementById("logoutBtn")
       .addEventListener(
         "click",
-        async () => {
+        async function() {
 
-          try {
-
-            await supabaseClient.auth.signOut();
-
-          } catch (error) {
-
-            console.error(
-              "Logout error:",
-              error
-            );
-
+          if (!supabaseClient) {
+            window.location.href =
+              "login.html";
+            return;
           }
 
-          window.location.replace(
-            "login.html"
-          );
+          await supabaseClient.auth.signOut();
+
+          window.location.href =
+            "login.html";
 
         }
       );
 
 
     /* =========================================================
-       AUTHENTICATION
+       MOBILE MENU
        ========================================================= */
 
-    async function initialiseTraining() {
+    document
+      .getElementById("menuBtn")
+      .addEventListener(
+        "click",
+        function() {
 
-      try {
-
-        const {
-          data,
-          error
-        } =
-          await supabaseClient.auth.getSession();
-
-
-        if (error) {
-
-          console.error(
-            "Session error:",
-            error
-          );
-
-          window.location.replace(
-            "login.html"
-          );
-
-          return;
+          document
+            .getElementById("sidebar")
+            .classList.toggle("open");
 
         }
+      );
 
 
-        const session =
-          data?.session;
+    function closeMobileMenu() {
 
-
-        if (!session?.user) {
-
-          window.location.replace(
-            "login.html"
-          );
-
-          return;
-
-        }
-
-
-        currentUser =
-          session.user;
-
-
-        /*
-          Load member-specific progress.
-        */
-
-        loadProgress();
-
-
-        /*
-          Load profile information.
-        */
-
-        await loadProfile();
-
-
-        /*
-          Render everything.
-        */
-
-        renderSidebar();
-
-        renderCurrentDay();
-
-        updateProgressUI();
-
-
-        /*
-          If training was already completed,
-          show assessment.
-        */
-
-        if (
-          completedDays.includes(
-            TOTAL_DAYS
-          )
-        ) {
-
-          renderAssessment();
-
-        }
-
-
-        loadingScreen.classList.add(
-          "hidden"
-        );
-
-
-      } catch (error) {
-
-        console.error(
-          "Training initialisation error:",
-          error
-        );
-
-
-        loadingScreen.innerHTML = `
-
-          <strong>
-            Unable to load training
-          </strong>
-
-          <span style="color:#9aa6b5;font-size:12px;text-align:center;max-width:350px;">
-            Please refresh the page or log in again.
-          </span>
-
-          <button
-            type="button"
-            onclick="window.location.replace('login.html')"
-            style="
-              margin-top:10px;
-              padding:10px 16px;
-              border:1px solid #343d4a;
-              border-radius:9px;
-              background:#111820;
-              color:#fff;
-              cursor:pointer;
-            "
-          >
-            Back to Login
-          </button>
-
-        `;
-
-      }
+      document
+        .getElementById("sidebar")
+        .classList.remove("open");
 
     }
-
-
-    /* =========================================================
-       AUTH STATE LISTENER
-       ========================================================= */
-
-    supabaseClient.auth.onAuthStateChange(
-      (event, session) => {
-
-        if (
-          event === "SIGNED_OUT"
-        ) {
-
-          window.location.replace(
-            "login.html"
-          );
-
-        }
-
-      }
-    );
 
 
     /* =========================================================
        START
        ========================================================= */
 
-    initialiseTraining();
+    async function startTraining() {
+
+      const ready =
+        await initializeSupabase();
+
+      if (!ready) {
+        return;
+      }
+
+      const loggedIn =
+        await loadCurrentUser();
+
+      if (!loggedIn) {
+        return;
+      }
+
+      await loadProfile();
+
+      loadLocalProgress();
+
+      /*
+        Agar kisi reason se currentDay available
+        nahi hai to highest available day open hoga.
+      */
+
+      currentDay =
+        getHighestAvailableDay();
+
+      /*
+        Agar Day 10 complete hai to Day 10
+        screen show hogi aur assessment available rahega.
+      */
+
+      if (
+        isDayCompleted(TOTAL_DAYS)
+      ) {
+
+        currentDay =
+          TOTAL_DAYS;
+
+      }
+
+      renderDay();
+
+    }
+
+
+    startTraining();
 
   </script>
 
