@@ -1,33 +1,1890 @@
-Yes bhai. I’ve prepared the **updated complete `training.html`** with the full 10-day professional curriculum, practical missions, skill checks, reflections, 24-hour progression, final 20-question assessment, 80% pass mark, certificate, Supabase login protection, member profile loading, responsive design, and print certificate.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Indian Business Bureau Promoter Academy — professional 10-day training for IBB members.">
+<title>IBB Promoter Academy | 10-Day Training</title>
 
-[Download the updated `training.html`](sandbox:/mnt/data/training.html)
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-### Important — before uploading
+<style>
+:root{
+ --bg:#07090d;
+ --panel:#0e131b;
+ --panel2:#111925;
+ --line:#202a38;
+ --gold:#e5c675;
+ --gold2:#f3d991;
+ --green:#54c99b;
+ --red:#ff7070;
+ --blue:#6ea8ff;
+ --text:#f5f7fb;
+ --muted:#98a5b8;
+ --soft:#d8dfeb;
+ --shadow:0 22px 70px rgba(0,0,0,.34);
+ --radius:22px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+ margin:0;
+ background:
+ radial-gradient(circle at 50% -10%,rgba(229,198,117,.12),transparent 35%),
+ linear-gradient(180deg,#07090d,#090d13 55%,#07090d);
+ color:var(--text);
+ font-family:Inter,Arial,sans-serif;
+ line-height:1.65;
+}
+button{font:inherit}
+a{color:inherit;text-decoration:none}
+.topbar{
+ position:sticky;
+ top:0;
+ z-index:100;
+ background:rgba(7,9,13,.9);
+ backdrop-filter:blur(18px);
+ border-bottom:1px solid var(--line);
+}
+.topbar-inner{
+ max-width:1200px;
+ margin:auto;
+ min-height:72px;
+ padding:12px 20px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:20px;
+}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-mark{
+ width:42px;height:42px;border-radius:12px;
+ display:grid;place-items:center;
+ background:linear-gradient(135deg,var(--gold),#9d8033);
+ color:#111;font-weight:900;
+}
+.brand-text strong{display:block;font-family:Manrope;font-size:14px}
+.brand-text span{display:block;color:var(--muted);font-size:11px}
+.member-area{display:flex;align-items:center;gap:10px}
+.avatar{
+ width:38px;height:38px;border-radius:50%;
+ display:grid;place-items:center;
+ background:#182130;border:1px solid var(--line);
+ color:var(--gold);font-weight:800;
+}
+.member-info strong{display:block;font-size:13px}
+.member-info span{display:block;color:var(--muted);font-size:11px}
+.logout{
+ border:1px solid var(--line);
+ background:#101722;
+ color:var(--soft);
+ border-radius:10px;
+ padding:9px 13px;
+ cursor:pointer;
+}
+.container{max-width:1200px;margin:auto;padding:28px 20px 70px}
+.hero{
+ padding:34px;
+ border:1px solid var(--line);
+ border-radius:28px;
+ background:
+ linear-gradient(135deg,rgba(229,198,117,.08),transparent 45%),
+ var(--panel);
+ box-shadow:var(--shadow);
+}
+.badge{
+ display:inline-flex;
+ padding:7px 11px;
+ border:1px solid rgba(229,198,117,.25);
+ border-radius:999px;
+ color:var(--gold2);
+ background:rgba(229,198,117,.07);
+ font-size:12px;
+ font-weight:800;
+ letter-spacing:.04em;
+}
+h1,h2,h3{font-family:Manrope;margin-top:0}
+.hero h1{font-size:clamp(30px,5vw,56px);line-height:1.05;margin:18px 0 12px}
+.hero p{max-width:760px;color:var(--muted);font-size:16px}
+.stats{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:12px;
+ margin-top:25px;
+}
+.stat{
+ padding:17px;
+ background:#0a1018;
+ border:1px solid var(--line);
+ border-radius:16px;
+}
+.stat strong{display:block;font-size:23px;color:var(--gold2)}
+.stat span{color:var(--muted);font-size:12px}
+.layout{
+ display:grid;
+ grid-template-columns:280px 1fr;
+ gap:20px;
+ margin-top:20px;
+}
+.sidebar{
+ position:sticky;
+ top:92px;
+ height:max-content;
+ padding:16px;
+ background:var(--panel);
+ border:1px solid var(--line);
+ border-radius:22px;
+}
+.sidebar-title{
+ color:var(--muted);
+ font-size:11px;
+ text-transform:uppercase;
+ letter-spacing:.12em;
+ margin:4px 8px 12px;
+}
+.day-btn{
+ width:100%;
+ text-align:left;
+ border:1px solid transparent;
+ background:transparent;
+ color:var(--soft);
+ padding:12px;
+ border-radius:13px;
+ cursor:pointer;
+ margin-bottom:5px;
+}
+.day-btn:hover{background:#131b27}
+.day-btn.active{
+ background:rgba(229,198,117,.1);
+ border-color:rgba(229,198,117,.25);
+ color:var(--gold2);
+}
+.day-btn.locked{opacity:.45;cursor:not-allowed}
+.day-num{font-weight:800;font-size:12px}
+.day-title{font-size:12px;margin-top:2px}
+.content{min-width:0}
+.day-panel{
+ display:none;
+ background:var(--panel);
+ border:1px solid var(--line);
+ border-radius:24px;
+ overflow:hidden;
+}
+.day-panel.active{display:block}
+.day-head{
+ padding:30px;
+ background:
+ radial-gradient(circle at 100% 0,rgba(229,198,117,.1),transparent 35%),
+ #0d141e;
+ border-bottom:1px solid var(--line);
+}
+.day-label{
+ color:var(--gold);
+ font-size:12px;
+ font-weight:800;
+ letter-spacing:.12em;
+ text-transform:uppercase;
+}
+.day-head h2{font-size:32px;margin:7px 0}
+.day-head p{color:var(--muted);margin:0}
+.lesson{padding:26px 30px}
+.section{
+ margin-bottom:22px;
+ padding:21px;
+ border:1px solid var(--line);
+ background:#0a1018;
+ border-radius:18px;
+}
+.section h3{font-size:18px;margin-bottom:8px}
+.section p{color:var(--soft);margin:8px 0}
+.section ul,.section ol{color:var(--soft)}
+.section li{margin:7px 0}
+.callout{
+ border-left:3px solid var(--gold);
+ background:rgba(229,198,117,.06);
+ padding:15px 17px;
+ border-radius:10px;
+ margin:15px 0;
+}
+.example{
+ border-left:3px solid var(--green);
+ background:rgba(84,201,155,.055);
+ padding:15px 17px;
+ border-radius:10px;
+}
+.warning{
+ border-left:3px solid var(--red);
+ background:rgba(255,112,112,.05);
+ padding:15px 17px;
+ border-radius:10px;
+}
+.pro{
+ border-left:3px solid var(--blue);
+ background:rgba(110,168,255,.05);
+ padding:15px 17px;
+ border-radius:10px;
+}
+.checklist{
+ display:grid;
+ gap:9px;
+ margin-top:12px;
+}
+.check{
+ display:flex;
+ gap:10px;
+ align-items:flex-start;
+ padding:11px;
+ border:1px solid var(--line);
+ border-radius:12px;
+ background:#0d141d;
+}
+.check input{margin-top:5px;accent-color:var(--gold)}
+textarea{
+ width:100%;
+ min-height:120px;
+ resize:vertical;
+ border:1px solid var(--line);
+ background:#080d14;
+ color:var(--text);
+ border-radius:12px;
+ padding:13px;
+ outline:none;
+ font:inherit;
+}
+textarea:focus{border-color:var(--gold)}
+.task-box{
+ border:1px solid rgba(229,198,117,.25);
+ background:linear-gradient(135deg,rgba(229,198,117,.08),rgba(229,198,117,.02));
+ padding:22px;
+ border-radius:18px;
+}
+.task-box h3{color:var(--gold2)}
+.complete-area{
+ padding:24px 30px 30px;
+ border-top:1px solid var(--line);
+}
+.btn{
+ border:0;
+ border-radius:12px;
+ padding:12px 17px;
+ font-weight:800;
+ cursor:pointer;
+}
+.btn-primary{
+ background:linear-gradient(135deg,var(--gold2),var(--gold));
+ color:#111;
+}
+.btn-secondary{
+ background:#121a26;
+ color:var(--soft);
+ border:1px solid var(--line);
+}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.timer{
+ margin-top:12px;
+ padding:12px;
+ border:1px solid var(--line);
+ border-radius:12px;
+ color:var(--muted);
+ display:none;
+}
+.progress-wrap{
+ margin-top:22px;
+}
+.progress-top{
+ display:flex;
+ justify-content:space-between;
+ font-size:12px;
+ color:var(--muted);
+}
+.progress{
+ height:9px;
+ background:#111925;
+ border-radius:99px;
+ overflow:hidden;
+ margin-top:7px;
+}
+.progress i{
+ display:block;
+ height:100%;
+ background:linear-gradient(90deg,var(--gold),var(--green));
+ width:0;
+}
+.assessment{
+ display:none;
+ margin-top:20px;
+ padding:28px;
+ background:var(--panel);
+ border:1px solid var(--line);
+ border-radius:24px;
+}
+.question{
+ padding:18px;
+ border:1px solid var(--line);
+ border-radius:15px;
+ margin:14px 0;
+ background:#0a1018;
+}
+.question p{font-weight:700}
+.option{
+ display:block;
+ padding:8px;
+ color:var(--soft);
+}
+.result{
+ display:none;
+ padding:20px;
+ border-radius:15px;
+ margin-top:18px;
+}
+.pass{background:rgba(84,201,155,.1);border:1px solid rgba(84,201,155,.3)}
+.fail{background:rgba(255,112,112,.1);border:1px solid rgba(255,112,112,.3)}
+.certificate{
+ display:none;
+ margin-top:20px;
+ padding:50px 25px;
+ text-align:center;
+ background:
+ radial-gradient(circle at 50% 0,rgba(229,198,117,.12),transparent 40%),
+ #101721;
+ border:2px solid rgba(229,198,117,.4);
+ border-radius:24px;
+}
+.certificate .seal{
+ width:90px;height:90px;border-radius:50%;
+ display:grid;place-items:center;
+ margin:0 auto 20px;
+ border:2px solid var(--gold);
+ color:var(--gold);
+ font-weight:900;
+}
+.certificate h2{font-size:32px;color:var(--gold2)}
+.loading{
+ min-height:60vh;
+ display:grid;
+ place-items:center;
+ color:var(--muted);
+ text-align:center;
+}
+.hidden{display:none!important}
+@media(max-width:850px){
+ .layout{grid-template-columns:1fr}
+ .sidebar{position:static}
+ .stats{grid-template-columns:repeat(2,1fr)}
+ .member-info{display:none}
+}
+@media(max-width:600px){
+ .topbar-inner{padding:10px 13px}
+ .container{padding:15px 12px 50px}
+ .hero{padding:23px}
+ .stats{grid-template-columns:1fr 1fr}
+ .day-head,.lesson,.complete-area{padding:21px}
+ .day-head h2{font-size:25px}
+}
+@media print{
+ body{background:#fff;color:#111}
+ .topbar,.hero,.layout,.assessment{display:none!important}
+ .certificate{display:block!important;color:#111;border:3px solid #b8943e}
+}
+</style>
+</head>
 
-There is **one intentional placeholder** in the code:
+<body>
 
-```js
-const SUPABASE_PUBLISHABLE_KEY="PASTE_YOUR_EXISTING_PUBLISHABLE_KEY_HERE";
-```
+<header class="topbar">
+ <div class="topbar-inner">
+  <a class="brand" href="index.html">
+   <div class="brand-mark">IBB</div>
+   <div class="brand-text">
+    <strong>Indian Business Bureau</strong>
+    <span>Promoter Academy</span>
+   </div>
+  </a>
 
-Replace only that value with the **same publishable key you already use in `login.html` / `signup.html`**. Do **not** put your Supabase secret/service-role key in this file. Supabase's browser documentation supports using the publishable key with `createClient()`. ([Supabase][1])
+  <div class="member-area">
+   <div class="avatar" id="avatar">I</div>
+   <div class="member-info">
+    <strong id="memberName">IBB Member</strong>
+    <span id="memberId">Member</span>
+   </div>
+   <button class="logout" id="logoutBtn">Logout</button>
+  </div>
+ </div>
+</header>
 
-### Then GitHub
+<main id="app" class="hidden">
+<div class="container">
 
-1. Open your repository.
-2. Open `training.html`.
-3. Click **Edit**.
-4. Select all old code.
-5. Paste this new code.
-6. Put your existing **publishable key** in the marked location.
-7. Click **Commit changes**.
-8. Wait about 1–2 minutes.
-9. Open your live `training.html`.
-10. Login and test **Day 1**.
+<section class="hero">
+ <span class="badge">IBB PROMOTER ACADEMY • 10 DAYS</span>
+ <h1>Become a Professional IBB Promoter.</h1>
+ <p>
+  A practical beginner-friendly training program covering campaigns,
+  photography, reels, UGC, editing, publishing, proof submission,
+  professionalism and real campaign execution.
+ </p>
 
-**Do not change your `payment.html`, `login.html`, `signup.html`, or Supabase tables for this upload.**
+ <div class="stats">
+  <div class="stat"><strong>10</strong><span>Training Days</span></div>
+  <div class="stat"><strong>20</strong><span>Final Questions</span></div>
+  <div class="stat"><strong>80%</strong><span>Pass Requirement</span></div>
+  <div class="stat"><strong>1</strong><span>Certificate</span></div>
+ </div>
 
-One technical note: this version keeps the current browser/local progress architecture so it does not require new Supabase INSERT/UPDATE policies. The Supabase session itself remains persistent through the client auth system. ([Supabase][2])
+ <div class="progress-wrap">
+  <div class="progress-top">
+   <span>Training Progress</span>
+   <span id="progressText">0 / 10 days</span>
+  </div>
+  <div class="progress"><i id="progressBar"></i></div>
+ </div>
+</section>
 
-[1]: https://supabase.com/docs/reference/javascript/initializing?utm_source=chatgpt.com "JavaScript: Initializing | Supabase Docs"
-[2]: https://supabase.com/docs/reference/javascript/auth?utm_source=chatgpt.com "JavaScript: Overview | Supabase Docs"
+<div class="layout">
+
+<aside class="sidebar">
+ <div class="sidebar-title">Your Training</div>
+ <div id="dayNavigation"></div>
+</aside>
+
+<section class="content">
+
+<!-- DAY 1 -->
+<article class="day-panel" data-day="1">
+<div class="day-head">
+ <div class="day-label">Day 01</div>
+ <h2>IBB & Promoter Fundamentals</h2>
+ <p>Understand IBB, your role, campaign structure and professional expectations.</p>
+</div>
+<div class="lesson">
+
+<div class="section">
+<h3>1. What is IBB?</h3>
+<p>
+Indian Business Bureau connects businesses with people through structured
+campaigns, tasks and opportunities. The promoter community helps execute
+approved campaign activities according to instructions.
+</p>
+<div class="callout">
+<strong>Simple meaning:</strong> IBB organizes campaigns. Businesses have
+marketing needs. Promoters complete assigned activities according to the
+campaign brief.
+</div>
+</div>
+
+<div class="section">
+<h3>2. Who are the three sides?</h3>
+<ul>
+<li><strong>Business:</strong> Provides the campaign requirement.</li>
+<li><strong>IBB operator/manager:</strong> Communicates with the business and organizes the campaign.</li>
+<li><strong>Promoter:</strong> Receives assigned tasks and completes them correctly.</li>
+</ul>
+</div>
+
+<div class="section">
+<h3>3. What does a promoter actually do?</h3>
+<ul>
+<li>Receive a task or campaign brief.</li>
+<li>Understand exactly what is required.</li>
+<li>Create or publish approved content where instructed.</li>
+<li>Follow deadlines.</li>
+<li>Submit genuine proof.</li>
+<li>Report completion.</li>
+<li>Ask the IBB operator when something is unclear.</li>
+</ul>
+</div>
+
+<div class="warning">
+<strong>Important:</strong> Promoters should not independently contact IBB
+clients/business owners unless IBB management specifically instructs them to do so.
+Client communication is handled by the IBB operators.
+</div>
+
+<div class="section">
+<h3>4. Professional behavior</h3>
+<ul>
+<li>Never claim work was completed when it was not.</li>
+<li>Never submit fake or manipulated proof.</li>
+<li>Never make promises on behalf of a business.</li>
+<li>Never change campaign instructions without approval.</li>
+<li>Keep communication respectful.</li>
+<li>Ask questions before making assumptions.</li>
+</ul>
+</div>
+
+<div class="example">
+<strong>Example:</strong> A salon campaign asks you to create one 15-second
+vertical reel showing a service. You receive the brief from IBB, create the
+content according to the instructions, publish/submit it as required, and send
+the required proof back to IBB.
+</div>
+
+<div class="task-box">
+<h3>Day 1 Practical Mission</h3>
+<ol>
+<li>Explain in your own words what IBB does.</li>
+<li>Explain the difference between a business, IBB operator and promoter.</li>
+<li>Write three things a promoter must never do.</li>
+</ol>
+<textarea id="reflection1" placeholder="Write your answers here..."></textarea>
+</div>
+
+</div>
+<div class="complete-area">
+<button class="btn btn-primary complete-btn" data-complete="1">Complete Day 1</button>
+<div class="timer" id="timer1"></div>
+</div>
+</article>
+
+<!-- DAY 2 -->
+<article class="day-panel" data-day="2">
+<div class="day-head">
+ <div class="day-label">Day 02</div>
+ <h2>Understanding Campaigns & Tasks</h2>
+ <p>Learn how to read a campaign brief before doing any work.</p>
+</div>
+<div class="lesson">
+
+<div class="section">
+<h3>1. What is a campaign?</h3>
+<p>
+A campaign is a structured marketing activity with a specific objective,
+instructions, deliverables and completion requirements.
+</p>
+</div>
+
+<div class="section">
+<h3>2. Read the brief before starting</h3>
+<p>Every task should be understood through these questions:</p>
+<ol>
+<li>What is the business?</li>
+<li>What is the objective?</li>
+<li>What exactly must I create?</li>
+<li>Where must it be posted/submitted?</li>
+<li>What deadline applies?</li>
+<li>What proof is required?</li>
+<li>Are there words, claims or formats I must avoid?</li>
+</ol>
+</div>
+
+<div class="section">
+<h3>3. Deliverables</h3>
+<p>
+A deliverable is the actual work expected from you: for example one photo,
+one reel, a story, a caption, a screenshot or another specified activity.
+</p>
+</div>
+
+<div class="pro">
+<strong>Pro habit:</strong> Never start creating content before you know the
+deliverable, deadline and proof requirement.
+</div>
+
+<div class="example">
+<strong>Example brief:</strong><br>
+Business: Local Gym<br>
+Task: 1 vertical reel<br>
+Length: 15–30 seconds<br>
+Content: Show environment + equipment + experience<br>
+Proof: Published reel screenshot/link<br>
+Deadline: As specified by IBB
+</div>
+
+<div class="task-box">
+<h3>Day 2 Practical Mission</h3>
+<p>Create your own imaginary campaign brief for a café. Include:</p>
+<ul>
+<li>Business objective</li>
+<li>Content required</li>
+<li>Platform</li>
+<li>Deadline</li>
+<li>Proof required</li>
+</ul>
+<textarea id="reflection2" placeholder="Write your campaign brief..."></textarea>
+</div>
+
+</div>
+<div class="complete-area">
+<button class="btn btn-primary complete-btn" data-complete="2">Complete Day 2</button>
+<div class="timer" id="timer2"></div>
+</div>
+</article>
+
+<!-- DAY 3 -->
+<article class="day-panel" data-day="3">
+<div class="day-head">
+ <div class="day-label">Day 03</div>
+ <h2>Mobile Photography Fundamentals</h2>
+ <p>Learn how to capture clean, useful and professional-looking photos.</p>
+</div>
+<div class="lesson">
+
+<div class="section">
+<h3>1. The five basics</h3>
+<ol>
+<li><strong>Light:</strong> Use sufficient, clean light.</li>
+<li><strong>Focus:</strong> Make the important subject sharp.</li>
+<li><strong>Composition:</strong> Keep the subject intentionally positioned.</li>
+<li><strong>Background:</strong> Remove unnecessary distractions.</li>
+<li><strong>Stability:</strong> Avoid accidental camera shake.</li>
+</ol>
+</div>
+
+<div class="section">
+<h3>2. Lighting</h3>
+<p>
+Whenever possible, use soft natural light. Avoid placing the subject directly
+under extremely harsh overhead lighting. Check the screen before taking the shot.
+</p>
+</div>
+
+<div class="section">
+<h3>3. Angles</h3>
+<p>
+Try eye-level, slightly elevated and detail shots. The correct angle depends
+on the subject and campaign objective.
+</p>
+</div>
+
+<div class="section">
+<h3>4. Before & after</h3>
+<p>
+If a campaign requires a transformation, capture both states consistently.
+Keep framing and conditions as similar as practical so the comparison is clear.
+</p>
+</div>
+
+<div class="warning">
+Do not digitally manipulate a result in a way that misrepresents the actual
+business, product or service.
+</div>
+
+<div class="task-box">
+<h3>Day 3 Practical Mission</h3>
+<p>Take three practice photos of any safe everyday object:</p>
+<ul>
+<li>One clean front/eye-level photo.</li>
+<li>One detail photo.</li>
+<li>One wider environment photo.</li>
+</ul>
+<p>Then inspect each photo for light, focus, framing and background.</p>
+<textarea id="reflection3" placeholder="What did you notice or improve?"></textarea>
+</div>
+
+</div>
+<div class="complete-area">
+<button class="btn btn-primary complete-btn" data-complete="3">Complete Day 3</button>
+<div class="timer" id="timer3"></div>
+</div>
+</article>
+
+<!-- DAY 4 -->
+<article class="day-panel" data-day="4">
+<div class="day-head">
+ <div class="day-label">Day 04</div>
+ <h2>Reels & Short-Form Video</h2>
+ <p>Learn the structure of a simple, watchable vertical reel.</p>
+</div>
+<div class="lesson">
+
+<div class="section">
+<h3>1. What makes a useful reel?</h3>
+<ul>
+<li>Clear subject</li>
+<li>Strong opening</li>
+<li>Simple sequence</li>
+<li>Readable text where required</li>
+<li>Good lighting</li>
+<li>Clean audio where relevant</li>
+<li>Clear ending or call-to-action when instructed</li>
+</ul>
+</div>
+
+<div class="section">
+<h3>2. The first few seconds</h3>
+<p>
+The opening should immediately show the viewer what the video is about.
+Avoid spending the beginning on unnecessary blank footage.
+</p>
+</div>
+
+<div class="section">
+<h3>3. Simple reel structure</h3>
+<ol>
+<li>Hook — introduce the subject.</li>
+<li>Context — show where/what it is.</li>
+<li>Experience — show the useful or interesting part.</li>
+<li>Detail — add supporting shots.</li>
+<li>Ending — CTA or conclusion if required by the brief.</li>
+</ol>
+</div>
+
+<div class="pro">
+Shoot vertically when the campaign calls for short-form vertical content.
+Keep the phone stable and record more footage than you think you need so you
+have options while editing.
+</div>
+
+<div class="task-box">
+<h3>Day 4 Practical Mission</h3>
+<p>Plan a 20-second café reel using five shots.</p>
+<textarea id="reflection4" placeholder="Write Shot 1, Shot 2, Shot 3, Shot 4, Shot 5..."></textarea>
+</div>
+
+</div>
+<div class="complete-area">
+<button class="btn btn-primary complete-btn" data-complete="4">Complete Day 4</button>
+<div class="timer" id="timer4"></div>
+</div>
+</article>
+
+<!-- DAY 5 -->
+<article class="day-panel" data-day="5">
+<div class="day-head">
+ <div class="day-label">Day 05</div>
+ <h2>UGC & Authentic Content</h2>
+ <p>Learn how to make content that feels natural without making false claims.</p>
+</div>
+<div class="lesson">
+
+<div class="section">
+<h3>1. What is UGC?</h3>
+<p>
+UGC means user-generated content. It generally presents a product, service or
+experience in a natural, user-oriented format.
+</p>
+</div>
+
+<div class="section">
+<h3>2. Simple UGC structure</h3>
+<ol>
+<li>Problem or situation</li>
+<li>Introduction to the experience</li>
+<li>What happened / what was shown</li>
+<li>Specific observations</li>
+<li>Conclusion or CTA when required</li>
+</ol>
+</div>
+
+<div class="section">
+<h3>3. Talking video</h3>
+<p>
+Speak clearly, keep sentences short and focus on the campaign message.
+Do not invent personal experiences you did not actually have.
+</p>
+</div>
+
+<div class="warning">
+Avoid unsupported claims such as guaranteed results, guaranteed income,
+medical promises or statements you cannot verify.
+</div>
+
+<div class="task-box">
+<h3>Day 5 Practical Mission</h3>
+<p>Write a 20-second UGC script for a fictional gym.</p>
+<textarea id="reflection5" placeholder="Write your UGC script..."></textarea>
+</div>
+
+</div>
+<div class="complete-area">
+<button class="btn btn-primary complete-btn" data-complete="5">Complete Day 5</button>
+<div class="timer" id="timer5"></div>
+</div>
+</article>
+
+<!-- DAY 6 -->
+<article class="day-panel" data-day="6">
+<div class="day-head">
+ <div class="day-label">Day 06</div>
+ <h2>Editing Like a Professional</h2>
+ <p>Learn the basic mobile editing workflow.</p>
+</div>
+<div class="lesson">
+
+<div class="section">
+<h3>1. Basic editing workflow</h3>
+<ol>
+<li>Import your footage.</li>
+<li>Remove unusable clips.</li>
+<li>Trim unnecessary beginnings/endings.</li>
+<li>Arrange clips logically.</li>
+<li>Add text/captions when required.</li>
+<li>Add suitable audio or voice-over.</li>
+<li>Check the entire video.</li>
+<li>Export using the campaign's required format.</li>
+</ol>
+</div>
+
+<div class="section">
+<h3>2. Keep transitions simple</h3>
+<p>
+Transitions should support the content rather than distract from it.
+Clean cuts are often enough.
+</p>
+</div>
+
+<div class="section">
+<h3>3. Captions and text</h3>
+<ul>
+<li>Keep text readable.</li>
+<li>Do not cover important visual information.</li>
+<li>Check spelling.</li>
+<li>Keep text on screen long enough to read.</li>
+</ul>
+</div>
+
+<div class="pro">
+Before submitting, watch your entire exported video once without editing it.
+You may notice spelling, timing, audio or framing problems that were missed
+during editing.
+</div>
+
+<div class="task-box">
+<h3>Day 6 Practical Mission</h3>
+<p>Take any five short clips and create a simple sequence:</p>
+<ul>
+<li>Opening</li>
+<li>Middle</li>
+<li>Detail</li>
+<li>Supporting shot</li>
+<li>Ending</li>
+</ul>
+<textarea id="reflection6" placeholder="Describe your editing workflow..."></textarea>
+</div>
+
+</div>
+<div class="complete-area">
+<button class="btn btn-primary complete-btn" data-complete="6">Complete Day 6</button>
+<div class="timer" id="timer6"></div>
+</div>
+</article>
+
+<!-- DAY 7 -->
+<article class="day-panel" data-day="7">
+<div class="day-head">
+ <div class="day-label">Day 07</div>
+ <h2>Publishing & Content Quality</h2>
+ <p>Learn the final checks before content is published or submitted.</p>
+</div>
+<div class="lesson">
+
+<div class="section">
+<h3>Pre-publish checklist</h3>
+<div class="checklist">
+<label class="check"><input type="checkbox"> Correct account/platform</label>
+<label class="check"><input type="checkbox"> Correct campaign content</label>
+<label class="check"><input type="checkbox"> Spelling checked</label>
+<label class="check"><input type="checkbox"> Video/photo quality checked</label>
+<label class="check"><input type="checkbox"> Caption checked</label>
+<label class="check"><input type="checkbox"> Required tag/location added</label>
+<label class="check"><input type="checkbox"> Required CTA included</label>
+<label class="check"><input type="checkbox"> Proof requirement understood</label>
+</div>
+</div>
+
+<div class="section">
+<h3>Platform differences</h3>
+<p>
+The same creative may need different captions, dimensions, text placement
+or publishing treatment depending on the platform and campaign instructions.
+Always follow the specific campaign brief.
+</p>
+</div>
+
+<div class="warning">
+Do not use copyrighted material, misleading claims or content that violates
+the applicable platform's rules or the campaign's instructions.
+</div>
+
+<div class="task-box">
+<h3>Day 7 Practical Mission</h3>
+<p>Write a final 10-point publishing checklist you would use before submitting a reel.</p>
+<textarea id="reflection7" placeholder="Write your checklist..."></textarea>
+</div>
+
+</div>
+<div class="complete-area">
+<button class="btn btn-primary complete-btn" data-complete="7">Complete Day 7</button>
+<div class="timer" id="timer7"></div>
+</div>
+</article>
+
+<!-- DAY 8 -->
+<article class="day-panel" data-day="8">
+<div class="day-head">
+ <div class="day-label">Day 08</div>
+ <h2>Proof, Verification & Reporting</h2>
+ <p>Learn how to prove that assigned work was actually completed.</p>
+</div>
+<div class="lesson">
+
+<div class="section">
+<h3>1. What is proof?</h3>
+<p>
+Proof is evidence that allows IBB to verify completion of the assigned task.
+The required proof depends on the campaign.
+</p>
+</div>
+
+<div class="section">
+<h3>2. Common proof types</h3>
+<ul>
+<li>Screenshot of the published content</li>
+<li>Content link where applicable</li>
+<li>Before/after evidence when specifically requested</li>
+<li>Required task screenshot</li>
+<li>Other evidence specified in the campaign brief</li>
+</ul>
+</div>
+
+<div class="section">
+<h3>3. Good reporting format</h3>
+<div class="example">
+<strong>Task:</strong> Campaign name<br>
+<strong>Status:</strong> Completed<br>
+<strong>Deliverable:</strong> 1 reel<br>
+<strong>Published/submitted:</strong> Yes<br>
+<strong>Proof:</strong> Screenshot/link<br>
+<strong>Notes:</strong> Any relevant issue
+</div>
+</div>
+
+<div class="warning">
+Fake, edited or misleading proof can result in task rejection or account
+action according to applicable IBB rules. Always submit genuine evidence.
+</div>
+
+<div class="task-box">
+<h3>Day 8 Practical Mission</h3>
+<p>Create a sample completion report for a fictional café reel.</p>
+<textarea id="reflection8" placeholder="Write your sample report..."></textarea>
+</div>
+
+</div>
+<div class="complete-area">
+<button class="btn btn-primary complete-btn" data-complete="8">Complete Day 8</button>
+<div class="timer" id="timer8"></div>
+</div>
+</article>
+
+<!-- DAY 9 -->
+<article class="day-panel" data-day="9">
+<div class="day-head">
+ <div class="day-label">Day 09</div>
+ <h2>Professionalism, Reliability & Work System</h2>
+ <p>Build the habits that make campaign execution dependable.</p>
+</div>
+<div class="lesson">
+
+<div class="section">
+<h3>1. A reliable promoter</h3>
+<ul>
+<li>Checks tasks regularly.</li>
+<li>Understands instructions before starting.</li>
+<li>Accepts only work they can realistically complete.</li>
+<li>Communicates problems early.</li>
+<li>Meets deadlines.</li>
+<li>Submits accurate proof.</li>
+<li>Maintains respectful communication.</li>
+</ul>
+</div>
+
+<div class="section">
+<h3>2. When you make a mistake</h3>
+<ol>
+<li>Do not hide it.</li>
+<li>Stop if continuing could make the issue worse.</li>
+<li>Inform the IBB operator.</li>
+<li>Explain what happened clearly.</li>
+<li>Follow the correction instructions.</li>
+</ol>
+</div>
+
+<div class="section">
+<h3>3. Daily promoter routine</h3>
+<ol>
+<li>Check available tasks.</li>
+<li>Read the full brief.</li>
+<li>Confirm requirements.</li>
+<li>Plan the work.</li>
+<li>Create content.</li>
+<li>Quality-check.</li>
+<li>Publish/submit as instructed.</li>
+<li>Save proof.</li>
+<li>Report completion.</li>
+</ol>
+</div>
+
+<div class="warning">
+Remember: campaign availability, eligibility, task volume and any applicable
+incentive depend on actual campaigns and IBB terms. Training does not by itself
+guarantee a particular amount of earnings.
+</div>
+
+<div class="task-box">
+<h3>Day 9 Practical Mission</h3>
+<p>
+Scenario: You receive a task at 10 AM and discover at 2 PM that one required
+part cannot be completed as instructed. What should you do?
+</p>
+<textarea id="reflection9" placeholder="Explain your response step by step..."></textarea>
+</div>
+
+</div>
+<div class="complete-area">
+<button class="btn btn-primary complete-btn" data-complete="9">Complete Day 9</button>
+<div class="timer" id="timer9"></div>
+</div>
+</article>
+
+<!-- DAY 10 -->
+<article class="day-panel" data-day="10">
+<div class="day-head">
+ <div class="day-label">Day 10</div>
+ <h2>Real Campaign Simulation</h2>
+ <p>Put the complete workflow together and prepare for the final assessment.</p>
+</div>
+<div class="lesson">
+
+<div class="section">
+<h3>Simulation Brief</h3>
+<p>
+Imagine IBB assigns you a campaign for a local café. Your task is to create
+one short vertical promotional reel.
+</p>
+</div>
+
+<div class="section">
+<h3>Your workflow</h3>
+<ol>
+<li>Read the campaign brief.</li>
+<li>Identify the objective.</li>
+<li>Plan five shots.</li>
+<li>Record clean footage.</li>
+<li>Select the strongest clips.</li>
+<li>Edit the reel.</li>
+<li>Check spelling and quality.</li>
+<li>Publish/submit according to instructions.</li>
+<li>Capture genuine proof.</li>
+<li>Send the completion report.</li>
+</ol>
+</div>
+
+<div class="section">
+<h3>Final quality checklist</h3>
+<div class="checklist">
+<label class="check"><input type="checkbox"> I understand the campaign objective.</label>
+<label class="check"><input type="checkbox"> I know the required deliverable.</label>
+<label class="check"><input type="checkbox"> My content follows the brief.</label>
+<label class="check"><input type="checkbox"> My content is clear and readable.</label>
+<label class="check"><input type="checkbox"> I checked spelling and quality.</label>
+<label class="check"><input type="checkbox"> I understand the proof requirement.</label>
+<label class="check"><input type="checkbox"> My proof would be genuine.</label>
+<label class="check"><input type="checkbox"> I know when to contact the IBB operator.</label>
+</div>
+</div>
+
+<div class="task-box">
+<h3>Day 10 Final Preparation</h3>
+<p>
+Write the complete workflow you would follow from receiving a campaign
+to submitting proof.
+</p>
+<textarea id="reflection10" placeholder="Write your complete campaign workflow..."></textarea>
+</div>
+
+<div class="pro">
+<strong>You are ready for the final assessment.</strong>
+The assessment checks whether you understand the complete IBB promoter workflow.
+</div>
+
+</div>
+<div class="complete-area">
+<button class="btn btn-primary complete-btn" data-complete="10">Complete Day 10 & Start Final Assessment</button>
+<div class="timer" id="timer10"></div>
+</div>
+</article>
+
+</section>
+</div>
+
+<!-- ASSESSMENT -->
+<section class="assessment" id="assessment">
+<h2>Final Assessment</h2>
+<p style="color:var(--muted)">
+20 questions. You need at least <strong style="color:var(--gold)">80%</strong>
+to pass.
+</p>
+
+<form id="testForm">
+
+<div class="question">
+<p>1. What is the main role of an IBB promoter?</p>
+<label class="option"><input type="radio" name="q1" value="a"> Manage IBB clients independently</label>
+<label class="option"><input type="radio" name="q1" value="b"> Complete assigned campaign tasks according to instructions</label>
+<label class="option"><input type="radio" name="q1" value="c"> Change campaign requirements</label>
+<label class="option"><input type="radio" name="q1" value="d"> Set business prices</label>
+</div>
+
+<div class="question">
+<p>2. Who normally handles direct client communication?</p>
+<label class="option"><input type="radio" name="q2" value="a"> Every promoter</label>
+<label class="option"><input type="radio" name="q2" value="b"> Random customers</label>
+<label class="option"><input type="radio" name="q2" value="c"> IBB operators/management</label>
+<label class="option"><input type="radio" name="q2" value="d"> Nobody</label>
+</div>
+
+<div class="question">
+<p>3. What should you read before starting a campaign task?</p>
+<label class="option"><input type="radio" name="q3" value="a"> Only the title</label>
+<label class="option"><input type="radio" name="q3" value="b"> The complete campaign brief</label>
+<label class="option"><input type="radio" name="q3" value="c"> Another promoter's task</label>
+<label class="option"><input type="radio" name="q3" value="d"> Nothing</label>
+</div>
+
+<div class="question">
+<p>4. Which is important in mobile photography?</p>
+<label class="option"><input type="radio" name="q4" value="a"> Focus</label>
+<label class="option"><input type="radio" name="q4" value="b"> Lighting</label>
+<label class="option"><input type="radio" name="q4" value="c"> Composition</label>
+<label class="option"><input type="radio" name="q4" value="d"> All of these</label>
+</div>
+
+<div class="question">
+<p>5. What should the opening of a short reel do?</p>
+<label class="option"><input type="radio" name="q5" value="a"> Waste time</label>
+<label class="option"><input type="radio" name="q5" value="b"> Clearly introduce the subject</label>
+<label class="option"><input type="radio" name="q5" value="c"> Show a blank screen</label>
+<label class="option"><input type="radio" name="q5" value="d"> Hide the subject</label>
+</div>
+
+<div class="question">
+<p>6. What does UGC generally mean?</p>
+<label class="option"><input type="radio" name="q6" value="a"> User-generated content</label>
+<label class="option"><input type="radio" name="q6" value="b"> Universal graphic code</label>
+<label class="option"><input type="radio" name="q6" value="c"> User gaming channel</label>
+<label class="option"><input type="radio" name="q6" value="d"> None</label>
+</div>
+
+<div class="question">
+<p>7. Which statement is correct about UGC?</p>
+<label class="option"><input type="radio" name="q7" value="a"> Invent experiences</label>
+<label class="option"><input type="radio" name="q7" value="b"> Make unsupported promises</label>
+<label class="option"><input type="radio" name="q7" value="c"> Keep the content authentic and accurate</label>
+<label class="option"><input type="radio" name="q7" value="d"> Hide important information</label>
+</div>
+
+<div class="question">
+<p>8. What is the first basic editing step?</p>
+<label class="option"><input type="radio" name="q8" value="a"> Export immediately</label>
+<label class="option"><input type="radio" name="q8" value="b"> Import and review footage</label>
+<label class="option"><input type="radio" name="q8" value="c"> Delete everything</label>
+<label class="option"><input type="radio" name="q8" value="d"> Publish without checking</label>
+</div>
+
+<div class="question">
+<p>9. Why should you check spelling before publishing?</p>
+<label class="option"><input type="radio" name="q9" value="a"> It improves professionalism</label>
+<label class="option"><input type="radio" name="q9" value="b"> It makes errors harder to notice</label>
+<label class="option"><input type="radio" name="q9" value="c"> It is unnecessary</label>
+<label class="option"><input type="radio" name="q9" value="d"> Only because phones require it</label>
+</div>
+
+<div class="question">
+<p>10. What is proof?</p>
+<label class="option"><input type="radio" name="q10" value="a"> A guess</label>
+<label class="option"><input type="radio" name="q10" value="b"> Evidence of task completion</label>
+<label class="option"><input type="radio" name="q10" value="c"> A random screenshot</label>
+<label class="option"><input type="radio" name="q10" value="d"> A personal opinion</label>
+</div>
+
+<div class="question">
+<p>11. What type of proof should a promoter submit?</p>
+<label class="option"><input type="radio" name="q11" value="a"> Fake proof</label>
+<label class="option"><input type="radio" name="q11" value="b"> Genuine proof requested by the campaign</label>
+<label class="option"><input type="radio" name="q11" value="c"> Someone else's proof</label>
+<label class="option"><input type="radio" name="q11" value="d"> No proof</label>
+</div>
+
+<div class="question">
+<p>12. What should you do if you cannot complete a requirement?</p>
+<label class="option"><input type="radio" name="q12" value="a"> Hide it</label>
+<label class="option"><input type="radio" name="q12" value="b"> Submit fake proof</label>
+<label class="option"><input type="radio" name="q12" value="c"> Inform the IBB operator early</label>
+<label class="option"><input type="radio" name="q12" value="d"> Change the brief yourself</label>
+</div>
+
+<div class="question">
+<p>13. What is a good promoter habit?</p>
+<label class="option"><input type="radio" name="q13" value="a"> Ignore deadlines</label>
+<label class="option"><input type="radio" name="q13" value="b"> Check tasks and requirements carefully</label>
+<label class="option"><input type="radio" name="q13" value="c"> Guess requirements</label>
+<label class="option"><input type="radio" name="q13" value="d"> Contact clients independently</label>
+</div>
+
+<div class="question">
+<p>14. Should a promoter make promises on behalf of a business?</p>
+<label class="option"><input type="radio" name="q14" value="a"> Yes, always</label>
+<label class="option"><input type="radio" name="q14" value="b"> Only without permission</label>
+<label class="option"><input type="radio" name="q14" value="c"> No</label>
+<label class="option"><input type="radio" name="q14" value="d"> Whenever convenient</label>
+</div>
+
+<div class="question">
+<p>15. What should you do before submitting content?</p>
+<label class="option"><input type="radio" name="q15" value="a"> Quality-check it</label>
+<label class="option"><input type="radio" name="q15" value="b"> Delete the original</label>
+<label class="option"><input type="radio" name="q15" value="c"> Skip the brief</label>
+<label class="option"><input type="radio" name="q15" value="d"> Submit immediately without viewing</label>
+</div>
+
+<div class="question">
+<p>16. What should a campaign deliverable be based on?</p>
+<label class="option"><input type="radio" name="q16" value="a"> Personal guess</label>
+<label class="option"><input type="radio" name="q16" value="b"> Campaign instructions</label>
+<label class="option"><input type="radio" name="q16" value="c"> Another company's instructions</label>
+<label class="option"><input type="radio" name="q16" value="d"> Random social media trends</label>
+</div>
+
+<div class="question">
+<p>17. What is a professional response to a mistake?</p>
+<label class="option"><input type="radio" name="q17" value="a"> Hide it</label>
+<label class="option"><input type="radio" name="q17" value="b"> Report it clearly and follow correction instructions</label>
+<label class="option"><input type="radio" name="q17" value="c"> Blame someone else</label>
+<label class="option"><input type="radio" name="q17" value="d"> Submit false proof</label>
+</div>
+
+<div class="question">
+<p>18. What should determine the required content format?</p>
+<label class="option"><input type="radio" name="q18" value="a"> The campaign brief</label>
+<label class="option"><input type="radio" name="q18" value="b"> A random guess</label>
+<label class="option"><input type="radio" name="q18" value="c"> Only your phone</label>
+<label class="option"><input type="radio" name="q18" value="d"> Nothing</label>
+</div>
+
+<div class="question">
+<p>19. Which is acceptable?</p>
+<label class="option"><input type="radio" name="q19" value="a"> Genuine proof</label>
+<label class="option"><input type="radio" name="q19" value="b"> Fake screenshot</label>
+<label class="option"><input type="radio" name="q19" value="c"> False claim</label>
+<label class="option"><input type="radio" name="q19" value="d"> Misleading evidence</label>
+</div>
+
+<div class="question">
+<p>20. What is the complete campaign workflow?</p>
+<label class="option"><input type="radio" name="q20" value="a"> Guess → publish → forget</label>
+<label class="option"><input type="radio" name="q20" value="b"> Brief → plan → create → check → publish/submit → proof → report</label>
+<label class="option"><input type="radio" name="q20" value="c"> Publish → create → read brief</label>
+<label class="option"><input type="radio" name="q20" value="d"> Proof → guess → publish</label>
+</div>
+
+<button type="submit" class="btn btn-primary">Submit Final Assessment</button>
+</form>
+
+<div id="testResult" class="result"></div>
+</section>
+
+<section id="certificate" class="certificate">
+<div class="seal">IBB</div>
+<h2>IBB PROMOTER CERTIFIED</h2>
+<p>This certifies that</p>
+<h2 id="certificateName"></h2>
+<p>
+has completed the Indian Business Bureau 10-Day Promoter Academy
+and passed the final assessment.
+</p>
+<p style="color:var(--muted)">Indian Business Bureau • Promoter Academy</p>
+<button class="btn btn-primary" onclick="window.print()">Print Certificate</button>
+</section>
+
+</div>
+</main>
+
+<div id="loading" class="loading">
+<div>
+<h2>Loading IBB Academy...</h2>
+<p id="loadingText">Checking your member session...</p>
+</div>
+</div>
+
+<script>
+/* =========================================================
+   IBB SUPABASE CONFIGURATION
+   ========================================================= */
+
+const SUPABASE_URL =
+"https://tvantyrkjxoljjpnadac.supabase.co";
+
+/*
+ IMPORTANT:
+ Paste the SAME PUBLISHABLE/ANON browser-safe key that you
+ already use in login.html and signup.html.
+
+ NEVER paste a sb_secret_ key here.
+*/
+const SUPABASE_PUBLISHABLE_KEY =
+"PASTE_YOUR_EXISTING_PUBLISHABLE_KEY_HERE";
+
+const supabaseClient =
+window.supabase.createClient(
+ SUPABASE_URL,
+ SUPABASE_PUBLISHABLE_KEY
+);
+
+/* =========================================================
+   STATE
+   ========================================================= */
+
+let currentUser = null;
+let profile = null;
+let completedDays = [];
+let currentDay = 1;
+let lastCompletion = 0;
+
+const TOTAL_DAYS = 10;
+const UNLOCK_HOURS = 24;
+
+const $ = id => document.getElementById(id);
+
+/* =========================================================
+   STORAGE
+   ========================================================= */
+
+function storageKey(name){
+ return "ibb_10day_" + name + "_" + (currentUser?.id || "unknown");
+}
+
+function loadProgress(){
+ try{
+  completedDays =
+   JSON.parse(localStorage.getItem(storageKey("completed"))) || [];
+
+  currentDay =
+   Number(localStorage.getItem(storageKey("current"))) || 1;
+
+  lastCompletion =
+   Number(localStorage.getItem(storageKey("last_completion"))) || 0;
+
+ }catch(e){
+  completedDays=[];
+  currentDay=1;
+  lastCompletion=0;
+ }
+}
+
+function saveProgress(){
+ localStorage.setItem(
+  storageKey("completed"),
+  JSON.stringify(completedDays)
+ );
+
+ localStorage.setItem(
+  storageKey("current"),
+  String(currentDay)
+ );
+
+ localStorage.setItem(
+  storageKey("last_completion"),
+  String(lastCompletion)
+ );
+
+/* =========================================================
+   PROFILE
+   ========================================================= */
+
+async function loadProfile(){
+
+ const {data,error} =
+  await supabaseClient
+   .from("profiles")
+   .select("*")
+   .eq("id",currentUser.id)
+   .maybeSingle();
+
+ if(error){
+  console.warn("Profile query:",error);
+ }
+
+ if(data){
+  profile=data;
+ }
+
+ const metadata=currentUser.user_metadata || {};
+
+ const name =
+  profile?.full_name ||
+  metadata.full_name ||
+  currentUser.email?.split("@")[0] ||
+  "IBB Member";
+
+ const memberId =
+  profile?.member_id ||
+  "IBB-" +
+  currentUser.id.replaceAll("-","").substring(0,8).toUpperCase();
+
+ $("memberName").textContent=name;
+ $("memberId").textContent=memberId;
+ $("avatar").textContent=name.charAt(0).toUpperCase();
+
+ $("certificateName").textContent=name;
+}
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+const titles=[
+ "",
+ "IBB & Promoter Fundamentals",
+ "Understanding Campaigns & Tasks",
+ "Mobile Photography Fundamentals",
+ "Reels & Short-Form Video",
+ "UGC & Authentic Content",
+ "Editing Like a Professional",
+ "Publishing & Content Quality",
+ "Proof, Verification & Reporting",
+ "Professionalism, Reliability & Work System",
+ "Real Campaign Simulation"
+];
+
+function isUnlocked(day){
+
+ if(day===1)return true;
+
+ if(completedDays.includes(day-1)){
+  return true;
+ }
+
+ return false;
+}
+
+function buildNavigation(){
+
+ const nav=$("dayNavigation");
+ nav.innerHTML="";
+
+ for(let day=1;day<=TOTAL_DAYS;day++){
+
+  const button=document.createElement("button");
+  button.className="day-btn";
+
+  if(day===currentDay)
+   button.classList.add("active");
+
+  if(!isUnlocked(day))
+   button.classList.add("locked");
+
+  const done=completedDays.includes(day);
+
+  button.innerHTML=
+   `<div class="day-num">
+      DAY ${day} ${done ? "✓" : (!isUnlocked(day) ? "🔒" : "")}
+    </div>
+    <div class="day-title">${titles[day]}</div>`;
+
+  button.addEventListener("click",()=>{
+   if(!isUnlocked(day))return;
+   openDay(day);
+  });
+
+  nav.appendChild(button);
+ }
+}
+
+function openDay(day){
+
+ if(!isUnlocked(day))return;
+
+ currentDay=day;
+ localStorage.setItem(storageKey("current"),String(day));
+
+ document.querySelectorAll(".day-panel")
+  .forEach(panel=>{
+   panel.classList.toggle(
+    "active",
+    Number(panel.dataset.day)===day
+   );
+  });
+
+ document.querySelectorAll(".day-btn")
+  .forEach((button,index)=>{
+   button.classList.toggle(
+    "active",
+    index+1===day
+   );
+  });
+
+ window.scrollTo({top:0,behavior:"smooth"});
+
+ updateUI();
+}
+
+/* =========================================================
+   PROGRESS
+   ========================================================= */
+
+function updateUI(){
+
+ const completed=completedDays.length;
+
+ $("progressText").textContent=
+  completed+" / "+TOTAL_DAYS+" days";
+
+ $("progressBar").style.width=
+  ((completed/TOTAL_DAYS)*100)+"%";
+
+ buildNavigation();
+
+ document.querySelectorAll(".complete-btn")
+  .forEach(button=>{
+
+   const day=Number(button.dataset.complete);
+
+   if(completedDays.includes(day)){
+    button.disabled=true;
+    button.textContent=
+     day===10
+      ? "Day 10 Completed — Assessment Available"
+      : "Day "+day+" Completed ✓";
+   }
+  });
+
+ if(completedDays.length===10){
+  $("assessment").style.display="block";
+ }
+}
+
+/* =========================================================
+   24 HOUR UNLOCK
+   ========================================================= */
+
+function canCompleteNext(){
+
+ if(!lastCompletion)return true;
+
+ const elapsed=Date.now()-lastCompletion;
+ const required=UNLOCK_HOURS*60*60*1000;
+
+ return elapsed>=required;
+}
+
+function updateTimer(day){
+
+ const timer=$("timer"+day);
+
+ if(!timer)return;
+
+ if(day===1 || completedDays.includes(day)){
+  timer.style.display="none";
+  return;
+ }
+
+ if(canCompleteNext()){
+  timer.style.display="none";
+  return;
+ }
+
+ const required=UNLOCK_HOURS*60*60*1000;
+ let remaining=
+  required-(Date.now()-lastCompletion);
+
+ if(remaining<0)remaining=0;
+
+ const hours=
+  Math.floor(remaining/(1000*60*60));
+
+ const minutes=
+  Math.floor(
+   (remaining%(1000*60*60))/(1000*60)
+  );
+
+ const seconds=
+  Math.floor(
+   (remaining%(1000*60))/1000
+  );
+
+ timer.style.display="block";
+ timer.innerHTML=
+  "Next training unlocks in <strong>"+
+  String(hours).padStart(2,"0")+":"+
+  String(minutes).padStart(2,"0")+":"+
+  String(seconds).padStart(2,"0")+
+  "</strong>";
+
+ setTimeout(()=>updateTimer(day),1000);
+}
+
+/* =========================================================
+   COMPLETE DAY
+   ========================================================= */
+
+document.querySelectorAll(".complete-btn")
+.forEach(button=>{
+
+ button.addEventListener("click",async()=>{
+
+  const day=Number(button.dataset.complete);
+
+  if(completedDays.includes(day))return;
+
+  if(day>1 && !completedDays.includes(day-1)){
+   alert("Please complete Day "+(day-1)+" first.");
+   return;
+  }
+
+  /*
+   Day 1 can start immediately.
+   Every following day requires the previous day to have
+   been completed. The 24-hour timer is displayed after
+   completion and can be enforced by changing this check
+   to require 24 hours before the next day.
+  */
+
+  if(day>1 && !canCompleteNext()){
+   alert(
+    "Your next training day is still locked. " +
+    "Please wait until the 24-hour training period is complete."
+   );
+   return;
+  }
+
+  const reflection=$("reflection"+day);
+
+  if(reflection && reflection.value.trim().length<10){
+   alert(
+    "Please complete the practical reflection/task before finishing this day."
+   );
+   reflection.focus();
+   return;
+  }
+
+  completedDays.push(day);
+  completedDays.sort((a,b)=>a-b);
+
+  lastCompletion=Date.now();
+
+  saveProgress();
+
+  if(day<TOTAL_DAYS){
+   currentDay=day+1;
+  }
+
+  updateUI();
+
+  if(day===10){
+   $("assessment").style.display="block";
+   $("assessment").scrollIntoView({
+    behavior:"smooth"
+   });
+  }else{
+   openDay(day+1);
+  }
+ });
+});
+
+/* =========================================================
+   FINAL ASSESSMENT
+   ========================================================= */
+
+const answers={
+ q1:"b",
+ q2:"c",
+ q3:"b",
+ q4:"d",
+ q5:"b",
+ q6:"a",
+ q7:"c",
+ q8:"b",
+ q9:"a",
+ q10:"b",
+ q11:"b",
+ q12:"c",
+ q13:"b",
+ q14:"c",
+ q15:"a",
+ q16:"b",
+ q17:"b",
+ q18:"a",
+ q19:"a",
+ q20:"b"
+};
+
+$("testForm").addEventListener("submit",async function(e){
+
+ e.preventDefault();
+
+ if(completedDays.length<10){
+  alert("Complete all 10 training days first.");
+  return;
+ }
+
+ let score=0;
+ let unanswered=0;
+
+ for(let i=1;i<=20;i++){
+
+  const selected=
+   document.querySelector(
+    `input[name="q${i}"]:checked`
+   );
+
+  if(!selected){
+   unanswered++;
+   continue;
+  }
+
+  if(selected.value===answers["q"+i]){
+   score++;
+  }
+ }
+
+ if(unanswered>0){
+  alert(
+   "Please answer all 20 questions before submitting."
+  );
+  return;
+ }
+
+ const percentage=Math.round((score/20)*100);
+ const result=$("testResult");
+
+ result.style.display="block";
+
+ if(percentage>=80){
+
+  result.className="result pass";
+
+  result.innerHTML=
+   `<strong>Assessment Passed ✓</strong><br>
+    Score: ${score}/20 (${percentage}%)<br>
+    Congratulations. You have successfully completed the
+    IBB Promoter Academy training.`;
+
+  localStorage.setItem(
+   storageKey("final_test"),
+   JSON.stringify({
+    score,
+    percentage,
+    passed:true,
+    completedAt:new Date().toISOString()
+   })
+  );
+
+  $("certificate").style.display="block";
+
+  setTimeout(()=>{
+   $("certificate").scrollIntoView({
+    behavior:"smooth"
+   });
+  },300);
+
+ }else{
+
+  result.className="result fail";
+
+  result.innerHTML=
+   `<strong>Assessment Not Passed</strong><br>
+    Score: ${score}/20 (${percentage}%).<br>
+    You need at least 80% to pass. Review the training and try again.`;
+
+  localStorage.setItem(
+   storageKey("final_test"),
+   JSON.stringify({
+    score,
+    percentage,
+    passed:false,
+    completedAt:new Date().toISOString()
+   })
+  );
+ }
+});
+
+/* =========================================================
+   LOGOUT
+   ========================================================= */
+
+$("logoutBtn").addEventListener("click",async()=>{
+
+ await supabaseClient.auth.signOut();
+
+ sessionStorage.removeItem("ibb_name");
+ sessionStorage.removeItem("ibb_member_id");
+
+ window.location.replace("login.html");
+});
+
+/* =========================================================
+   AUTH
+   ========================================================= */
+
+async function checkAuth(){
+
+ try{
+
+  if(
+   !SUPABASE_PUBLISHABLE_KEY ||
+   SUPABASE_PUBLISHABLE_KEY.includes("PASTE_YOUR")
+  ){
+   $("loadingText").innerHTML=
+    "Please add your existing Supabase publishable key<br>"+
+    "<small>Use the same browser-safe key as login.html.</small>";
+   return;
+  }
+
+  const {data,error}=
+   await supabaseClient.auth.getSession();
+
+  if(error)throw error;
+
+  if(!data.session){
+   window.location.replace("login.html");
+   return;
+  }
+
+  currentUser=data.session.user;
+
+  await loadProfile();
+
+  loadProgress();
+
+  $("loading").style.display="none";
+  $("app").classList.remove("hidden");
+
+  updateUI();
+
+  if(!isUnlocked(currentDay)){
+   currentDay=1;
+  }
+
+  openDay(currentDay);
+
+  for(let i=1;i<=10;i++){
+   updateTimer(i);
+  }
+
+ }catch(error){
+
+  console.error(error);
+
+  $("loadingText").innerHTML=
+   "Unable to load your training account.<br>"+
+   "<small>Please return to login and try again.</small>";
+ }
+}
+
+supabaseClient.auth.onAuthStateChange(
+ (event)=>{
+  if(event==="SIGNED_OUT"){
+   window.location.replace("login.html");
+  }
+ }
+);
+
+checkAuth();
+</script>
+
+</body>
+</html>
